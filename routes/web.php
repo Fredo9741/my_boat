@@ -13,6 +13,14 @@ use App\Http\Controllers\Admin\BateauController as AdminBateauController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+// a supprimer apres (erreur de creation admin railway)
+Route::get('/force-user', function() {
+    $user = \App\Models\User::updateOrCreate(
+        ['email' => 'admin@admin.com'],
+        ['name' => 'Admin', 'password' => Hash::make('admin123')]
+    );
+    return "Utilisateur créé : " . $user->email;
+});
 // a supprimer apres test
 Route::get('/test-simple', function() {
     return view('welcome', [
