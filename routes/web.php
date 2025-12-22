@@ -13,6 +13,14 @@ use App\Http\Controllers\Admin\BateauController as AdminBateauController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+// a supprimer apres test
+Route::get('/test-simple', function() {
+    return view('welcome', [
+        'featuredBateaux' => collect(), 'recentBateaux' => collect(), 
+        'premiumBateaux' => collect(), 'stats' => [], 
+        'types' => collect(), 'zones' => collect()
+    ]);
+});
 // Localized routes
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
