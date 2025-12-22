@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(php artisan:*)",
+      "Bash(curl:*)",
+      "Bash(php reset_admin_passwords.php:*)",
+      "Bash(composer require:*)",
+      "Bash(php -l:*)",
+      "Bash(php -i:*)",
+      "Bash(php -r:*)",
+      "Bash(git add:*)",
+      "Bash(git remote add:*)"
+    ]
+  }
+}
