@@ -21,7 +21,7 @@ Route::get('/test-simple', function() {
         'types' => collect(), 'zones' => collect()
     ]);
 });
-// Localized routes
+/* Localized routes
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
@@ -52,6 +52,36 @@ Route::group([
     Route::get('/cgv', [PageController::class, 'cgv'])->name('cgv');
     Route::get('/confidentialite', [PageController::class, 'confidentialite'])->name('confidentialite');
 });
+*/
+// --- ROUTES EN ACCÈS DIRECT (SANS /FR) ---
+
+// Home page
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Bateaux routes
+Route::get('/bateaux', [BateauController::class, 'index'])->name('bateaux.index');
+Route::get('/bateaux/{slug}', [BateauController::class, 'show'])->name('bateaux.show');
+
+// Categories page
+Route::get('/categories', function () {
+    $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
+        $query->visible();
+    }])->get();
+    return view('categories', compact('types'));
+})->name('categories');
+
+// Contact form
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
+// Pages statiques
+Route::get('/a-propos', [PageController::class, 'about'])->name('about');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/vendre', [PageController::class, 'sell'])->name('sell');
+Route::get('/mentions-legales', [PageController::class, 'mentionsLegales'])->name('mentions-legales');
+Route::get('/cgv', [PageController::class, 'cgv'])->name('cgv');
+Route::get('/confidentialite', [PageController::class, 'confidentialite'])->name('confidentialite');
+
+// --- FIN DES ROUTES EN ACCÈS DIRECT ---
 
 // Auth routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
