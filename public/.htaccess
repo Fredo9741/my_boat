@@ -42,3 +42,11 @@
     ExpiresByType application/javascript "access plus 1 month"
     ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
+
+# PHP Upload settings
+<IfModule mod_php.c>
+    php_value upload_max_filesize 50M
+    php_value post_max_size 60M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>

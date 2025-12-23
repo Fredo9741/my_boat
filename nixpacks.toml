@@ -9,4 +9,10 @@ cmds = [
 ]
 
 [start]
-cmd = "php artisan migrate --force && php artisan db:seed --force && php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
+cmd = "php artisan migrate --force && php artisan db:seed --force && php artisan storage:link && php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
+
+# Railway Volume Configuration
+# Mount point for persistent storage
+# In Railway dashboard, create a volume and mount it at /app/storage
+[variables]
+RAILWAY_VOLUME_MOUNT_PATH = "/app/storage/app/public"

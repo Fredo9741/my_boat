@@ -10,7 +10,8 @@
       "Bash(php -i:*)",
       "Bash(php -r:*)",
       "Bash(git add:*)",
-      "Bash(git remote add:*)"
+      "Bash(git remote add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

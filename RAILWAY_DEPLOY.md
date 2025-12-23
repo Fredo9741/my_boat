@@ -59,6 +59,21 @@ MAIL_FROM_NAME="${APP_NAME}"
 2. Sélectionnez "Database" → "MySQL" (ou PostgreSQL)
 3. Railway créera automatiquement la base de données
 
+### 2.5. Ajouter un volume pour les fichiers uploadés (IMPORTANT)
+
+**⚠️ CRITIQUE** : Sans volume, les photos uploadées disparaîtront à chaque redéploiement !
+
+1. Dans votre projet Railway, cliquez sur votre service web
+2. Allez dans l'onglet **"Settings"**
+3. Scrollez jusqu'à **"Volumes"**
+4. Cliquez sur **"+ Add Volume"**
+5. Configurez le volume :
+   - **Mount Path** : `/app/storage/app/public`
+   - **Size** : 1 GB (ou plus selon vos besoins)
+6. Cliquez sur **"Add"**
+
+Ce volume persistera tous les fichiers uploadés (photos de bateaux, etc.)
+
 ### 3. Configurer les variables d'environnement
 
 1. Cliquez sur votre service web
@@ -119,6 +134,25 @@ Railway gère automatiquement les permissions. Si problème :
 1. Activez temporairement `APP_DEBUG=true` dans les variables d'environnement
 2. Consultez les logs Railway
 3. Remettez `APP_DEBUG=false` après diagnostic
+
+### Les photos ne s'enregistrent pas
+**Causes possibles** :
+
+1. **Pas de volume Railway** (le plus fréquent)
+   - Vérifiez qu'un volume est monté sur `/app/storage/app/public`
+   - Voir section "2.5. Ajouter un volume" ci-dessus
+
+2. **Limites PHP d'upload trop basses**
+   - Railway utilise les limites définies dans `.user.ini`
+   - Vérifiez les logs pour voir les erreurs d'upload
+
+3. **Permissions**
+   - Railway gère automatiquement les permissions
+   - Si problème, vérifiez les logs de déploiement
+
+4. **Le lien symbolique n'existe pas**
+   - Normalement créé automatiquement au déploiement
+   - Pour forcer : `php artisan storage:link` dans la console Railway
 
 ## 📝 Notes importantes
 
