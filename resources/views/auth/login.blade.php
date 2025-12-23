@@ -102,12 +102,14 @@
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
                             <input type="password"
+                                   id="passwordInput"
                                    name="password"
                                    placeholder="••••••••"
                                    class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                                   required>
-                            <button type="button" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600">
-                                <i class="fas fa-eye"></i>
+                                   required
+                                   autocomplete="current-password">
+                            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition">
+                                <i class="fas fa-eye" id="toggleIcon"></i>
                             </button>
                         </div>
                     </div>
@@ -115,12 +117,9 @@
                     <!-- Se souvenir / Mot de passe oublié -->
                     <div class="flex items-center justify-between">
                         <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                            <input type="checkbox" name="remember" class="w-4 h-4 text-blue-600 rounded">
                             <span class="ml-2 text-sm text-gray-700">Se souvenir de moi</span>
                         </label>
-                        <a href="/forgot-password" class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                            Mot de passe oublié ?
-                        </a>
                     </div>
 
                     <!-- Bouton connexion -->
@@ -151,6 +150,31 @@
 
         </div>
     </div>
+
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordInput');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        togglePassword.addEventListener('click', function() {
+            // Toggle password visibility
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle icon
+            toggleIcon.classList.toggle('fa-eye');
+            toggleIcon.classList.toggle('fa-eye-slash');
+        });
+
+        // Auto-fill email for dev (remove in production)
+        @if(config('app.env') === 'local')
+            const emailInput = document.querySelector('input[name="email"]');
+            if (!emailInput.value) {
+                emailInput.value = 'admin@myboat.re';
+            }
+        @endif
+    </script>
 
 </body>
 </html>
