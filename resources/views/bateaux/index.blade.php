@@ -17,16 +17,33 @@
         </div>
     </div>
 
+    <!-- Mobile Filter Button -->
+    <div class="container mx-auto px-4 py-4 lg:hidden">
+        <button id="mobileFilterBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium flex items-center justify-center">
+            <i class="fas fa-filter mr-2"></i> Afficher les filtres <span class="ml-2 text-xs">({{ number_format($bateaux->total()) }} bateaux)</span>
+        </button>
+    </div>
+
     <!-- Filters & Listings -->
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 pb-8 lg:py-8">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
             <!-- Sidebar Filters -->
             <aside class="lg:col-span-1">
-                <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
-                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                        <i class="fas fa-filter text-blue-600 mr-2"></i> {{ __('Filtres') }}
-                    </h3>
+                <!-- Mobile Filter Overlay -->
+                <div id="mobileFilterOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+
+                <!-- Filter Panel -->
+                <div id="filterPanel" class="fixed lg:relative inset-x-0 bottom-0 lg:inset-auto bg-white rounded-t-2xl lg:rounded-xl shadow-lg lg:shadow-md p-6 lg:sticky lg:top-24 max-h-[85vh] lg:max-h-none overflow-y-auto z-50 transform translate-y-full lg:translate-y-0 transition-transform duration-300">
+                    <!-- Mobile Header -->
+                    <div class="flex items-center justify-between mb-4 lg:mb-6 lg:block">
+                        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-filter text-blue-600 mr-2"></i> Filtres
+                        </h3>
+                        <button id="closeFilterBtn" class="lg:hidden text-gray-500 hover:text-gray-700 p-2">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
 
                     <form id="filterForm" method="GET" action="{{ route('bateaux.index') }}">
                         @php
@@ -217,6 +234,34 @@
     </div>
 
 @endsection
+
+@push('scripts')
+<script>
+// Mobile Filter Toggle
+const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+const closeFilterBtn = document.getElementById('closeFilterBtn');
+const filterPanel = document.getElementById('filterPanel');
+const mobileFilterOverlay = document.getElementById('mobileFilterOverlay');
+
+function openFilters() {
+    filterPanel.classList.remove('translate-y-full');
+    filterPanel.classList.add('translate-y-0');
+    mobileFilterOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeFilters() {
+    filterPanel.classList.add('translate-y-full');
+    filterPanel.classList.remove('translate-y-0');
+    mobileFilterOverlay.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+mobileFilterBtn.addEventListener('click', openFilters);
+closeFilterBtn.addEventListener('click', closeFilters);
+mobileFilterOverlay.addEventListener('click', closeFilters);
+</script>
+@endpush
 
 @push('scripts')
 <script>

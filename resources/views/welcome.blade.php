@@ -10,18 +10,18 @@
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
 
-        <div class="relative container mx-auto px-4 py-20 md:py-32">
+        <div class="relative container mx-auto px-4 py-12 md:py-20 lg:py-32">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-6xl font-bold mb-6">
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
                     Trouvez votre bateau de rêve
                 </h2>
-                <p class="text-xl md:text-2xl mb-10 text-blue-100">
+                <p class="text-lg md:text-xl lg:text-2xl mb-6 md:mb-10 text-blue-100">
                     Votre courtier maritime de confiance dans l'océan Indien
                 </p>
 
                 <!-- Barre de Recherche Avancée -->
-                <div class="bg-white rounded-xl shadow-2xl p-6">
-                    <form action="{{ route('bateaux.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-xl shadow-2xl p-4 md:p-6">
+                    <form action="{{ route('bateaux.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
                         <!-- Type de bateau -->
                         <div class="text-left">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Type de bateau</label>
@@ -72,24 +72,24 @@
     </section>
 
     <!-- Stats -->
-    <section class="bg-white py-12 border-b">
+    <section class="bg-white py-8 md:py-12 border-b">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
                 <div>
-                    <div class="text-4xl font-bold text-blue-600 mb-2">{{ number_format($stats['total_bateaux']) }}</div>
-                    <div class="text-gray-600">Annonces actives</div>
+                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ number_format($stats['total_bateaux']) }}</div>
+                    <div class="text-sm md:text-base text-gray-600">Annonces actives</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-blue-600 mb-2">{{ $stats['total_types'] }}</div>
-                    <div class="text-gray-600">Types de bateaux</div>
+                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ $stats['total_types'] }}</div>
+                    <div class="text-sm md:text-base text-gray-600">Types de bateaux</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-blue-600 mb-2">{{ $stats['total_zones'] }}</div>
-                    <div class="text-gray-600">Zones disponibles</div>
+                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ $stats['total_zones'] }}</div>
+                    <div class="text-sm md:text-base text-gray-600">Zones disponibles</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-blue-600 mb-2">{{ $zones->count() }}</div>
-                    <div class="text-gray-600">Îles couvertes</div>
+                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ $zones->count() }}</div>
+                    <div class="text-sm md:text-base text-gray-600">Îles couvertes</div>
                 </div>
             </div>
         </div>
@@ -136,7 +136,7 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 @forelse($featuredBateaux->take(4) as $bateau)
                     <x-boat-card
                         :slug="$bateau->slug"
