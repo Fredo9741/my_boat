@@ -2,40 +2,138 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ActionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $actions = [
-            'Prix en baisse !',
-            'Nouveau sur le marché',
-            'Affaire à saisir',
-            'Exclusivité',
-            'Urgent - Vente rapide',
-            'Rare sur le marché',
-            'État exceptionnel',
-            'Grand entretien récent',
-            'Prêt à naviguer',
-            'Idéal première acquisition',
-            'Coup de coeur',
-            'Visible sur rendez-vous',
-        ];
+        DB::table('actions')->insert([
+            'libelle' => 'Affaire à saisir',
+            'slug' => 'affaire-a-saisir',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        foreach ($actions as $action) {
-            DB::table('actions')->insert([
-                'libelle' => $action,
-                'slug' => Str::slug($action),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        DB::table('actions')->insert([
+            'libelle' => 'Coup de coeur',
+            'slug' => 'coup-de-coeur',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'État exceptionnel',
+            'slug' => 'etat-exceptionnel',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Exclusivité',
+            'slug' => 'exclusivite',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Grand entretien récent',
+            'slug' => 'grand-entretien-recent',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Idéal première acquisition',
+            'slug' => 'ideal-premiere-acquisition',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Nouveau sur le marché',
+            'slug' => 'nouveau-sur-le-marche',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Prêt à naviguer',
+            'slug' => 'pret-a-naviguer',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Prix en baisse !',
+            'slug' => 'prix-en-baisse',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Rare sur le marché',
+            'slug' => 'rare-sur-le-marche',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Sous offre',
+            'slug' => 'sous-offre',
+            'libelle_translations' => null,
+            'color' => 'yellow',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Urgent - Vente rapide',
+            'slug' => 'urgent-vente-rapide',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Vendu',
+            'slug' => 'vendu',
+            'libelle_translations' => null,
+            'color' => 'red',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('actions')->insert([
+            'libelle' => 'Visible sur rendez-vous',
+            'slug' => 'visible-sur-rendez-vous',
+            'libelle_translations' => null,
+            'color' => 'gray',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }

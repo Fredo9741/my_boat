@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             ZoneSeeder::class,
             ActionSeeder::class,
+            EquipementSeeder::class,
             BateauSeeder::class,
             MediaSeeder::class,
             UserSeeder::class,
