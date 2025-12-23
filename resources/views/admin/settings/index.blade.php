@@ -22,6 +22,15 @@
             </div>
             @endif
 
+            @if(session('error'))
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
+                    <p class="text-red-800">{{ session('error') }}</p>
+                </div>
+            </div>
+            @endif
+
             @if ($errors->any())
             <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
                 <div class="flex items-center mb-2">
@@ -131,6 +140,66 @@
                                 class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
                             <i class="fas fa-save mr-2"></i>Enregistrer les paramètres
                         </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Changement de mot de passe -->
+            <div class="bg-white rounded-xl shadow-md p-8 mt-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-lock text-blue-600 mr-2"></i>
+                    Sécurité - Changer le mot de passe
+                </h2>
+
+                <form action="{{ route('admin.settings.password.update') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="space-y-6 max-w-xl">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Mot de passe actuel *
+                            </label>
+                            <input type="password"
+                                   name="current_password"
+                                   required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            @error('current_password')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Nouveau mot de passe * (min. 8 caractères)
+                            </label>
+                            <input type="password"
+                                   name="new_password"
+                                   required
+                                   minlength="8"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            @error('new_password')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Confirmer le nouveau mot de passe *
+                            </label>
+                            <input type="password"
+                                   name="new_password_confirmation"
+                                   required
+                                   minlength="8"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+
+                        <div class="flex items-center justify-end space-x-4 pt-4">
+                            <button type="submit"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+                                <i class="fas fa-key mr-2"></i>Changer le mot de passe
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

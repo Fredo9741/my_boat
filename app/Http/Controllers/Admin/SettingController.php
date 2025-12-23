@@ -44,4 +44,35 @@ class SettingController extends Controller
         return redirect()->route('admin.settings.index')
             ->with('success', 'Paramètres mis à jour avec succès.');
     }
+
+    /**
+     * Update admin password
+     */
+    public function updatePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ], [
+            'current_password.required' => 'Le mot de passe actuel est requis',
+            'new_password.required' => 'Le nouveau mot de passe est requis',
+            'new_password.min' => 'Le nouveau mot de passe doit contenir au moins 8 caractères',
+            'new_password.confirmed' => 'La confirmation du mot de passe ne correspond pas',
+        ]);
+
+        $user = auth()->user();
+
+        // Vérifier le mot de passe actuel
+        if (!password_verify($validated['current_password'], $user->password)) {
+            return redirect()->route('admin.settings.index')
+                ->with('error', 'Le mot de passe actuel est incorrect.');
+        }
+
+        // Mettre à jour le mot de passe
+        $user->password = bcrypt($validated['new_password']);
+        $user->save();
+
+        return redirect()->route('admin.settings.index')
+            ->with('success', 'Mot de passe modifié avec succès.');
+    }
 }
