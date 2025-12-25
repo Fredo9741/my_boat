@@ -15,14 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed boat marketplace data in correct order (respecting foreign keys)
+        // Seed essential boat marketplace data only
+        // BateauSeeder and MediaSeeder removed - boats will be added manually via admin panel
         $this->call([
             TypeSeeder::class,
             ZoneSeeder::class,
             ActionSeeder::class,
             EquipementSeeder::class,
-            BateauSeeder::class,
-            MediaSeeder::class,
             UserSeeder::class,
         ]);
     }
