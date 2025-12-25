@@ -259,10 +259,19 @@
                 <!-- Médias existants -->
                 @if($bateau->medias->count() > 0)
                 <div class="bg-white rounded-xl shadow-md p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-photo-video text-blue-600 mr-2"></i>
-                        Médias existants
-                    </h2>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-photo-video text-blue-600 mr-2"></i>
+                            Médias existants
+                        </h2>
+                        <button type="button"
+                                id="deleteSelectedBtn"
+                                onclick="deleteSelectedMedia()"
+                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition hidden"
+                                title="Supprimer la sélection">
+                            <i class="fas fa-trash mr-2"></i>Supprimer la sélection
+                        </button>
+                    </div>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach($bateau->medias as $media)
@@ -274,6 +283,14 @@
                                     <i class="fas fa-video text-white text-3xl"></i>
                                 </div>
                             @endif
+
+                            <!-- Checkbox de sélection -->
+                            <div class="absolute top-2 left-2">
+                                <input type="checkbox"
+                                       class="media-checkbox w-5 h-5 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
+                                       data-media-id="{{ $media->id }}"
+                                       onchange="toggleDeleteButton()">
+                            </div>
 
                             <div class="absolute top-2 right-2 flex gap-1">
                                 @if($media->type === 'image' && $media->ordre !== 0)
@@ -468,6 +485,61 @@ window.deleteMedia = function(mediaId) {
 
     form.appendChild(csrfInput);
     form.appendChild(methodInput);
+    document.body.appendChild(form);
+    form.submit();
+};
+
+// Fonction pour afficher/masquer le bouton "Supprimer la sélection"
+window.toggleDeleteButton = function() {
+    const checkboxes = document.querySelectorAll('.media-checkbox:checked');
+    const deleteBtn = document.getElementById('deleteSelectedBtn');
+
+    if (checkboxes.length > 0) {
+        deleteBtn.classList.remove('hidden');
+    } else {
+        deleteBtn.classList.add('hidden');
+    }
+};
+
+// Fonction pour supprimer les médias sélectionnés
+window.deleteSelectedMedia = function() {
+    const checkboxes = document.querySelectorAll('.media-checkbox:checked');
+    const mediaIds = Array.from(checkboxes).map(cb => cb.dataset.mediaId);
+
+    if (mediaIds.length === 0) {
+        alert('Veuillez sélectionner au moins un média à supprimer');
+        return;
+    }
+
+    if (!confirm(`Voulez-vous vraiment supprimer ${mediaIds.length} média(s) ?`)) {
+        return;
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/admin/media/bulk-delete';
+
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = '{{ csrf_token() }}';
+    form.appendChild(csrfInput);
+
+    const methodInput = document.createElement('input');
+    methodInput.type = 'hidden';
+    methodInput.name = '_method';
+    methodInput.value = 'DELETE';
+    form.appendChild(methodInput);
+
+    // Ajouter chaque ID de média
+    mediaIds.forEach(id => {
+        const idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'media_ids[]';
+        idInput.value = id;
+        form.appendChild(idInput);
+    });
+
     document.body.appendChild(form);
     form.submit();
 };

@@ -247,6 +247,38 @@ class BateauController extends Controller
     }
 
     /**
+     * Delete multiple media at once
+     */
+    public function bulkDeleteMedia(Request $request)
+    {
+        $mediaIds = $request->input('media_ids', []);
+
+        if (empty($mediaIds)) {
+            return redirect()->back()->with('error', 'Aucun média sélectionné.');
+        }
+
+        // Get the first media to retrieve bateau_id for redirect
+        $firstMedia = Media::find($mediaIds[0]);
+        $bateauId = $firstMedia ? $firstMedia->bateau_id : null;
+
+        $count = 0;
+        foreach ($mediaIds as $mediaId) {
+            $media = Media::find($mediaId);
+            if ($media) {
+                $this->mediaService->deleteMedia($media);
+                $count++;
+            }
+        }
+
+        if ($bateauId) {
+            return redirect()->route('admin.bateaux.edit', $bateauId)
+                ->with('success', "$count média(s) supprimé(s) avec succès.");
+        }
+
+        return redirect()->back()->with('success', "$count média(s) supprimé(s) avec succès.");
+    }
+
+    /**
      * Set a media as main/principal
      */
     public function setMainMedia(Media $media)
