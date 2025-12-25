@@ -248,24 +248,17 @@
                         </div>
                     </div>
 
-                    <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Votre nom" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                        <input type="email" placeholder="Votre email" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                        <input type="tel" placeholder="Votre téléphone" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                        <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                            <option value="">Type de bateau</option>
-                            <option>Voilier</option>
-                            <option>Catamaran</option>
-                            <option>Yacht</option>
-                            <option>Bateau à moteur</option>
-                            <option>Semi-rigide</option>
-                            <option>Bateau de pêche</option>
-                        </select>
-                        <textarea rows="4" placeholder="Description de votre bateau (marque, modèle, année, prix souhaité...)" class="md:col-span-2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required></textarea>
-                        <button type="submit" class="md:col-span-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105">
-                            <i class="fas fa-paper-plane mr-2"></i> Demander une estimation gratuite
-                        </button>
-                    </form>
+                    <div class="text-center">
+                        <p class="text-gray-700 text-lg mb-8">
+                            Remplissez notre formulaire détaillé et recevez une estimation gratuite de votre bateau sous 48h.
+                        </p>
+                        <a href="{{ route('sell') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-lg font-bold text-xl transition transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-edit mr-3"></i> Remplir le formulaire de vente
+                        </a>
+                        <p class="text-gray-500 text-sm mt-6">
+                            <i class="fas fa-clock mr-2"></i> Réponse sous 48h • <i class="fas fa-shield-alt mr-2"></i> Totalement gratuit et sans engagement
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
