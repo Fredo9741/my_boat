@@ -10,9 +10,15 @@ use App\Models\Action;
 
 class BateauSeeder extends Seeder
 {
+    private function createOrUpdateBateau(array $data): void
+    {
+        $slug = $data['slug'];
+        Bateau::updateOrCreate(['slug' => $slug], $data);
+    }
+
     public function run(): void
     {
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => false,
             'type_id' => Type::where('slug', 'vedette')->first()->id,
@@ -76,7 +82,7 @@ Infos: Quentin Whats ap +261 32 19 76 308',
             'passagers' => null,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => true,
             'type_id' => Type::where('slug', 'catamaran-a-voile')->first()->id,
@@ -107,7 +113,7 @@ Infos: Quentin Whats ap +261 32 19 76 308',
             'passagers' => 10,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => true,
             'type_id' => Type::where('slug', 'bateau-moteur')->first()->id,
@@ -138,7 +144,7 @@ Infos: Quentin Whats ap +261 32 19 76 308',
             'passagers' => null,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => false,
             'type_id' => Type::where('slug', 'bateau-moteur')->first()->id,
@@ -195,7 +201,7 @@ Ajustement de prix en novembre 2025 pour vente rapide',
             'passagers' => null,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => true,
             'type_id' => Type::where('slug', 'voilier-monocoque')->first()->id,
@@ -246,7 +252,7 @@ Contactez-nous pour plus d’infos ou pour planifier une visite.',
             'passagers' => null,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => false,
             'type_id' => Type::where('slug', 'catamaran-a-voile')->first()->id,
@@ -282,7 +288,7 @@ Contact: Quentin WhatsApp +261 32 79 16 308',
             'passagers' => 8,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => true,
             'type_id' => Type::where('slug', 'voilier-monocoque')->first()->id,
@@ -325,7 +331,7 @@ Quentin Whats ap +261 32 79 16 308',
             'passagers' => 8,
         ]);
 
-        Bateau::create([
+        $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => true,
             'type_id' => Type::where('slug', 'catamaran-a-voile')->first()->id,
