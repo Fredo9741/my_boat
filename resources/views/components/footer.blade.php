@@ -70,6 +70,7 @@
                     <a href="{{ route('mentions-legales') }}" class="hover:text-blue-500 transition">Mentions légales</a>
                     <a href="{{ route('cgv') }}" class="hover:text-blue-500 transition">CGV</a>
                     <a href="{{ route('confidentialite') }}" class="hover:text-blue-500 transition">Confidentialité</a>
+                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-400 text-xs transition opacity-50 hover:opacity-100" title="Administration">•</a>
                 </div>
             </div>
         </div>
