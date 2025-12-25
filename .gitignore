@@ -18,3 +18,5 @@ yarn-error.log
 *.log
 clear-opcache.php
 check_opcache.php
+/database/database.sqlite
+*.sqlite
