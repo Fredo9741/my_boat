@@ -74,13 +74,13 @@ class EquipementSeeder extends Seeder
         ];
 
         foreach ($equipements as $equipement) {
-            DB::table('equipements')->insert([
-                'libelle' => $equipement['libelle'],
-                'categorie' => $equipement['categorie'],
-                'ordre' => $equipement['ordre'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            \App\Models\Equipement::updateOrCreate(
+                [
+                    'libelle' => $equipement['libelle'],
+                    'categorie' => $equipement['categorie']
+                ],
+                ['ordre' => $equipement['ordre']]
+            );
         }
     }
 }
