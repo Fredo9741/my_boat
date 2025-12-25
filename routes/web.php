@@ -67,6 +67,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/media/bulk-delete', [AdminBateauController::class, 'bulkDeleteMedia'])->name('media.bulk-delete');
     Route::patch('/media/{media}/set-main', [AdminBateauController::class, 'setMainMedia'])->name('media.set-main');
 
+    // Equipment quick create
+    Route::post('/equipements/quick-create', [AdminBateauController::class, 'quickCreateEquipement'])->name('equipements.quick-create');
+
     // Settings
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');

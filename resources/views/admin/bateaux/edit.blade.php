@@ -325,10 +325,17 @@
 
                 <!-- Équipements -->
                 <div class="bg-white rounded-xl shadow-md p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-list-check text-blue-600 mr-2"></i>
-                        Équipements
-                    </h2>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-list-check text-blue-600 mr-2"></i>
+                            Équipements
+                        </h2>
+                        <button type="button"
+                                onclick="openEquipmentModal()"
+                                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-semibold transition text-sm">
+                            <i class="fas fa-plus mr-2"></i>Nouvel équipement
+                        </button>
+                    </div>
 
                     @php
                         $categories = [
@@ -437,6 +444,53 @@
         </main>
     </div>
 </div>
+
+<!-- Modal Nouvel Équipement -->
+<div id="equipmentModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full">
+        <div class="flex items-center justify-between p-6 border-b">
+            <h3 class="text-xl font-bold text-gray-800">Ajouter un équipement</h3>
+            <button type="button" onclick="closeEquipmentModal()" class="text-gray-400 hover:text-gray-600 transition">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <form id="quickEquipmentForm" class="p-6 space-y-4">
+            @csrf
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nom de l'équipement *</label>
+                <input type="text" id="equipmentLibelle" name="libelle" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       placeholder="Ex: Radar couleur">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Catégorie *</label>
+                <select id="equipmentCategorie" name="categorie" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">-- Sélectionner une catégorie --</option>
+                    <option value="Navigation">Navigation</option>
+                    <option value="Confort">Confort</option>
+                    <option value="Sécurité">Sécurité</option>
+                    <option value="Électronique">Électronique</option>
+                    <option value="Manœuvre">Manœuvre</option>
+                    <option value="Loisirs">Loisirs</option>
+                </select>
+            </div>
+
+            <div class="flex items-center justify-end space-x-3 pt-4">
+                <button type="button" onclick="closeEquipmentModal()"
+                        class="px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition">
+                    Annuler
+                </button>
+                <button type="submit"
+                        class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition">
+                    <i class="fas fa-check mr-2"></i>Ajouter
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -543,6 +597,62 @@ window.deleteSelectedMedia = function() {
     document.body.appendChild(form);
     form.submit();
 };
+
+// Fonctions pour le modal d'équipement
+window.openEquipmentModal = function() {
+    document.getElementById('equipmentModal').classList.remove('hidden');
+    document.getElementById('equipmentLibelle').value = '';
+    document.getElementById('equipmentCategorie').value = '';
+    document.getElementById('equipmentLibelle').focus();
+};
+
+window.closeEquipmentModal = function() {
+    document.getElementById('equipmentModal').classList.add('hidden');
+};
+
+// Soumission du formulaire d'ajout d'équipement
+document.addEventListener('DOMContentLoaded', function() {
+    const equipmentForm = document.getElementById('quickEquipmentForm');
+    if (equipmentForm) {
+        equipmentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const libelle = document.getElementById('equipmentLibelle').value;
+            const categorie = document.getElementById('equipmentCategorie').value;
+
+            if (!libelle || !categorie) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+
+            // Envoyer la requête AJAX
+            fetch('/admin/equipements/quick-create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    libelle: libelle,
+                    categorie: categorie
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Recharger la page pour afficher le nouvel équipement
+                    window.location.reload();
+                } else {
+                    alert('Erreur: ' + (data.message || 'Impossible de créer l\'équipement'));
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la création de l\'équipement');
+            });
+        });
+    }
+});
 
 // Debug: Vérifier la soumission du formulaire
 document.addEventListener('DOMContentLoaded', function() {

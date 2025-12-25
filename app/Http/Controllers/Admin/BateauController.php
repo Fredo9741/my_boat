@@ -305,4 +305,37 @@ class BateauController extends Controller
         return redirect()->route('admin.bateaux.edit', $bateau)
             ->with('success', 'Photo principale mise à jour avec succès.');
     }
+
+    /**
+     * Quick create equipment via AJAX
+     */
+    public function quickCreateEquipement(Request $request)
+    {
+        $validated = $request->validate([
+            'libelle' => 'required|string|max:100',
+            'categorie' => 'required|string|in:Navigation,Confort,Sécurité,Électronique,Manœuvre,Loisirs'
+        ]);
+
+        try {
+            // Get the max ordre for this category
+            $maxOrdre = Equipement::where('categorie', $validated['categorie'])->max('ordre') ?? 0;
+
+            $equipement = Equipement::create([
+                'libelle' => $validated['libelle'],
+                'categorie' => $validated['categorie'],
+                'ordre' => $maxOrdre + 1
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'equipement' => $equipement,
+                'message' => 'Équipement créé avec succès'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de la création: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
