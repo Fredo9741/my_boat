@@ -292,7 +292,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 Longueur (m)
@@ -303,7 +303,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Localisation actuelle
+                                Île / Pays
                             </label>
                             <select name="localisation"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
@@ -313,6 +313,14 @@
                                 <option value="Madagascar">Madagascar</option>
                                 <option value="Autre">Autre</option>
                             </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Ville / Région
+                            </label>
+                            <input type="text" name="ville" placeholder="Ex: Saint-Denis, Port-Louis..."
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
 
