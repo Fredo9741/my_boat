@@ -9,7 +9,7 @@ L'application suit une architecture "Majestic Monolith" avec 4 services :
 1. **App Service** - Application Laravel principale (HTTP)
 2. **Cron Service** - Tâches planifiées (Laravel Scheduler)
 3. **Worker Service** - Traitement des jobs en arrière-plan
-4. **Postgres Service** - Base de données PostgreSQL
+4. **MySQL Service** - Base de données MySQL
 
 ## Scripts
 
@@ -44,9 +44,13 @@ APP_ENV=production
 APP_DEBUG=false
 APP_URL=<URL de votre service Railway>
 
-# Database
-DB_CONNECTION=pgsql
-DB_URL=${{Postgres.DATABASE_URL}}
+# Database (MySQL)
+DB_CONNECTION=mysql
+DB_HOST=${{MySQL.MYSQLHOST}}
+DB_PORT=${{MySQL.MYSQLPORT}}
+DB_DATABASE=${{MySQL.MYSQLDATABASE}}
+DB_USERNAME=${{MySQL.MYSQLUSER}}
+DB_PASSWORD=${{MySQL.MYSQLPASSWORD}}
 
 # Queue
 QUEUE_CONNECTION=database
@@ -62,8 +66,8 @@ CACHE_STORE=database
 
 ## Instructions de déploiement
 
-### 1. Créer le service PostgreSQL
-1. Sur Railway, créez un nouveau service PostgreSQL
+### 1. Créer le service MySQL
+1. Sur Railway, créez un nouveau service MySQL
 2. Déployez-le
 
 ### 2. Créer le service App
