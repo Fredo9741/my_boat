@@ -18,6 +18,11 @@ class BateauSeeder extends Seeder
 
     public function run(): void
     {
+        // Ne seed que si aucun bateau n'existe
+        if (Bateau::count() > 0) {
+            return;
+        }
+
         $this->createOrUpdateBateau([
             'visible' => true,
             'occasion' => false,

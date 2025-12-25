@@ -9,6 +9,11 @@ class EquipementSeeder extends Seeder
 {
     public function run(): void
     {
+        // Ne seed que si aucun équipement n'existe
+        if (\App\Models\Equipement::count() > 0) {
+            return;
+        }
+
         $equipements = [
             // Navigation
             ['libelle' => 'GPS', 'categorie' => 'Navigation', 'ordre' => 1],

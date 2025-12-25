@@ -9,6 +9,11 @@ class ActionSeeder extends Seeder
 {
     public function run(): void
     {
+        // Ne seed que si aucune action n'existe
+        if (Action::count() > 0) {
+            return;
+        }
+
         $actions = [
             ['libelle' => 'Affaire à saisir', 'slug' => 'affaire-a-saisir', 'libelle_translations' => null, 'color' => 'gray'],
             ['libelle' => 'Coup de coeur', 'slug' => 'coup-de-coeur', 'libelle_translations' => null, 'color' => 'gray'],

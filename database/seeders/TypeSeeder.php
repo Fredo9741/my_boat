@@ -9,6 +9,11 @@ class TypeSeeder extends Seeder
 {
     public function run(): void
     {
+        // Ne seed que si aucun type n'existe
+        if (Type::count() > 0) {
+            return;
+        }
+
         $types = [
             [
                 'libelle' => 'Bateau Moteur',

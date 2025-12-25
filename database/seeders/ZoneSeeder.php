@@ -9,6 +9,11 @@ class ZoneSeeder extends Seeder
 {
     public function run(): void
     {
+        // Ne seed que si aucune zone n'existe
+        if (Zone::count() > 0) {
+            return;
+        }
+
         $zones = [
             ['libelle' => 'La Réunion', 'slug' => 'la-reunion', 'libelle_translations' => null],
             ['libelle' => 'Madagascar', 'slug' => 'madagascar', 'libelle_translations' => null],
