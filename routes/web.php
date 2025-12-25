@@ -63,8 +63,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     ]);
 
     // Media management
-    Route::delete('/media/{media}', [AdminBateauController::class, 'deleteMedia'])->name('media.delete');
     Route::delete('/media/bulk-delete', [AdminBateauController::class, 'bulkDeleteMedia'])->name('media.bulk-delete');
+    Route::delete('/media/{media}', [AdminBateauController::class, 'deleteMedia'])->name('media.delete');
     Route::patch('/media/{media}/set-main', [AdminBateauController::class, 'setMainMedia'])->name('media.set-main');
 
     // Equipment quick create
