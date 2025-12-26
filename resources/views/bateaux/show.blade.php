@@ -141,36 +141,36 @@
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ $bateau->modele }}</h1>
-                            <p class="text-gray-600">
+                            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{{ $bateau->modele }}</h1>
+                            <p class="text-gray-600 text-sm md:text-base">
                                 <i class="fas fa-map-marker-alt text-blue-600 mr-1"></i>
                                 {{ $bateau->location }}
                             </p>
                         </div>
                         <div class="text-right">
-                            <div class="text-4xl font-bold text-blue-600 mb-1">{{ $bateau->formatted_price }}</div>
+                            <div class="text-2xl md:text-4xl font-bold text-blue-600 mb-1">{{ $bateau->formatted_price }}</div>
                             @if($bateau->afficher_prix && $bateau->prix)
-                                <p class="text-sm text-gray-500">Négociable</p>
+                                <p class="text-xs md:text-sm text-gray-500">Négociable</p>
                             @endif
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t">
                         <div class="text-center">
-                            <div class="text-gray-500 text-sm mb-1">Longueur</div>
-                            <div class="text-xl font-bold text-gray-800">{{ $bateau->length }}</div>
+                            <div class="text-gray-500 text-xs md:text-sm mb-1">Longueur</div>
+                            <div class="text-base md:text-xl font-bold text-gray-800">{{ $bateau->length }}</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-gray-500 text-sm mb-1">Année</div>
-                            <div class="text-xl font-bold text-gray-800">{{ $bateau->annee ?? 'N/A' }}</div>
+                            <div class="text-gray-500 text-xs md:text-sm mb-1">Année</div>
+                            <div class="text-base md:text-xl font-bold text-gray-800">{{ $bateau->annee ?? 'N/A' }}</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-gray-500 text-sm mb-1">Type</div>
-                            <div class="text-xl font-bold text-gray-800">{{ $bateau->type->libelle ?? 'N/A' }}</div>
+                            <div class="text-gray-500 text-xs md:text-sm mb-1">Type</div>
+                            <div class="text-base md:text-xl font-bold text-gray-800">{{ $bateau->type->libelle ?? 'N/A' }}</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-gray-500 text-sm mb-1">État</div>
-                            <div class="text-xl font-bold {{ $bateau->occasion ? 'text-gray-600' : 'text-green-600' }}">{{ $bateau->occasion ? 'Occasion' : 'Neuf' }}</div>
+                            <div class="text-gray-500 text-xs md:text-sm mb-1">État</div>
+                            <div class="text-base md:text-xl font-bold {{ $bateau->occasion ? 'text-gray-600' : 'text-green-600' }}">{{ $bateau->occasion ? 'Occasion' : 'Neuf' }}</div>
                         </div>
                     </div>
                 </div>
@@ -225,10 +225,10 @@
 
                 <!-- Description -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-align-left text-blue-600 mr-2"></i> Description
                     </h2>
-                    <div class="text-gray-700 leading-relaxed space-y-4">
+                    <div class="text-gray-700 text-sm md:text-base leading-relaxed space-y-4">
                         @if($bateau->description)
                             {!! nl2br(e($bateau->description)) !!}
                         @else
@@ -239,15 +239,15 @@
 
                 <!-- Caractéristiques techniques -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <i class="fas fa-cogs text-blue-600 mr-2"></i> Caractéristiques techniques
                     </h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Informations générales -->
                         <div>
-                            <h3 class="font-bold text-gray-800 mb-3 text-lg">Informations générales</h3>
-                            <div class="space-y-2 text-gray-700">
+                            <h3 class="font-bold text-gray-800 mb-3 text-base md:text-lg">Informations générales</h3>
+                            <div class="space-y-2 text-gray-700 text-sm md:text-base">
                                 @if($bateau->chantier)
                                     <div class="flex justify-between py-2 border-b">
                                         <span>Chantier</span>
@@ -277,8 +277,8 @@
 
                         <!-- Dimensions -->
                         <div>
-                            <h3 class="font-bold text-gray-800 mb-3 text-lg">Dimensions</h3>
-                            <div class="space-y-2 text-gray-700">
+                            <h3 class="font-bold text-gray-800 mb-3 text-base md:text-lg">Dimensions</h3>
+                            <div class="space-y-2 text-gray-700 text-sm md:text-base">
                                 @if($bateau->longueurht)
                                     <div class="flex justify-between py-2 border-b">
                                         <span>Longueur hors tout</span>
@@ -314,8 +314,8 @@
 
                         <!-- Motorisation -->
                         <div>
-                            <h3 class="font-bold text-gray-800 mb-3 text-lg">Motorisation</h3>
-                            <div class="space-y-2 text-gray-700">
+                            <h3 class="font-bold text-gray-800 mb-3 text-base md:text-lg">Motorisation</h3>
+                            <div class="space-y-2 text-gray-700 text-sm md:text-base">
                                 @if($bateau->moteur)
                                     <div class="flex justify-between py-2 border-b">
                                         <span>Moteur</span>
@@ -351,8 +351,8 @@
 
                         <!-- Capacités -->
                         <div>
-                            <h3 class="font-bold text-gray-800 mb-3 text-lg">Capacités</h3>
-                            <div class="space-y-2 text-gray-700">
+                            <h3 class="font-bold text-gray-800 mb-3 text-base md:text-lg">Capacités</h3>
+                            <div class="space-y-2 text-gray-700 text-sm md:text-base">
                                 @if($bateau->cabines)
                                     <div class="flex justify-between py-2 border-b">
                                         <span>Cabines</span>
@@ -373,7 +373,7 @@
                 <!-- Équipements -->
                 @if($bateau->equipements->count() > 0)
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <i class="fas fa-list-check text-blue-600 mr-2"></i> Équipements
                     </h2>
 
@@ -393,8 +393,8 @@
                         @foreach($categories as $categorieKey => $categorieLabel)
                             @if(isset($equipementsGrouped[$categorieKey]) && $equipementsGrouped[$categorieKey]->count() > 0)
                                 <div>
-                                    <h3 class="font-bold text-gray-800 mb-3">{{ $categorieLabel }}</h3>
-                                    <ul class="space-y-2 text-gray-700">
+                                    <h3 class="font-bold text-gray-800 mb-3 text-base md:text-lg">{{ $categorieLabel }}</h3>
+                                    <ul class="space-y-2 text-gray-700 text-sm md:text-base">
                                         @foreach($equipementsGrouped[$categorieKey] as $equipement)
                                             <li class="flex items-center">
                                                 <i class="fas fa-check text-green-600 mr-2"></i>
@@ -417,7 +417,7 @@
 
                 <!-- Contact courtier -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6 sticky top-24">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Contactez votre courtier</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Contactez votre courtier</h3>
 
                     <!-- Profil courtier -->
                     <div class="flex items-center mb-6 pb-6 border-b">
@@ -514,7 +514,7 @@
 
                 <!-- Informations annonce -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Informations</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Informations</h3>
                     <div class="space-y-3 text-sm">
                         <div class="flex items-center text-gray-700">
                             <i class="fas fa-calendar text-blue-600 mr-3 w-5"></i>
@@ -537,7 +537,7 @@
 
                 <!-- Partager -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Partager</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Partager</h3>
                     <div class="flex gap-2">
                         @php
                             $shareUrl = urlencode(url()->current());
@@ -591,8 +591,8 @@
         <!-- Annonces similaires -->
         <div class="mt-16">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Annonces similaires</h2>
-                <p class="text-gray-600">Autres bateaux qui pourraient vous intéresser</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Annonces similaires</h2>
+                <p class="text-gray-600 text-sm md:text-base">Autres bateaux qui pourraient vous intéresser</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

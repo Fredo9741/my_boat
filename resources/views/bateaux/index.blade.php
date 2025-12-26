@@ -12,8 +12,8 @@
     <!-- Page Title & Stats -->
     <div class="bg-white border-b">
         <div class="container mx-auto px-4 py-8">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">{{ __('Toutes les annonces') }}</h1>
-            <p class="text-gray-600 text-lg">{{ number_format($bateaux->total()) }} {{ $bateaux->total() > 1 ? __('bateaux') : __('bateau') }} {{ $bateaux->total() > 1 ? __('trouvés') : __('trouvé') }}</p>
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-2">{{ __('Toutes les annonces') }}</h1>
+            <p class="text-gray-600 text-sm md:text-lg">{{ number_format($bateaux->total()) }} {{ $bateaux->total() > 1 ? __('bateaux') : __('bateau') }} {{ $bateaux->total() > 1 ? __('trouvés') : __('trouvé') }}</p>
         </div>
     </div>
 

@@ -7,8 +7,8 @@
     <!-- Hero -->
     <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
         <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Explorer par catégorie</h1>
-            <p class="text-xl text-blue-100">Trouvez le type de bateau qui correspond à vos besoins</p>
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">Explorer par catégorie</h1>
+            <p class="text-lg md:text-xl text-blue-100">Trouvez le type de bateau qui correspond à vos besoins</p>
         </div>
     </div>
 
@@ -64,17 +64,17 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas {{ $typeIcon }} text-4xl mr-4"></i>
+                                    <i class="fas {{ $typeIcon }} text-3xl md:text-4xl mr-4"></i>
                                     <div>
-                                        <h3 class="text-2xl font-bold">{{ $type->libelle }}</h3>
-                                        <p class="text-blue-200">{{ $type->bateaux_count }} annonce{{ $type->bateaux_count > 1 ? 's' : '' }}</p>
+                                        <h3 class="text-xl md:text-2xl font-bold">{{ $type->libelle }}</h3>
+                                        <p class="text-blue-200 text-sm md:text-base">{{ $type->bateaux_count }} annonce{{ $type->bateaux_count > 1 ? 's' : '' }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="p-6">
-                            <p class="text-gray-600 mb-4">{{ getDescriptionForType($type->libelle, $descriptionMap) }}</p>
-                            <div class="flex items-center text-blue-600 font-semibold group-hover:translate-x-2 transition">
+                            <p class="text-gray-600 text-sm md:text-base mb-4">{{ getDescriptionForType($type->libelle, $descriptionMap) }}</p>
+                            <div class="flex items-center text-blue-600 font-semibold text-sm md:text-base group-hover:translate-x-2 transition">
                                 Voir les annonces <i class="fas fa-arrow-right ml-2"></i>
                             </div>
                         </div>
@@ -89,8 +89,8 @@
     <!-- CTA -->
     <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Vous ne trouvez pas ce que vous cherchez ?</h2>
-            <p class="text-xl mb-8 text-blue-100">Contactez-nous pour une recherche personnalisée</p>
+            <h2 class="text-2xl md:text-4xl font-bold mb-4">Vous ne trouvez pas ce que vous cherchez ?</h2>
+            <p class="text-lg md:text-xl mb-8 text-blue-100">Contactez-nous pour une recherche personnalisée</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="{{ route('bateaux.index') }}" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105 inline-flex items-center justify-center">
                     <i class="fas fa-search mr-2"></i> Toutes les annonces

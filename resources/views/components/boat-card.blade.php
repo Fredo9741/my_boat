@@ -33,9 +33,9 @@
 
     <div class="p-4 md:p-5">
         <div class="flex justify-between items-start mb-2 md:mb-3">
-            <h4 class="font-bold text-lg md:text-xl text-gray-800 line-clamp-1">{{ $title }}</h4>
+            <h4 class="font-bold text-base md:text-xl text-gray-800 line-clamp-1">{{ $title }}</h4>
             <button onclick="toggleCardFavorite(event, '{{ $slug }}')" class="text-gray-400 hover:text-red-500 transition">
-                <i class="favorite-icon-{{ $slug }} far fa-heart text-xl"></i>
+                <i class="favorite-icon-{{ $slug }} far fa-heart text-lg md:text-xl"></i>
             </button>
         </div>
 
@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex justify-between items-center pt-3 md:pt-4 border-t">
-            <div class="text-xl md:text-2xl font-bold text-blue-600">{{ number_format($price, 0, ',', ' ') }} €</div>
+            <div class="text-lg md:text-2xl font-bold text-blue-600">{{ number_format($price, 0, ',', ' ') }} €</div>
             <a href="{{ route('bateaux.show', $slug) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition">
                 Voir <i class="fas fa-arrow-right ml-1"></i>
             </a>

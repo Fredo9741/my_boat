@@ -109,8 +109,8 @@
     <section id="categories" class="hidden md:block py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Explorer par catégorie</h3>
-                <p class="text-gray-600 text-lg">Trouvez le type de bateau qui vous correspond</p>
+                <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Explorer par catégorie</h3>
+                <p class="text-gray-600 text-sm md:text-lg">Trouvez le type de bateau qui vous correspond</p>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -138,7 +138,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
                 <div class="mb-4 md:mb-0">
-                    <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-2">Annonces à la une</h3>
+                    <h3 class="text-xl md:text-4xl font-bold text-gray-800 mb-2">Annonces à la une</h3>
                     <p class="text-gray-600 text-sm md:text-base">Les meilleures offres du moment</p>
                 </div>
                 <a href="{{ route('bateaux.index') }}" class="hidden md:flex text-blue-600 hover:text-blue-700 font-semibold items-center">
@@ -180,8 +180,8 @@
     <section class="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Pourquoi My Boat ?</h3>
-                <p class="text-gray-600 text-lg">La plateforme de confiance pour l'océan Indien</p>
+                <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Pourquoi My Boat ?</h3>
+                <p class="text-gray-600 text-sm md:text-lg">La plateforme de confiance pour l'océan Indien</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -190,8 +190,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-shield-alt text-3xl text-blue-600"></i>
                     </div>
-                    <h4 class="font-bold text-xl text-gray-800 mb-3">Sécurisé</h4>
-                    <p class="text-gray-600">Paiements sécurisés et vérification des vendeurs pour votre tranquillité</p>
+                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Sécurisé</h4>
+                    <p class="text-gray-600 text-sm md:text-base">Paiements sécurisés et vérification des vendeurs pour votre tranquillité</p>
                 </div>
 
                 <!-- Avantage 2 -->
@@ -199,8 +199,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-search text-3xl text-blue-600"></i>
                     </div>
-                    <h4 class="font-bold text-xl text-gray-800 mb-3">Large choix</h4>
-                    <p class="text-gray-600">Des milliers d'annonces pour tous les budgets et tous les besoins</p>
+                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Large choix</h4>
+                    <p class="text-gray-600 text-sm md:text-base">Des milliers d'annonces pour tous les budgets et tous les besoins</p>
                 </div>
 
                 <!-- Avantage 3 -->
@@ -208,8 +208,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-headset text-3xl text-blue-600"></i>
                     </div>
-                    <h4 class="font-bold text-xl text-gray-800 mb-3">Support 7j/7</h4>
-                    <p class="text-gray-600">Notre équipe vous accompagne à chaque étape de votre achat</p>
+                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Support 7j/7</h4>
+                    <p class="text-gray-600 text-sm md:text-base">Notre équipe vous accompagne à chaque étape de votre achat</p>
                 </div>
 
                 <!-- Avantage 4 -->
@@ -217,8 +217,8 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-chart-line text-3xl text-blue-600"></i>
                     </div>
-                    <h4 class="font-bold text-xl text-gray-800 mb-3">Prix justes</h4>
-                    <p class="text-gray-600">Estimation gratuite et transparence sur les prix du marché</p>
+                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Prix justes</h4>
+                    <p class="text-gray-600 text-sm md:text-base">Estimation gratuite et transparence sur les prix du marché</p>
                 </div>
             </div>
         </div>
@@ -229,8 +229,8 @@
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                    <h3 class="text-3xl md:text-4xl font-bold mb-4">Vous souhaitez vendre votre bateau ?</h3>
-                    <p class="text-xl text-blue-100">Confiez la vente de votre bateau à notre équipe d'experts</p>
+                    <h3 class="text-2xl md:text-4xl font-bold mb-4">Vous souhaitez vendre votre bateau ?</h3>
+                    <p class="text-lg md:text-xl text-blue-100">Confiez la vente de votre bateau à notre équipe d'experts</p>
                 </div>
 
                 <div class="bg-white rounded-xl p-8 text-gray-800">
@@ -238,39 +238,39 @@
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Estimation gratuite</h4>
-                                <p class="text-gray-600">Nous évaluons votre bateau au meilleur prix du marché</p>
+                                <h4 class="font-bold text-base md:text-lg mb-2">Estimation gratuite</h4>
+                                <p class="text-gray-600 text-sm md:text-base">Nous évaluons votre bateau au meilleur prix du marché</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Gestion complète</h4>
-                                <p class="text-gray-600">Photos professionnelles, annonces et visites</p>
+                                <h4 class="font-bold text-base md:text-lg mb-2">Gestion complète</h4>
+                                <p class="text-gray-600 text-sm md:text-base">Photos professionnelles, annonces et visites</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Réseau d'acheteurs</h4>
-                                <p class="text-gray-600">Accès à notre base de clients qualifiés</p>
+                                <h4 class="font-bold text-base md:text-lg mb-2">Réseau d'acheteurs</h4>
+                                <p class="text-gray-600 text-sm md:text-base">Accès à notre base de clients qualifiés</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
                             <div>
-                                <h4 class="font-bold text-lg mb-2">Accompagnement juridique</h4>
-                                <p class="text-gray-600">Sécurisation de la transaction de A à Z</p>
+                                <h4 class="font-bold text-base md:text-lg mb-2">Accompagnement juridique</h4>
+                                <p class="text-gray-600 text-sm md:text-base">Sécurisation de la transaction de A à Z</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <p class="text-gray-700 text-lg mb-8">
+                        <p class="text-gray-700 text-base md:text-lg mb-8">
                             Remplissez notre formulaire détaillé et recevez une estimation gratuite de votre bateau sous 48h.
                         </p>
-                        <a href="{{ route('sell') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-lg font-bold text-xl transition transform hover:scale-105 shadow-lg">
-                            <i class="fas fa-edit mr-3"></i> Remplir le formulaire de vente
+                        <a href="{{ route('sell') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 md:px-12 py-4 md:py-5 rounded-lg font-bold text-lg md:text-xl transition transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-edit mr-2 md:mr-3"></i> Remplir le formulaire de vente
                         </a>
                         <p class="text-gray-500 text-sm mt-6">
                             <i class="fas fa-clock mr-2"></i> Réponse sous 48h • <i class="fas fa-shield-alt mr-2"></i> Totalement gratuit et sans engagement
