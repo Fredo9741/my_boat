@@ -28,8 +28,20 @@ class MediaService
         $path = $type === 'video' ? 'videos' : 'images';
         $fullPath = $path . '/' . $bateau->id;
 
-        // Store file in public disk
-        $file->storeAs($fullPath, $filename, 'public');
+        // Get configured disk (cloudflare in production, public in local)
+        $disk = config('filesystems.default');
+
+        // Store file
+        $file->storeAs($fullPath, $filename, $disk);
+
+        // Generate URL based on disk type
+        if ($disk === 'cloudflare') {
+            // For Cloudflare R2, use the public URL
+            $url = config('filesystems.disks.cloudflare.url') . '/' . $fullPath . '/' . $filename;
+        } else {
+            // For local storage, use Laravel storage URL
+            $url = '/storage/' . $fullPath . '/' . $filename;
+        }
 
         // Create media record
         $lastOrder = $bateau->medias()->where('type', $type)->max('ordre') ?? 0;
@@ -37,7 +49,7 @@ class MediaService
         return Media::create([
             'bateau_id' => $bateau->id,
             'type' => $type,
-            'url' => '/storage/' . $fullPath . '/' . $filename,
+            'url' => $url,
             'description' => $description,
             'ordre' => $lastOrder + 1,
         ]);
@@ -72,10 +84,22 @@ class MediaService
      */
     public function deleteMedia(Media $media): bool
     {
+        // Get configured disk
+        $disk = config('filesystems.default');
+
+        // Extract file path from URL
+        if ($disk === 'cloudflare') {
+            // For Cloudflare R2, extract path from full URL
+            $cloudflareUrl = config('filesystems.disks.cloudflare.url');
+            $filePath = str_replace($cloudflareUrl . '/', '', $media->url);
+        } else {
+            // For local storage, remove /storage/ prefix
+            $filePath = str_replace('/storage/', '', $media->url);
+        }
+
         // Remove file from storage
-        $filePath = str_replace('/storage/', '', $media->url);
-        if (Storage::disk('public')->exists($filePath)) {
-            Storage::disk('public')->delete($filePath);
+        if (Storage::disk($disk)->exists($filePath)) {
+            Storage::disk($disk)->delete($filePath);
         }
 
         // Delete database record
