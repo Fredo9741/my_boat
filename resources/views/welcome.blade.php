@@ -105,8 +105,8 @@
         </div>
     </section>
 
-    <!-- Catégories -->
-    <section id="categories" class="py-16 bg-gray-50">
+    <!-- Catégories - Hidden on mobile, shown on desktop -->
+    <section id="categories" class="hidden md:block py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Explorer par catégorie</h3>
@@ -134,14 +134,14 @@
     </section>
 
     <!-- Annonces à la Une -->
-    <section class="py-16 bg-white">
+    <section class="py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-12">
-                <div>
-                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Annonces à la une</h3>
-                    <p class="text-gray-600">Les meilleures offres du moment</p>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-2">Annonces à la une</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Les meilleures offres du moment</p>
                 </div>
-                <a href="{{ route('bateaux.index') }}" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center">
+                <a href="{{ route('bateaux.index') }}" class="hidden md:flex text-blue-600 hover:text-blue-700 font-semibold items-center">
                     Voir tout <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -165,6 +165,13 @@
                         <p class="text-xl">Aucune annonce disponible pour le moment</p>
                     </div>
                 @endforelse
+            </div>
+
+            <!-- Bouton "Voir toutes les annonces" - Mobile uniquement -->
+            <div class="mt-8 text-center md:hidden">
+                <a href="{{ route('bateaux.index') }}" class="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-list mr-2"></i> Voir toutes les annonces
+                </a>
             </div>
         </div>
     </section>
