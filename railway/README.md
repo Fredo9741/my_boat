@@ -62,7 +62,27 @@ LOG_STDERR_FORMATTER=\Monolog\Formatter\JsonFormatter
 # Session & Cache
 SESSION_DRIVER=database
 CACHE_STORE=database
+
+# Cloudflare R2 Storage
+FILESYSTEM_DISK=cloudflare
+CLOUDFLARE_R2_ACCESS_KEY_ID=3b40201c3df3c5640859889e1874c872
+CLOUDFLARE_R2_SECRET_ACCESS_KEY=13132322a9edbef95ce049d6c7eefca5ac9af73c4d34d72d2f8a2e071cfaf382
+CLOUDFLARE_R2_BUCKET=myboat
+CLOUDFLARE_R2_URL=https://files.fredlabs.org
+CLOUDFLARE_R2_ENDPOINT=https://898047b4c422ffe9966cc1cb7493ceed.r2.cloudflarestorage.com
 ```
+
+### Configuration Cloudflare R2
+
+Pour configurer le stockage des images sur Cloudflare R2 :
+
+1. **Créer un bucket R2** sur Cloudflare Dashboard
+2. **Générer des clés d'API R2** dans R2 → Manage R2 API Tokens
+3. **Récupérer l'endpoint** : `https://<account-id>.r2.cloudflarestorage.com`
+4. **Configurer l'URL publique** : Activer "Public Access" sur le bucket ou configurer un domaine personnalisé
+5. **Ajouter les variables** dans Railway (Service App, Cron, Worker)
+
+**Note** : Le stockage local (`FILESYSTEM_DISK=local`) fonctionne en développement mais Railway a un filesystem éphémère. Les fichiers uploadés seront perdus au redéploiement sans R2.
 
 ## Instructions de déploiement
 
