@@ -32,8 +32,15 @@ class TypeController extends Controller
 
         // Handle photo upload
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('types', 'public');
-            $validated['photo'] = $path;
+            $disk = config('filesystems.default');
+            $path = $request->file('photo')->store('types', $disk);
+
+            // Generate full URL for Cloudflare R2
+            if ($disk === 'cloudflare') {
+                $validated['photo'] = config('filesystems.disks.cloudflare.url') . '/' . $path;
+            } else {
+                $validated['photo'] = $path;
+            }
         }
 
         Type::create($validated);
@@ -59,13 +66,31 @@ class TypeController extends Controller
 
         // Handle photo upload
         if ($request->hasFile('photo')) {
+            $disk = config('filesystems.default');
+
             // Delete old photo if exists
-            if ($type->photo && \Storage::disk('public')->exists($type->photo)) {
-                \Storage::disk('public')->delete($type->photo);
+            if ($type->photo) {
+                if ($disk === 'cloudflare') {
+                    $cloudflareUrl = config('filesystems.disks.cloudflare.url');
+                    $oldPath = str_replace($cloudflareUrl . '/', '', $type->photo);
+                    if (\Storage::disk($disk)->exists($oldPath)) {
+                        \Storage::disk($disk)->delete($oldPath);
+                    }
+                } else {
+                    if (\Storage::disk($disk)->exists($type->photo)) {
+                        \Storage::disk($disk)->delete($type->photo);
+                    }
+                }
             }
 
-            $path = $request->file('photo')->store('types', 'public');
-            $validated['photo'] = $path;
+            $path = $request->file('photo')->store('types', $disk);
+
+            // Generate full URL for Cloudflare R2
+            if ($disk === 'cloudflare') {
+                $validated['photo'] = config('filesystems.disks.cloudflare.url') . '/' . $path;
+            } else {
+                $validated['photo'] = $path;
+            }
         }
 
         $type->update($validated);

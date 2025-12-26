@@ -58,7 +58,7 @@
                         </label>
                         @if($type->photo)
                             <div class="mb-4">
-                                <img src="{{ asset('storage/' . $type->photo) }}" alt="Photo actuelle" class="w-48 h-32 object-cover rounded-lg border-2 border-gray-200">
+                                <img src="{{ str_starts_with($type->photo, 'http') ? $type->photo : asset('storage/' . $type->photo) }}" alt="Photo actuelle" class="w-48 h-32 object-cover rounded-lg border-2 border-gray-200">
                                 <p class="text-xs text-gray-500 mt-1">Photo actuelle</p>
                             </div>
                         @endif

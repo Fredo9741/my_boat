@@ -45,7 +45,14 @@
             @foreach($types as $type)
                 @php
                     // Use type's photo if available, otherwise default
-                    $typeImage = $type->photo ? asset('storage/' . $type->photo) : $defaultImage;
+                    // Check if photo is a full URL (Cloudflare R2) or a path (local storage)
+                    if ($type->photo) {
+                        $typeImage = str_starts_with($type->photo, 'http')
+                            ? $type->photo
+                            : asset('storage/' . $type->photo);
+                    } else {
+                        $typeImage = $defaultImage;
+                    }
                     // Use type's icon if available, otherwise default
                     $typeIcon = $type->icone ?? $defaultIcon;
                 @endphp
