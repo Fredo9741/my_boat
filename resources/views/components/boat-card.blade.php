@@ -12,7 +12,7 @@
 
 <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden group">
     <a href="{{ route('bateaux.show', $slug) }}" class="relative overflow-hidden block">
-        <img src="{{ $image }}" class="w-full h-48 md:h-56 object-cover group-hover:scale-110 transition duration-500" alt="{{ $title }}">
+        <img src="{{ $image }}" class="w-full h-48 md:h-56 object-cover object-center group-hover:scale-110 transition duration-500" alt="{{ $title }}" loading="lazy">
 
         @if($badge)
             @php

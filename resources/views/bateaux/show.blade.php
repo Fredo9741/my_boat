@@ -23,7 +23,7 @@
                     <!-- Photo principale -->
                     <div class="relative group">
                         <img id="mainImage" src="{{ $bateau->main_image }}"
-                             class="w-full h-96 object-cover" alt="{{ $bateau->modele }}">
+                             class="w-full h-64 md:h-96 object-cover object-center" alt="{{ $bateau->modele }}">
 
                         <!-- Badges -->
                         <div class="absolute top-4 left-4 flex gap-2">
@@ -127,12 +127,13 @@
                     </div>
 
                     <!-- Miniatures -->
-                    <div id="thumbnailsContainer" class="p-4 grid grid-cols-6 gap-2">
+                    <div id="thumbnailsContainer" class="p-4 grid grid-cols-4 md:grid-cols-6 gap-2">
                         @foreach($bateau->images as $index => $media)
                             <img src="{{ $media->url }}"
-                                 class="thumbnail w-full h-20 object-cover rounded-lg cursor-pointer {{ $index == 0 ? 'border-2 border-blue-600' : 'hover:opacity-75' }} transition"
+                                 class="thumbnail w-full h-16 md:h-20 object-cover object-center rounded-lg cursor-pointer {{ $index == 0 ? 'border-2 border-blue-600' : 'hover:opacity-75' }} transition"
                                  data-index="{{ $index }}"
-                                 alt="{{ $media->description ?? 'Image ' . ($index + 1) }}">
+                                 alt="{{ $media->description ?? 'Image ' . ($index + 1) }}"
+                                 loading="lazy">
                         @endforeach
                     </div>
                 </div>

@@ -60,7 +60,7 @@
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
                         <div class="relative h-64 overflow-hidden">
                             <img src="{{ $typeImage }}"
-                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="{{ $type->libelle }}">
+                                 class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-500" alt="{{ $type->libelle }}" loading="lazy">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                                 <div class="flex items-center mb-2">
