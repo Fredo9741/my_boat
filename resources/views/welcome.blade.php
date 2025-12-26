@@ -10,18 +10,18 @@
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
 
-        <div class="relative container mx-auto px-4 py-12 md:py-20 lg:py-32">
+        <div class="relative container mx-auto px-4 py-16 md:py-20 lg:py-32">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-6">
                     Trouvez votre bateau de rêve
                 </h2>
-                <p class="text-lg md:text-xl lg:text-2xl mb-6 md:mb-10 text-blue-100">
+                <p class="text-base md:text-xl lg:text-2xl mb-6 md:mb-10 text-blue-100">
                     Votre courtier maritime de confiance dans l'océan Indien
                 </p>
 
-                <!-- Barre de Recherche Avancée -->
-                <div class="bg-white rounded-xl shadow-2xl p-4 md:p-6">
-                    <form action="{{ route('bateaux.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
+                <!-- Barre de Recherche Avancée - Version Desktop -->
+                <div class="hidden md:block bg-white rounded-xl shadow-2xl p-6">
+                    <form action="{{ route('bateaux.index') }}" method="GET" class="grid grid-cols-4 gap-4">
                         <!-- Type de bateau -->
                         <div class="text-left">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Type de bateau</label>
@@ -66,6 +66,16 @@
                             </button>
                         </div>
                     </form>
+                </div>
+
+                <!-- Barre de Recherche Simplifiée - Version Mobile -->
+                <div class="md:hidden space-y-3">
+                    <a href="{{ route('bateaux.index') }}" class="block w-full bg-white hover:bg-gray-50 text-gray-800 px-6 py-4 rounded-xl font-semibold transition shadow-lg">
+                        <i class="fas fa-search mr-2"></i> Voir toutes les annonces
+                    </a>
+                    <a href="{{ route('categories') }}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition shadow-lg">
+                        <i class="fas fa-th-large mr-2"></i> Explorer par catégorie
+                    </a>
                 </div>
             </div>
         </div>
