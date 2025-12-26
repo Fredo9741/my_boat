@@ -27,6 +27,9 @@
     <!-- Footer -->
     @include('components.footer')
 
+    <!-- Favorites System -->
+    <script src="{{ asset('js/favorites.js') }}"></script>
+
     @stack('scripts')
 </body>
 </html>

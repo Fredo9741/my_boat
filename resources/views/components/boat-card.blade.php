@@ -34,8 +34,8 @@
     <div class="p-4 md:p-5">
         <div class="flex justify-between items-start mb-2 md:mb-3">
             <h4 class="font-bold text-lg md:text-xl text-gray-800 line-clamp-1">{{ $title }}</h4>
-            <button class="text-gray-400 hover:text-red-500 transition">
-                <i class="far fa-heart text-xl"></i>
+            <button onclick="toggleCardFavorite(event, '{{ $slug }}')" class="text-gray-400 hover:text-red-500 transition">
+                <i class="favorite-icon-{{ $slug }} far fa-heart text-xl"></i>
             </button>
         </div>
 

@@ -48,12 +48,68 @@
 
                         <!-- Boutons actions -->
                         <div class="absolute top-4 right-4 flex gap-2">
-                            <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-red-500 transition shadow-lg">
-                                <i class="far fa-heart text-xl"></i>
+                            <button id="favoriteBtn" onclick="toggleFavorite('{{ $bateau->slug }}')" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-red-500 transition shadow-lg">
+                                <i id="favoriteIcon" class="far fa-heart text-xl"></i>
                             </button>
-                            <button class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-blue-600 transition shadow-lg">
-                                <i class="fas fa-share-alt text-xl"></i>
-                            </button>
+                            <div class="relative">
+                                <button id="shareBtn" onclick="toggleShareMenu()" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-blue-600 transition shadow-lg">
+                                    <i class="fas fa-share-alt text-xl"></i>
+                                </button>
+                                <!-- Menu de partage -->
+                                <div id="shareMenu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-2xl border border-gray-200 z-50">
+                                    <div class="p-4">
+                                        <h4 class="font-bold text-gray-800 mb-3">Partager cette annonce</h4>
+                                        <div class="space-y-2">
+                                            @php
+                                                $shareUrl = urlencode(url()->current());
+                                                $shareTitle = urlencode($bateau->modele . ' - ' . $bateau->formatted_price);
+                                                $shareText = urlencode($bateau->modele . ' - ' . $bateau->type->libelle . ' - ' . $bateau->formatted_price);
+                                            @endphp
+
+                                            <!-- Facebook -->
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}"
+                                               target="_blank" rel="noopener noreferrer"
+                                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
+                                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </div>
+                                                <span class="text-gray-700 font-medium">Facebook</span>
+                                            </a>
+
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/?text={{ $shareText }}%20{{ $shareUrl }}"
+                                               target="_blank" rel="noopener noreferrer"
+                                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
+                                                <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fab fa-whatsapp"></i>
+                                                </div>
+                                                <span class="text-gray-700 font-medium">WhatsApp</span>
+                                            </a>
+
+                                            <!-- Email -->
+                                            <a href="mailto:?subject={{ $shareTitle }}&body={{ $shareText }}%20{{ $shareUrl }}"
+                                               class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
+                                                <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                                <span class="text-gray-700 font-medium">Email</span>
+                                            </a>
+
+                                            <!-- Copier le lien -->
+                                            <button onclick="copyShareLink('{{ url()->current() }}')"
+                                                    class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
+                                                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                                    <i class="fas fa-link"></i>
+                                                </div>
+                                                <span class="text-gray-700 font-medium">Copier le lien</span>
+                                            </button>
+                                        </div>
+                                        <p id="shareMessage" class="hidden text-xs text-green-600 mt-2 text-center">
+                                            <i class="fas fa-check"></i> Lien copié !
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Navigation photos -->
@@ -632,6 +688,65 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 message.style.display = 'none';
             }, 3000);
+        }, function(err) {
+            console.error('Erreur lors de la copie: ', err);
+        });
+    };
+
+    // Favorites system using localStorage
+    window.toggleFavorite = function(slug) {
+        let favorites = JSON.parse(localStorage.getItem('myboat_favorites') || '[]');
+        const favoriteIcon = document.getElementById('favoriteIcon');
+        const favoriteBtn = document.getElementById('favoriteBtn');
+
+        if (favorites.includes(slug)) {
+            // Remove from favorites
+            favorites = favorites.filter(item => item !== slug);
+            favoriteIcon.classList.remove('fas', 'text-red-500');
+            favoriteIcon.classList.add('far', 'text-gray-600');
+        } else {
+            // Add to favorites
+            favorites.push(slug);
+            favoriteIcon.classList.remove('far', 'text-gray-600');
+            favoriteIcon.classList.add('fas', 'text-red-500');
+        }
+
+        localStorage.setItem('myboat_favorites', JSON.stringify(favorites));
+    };
+
+    // Check if current boat is in favorites on page load
+    const bateauSlug = '{{ $bateau->slug }}';
+    const favorites = JSON.parse(localStorage.getItem('myboat_favorites') || '[]');
+    if (favorites.includes(bateauSlug)) {
+        const favoriteIcon = document.getElementById('favoriteIcon');
+        favoriteIcon.classList.remove('far', 'text-gray-600');
+        favoriteIcon.classList.add('fas', 'text-red-500');
+    }
+
+    // Share menu toggle
+    window.toggleShareMenu = function() {
+        const shareMenu = document.getElementById('shareMenu');
+        shareMenu.classList.toggle('hidden');
+    };
+
+    // Close share menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const shareBtn = document.getElementById('shareBtn');
+        const shareMenu = document.getElementById('shareMenu');
+
+        if (!shareBtn.contains(event.target) && !shareMenu.contains(event.target)) {
+            shareMenu.classList.add('hidden');
+        }
+    });
+
+    // Copy share link function
+    window.copyShareLink = function(url) {
+        navigator.clipboard.writeText(url).then(function() {
+            const shareMessage = document.getElementById('shareMessage');
+            shareMessage.classList.remove('hidden');
+            setTimeout(function() {
+                shareMessage.classList.add('hidden');
+            }, 2000);
         }, function(err) {
             console.error('Erreur lors de la copie: ', err);
         });
