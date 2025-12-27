@@ -18,6 +18,12 @@ class BateauSeeder extends Seeder
      */
     public function run(): void
     {
+        // Protection : ne pas re-seeder si des bateaux existent déjà
+        if (Bateau::count() > 0) {
+            echo "\n⏭️  Bateaux déjà présents en base, skip du seeding\n";
+            return;
+        }
+
         echo "\n🚢 Seeding 55 bateaux...\n\n";
 
         // Bateau 1: VEDETTE PRO
