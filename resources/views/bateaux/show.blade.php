@@ -26,7 +26,7 @@
                              class="w-full h-64 md:h-96 object-cover object-center" alt="{{ $bateau->modele }}">
 
                         <!-- Badges -->
-                        <div class="absolute top-4 left-4 flex gap-2">
+                        <div class="absolute top-4 left-4 flex flex-col md:flex-row gap-2">
                             @if($bateau->badge)
                                 @php
                                     $badgeClasses = [
@@ -34,20 +34,24 @@
                                         'yellow' => 'bg-yellow-500',
                                         'red' => 'bg-red-500',
                                         'blue' => 'bg-blue-500',
+                                        'purple' => 'bg-purple-500',
+                                        'pink' => 'bg-pink-500',
+                                        'orange' => 'bg-orange-500',
+                                        'gray' => 'bg-gray-500',
                                     ];
                                     $badgeClass = $badgeClasses[$bateau->badge['color']] ?? 'bg-gray-500';
                                 @endphp
-                                <span class="{{ $badgeClass }} text-white px-4 py-2 rounded-full text-sm font-semibold">
+                                <span class="{{ $badgeClass }} text-white px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-semibold">
                                     <i class="fas fa-star mr-1"></i> {{ $bateau->badge['label'] }}
                                 </span>
                             @endif
-                            <span class="bg-white text-gray-800 px-4 py-2 rounded-full text-sm font-semibold">
+                            <span class="bg-white text-gray-800 px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-semibold">
                                 {{ $bateau->occasion ? 'Occasion' : 'Neuf' }}
                             </span>
                         </div>
 
                         <!-- Boutons actions -->
-                        <div class="absolute top-4 right-4 flex gap-2">
+                        <div class="absolute top-4 right-4 flex flex-col md:flex-row gap-2">
                             <button id="favoriteBtn" onclick="toggleFavorite('{{ $bateau->slug }}')" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-red-500 transition shadow-lg">
                                 <i id="favoriteIcon" class="far fa-heart text-xl"></i>
                             </button>
@@ -372,10 +376,11 @@
                 </div>
 
                 <!-- Équipements -->
-                @if($bateau->equipements->count() > 0)
+                @if($bateau->equipements && $bateau->equipements->count() > 0)
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                     <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <i class="fas fa-list-check text-blue-600 mr-2"></i> Équipements
+                        <span class="ml-2 text-sm text-gray-500">({{ $bateau->equipements->count() }})</span>
                     </h2>
 
                     @php
@@ -399,7 +404,9 @@
                                         @foreach($equipementsGrouped[$categorieKey] as $equipement)
                                             <li class="flex items-center">
                                                 <i class="fas fa-check text-green-600 mr-2"></i>
-                                                <i class="fas {{ $equipement->icone }} text-gray-600 mr-2"></i>
+                                                @if($equipement->icone)
+                                                    <i class="fas {{ $equipement->icone }} text-gray-600 mr-2"></i>
+                                                @endif
                                                 {{ $equipement->libelle }}
                                             </li>
                                         @endforeach
@@ -409,6 +416,8 @@
                         @endforeach
                     </div>
                 </div>
+                @else
+                <!-- Debug: Section equipements vide -->
                 @endif
 
             </div>
