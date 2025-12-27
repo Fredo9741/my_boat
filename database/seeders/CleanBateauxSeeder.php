@@ -19,8 +19,8 @@ class CleanBateauxSeeder extends Seeder
         // Désactiver les foreign key checks temporairement
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        // Supprimer toutes les médias (même soft deleted)
-        Media::withTrashed()->forceDelete();
+        // Supprimer toutes les médias
+        DB::table('medias')->truncate();
         echo "  ✓ Médias supprimées\n";
 
         // Supprimer tous les bateaux (même soft deleted)
