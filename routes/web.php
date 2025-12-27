@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BateauController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TypeController as AdminTypeController;
@@ -34,6 +35,7 @@ Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.
 Route::get('/a-propos', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/vendre', [PageController::class, 'sell'])->name('sell');
+Route::get('/partenaires', [PartnerController::class, 'index'])->name('partners');
 Route::get('/mentions-legales', [PageController::class, 'mentionsLegales'])->name('mentions-legales');
 Route::get('/cgv', [PageController::class, 'cgv'])->name('cgv');
 Route::get('/confidentialite', [PageController::class, 'confidentialite'])->name('confidentialite');
