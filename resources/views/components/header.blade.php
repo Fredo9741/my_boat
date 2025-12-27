@@ -20,6 +20,9 @@
                 <a href="/a-propos" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('a-propos') ? 'text-blue-600' : '' }}">
                     À propos
                 </a>
+                <a href="/partenaires" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('partenaires') ? 'text-blue-600' : '' }}">
+                    Partenaires
+                </a>
                 <a href="/contact" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('contact') ? 'text-blue-600' : '' }}">
                     Contact
                 </a>
@@ -54,6 +57,9 @@
             </a>
             <a href="/a-propos" class="block py-2 text-gray-700 hover:text-blue-600 font-medium {{ request()->is('a-propos') ? 'text-blue-600' : '' }}">
                 <i class="fas fa-info-circle w-6"></i> À propos
+            </a>
+            <a href="/partenaires" class="block py-2 text-gray-700 hover:text-blue-600 font-medium {{ request()->is('partenaires') ? 'text-blue-600' : '' }}">
+                <i class="fas fa-handshake w-6"></i> Partenaires
             </a>
             <a href="/contact" class="block py-2 text-gray-700 hover:text-blue-600 font-medium {{ request()->is('contact') ? 'text-blue-600' : '' }}">
                 <i class="fas fa-envelope w-6"></i> Contact

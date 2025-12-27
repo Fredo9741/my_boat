@@ -132,132 +132,100 @@
                     <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                         <i class="fas fa-euro-sign text-3xl text-white"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Tarifs Compétitifs</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Partenariat Gagnant-Gagnant</h3>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed">
-                        Formules adaptées à tous les budgets.
-                        Sans engagement, sans frais cachés. Payez uniquement pour vos annonces actives.
+                        Nous publions vos bateaux et vous offrons une visibilité maximale.
+                        Aucun frais, juste une collaboration professionnelle et transparente.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Formules & Tarifs -->
+    <!-- Nos Partenaires -->
     <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nos Formules Partenaires</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nos Partenaires de Confiance</h2>
                 <p class="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Des solutions flexibles adaptées à votre activité
+                    Des professionnels reconnus dans l'océan Indien nous font déjà confiance
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Formule Essentielle -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Essentielle</h3>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold text-blue-600">29€</span>
-                        <span class="text-gray-600">/annonce/mois</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <!-- Partenaire 1: Sailoé Seychelles -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-ship text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Sailoé Seychelles</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
+                            Seychelles
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            Location & vente de voiliers
+                        </p>
                     </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Jusqu'à 10 photos par annonce</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Fiche détaillée avec équipements</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Badge "Professionnel"</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Statistiques de base</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center px-6 py-3 rounded-lg font-semibold transition">
-                        Commencer
-                    </a>
                 </div>
 
-                <!-- Formule Premium -->
-                <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-8 text-white relative transform md:scale-105 shadow-2xl">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-bold">
-                        POPULAIRE
+                <!-- Partenaire 2: Pro Plaisance -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-anchor text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pro Plaisance</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
+                            Le Port, La Réunion
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            Accastillage & équipement nautique
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Premium</h3>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold">49€</span>
-                        <span class="text-blue-100">/annonce/mois</span>
-                    </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-300 mt-1 mr-3"></i>
-                            <span>Photos illimitées + Vidéos YouTube</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-300 mt-1 mr-3"></i>
-                            <span>Mise en avant en page d'accueil</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-300 mt-1 mr-3"></i>
-                            <span>Badge personnalisé (Exclusivité, etc.)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-300 mt-1 mr-3"></i>
-                            <span>Statistiques avancées + Analytics</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-300 mt-1 mr-3"></i>
-                            <span>Support prioritaire</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="block w-full bg-white hover:bg-gray-100 text-blue-600 text-center px-6 py-3 rounded-lg font-semibold transition">
-                        Choisir Premium
-                    </a>
                 </div>
 
-                <!-- Formule Pro -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Pro</h3>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold text-blue-600">Sur mesure</span>
+                <!-- Partenaire 3: Aurélien Bilh -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-hammer text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Aurélien Bilh</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
+                            Océan Indien
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            Fabricant de bateaux
+                        </p>
                     </div>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Tout Premium inclus</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Page courtier personnalisée</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">API et intégration site web</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Campagnes marketing dédiées</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Account manager dédié</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center px-6 py-3 rounded-lg font-semibold transition">
-                        Nous contacter
-                    </a>
+                </div>
+
+                <!-- Partenaire 4: Yacht Management Maurice -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sailboat text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Yacht Management</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
+                            Maurice
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            Distributeur Beneteau
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <div class="text-center mt-12">
-                <p class="text-gray-600 text-sm md:text-base">
-                    <i class="fas fa-info-circle mr-2"></i>
-                    Tous les tarifs sont HT. Réduction de 15% pour un engagement annuel.
+                <p class="text-gray-600 text-base md:text-lg">
+                    <i class="fas fa-handshake mr-2 text-blue-600"></i>
+                    Rejoignez nos partenaires et bénéficiez d'une visibilité maximale dans tout l'océan Indien
                 </p>
             </div>
         </div>
@@ -391,17 +359,20 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Formule souhaitée</label>
-                            <select name="formula" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">Sélectionnez une formule</option>
-                                <option value="essentielle">Essentielle - 29€/annonce/mois</option>
-                                <option value="premium">Premium - 49€/annonce/mois</option>
-                                <option value="pro">Pro - Sur mesure</option>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Type d'activité</label>
+                            <select name="activity_type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Sélectionnez votre activité</option>
+                                <option value="courtier">Courtier maritime</option>
+                                <option value="fabricant">Fabricant de bateaux</option>
+                                <option value="distributeur">Distributeur / Revendeur</option>
+                                <option value="accastillage">Accastillage / Équipements</option>
+                                <option value="location">Location de bateaux</option>
+                                <option value="autre">Autre activité nautique</option>
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre de bateaux à publier</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre estimé de bateaux</label>
                             <input type="number" name="boat_count" min="1" placeholder="Ex: 5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
 
