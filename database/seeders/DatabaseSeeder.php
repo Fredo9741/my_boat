@@ -25,8 +25,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // IMPORT INITIAL UNIQUEMENT - À RETIRER APRÈS PREMIER DÉPLOIEMENT
-        // Import des bateaux scrapés (s'exécute après pour avoir les types/zones/actions)
+        // Nettoyer les anciennes données puis importer les bateaux scrapés
         $this->call([
+            CleanBateauxSeeder::class,  // Nettoie la base avant import
             BateauSeeder::class,
             BateauMediaSeeder::class,
         ]);
