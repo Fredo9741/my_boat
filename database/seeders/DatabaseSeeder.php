@@ -24,12 +24,13 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        // IMPORT INITIAL UNIQUEMENT - À RETIRER APRÈS PREMIER DÉPLOIEMENT
-        // Nettoyer les anciennes données puis importer les bateaux scrapés
-        $this->call([
-            CleanBateauxSeeder::class,  // Nettoie la base avant import
-            BateauSeeder::class,
-            BateauMediaSeeder::class,
-        ]);
+        // IMPORT INITIAL - DÉSACTIVÉ APRÈS PREMIER IMPORT RÉUSSI LE 2025-12-27
+        // Les seeders ci-dessous ont été commentés pour préserver les données en production
+        // Ne décommentez que si vous voulez réinitialiser complètement les bateaux
+        // $this->call([
+        //     CleanBateauxSeeder::class,  // Nettoie la base avant import
+        //     BateauSeeder::class,         // 55 bateaux scrapés
+        //     BateauMediaSeeder::class,    // 457 images
+        // ]);
     }
 }
