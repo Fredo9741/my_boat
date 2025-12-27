@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ['...']
+
+[phases.install]
+cmds = ['...']
+
+[phases.build]
+cmds = ['...']
+
+[start]
+cmd = "bash railway/init-app.sh && frankenphp php-server --listen :$PORT"
