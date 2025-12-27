@@ -10,6 +10,10 @@ echo "🚀 Starting My Boat deployment..."
 echo "📊 Running database migrations..."
 php artisan migrate --force
 
+# Seed essential data (types, zones, actions/slogans, equipements, admin user)
+echo "🌱 Seeding essential data (types, zones, slogans, equipment)..."
+php artisan db:seed --force
+
 # Clear cache
 echo "🧹 Clearing Laravel cache..."
 php artisan optimize:clear
@@ -21,4 +25,4 @@ php artisan event:cache
 php artisan route:cache
 php artisan view:cache
 
-echo "✅ Deployment preparation complete!"
+echo "✅ Deployment complete! Essential data seeded successfully."

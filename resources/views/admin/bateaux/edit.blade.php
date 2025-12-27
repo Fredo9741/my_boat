@@ -339,12 +339,12 @@
 
                     @php
                         $categories = [
-                            'Navigation' => 'Navigation',
-                            'Confort' => 'Confort',
-                            'Sécurité' => 'Sécurité',
-                            'Électronique' => 'Électronique',
-                            'Manœuvre' => 'Manœuvre',
-                            'Loisirs' => 'Loisirs'
+                            'navigation' => 'Navigation',
+                            'confort' => 'Confort',
+                            'securite' => 'Sécurité',
+                            'electronique' => 'Électronique',
+                            'manoeuvre' => 'Manœuvre',
+                            'loisirs' => 'Loisirs'
                         ];
                         $selectedEquipements = $bateau->equipements->pluck('id')->toArray();
                     @endphp

@@ -45,13 +45,13 @@
                                     <i class="fas fa-star mr-1"></i> {{ $bateau->badge['label'] }}
                                 </span>
                             @endif
-                            <span class="bg-white text-gray-800 px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-semibold">
+                            <span class="hidden md:inline-flex bg-white text-gray-800 px-3 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-semibold">
                                 {{ $bateau->occasion ? 'Occasion' : 'Neuf' }}
                             </span>
                         </div>
 
                         <!-- Boutons actions -->
-                        <div class="absolute top-4 right-4 flex flex-col md:flex-row gap-2">
+                        <div class="absolute top-4 right-4 flex gap-2">
                             <button id="favoriteBtn" onclick="toggleFavorite('{{ $bateau->slug }}')" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-red-500 transition shadow-lg">
                                 <i id="favoriteIcon" class="far fa-heart text-xl"></i>
                             </button>
@@ -416,8 +416,6 @@
                         @endforeach
                     </div>
                 </div>
-                @else
-                <!-- Debug: Section equipements vide -->
                 @endif
 
             </div>
