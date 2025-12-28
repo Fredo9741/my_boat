@@ -25,7 +25,7 @@ class BateauController extends Controller
     public function index()
     {
         $bateaux = Bateau::with(['type', 'zone', 'slogan', 'medias'])
-            ->latest()
+            ->orderBy('published_at', 'desc')
             ->paginate(20);
 
         return view('admin.bateaux.index', compact('bateaux'));
@@ -52,6 +52,7 @@ class BateauController extends Controller
             'afficher_prix' => 'boolean',
             'occasion' => 'boolean',
             'visible' => 'boolean',
+            'published_at' => 'nullable|date',
             'description' => 'nullable|string',
             'symboles' => 'nullable|string',
             'mots' => 'nullable|string',
@@ -80,6 +81,11 @@ class BateauController extends Controller
         $validated['visible'] = $request->has('visible');
         $validated['occasion'] = $request->has('occasion');
         $validated['afficher_prix'] = $request->has('afficher_prix');
+
+        // Auto-assign published_at if not provided
+        if (empty($validated['published_at'])) {
+            $validated['published_at'] = now();
+        }
 
         // Convert empty strings to null for foreign keys
         if (empty($validated['slogan_id'])) {
@@ -148,6 +154,7 @@ class BateauController extends Controller
             'afficher_prix' => 'boolean',
             'occasion' => 'boolean',
             'visible' => 'boolean',
+            'published_at' => 'nullable|date',
             'description' => 'nullable|string',
             'symboles' => 'nullable|string',
             'mots' => 'nullable|string',

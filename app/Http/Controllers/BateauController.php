@@ -66,7 +66,7 @@ class BateauController extends Controller
         }
 
         // Sorting
-        $sortBy = $request->get('sort_by', 'created_at');
+        $sortBy = $request->get('sort_by', 'published_at');
         $sortOrder = $request->get('sort_order', 'desc');
 
         switch ($sortBy) {
@@ -82,8 +82,11 @@ class BateauController extends Controller
             case 'annee_asc':
                 $query->orderBy('annee', 'asc');
                 break;
+            case 'published_at':
+                $query->orderBy('published_at', 'desc');
+                break;
             default:
-                $query->orderBy('created_at', 'desc');
+                $query->orderBy('published_at', 'desc');
         }
 
         // Paginate results

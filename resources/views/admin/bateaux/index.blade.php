@@ -37,6 +37,7 @@
                             <tr>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Photo</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modèle</th>
+                                <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Date publication</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Type</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
@@ -76,6 +77,14 @@
                                     <div class="md:hidden text-xs text-gray-500 mt-1">
                                         {{ $bateau->type->libelle ?? 'N/A' }}
                                     </div>
+                                </td>
+                                <td class="px-3 md:px-6 py-4 whitespace-nowrap hidden lg:table-cell">
+                                    @if($bateau->published_at)
+                                        <div class="text-sm text-gray-900">{{ $bateau->published_at->format('d/m/Y') }}</div>
+                                        <div class="text-xs text-gray-500">{{ $bateau->published_at->format('H:i') }}</div>
+                                    @else
+                                        <span class="text-xs text-gray-400 italic">Non publiée</span>
+                                    @endif
                                 </td>
                                 <td class="px-3 md:px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
                                     <div class="flex items-center space-x-2">

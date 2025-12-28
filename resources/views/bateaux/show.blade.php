@@ -524,17 +524,15 @@
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                     <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Informations</h3>
                     <div class="space-y-3 text-sm">
+                        @if($bateau->published_at)
                         <div class="flex items-center text-gray-700">
                             <i class="fas fa-calendar text-blue-600 mr-3 w-5"></i>
-                            <span>Publiée le 12 déc. 2025</span>
+                            <span>Publiée le {{ $bateau->published_at->translatedFormat('d M Y') }}</span>
                         </div>
-                        <div class="flex items-center text-gray-700">
-                            <i class="fas fa-eye text-blue-600 mr-3 w-5"></i>
-                            <span>1,247 vues</span>
-                        </div>
+                        @endif
                         <div class="flex items-center text-gray-700">
                             <i class="fas fa-hashtag text-blue-600 mr-3 w-5"></i>
-                            <span>Réf: BAV-46-2025-001</span>
+                            <span>Réf: {{ strtoupper(substr($bateau->slug, 0, 15)) }}</span>
                         </div>
                         <div class="flex items-center text-gray-700">
                             <i class="fas fa-shield-alt text-blue-600 mr-3 w-5"></i>

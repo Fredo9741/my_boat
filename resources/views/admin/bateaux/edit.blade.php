@@ -103,6 +103,14 @@
                             </select>
                         </div>
 
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date de publication</label>
+                            <input type="datetime-local" name="published_at"
+                                value="{{ old('published_at', $bateau->published_at ? $bateau->published_at->format('Y-m-d\TH:i') : now()->format('Y-m-d\TH:i')) }}"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <p class="text-xs text-gray-500 mt-1">Date de mise en ligne du bateau</p>
+                        </div>
+
                         <div class="md:col-span-2">
                             <div class="flex items-center space-x-6">
                                 <label class="flex items-center">
