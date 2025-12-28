@@ -13,7 +13,7 @@ class BateauSeeder extends Seeder
     /**
      * Run the database seeder.
      *
-     * Auto-generated from backoffice scraping on 2025-12-27 21:17:04
+     * Auto-generated from JSON on 2025-12-28 11:41:55
      * Total bateaux: 55
      */
     public function run(): void
@@ -51,6 +51,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-12-10T08:33:33',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -98,6 +99,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => 8,
+            'published_at' => '2025-11-27T09:15:01',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -145,6 +147,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-11-25T14:01:02',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -192,6 +195,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 1,
             'passagers' => null,
+            'published_at' => '2025-11-25T12:45:08',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -239,6 +243,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quille fixe',
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-11-20T08:52:49',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -286,6 +291,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2025-11-19T10:00:54',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -333,6 +339,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quille',
             'cabines' => 3,
             'passagers' => 8,
+            'published_at' => '2025-11-19T09:30:34',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -380,6 +387,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => null,
+            'published_at' => '2025-11-14T13:23:54',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -427,6 +435,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-10-14T14:02:04',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -474,6 +483,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quilleron',
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2025-09-30T06:56:35',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -521,6 +531,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-09-30T06:55:12',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -568,6 +579,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quilleron',
             'cabines' => 4,
             'passagers' => 10,
+            'published_at' => '2025-09-09T11:25:01',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -615,6 +627,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quille',
             'cabines' => 2,
             'passagers' => 6,
+            'published_at' => '2025-09-06T07:35:15',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -662,6 +675,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'sans dérive',
             'cabines' => 4,
             'passagers' => null,
+            'published_at' => '2025-09-05T09:56:59',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -709,6 +723,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quillerons',
             'cabines' => 6,
             'passagers' => 12,
+            'published_at' => '2025-08-26T07:06:35',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -756,6 +771,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => 4,
+            'published_at' => '2025-08-20T08:36:50',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -803,6 +819,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => 8,
+            'published_at' => '2025-08-13T14:18:24',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -850,6 +867,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => 8,
+            'published_at' => '2025-07-25T07:27:00',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -897,6 +915,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'QUILLE',
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2025-07-15T19:49:24',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -944,6 +963,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quille longue / dériveur',
             'cabines' => 1,
             'passagers' => 8,
+            'published_at' => '2025-07-04T09:56:48',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -991,6 +1011,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 1,
             'passagers' => null,
+            'published_at' => '2025-06-19T13:44:33',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1038,6 +1059,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2025-06-12T13:58:55',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -1085,6 +1107,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => '_',
             'cabines' => null,
             'passagers' => 4,
+            'published_at' => '2025-06-11T10:08:36',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1132,6 +1155,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Dérive',
             'cabines' => 2,
             'passagers' => 6,
+            'published_at' => '2025-06-05T09:26:12',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -1179,6 +1203,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-05-26T11:15:14',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1226,6 +1251,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2025-05-26T10:47:24',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1273,6 +1299,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 1,
             'passagers' => null,
+            'published_at' => '2025-05-26T10:28:16',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1320,6 +1347,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => null,
+            'published_at' => '2025-05-26T10:09:40',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1367,6 +1395,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 1,
             'passagers' => null,
+            'published_at' => '2025-05-26T10:09:07',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1414,6 +1443,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => 32,
+            'published_at' => '2025-02-26T12:12:45',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -1461,6 +1491,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quillerons',
             'cabines' => 4,
             'passagers' => 10,
+            'published_at' => '2025-01-30T08:49:26',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1508,6 +1539,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quillerons',
             'cabines' => 4,
             'passagers' => 10,
+            'published_at' => '2025-01-30T08:36:45',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1555,6 +1587,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quillerons',
             'cabines' => 4,
             'passagers' => 10,
+            'published_at' => '2025-01-30T08:21:28',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1602,6 +1635,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quillerons',
             'cabines' => 4,
             'passagers' => 10,
+            'published_at' => '2025-01-30T08:13:33',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1649,6 +1683,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => 6,
+            'published_at' => '2025-01-30T06:23:32',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1696,6 +1731,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => 8,
+            'published_at' => '2025-01-10T05:41:45',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1743,6 +1779,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => 20,
+            'published_at' => '2024-12-18T08:45:07',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -1790,6 +1827,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => 20,
+            'published_at' => '2024-12-18T06:01:23',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -1837,6 +1875,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Quilleron',
             'cabines' => 3,
             'passagers' => 8,
+            'published_at' => '2024-11-06T12:22:52',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1884,6 +1923,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Ailerons fixes',
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2024-10-25T14:09:44',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -1931,6 +1971,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => 6,
+            'published_at' => '2024-09-27T08:20:11',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -1978,6 +2019,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => 10,
+            'published_at' => '2024-09-27T08:19:24',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -2025,6 +2067,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => null,
+            'published_at' => '2024-09-27T08:18:49',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -2072,6 +2115,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2024-09-27T08:18:02',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -2119,6 +2163,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => null,
+            'published_at' => '2024-09-27T08:17:24',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -2166,6 +2211,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => null,
+            'published_at' => '2024-09-27T08:17:03',
         ];
 
         $type = Type::where('libelle', 'Catamaran à moteur')->first();
@@ -2213,6 +2259,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => null,
+            'published_at' => '2024-09-24T15:19:55',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -2260,6 +2307,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 3,
             'passagers' => null,
+            'published_at' => '2024-09-24T11:27:25',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -2307,6 +2355,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => 8,
+            'published_at' => '2024-09-04T09:38:02',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -2354,6 +2403,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 6,
             'passagers' => null,
+            'published_at' => '2024-08-13T06:15:42',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -2401,6 +2451,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => null,
             'passagers' => 4,
+            'published_at' => '2024-08-13T06:12:19',
         ];
 
         $type = Type::where('libelle', 'Voilier monocoque')->first();
@@ -2448,6 +2499,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => null,
+            'published_at' => '2024-07-11T09:31:01',
         ];
 
         $type = Type::where('libelle', 'Bateau Moteur')->first();
@@ -2495,6 +2547,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => 'Sail drive',
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2024-05-31T14:35:18',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -2542,6 +2595,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 4,
             'passagers' => 8,
+            'published_at' => '2024-02-06T15:31:15',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();
@@ -2586,6 +2640,7 @@ class BateauSeeder extends Seeder
             'systemeantiderive' => null,
             'cabines' => 2,
             'passagers' => 7,
+            'published_at' => '2022-02-17T09:07:44',
         ];
 
         $type = Type::where('libelle', 'Catamaran à voile')->first();

@@ -17,6 +17,8 @@ class Bateau extends Model
 
     protected $fillable = [
         'visible',
+        'published_at',
+        'featured',
         'occasion',
         'zone_id',
         'type_id',
@@ -49,6 +51,8 @@ class Bateau extends Model
 
     protected $casts = [
         'visible' => 'boolean',
+        'featured' => 'boolean',
+        'published_at' => 'datetime',
         'occasion' => 'boolean',
         'afficher_prix' => 'boolean',
         'prix' => 'decimal:2',
@@ -79,6 +83,14 @@ class Bateau extends Model
     public function zone(): BelongsTo
     {
         return $this->belongsTo(Zone::class, 'zone_id');
+    }
+
+    /**
+     * Get all zones for this bateau (many-to-many)
+     */
+    public function zones(): BelongsToMany
+    {
+        return $this->belongsToMany(Zone::class, 'bateau_zone');
     }
 
     /**
