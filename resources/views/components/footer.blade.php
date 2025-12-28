@@ -4,7 +4,7 @@
             <!-- À propos -->
             <div>
                 <div class="mb-4">
-                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="My Boat Logo" class="h-10 w-auto">
+                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-10 w-auto">
                 </div>
                 <p class="text-gray-400 mb-4">Votre courtier maritime de confiance dans l'océan Indien.</p>
                 <div class="flex space-x-4">
@@ -65,7 +65,7 @@
 
         <div class="border-t border-gray-800 pt-6 mt-6 text-center text-gray-500">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p>&copy; 2025 My Boat - Courtage Maritime. Tous droits réservés.</p>
+                <p>&copy; 2025 Myboat-oi - Courtage Maritime. Tous droits réservés.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="{{ route('mentions-legales') }}" class="hover:text-blue-500 transition">Mentions légales</a>
                     <a href="{{ route('cgv') }}" class="hover:text-blue-500 transition">CGV</a>

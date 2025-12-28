@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center space-x-8">
                 <a href="/" class="flex items-center">
-                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="My Boat Logo" class="h-12 w-auto">
+                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-12 w-auto">
                 </a>
 
                 <nav class="hidden md:flex items-center space-x-6">

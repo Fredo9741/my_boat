@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Contact - My Boat | Courtage Maritime')
-@section('description', 'Contactez My Boat pour tous vos projets d\'achat ou de vente de bateaux dans l\'océan Indien. Notre équipe d\'experts est à votre écoute.')
+@section('title', 'Contact - Myboat-oi | Courtage Maritime')
+@section('description', 'Contactez Myboat-oi pour tous vos projets d\'achat ou de vente de bateaux dans l\'océan Indien. Notre équipe d\'experts est à votre écoute.')
 
 @section('content')
 

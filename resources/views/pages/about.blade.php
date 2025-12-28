@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'À propos - My Boat | Courtage Maritime Océan Indien')
-@section('description', 'Découvrez My Boat, votre courtier maritime de confiance dans l\'océan Indien. Expertise, passion et service de qualité pour l\'achat et la vente de bateaux.')
+@section('title', 'À propos - Myboat-oi | Courtage Maritime Océan Indien')
+@section('description', 'Découvrez Myboat-oi, votre courtier maritime de confiance dans l\'océan Indien. Expertise, passion et service de qualité pour l\'achat et la vente de bateaux.')
 
 @section('content')
 
@@ -9,7 +9,7 @@
 <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">À propos de My Boat</h1>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">À propos de Myboat-oi</h1>
             <p class="text-xl md:text-2xl text-blue-100">Votre partenaire de confiance pour l'achat et la vente de bateaux dans l'océan Indien</p>
         </div>
     </div>
@@ -32,7 +32,7 @@
             </h2>
             <div class="prose prose-lg max-w-none text-gray-700 space-y-4">
                 <p class="text-lg leading-relaxed">
-                    Fondée par des passionnés de mer et de navigation, <strong>My Boat</strong> est née d'une vision simple : créer la première marketplace dédiée à la vente de bateaux dans l'océan Indien, regroupant La Réunion, Maurice et Madagascar.
+                    Fondée par des passionnés de mer et de navigation, <strong>Myboat-oi</strong> est née d'une vision simple : créer la première marketplace dédiée à la vente de bateaux dans l'océan Indien, regroupant La Réunion, Maurice, Madagascar, Seychelles et Zanzibar.
                 </p>
                 <p class="leading-relaxed">
                     Fort de plusieurs années d'expérience dans le courtage maritime, notre équipe connaît parfaitement les spécificités du marché local et les besoins des plaisanciers de la région. Nous comprenons que l'achat ou la vente d'un bateau est bien plus qu'une simple transaction : c'est la concrétisation d'un rêve, d'une passion, d'un projet de vie.
@@ -153,7 +153,7 @@
     <div class="mb-16">
         <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
             <i class="fas fa-trophy text-blue-600 mr-2"></i>
-            Pourquoi Choisir My Boat ?
+            Pourquoi Choisir Myboat-oi ?
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white rounded-xl shadow-lg p-8">
@@ -164,7 +164,7 @@
                     <div class="ml-4">
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Expertise Locale</h3>
                         <p class="text-gray-600">
-                            Parfaite connaissance du marché maritime de l'océan Indien et de ses spécificités.
+                            Une équipe de passionnés, avec un collaborateur sur chaque îles.
                         </p>
                     </div>
                 </div>
@@ -206,7 +206,7 @@
                     <div class="ml-4">
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Réseau Étendu</h3>
                         <p class="text-gray-600">
-                            Présence sur 3 îles de l'océan Indien pour maximiser la visibilité de votre annonce.
+                            Présence sur 5 îles de l'océan Indien pour maximiser la visibilité de votre annonce.
                         </p>
                     </div>
                 </div>
@@ -287,7 +287,7 @@
                     </div>
                 </div>
                 <p class="text-gray-600 italic text-sm">
-                    "J'ai trouvé le voilier de mes rêves grâce à My Boat. Accompagnement parfait de A à Z, je recommande les yeux fermés !"
+                    "J'ai trouvé le voilier de mes rêves grâce à Myboat-oi. Accompagnement parfait de A à Z, je recommande les yeux fermés !"
                 </p>
             </div>
 

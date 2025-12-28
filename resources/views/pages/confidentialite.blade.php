@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Politique de Confidentialité - My Boat')
+@section('title', 'Politique de Confidentialité - Myboat-oi')
 
 @section('content')
 
@@ -22,14 +22,14 @@
 
             <section>
                 <p class="text-lg text-gray-700">
-                    My Boat s'engage à protéger la confidentialité et la sécurité de vos données personnelles.
+                    Myboat-oi s'engage à protéger la confidentialité et la sécurité de vos données personnelles.
                     Cette politique explique comment nous collectons, utilisons et protégeons vos informations.
                 </p>
             </section>
 
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Responsable du Traitement</h2>
-                <p><strong>Raison sociale :</strong> My Boat</p>
+                <p><strong>Raison sociale :</strong> Myboat-oi</p>
                 <p><strong>Adresse :</strong> Port de Saint-Gilles, 97434 La Réunion</p>
                 <p><strong>Email :</strong> contact@myboat.re</p>
                 <p><strong>Téléphone :</strong> +262 692 XX XX XX</p>
@@ -192,7 +192,7 @@
                 <div class="bg-blue-50 p-6 rounded-lg mt-4">
                     <p><strong>Email :</strong> <a href="mailto:contact@myboat.re" class="text-blue-600 hover:underline">contact@myboat.re</a></p>
                     <p><strong>Téléphone :</strong> +262 692 XX XX XX</p>
-                    <p><strong>Courrier :</strong> My Boat - Port de Saint-Gilles, 97434 La Réunion</p>
+                    <p><strong>Courrier :</strong> Myboat-oi - Port de Saint-Gilles, 97434 La Réunion</p>
                 </div>
             </section>
 

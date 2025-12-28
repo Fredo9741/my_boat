@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Devenir Partenaire - My Boat')
+@section('title', 'Devenir Partenaire - Myboat-oi')
 
 @section('content')
 
@@ -18,7 +18,7 @@
                     Rejoignez le N°1 de la vente de bateaux dans l'océan Indien
                 </h1>
                 <p class="text-lg md:text-2xl text-blue-100 mb-8 md:mb-12">
-                    Développez votre activité avec My Boat, la plateforme de référence pour les professionnels nautiques
+                    Développez votre activité avec Myboat-oi, la plateforme de référence pour les professionnels nautiques
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#contact" class="bg-white text-blue-600 hover:bg-blue-50 px-8 md:px-12 py-4 md:py-5 rounded-lg font-bold text-base md:text-xl transition transform hover:scale-105 shadow-2xl inline-flex items-center justify-center">
@@ -220,6 +220,23 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- Partenaire 5: MadaNautique -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-wrench text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">MadaNautique</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
+                            Nosy-Bé, Madagascar
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            Travaux, acastillage & gestion
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="text-center mt-12">
@@ -304,7 +321,7 @@
                         </div>
                     </div>
                     <p class="text-gray-700 italic mb-6 text-sm md:text-base">
-                        "My Boat a transformé notre business. Visibilité maximale, leads qualifiés et service client au top. Je recommande vivement !"
+                        "Myboat-oi a transformé notre business. Visibilité maximale, leads qualifiés et service client au top. Je recommande vivement !"
                     </p>
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
@@ -325,7 +342,7 @@
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Prêt à rejoindre My Boat ?</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Prêt à rejoindre Myboat-oi ?</h2>
                     <p class="text-lg md:text-xl text-blue-100">
                         Remplissez le formulaire ci-dessous et notre équipe vous contactera dans les 24h
                     </p>

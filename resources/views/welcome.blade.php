@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'My Boat - Marketplace de Bateaux | Océan Indien')
+@section('title', 'Myboat-oi - Marketplace de Bateaux | Océan Indien')
 @section('description', 'La première marketplace de vente de bateaux dans l\'océan Indien. Trouvez votre bateau idéal à La Réunion, Maurice et Madagascar.')
 
 @section('content')
@@ -181,7 +181,7 @@
     <section class="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Pourquoi My Boat ?</h3>
+                <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Pourquoi Myboat-oi ?</h3>
                 <p class="text-gray-600 text-sm md:text-lg">La plateforme de confiance pour l'océan Indien</p>
             </div>
 

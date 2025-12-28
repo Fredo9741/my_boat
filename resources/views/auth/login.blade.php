@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - My Boat</title>
+    <title>Connexion - Myboat-oi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,7 +14,7 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <a href="/" class="flex items-center">
-                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="My Boat Logo" class="h-12 w-auto">
+                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-12 w-auto">
                 </a>
 
                 <a href="/" class="text-gray-600 hover:text-gray-800">
@@ -32,7 +32,7 @@
                 <div class="mb-8">
                     <i class="fas fa-shield-alt text-6xl mb-6"></i>
                     <h2 class="text-4xl font-bold mb-4">Espace Administration</h2>
-                    <p class="text-xl text-blue-100 mb-8">Accès réservé au courtier My Boat</p>
+                    <p class="text-xl text-blue-100 mb-8">Accès réservé au courtier Myboat-oi</p>
                 </div>
 
                 <div class="space-y-6">
@@ -135,7 +135,7 @@
                         <i class="fas fa-info-circle text-blue-600 mt-1 mr-3"></i>
                         <div>
                             <p class="text-sm text-blue-900 font-medium">Accès réservé</p>
-                            <p class="text-sm text-blue-700 mt-1">Cet espace est exclusivement réservé aux administrateurs My Boat.</p>
+                            <p class="text-sm text-blue-700 mt-1">Cet espace est exclusivement réservé aux administrateurs Myboat-oi.</p>
                         </div>
                     </div>
                 </div>

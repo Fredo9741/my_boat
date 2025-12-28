@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Conditions Générales de Vente - My Boat')
+@section('title', 'Conditions Générales de Vente - Myboat-oi')
 
 @section('content')
 
@@ -23,7 +23,7 @@
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Objet</h2>
                 <p>
-                    Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre My Boat
+                    Les présentes Conditions Générales de Vente (CGV) régissent les relations contractuelles entre Myboat-oi
                     et ses clients dans le cadre de la vente ou de l'achat de bateaux par l'intermédiaire de notre service de courtage maritime.
                 </p>
                 <p>
@@ -72,7 +72,7 @@
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">4. Mandat de Vente</h2>
                 <p>
-                    <strong>4.1 Signature :</strong> Le vendeur signe un mandat de vente exclusif ou non-exclusif avec My Boat.
+                    <strong>4.1 Signature :</strong> Le vendeur signe un mandat de vente exclusif ou non-exclusif avec Myboat-oi.
                 </p>
                 <p>
                     <strong>4.2 Durée :</strong> La durée du mandat est fixée par écrit et peut être renouvelée par accord des deux parties.
@@ -85,12 +85,12 @@
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">5. Prix et Modalités de Paiement</h2>
                 <p>
-                    <strong>5.1 Prix :</strong> Le prix de vente du bateau est fixé d'un commun accord entre le vendeur et My Boat,
+                    <strong>5.1 Prix :</strong> Le prix de vente du bateau est fixé d'un commun accord entre le vendeur et Myboat-oi,
                     en fonction de l'expertise réalisée et des conditions du marché.
                 </p>
                 <p>
                     <strong>5.2 Paiement :</strong> Les modalités de paiement entre l'acheteur et le vendeur sont définies lors de la négociation.
-                    My Boat peut proposer un service de séquestre pour sécuriser la transaction.
+                    Myboat-oi peut proposer un service de séquestre pour sécuriser la transaction.
                 </p>
             </section>
 
@@ -101,7 +101,7 @@
                     <li>Présenter tous les documents obligatoires (acte de francisation, certificat de navigabilité, etc.)</li>
                     <li>Garantir qu'il est le propriétaire légitime du bateau</li>
                     <li>Maintenir le bateau en bon état pendant la période de vente</li>
-                    <li>Donner accès au bateau pour les visites organisées par My Boat</li>
+                    <li>Donner accès au bateau pour les visites organisées par Myboat-oi</li>
                 </ul>
             </section>
 
@@ -126,14 +126,14 @@
                     <strong>8.2 Bateaux neufs :</strong> Les bateaux neufs bénéficient de la garantie constructeur selon les conditions du fabricant.
                 </p>
                 <p>
-                    <strong>8.3 Expertise :</strong> My Boat recommande fortement de faire expertiser le bateau avant l'achat.
+                    <strong>8.3 Expertise :</strong> Myboat-oi recommande fortement de faire expertiser le bateau avant l'achat.
                 </p>
             </section>
 
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">9. Responsabilité</h2>
                 <p>
-                    My Boat agit en tant qu'intermédiaire entre le vendeur et l'acheteur. Sa responsabilité ne saurait être engagée
+                    Myboat-oi agit en tant qu'intermédiaire entre le vendeur et l'acheteur. Sa responsabilité ne saurait être engagée
                     pour les vices cachés ou défauts du bateau non apparents lors de la présentation.
                 </p>
                 <p>
@@ -166,7 +166,7 @@
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">12. Modification des CGV</h2>
                 <p>
-                    My Boat se réserve le droit de modifier les présentes CGV à tout moment.
+                    Myboat-oi se réserve le droit de modifier les présentes CGV à tout moment.
                     Les CGV applicables sont celles en vigueur au moment de la signature du mandat ou de la réalisation de la prestation.
                 </p>
             </section>

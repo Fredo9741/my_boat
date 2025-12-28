@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Catégories de Bateaux - My Boat')
+@section('title', 'Catégories de Bateaux - Myboat-oi')
 
 @section('content')
 

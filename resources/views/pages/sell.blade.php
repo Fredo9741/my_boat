@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Vendre Mon Bateau - My Boat | Courtage Maritime')
-@section('description', 'Confiez la vente de votre bateau à My Boat. Service professionnel, estimation gratuite, photos pro et accompagnement personnalisé dans l\'océan Indien.')
+@section('title', 'Vendre Mon Bateau - Myboat-oi | Courtage Maritime')
+@section('description', 'Confiez la vente de votre bateau à Myboat-oi. Service professionnel, estimation gratuite, photos pro et accompagnement personnalisé dans l\'océan Indien.')
 
 @section('content')
 
@@ -36,7 +36,7 @@
     <!-- Avantages -->
     <div class="mb-16">
         <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
-            Pourquoi Vendre avec My Boat ?
+            Pourquoi Vendre avec Myboat-oi ?
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition text-center">

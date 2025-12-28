@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tableau de bord - My Boat')
+@section('title', 'Tableau de bord - Myboat-oi')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Mentions Légales - My Boat')
+@section('title', 'Mentions Légales - Myboat-oi')
 
 @section('content')
 
@@ -22,7 +22,7 @@
 
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Informations Légales</h2>
-                <p><strong>Dénomination sociale :</strong> My Boat</p>
+                <p><strong>Dénomination sociale :</strong> Myboat-oi</p>
                 <p><strong>Forme juridique :</strong> [À compléter]</p>
                 <p><strong>Siège social :</strong> Port de Saint-Gilles, 97434 La Réunion, France</p>
                 <p><strong>SIRET :</strong> [À compléter]</p>
@@ -59,7 +59,7 @@
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">5. Cookies</h2>
                 <p>
-                    Le site My Boat peut être amené à vous demander l'acceptation des cookies pour des besoins de statistiques et d'affichage.
+                    Le site Myboat-oi peut être amené à vous demander l'acceptation des cookies pour des besoins de statistiques et d'affichage.
                     Un cookie est une information déposée sur votre disque dur par le serveur du site que vous visitez.
                 </p>
                 <p>
@@ -83,8 +83,8 @@
             <section>
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">7. Liens Hypertextes</h2>
                 <p>
-                    Le site My Boat peut contenir des liens hypertextes vers d'autres sites présents sur le réseau Internet.
-                    Les liens vers ces autres ressources vous font quitter le site My Boat.
+                    Le site Myboat-oi peut contenir des liens hypertextes vers d'autres sites présents sur le réseau Internet.
+                    Les liens vers ces autres ressources vous font quitter le site Myboat-oi.
                 </p>
                 <p>
                     Il est possible de créer un lien vers la page de présentation de ce site sans autorisation expresse de l'éditeur.

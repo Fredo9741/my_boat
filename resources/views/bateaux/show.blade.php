@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $bateau->modele . ' - My Boat')
+@section('title', $bateau->modele . ' - Myboat-oi')
 
 @section('content')
 
@@ -436,7 +436,7 @@
                             <i class="fas fa-ship"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800">My Boat</h4>
+                            <h4 class="font-bold text-gray-800">Myboat-oi</h4>
                             <p class="text-sm text-blue-600 font-medium">Courtier maritime agréé</p>
                             <div class="flex items-center text-yellow-500 text-sm mt-1">
                                 <i class="fas fa-star"></i>
