@@ -112,7 +112,7 @@
                         </div>
 
                         <div class="md:col-span-2">
-                            <div class="flex items-center space-x-6">
+                            <div class="flex items-center flex-wrap gap-6">
                                 <label class="flex items-center">
                                     <input type="checkbox" name="visible" value="1" {{ old('visible', $bateau->visible) ? 'checked' : '' }}
                                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
@@ -129,6 +129,14 @@
                                     <input type="checkbox" name="afficher_prix" value="1" {{ old('afficher_prix', $bateau->afficher_prix) ? 'checked' : '' }}
                                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                                     <span class="ml-2 text-sm text-gray-700">Afficher le prix</span>
+                                </label>
+
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="featured" value="1" {{ old('featured', $bateau->featured) ? 'checked' : '' }}
+                                        class="w-4 h-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500">
+                                    <span class="ml-2 text-sm text-gray-700">
+                                        <i class="fas fa-star text-yellow-500 mr-1"></i>Mise en avant (max 4)
+                                    </span>
                                 </label>
                             </div>
                         </div>

@@ -15,12 +15,24 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        // Get featured boats (newest and premium)
+        // Get featured boats (4 boats marked as featured by admin)
         $featuredBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
             ->visible()
+            ->where('featured', true)
             ->orderBy('published_at', 'desc')
-            ->limit(6)
+            ->limit(4)
             ->get();
+
+        // If less than 4 featured boats, fill with newest boats
+        if ($featuredBateaux->count() < 4) {
+            $additionalBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
+                ->visible()
+                ->where('featured', false)
+                ->orderBy('published_at', 'desc')
+                ->limit(4 - $featuredBateaux->count())
+                ->get();
+            $featuredBateaux = $featuredBateaux->merge($additionalBateaux);
+        }
 
         // Get recent boats
         $recentBateaux = Bateau::with(['type', 'zone', 'images'])

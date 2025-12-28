@@ -52,6 +52,7 @@ class BateauController extends Controller
             'afficher_prix' => 'boolean',
             'occasion' => 'boolean',
             'visible' => 'boolean',
+            'featured' => 'boolean',
             'published_at' => 'nullable|date',
             'description' => 'nullable|string',
             'symboles' => 'nullable|string',
@@ -81,6 +82,7 @@ class BateauController extends Controller
         $validated['visible'] = $request->has('visible');
         $validated['occasion'] = $request->has('occasion');
         $validated['afficher_prix'] = $request->has('afficher_prix');
+        $validated['featured'] = $request->has('featured');
 
         // Auto-assign published_at if not provided
         if (empty($validated['published_at'])) {
@@ -154,6 +156,7 @@ class BateauController extends Controller
             'afficher_prix' => 'boolean',
             'occasion' => 'boolean',
             'visible' => 'boolean',
+            'featured' => 'boolean',
             'published_at' => 'nullable|date',
             'description' => 'nullable|string',
             'symboles' => 'nullable|string',
@@ -183,6 +186,7 @@ class BateauController extends Controller
         $validated['visible'] = $request->has('visible');
         $validated['occasion'] = $request->has('occasion');
         $validated['afficher_prix'] = $request->has('afficher_prix');
+        $validated['featured'] = $request->has('featured');
 
         // Convert empty strings to null for foreign keys
         if (empty($validated['slogan_id'])) {
