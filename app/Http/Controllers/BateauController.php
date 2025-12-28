@@ -89,8 +89,8 @@ class BateauController extends Controller
                 $query->orderBy('published_at', 'desc');
         }
 
-        // Paginate results
-        $bateaux = $query->paginate(12)->withQueryString();
+        // Get all results (no pagination)
+        $bateaux = $query->get();
 
         // Get filters data
         $types = Type::withCount(['bateaux' => function ($query) {

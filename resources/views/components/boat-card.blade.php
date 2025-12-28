@@ -6,6 +6,7 @@
     'location' => 'La Réunion',
     'length' => '0m',
     'year' => 2024,
+    'publishedAt' => null,
     'badge' => null,
     'badgeColor' => 'green'
 ])
@@ -51,6 +52,12 @@
             <span><i class="fas fa-ruler-horizontal mr-1"></i> {{ $length }}</span>
             <span><i class="fas fa-calendar-alt mr-1"></i> {{ $year }}</span>
         </div>
+
+        @if($publishedAt)
+        <div class="text-xs text-gray-400 mb-3">
+            <i class="fas fa-clock mr-1"></i> Publié le {{ $publishedAt }}
+        </div>
+        @endif
 
         <div class="flex justify-between items-center pt-3 md:pt-4 border-t">
             <div class="text-lg md:text-2xl font-bold text-blue-600">{{ number_format($price, 0, ',', ' ') }} €</div>

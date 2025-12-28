@@ -209,6 +209,7 @@
                             :location="$bateau->location"
                             :length="$bateau->length"
                             :year="$bateau->annee"
+                            :published-at="$bateau->published_at ? $bateau->published_at->format('d/m/Y') : null"
                             :badge="$bateau->badge['label'] ?? null"
                             :badge-color="$bateau->badge['color'] ?? 'green'"
                         />
@@ -220,13 +221,6 @@
                         </div>
                     @endforelse
                 </div>
-
-                <!-- Pagination -->
-                @if($bateaux->hasPages())
-                    <div class="mt-12">
-                        {{ $bateaux->links() }}
-                    </div>
-                @endif
 
             </main>
 

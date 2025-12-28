@@ -23,7 +23,7 @@
                     <!-- Photo principale -->
                     <div class="relative group">
                         <img id="mainImage" src="{{ $bateau->main_image }}"
-                             class="w-full h-64 md:h-96 object-cover object-center" alt="{{ $bateau->modele }}">
+                             class="w-full h-64 md:h-96 object-cover object-center" alt="{{ $bateau->modele }}" loading="eager">
 
                         <!-- Badges -->
                         <div class="absolute top-4 left-4 flex flex-col md:flex-row gap-2">
@@ -527,7 +527,7 @@
                         @if($bateau->published_at)
                         <div class="flex items-center text-gray-700">
                             <i class="fas fa-calendar text-blue-600 mr-3 w-5"></i>
-                            <span>Publiée le {{ $bateau->published_at->translatedFormat('d M Y') }}</span>
+                            <span>Publiée le {{ $bateau->published_at->format('d/m/Y') }}</span>
                         </div>
                         @endif
                         <div class="flex items-center text-gray-700">
