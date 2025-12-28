@@ -1,42 +1,62 @@
-<header class="bg-white shadow-md sticky top-0 z-50">
+<header class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center py-3 md:py-4">
+        <div class="flex justify-between items-center py-4 md:py-5">
             <!-- Logo -->
-            <a href="/" class="flex items-center">
-                <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-10 md:h-12 w-auto">
+            <a href="/" class="flex items-center group">
+                <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-12 md:h-14 w-auto transition-transform group-hover:scale-105">
             </a>
 
             <!-- Navigation Desktop -->
-            <nav class="hidden lg:flex items-center space-x-6">
-                <a href="/" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('/') ? 'text-blue-600' : '' }}">
+            <nav class="hidden lg:flex items-center space-x-1">
+                <a href="/" class="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 {{ request()->is('/') ? 'text-blue-600 bg-blue-50' : '' }}">
                     Accueil
+                    @if(request()->is('/'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-blue-600 rounded-full"></span>
+                    @endif
                 </a>
-                <a href="/bateaux" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('bateaux*') ? 'text-blue-600' : '' }}">
+                <a href="/bateaux" class="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 {{ request()->is('bateaux*') ? 'text-blue-600 bg-blue-50' : '' }}">
                     Annonces
+                    @if(request()->is('bateaux*'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-blue-600 rounded-full"></span>
+                    @endif
                 </a>
-                <a href="/categories" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('categories') ? 'text-blue-600' : '' }}">
+                <a href="/categories" class="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 {{ request()->is('categories') ? 'text-blue-600 bg-blue-50' : '' }}">
                     Catégories
+                    @if(request()->is('categories'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-blue-600 rounded-full"></span>
+                    @endif
                 </a>
-                <a href="/a-propos" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('a-propos') ? 'text-blue-600' : '' }}">
+                <a href="/a-propos" class="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 {{ request()->is('a-propos') ? 'text-blue-600 bg-blue-50' : '' }}">
                     À propos
+                    @if(request()->is('a-propos'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-blue-600 rounded-full"></span>
+                    @endif
                 </a>
-                <a href="/partenaires" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('partenaires') ? 'text-blue-600' : '' }}">
+                <a href="/partenaires" class="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 {{ request()->is('partenaires') ? 'text-blue-600 bg-blue-50' : '' }}">
                     Partenaires
+                    @if(request()->is('partenaires'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-blue-600 rounded-full"></span>
+                    @endif
                 </a>
-                <a href="/contact" class="text-gray-700 hover:text-blue-600 font-medium transition {{ request()->is('contact') ? 'text-blue-600' : '' }}">
+                <a href="/contact" class="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 {{ request()->is('contact') ? 'text-blue-600 bg-blue-50' : '' }}">
                     Contact
+                    @if(request()->is('contact'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-blue-600 rounded-full"></span>
+                    @endif
                 </a>
             </nav>
 
             <!-- Actions Desktop + Hamburger -->
-            <div class="flex items-center space-x-2 md:space-x-4">
+            <div class="flex items-center space-x-3">
                 <!-- CTA Button Desktop -->
-                <a href="/vendre" class="hidden sm:flex bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-2 rounded-lg font-medium transition text-sm md:text-base">
-                    <i class="fas fa-handshake mr-1"></i> <span class="hidden md:inline">Vendre mon bateau</span><span class="md:hidden">Vendre</span>
+                <a href="/vendre" class="hidden sm:flex items-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-5 md:px-6 py-2.5 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105 text-sm md:text-base">
+                    <i class="fas fa-plus-circle mr-2"></i>
+                    <span class="hidden md:inline">Vendre mon bateau</span>
+                    <span class="md:hidden">Vendre</span>
                 </a>
 
                 <!-- Menu Hamburger Mobile -->
-                <button id="mobileMenuBtn" class="lg:hidden text-gray-700 hover:text-blue-600 p-2">
+                <button id="mobileMenuBtn" class="lg:hidden text-gray-700 hover:text-blue-600 p-2 transition-colors">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
