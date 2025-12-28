@@ -64,6 +64,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         'bateaux' => 'bateau'
     ]);
 
+    // Toggle featured status
+    Route::post('/bateaux/{bateau}/toggle-featured', [AdminBateauController::class, 'toggleFeatured'])->name('bateaux.toggle-featured');
+
     // Media management
     Route::delete('/media/bulk-delete', [AdminBateauController::class, 'bulkDeleteMedia'])->name('media.bulk-delete');
     Route::delete('/media/{media}', [AdminBateauController::class, 'deleteMedia'])->name('media.delete');

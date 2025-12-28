@@ -18,14 +18,14 @@ class HomeController extends Controller
         // Get featured boats (newest and premium)
         $featuredBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
             ->visible()
-            ->orderBy('created_at', 'desc')
+            ->orderBy('published_at', 'desc')
             ->limit(6)
             ->get();
 
         // Get recent boats
         $recentBateaux = Bateau::with(['type', 'zone', 'images'])
             ->visible()
-            ->orderBy('created_at', 'desc')
+            ->orderBy('published_at', 'desc')
             ->limit(8)
             ->get();
 

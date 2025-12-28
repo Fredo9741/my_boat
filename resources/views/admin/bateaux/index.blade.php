@@ -39,6 +39,7 @@
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modèle</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Date publication</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                <th class="px-3 md:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">⭐</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Type</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                                 <th class="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">Zone</th>
@@ -106,6 +107,14 @@
                                             </button>
                                         </form>
                                     </div>
+                                </td>
+                                <td class="px-3 md:px-6 py-4 whitespace-nowrap text-center" onclick="event.stopPropagation()">
+                                    <button onclick="toggleFeatured({{ $bateau->id }})"
+                                            id="featured-btn-{{ $bateau->id }}"
+                                            class="text-2xl transition hover:scale-110"
+                                            title="{{ $bateau->featured ? 'Retirer de la mise en avant' : 'Mettre en avant' }}">
+                                        <i class="{{ $bateau->featured ? 'fas' : 'far' }} fa-star text-yellow-500"></i>
+                                    </button>
                                 </td>
                                 <td class="px-3 md:px-6 py-4 whitespace-nowrap hidden lg:table-cell">
                                     <span class="text-sm text-gray-900">{{ $bateau->type->libelle ?? 'N/A' }}</span>
@@ -175,4 +184,46 @@
         </main>
     </div>
 </div>
+
+@push('scripts')
+<script>
+function toggleFeatured(bateauId) {
+    const btn = document.getElementById(`featured-btn-${bateauId}`);
+    const icon = btn.querySelector('i');
+
+    fetch(`/admin/bateaux/${bateauId}/toggle-featured`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Toggle icon
+            if (data.featured) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                btn.title = 'Retirer de la mise en avant';
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                btn.title = 'Mettre en avant';
+            }
+
+            // Show notification if limit reached
+            if (data.message) {
+                alert(data.message);
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Une erreur est survenue');
+    });
+}
+</script>
+@endpush
+
 @endsection

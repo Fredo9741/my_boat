@@ -33,9 +33,9 @@ class DatabaseSeeder extends Seeder
         //     BateauMediaSeeder::class,    // 457 images
         // ]);
 
-        // Mise à jour des dates de publication (safe, ne touche que les bateaux sans date)
-        $this->call([
-            UpdatePublishedDatesSeeder::class,
-        ]);
+        // MISE À JOUR DES DATES - DÉSACTIVÉ APRÈS EXÉCUTION RÉUSSIE LE 2025-12-28
+        // $this->call([
+        //     UpdatePublishedDatesSeeder::class,
+        // ]);
     }
 }

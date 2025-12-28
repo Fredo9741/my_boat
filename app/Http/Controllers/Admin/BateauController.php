@@ -228,6 +228,33 @@ class BateauController extends Controller
             ->with('success', 'Bateau modifié avec succès.');
     }
 
+    /**
+     * Toggle featured status for a boat
+     */
+    public function toggleFeatured(Bateau $bateau)
+    {
+        // Check if we're trying to add a 5th featured boat
+        if (!$bateau->featured) {
+            $featuredCount = Bateau::where('featured', true)->count();
+            if ($featuredCount >= 4) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Vous ne pouvez mettre en avant que 4 bateaux maximum. Retirez-en un avant d\'en ajouter un autre.'
+                ]);
+            }
+        }
+
+        // Toggle featured status
+        $bateau->featured = !$bateau->featured;
+        $bateau->save();
+
+        return response()->json([
+            'success' => true,
+            'featured' => $bateau->featured,
+            'message' => $bateau->featured ? 'Bateau mis en avant' : null
+        ]);
+    }
+
     public function destroy(Bateau $bateau)
     {
         // Delete all associated media files

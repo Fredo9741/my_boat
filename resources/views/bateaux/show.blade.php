@@ -11,6 +11,18 @@
         ['label' => $bateau->modele, 'url' => '#']
     ]" />
 
+    <!-- Publication Date -->
+    @if($bateau->published_at)
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center text-sm text-gray-600">
+                <i class="fas fa-clock mr-2 text-blue-600"></i>
+                <span>Publiée le {{ $bateau->published_at->format('d/m/Y') }}</span>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <!-- Content -->
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -611,6 +623,7 @@
                         :location="$similaire->location"
                         :length="$similaire->length"
                         :year="$similaire->annee"
+                        :published-at="$similaire->published_at ? $similaire->published_at->format('d/m/Y') : null"
                         :badge="$similaire->badge['label'] ?? null"
                         :badge-color="$similaire->badge['color'] ?? 'green'"
                     />
