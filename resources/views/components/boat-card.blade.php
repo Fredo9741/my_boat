@@ -12,8 +12,14 @@
 ])
 
 <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden group">
-    <a href="{{ route('bateaux.show', $slug) }}" class="relative overflow-hidden block">
-        <img src="{{ $image }}" class="w-full h-48 md:h-56 object-cover object-center group-hover:scale-110 transition duration-500" alt="{{ $title }}" loading="lazy">
+    <a href="{{ route('bateaux.show', $slug) }}" class="relative overflow-hidden block bg-gray-100">
+        <div class="w-full h-48 md:h-56 relative overflow-hidden">
+            <img src="{{ $image }}"
+                 class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500"
+                 alt="{{ $title }}"
+                 loading="lazy"
+                 onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200');">
+        </div>
 
         @if($badge)
             @php

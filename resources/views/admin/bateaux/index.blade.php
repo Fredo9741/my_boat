@@ -52,13 +52,13 @@
                             <tr class="hover:bg-gray-50 transition cursor-pointer" onclick="window.location='{{ route('admin.bateaux.edit', $bateau) }}'">
                                 <td class="px-3 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
                                     <div class="flex items-center">
-                                        <div class="h-16 w-24 flex-shrink-0 relative">
+                                        <div class="h-16 w-24 flex-shrink-0 relative bg-gray-100 rounded-lg overflow-hidden">
                                             @if($bateau->medias->where('type', 'image')->first())
-                                                <img class="h-16 w-24 object-cover rounded-lg"
+                                                <img class="absolute inset-0 w-full h-full object-cover"
                                                      src="{{ $bateau->medias->where('type', 'image')->first()->url }}"
                                                      alt="{{ $bateau->modele }}">
                                             @else
-                                                <div class="h-16 w-24 bg-gray-200 rounded-lg flex items-center justify-center">
+                                                <div class="absolute inset-0 flex items-center justify-center bg-gray-200">
                                                     <i class="fas fa-ship text-gray-400 text-2xl"></i>
                                                 </div>
                                             @endif

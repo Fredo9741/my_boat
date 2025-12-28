@@ -33,9 +33,13 @@
                 <!-- Galerie Photos -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
                     <!-- Photo principale -->
-                    <div class="relative group">
-                        <img id="mainImage" src="{{ $bateau->main_image }}"
-                             class="w-full h-64 md:h-96 object-cover object-center" alt="{{ $bateau->modele }}" loading="eager">
+                    <div class="relative group bg-gray-900">
+                        <div class="w-full h-64 md:h-96 relative overflow-hidden">
+                            <img id="mainImage" src="{{ $bateau->main_image }}"
+                                 class="absolute inset-0 w-full h-full object-contain"
+                                 alt="{{ $bateau->modele }}"
+                                 loading="eager">
+                        </div>
 
                         <!-- Badges -->
                         <div class="absolute top-4 left-4 flex flex-col md:flex-row gap-2">
@@ -145,11 +149,13 @@
                     <!-- Miniatures -->
                     <div id="thumbnailsContainer" class="p-4 grid grid-cols-4 md:grid-cols-6 gap-2">
                         @foreach($bateau->images as $index => $media)
-                            <img src="{{ $media->url }}"
-                                 class="thumbnail w-full h-16 md:h-20 object-cover object-center rounded-lg cursor-pointer {{ $index == 0 ? 'border-2 border-blue-600' : 'hover:opacity-75' }} transition"
-                                 data-index="{{ $index }}"
-                                 alt="{{ $media->description ?? 'Image ' . ($index + 1) }}"
-                                 loading="lazy">
+                            <div class="relative h-16 md:h-20 bg-gray-100 rounded-lg overflow-hidden {{ $index == 0 ? 'ring-2 ring-blue-600' : '' }}">
+                                <img src="{{ $media->url }}"
+                                     class="thumbnail absolute inset-0 w-full h-full object-cover object-center cursor-pointer hover:opacity-75 transition"
+                                     data-index="{{ $index }}"
+                                     alt="{{ $media->description ?? 'Image ' . ($index + 1) }}"
+                                     loading="lazy">
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -659,12 +665,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update thumbnail borders
         thumbnails.forEach((thumb, idx) => {
+            const container = thumb.parentElement;
             if (idx === currentIndex) {
-                thumb.classList.add('border-2', 'border-blue-600');
-                thumb.classList.remove('hover:opacity-75');
+                container.classList.add('ring-2', 'ring-blue-600');
+                container.classList.remove('ring-0');
             } else {
-                thumb.classList.remove('border-2', 'border-blue-600');
-                thumb.classList.add('hover:opacity-75');
+                container.classList.remove('ring-2', 'ring-blue-600');
+                container.classList.add('ring-0');
             }
         });
     }
