@@ -133,11 +133,15 @@
                         </div>
 
                         <!-- Navigation photos -->
-                        <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition">
-                            <i class="fas fa-chevron-left text-gray-800"></i>
+                        <button id="prevBtn"
+                                class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition"
+                                aria-label="Image précédente">
+                            <i class="fas fa-chevron-left text-gray-800" aria-hidden="true"></i>
                         </button>
-                        <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition">
-                            <i class="fas fa-chevron-right text-gray-800"></i>
+                        <button id="nextBtn"
+                                class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center transition"
+                                aria-label="Image suivante">
+                            <i class="fas fa-chevron-right text-gray-800" aria-hidden="true"></i>
                         </button>
 
                         <!-- Compteur photos -->
@@ -210,30 +214,11 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         @foreach($youtubeVideos as $video)
-                            @php
-                                // Extraire l'ID YouTube depuis différents formats d'URL
-                                $videoId = null;
-                                $url = $video->url;
-
-                                // Format: https://www.youtube.com/watch?v=VIDEO_ID
-                                if (preg_match('/[?&]v=([^&]+)/', $url, $matches)) {
-                                    $videoId = $matches[1];
-                                }
-                                // Format: https://youtu.be/VIDEO_ID
-                                elseif (preg_match('/youtu\.be\/([^?]+)/', $url, $matches)) {
-                                    $videoId = $matches[1];
-                                }
-                                // Format: https://www.youtube.com/embed/VIDEO_ID
-                                elseif (preg_match('/youtube\.com\/embed\/([^?]+)/', $url, $matches)) {
-                                    $videoId = $matches[1];
-                                }
-                            @endphp
-
-                            @if($videoId)
+                            @if($video->youtube_id)
                             <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
                                 <iframe
                                     class="absolute top-0 left-0 w-full h-full"
-                                    src="https://www.youtube.com/embed/{{ $videoId }}"
+                                    src="https://www.youtube.com/embed/{{ $video->youtube_id }}"
                                     title="Vidéo YouTube"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
