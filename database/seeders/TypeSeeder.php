@@ -7,13 +7,17 @@ use Illuminate\Database\Seeder;
 
 class TypeSeeder extends Seeder
 {
+    /**
+     * Seed des types de bateaux
+     *
+     * COMPORTEMENT INTELLIGENT :
+     * - Ajoute les types manquants
+     * - Met à jour les types existants (via slug)
+     * - Préserve les types ajoutés manuellement en production
+     * - Peut être exécuté à chaque déploiement sans risque
+     */
     public function run(): void
     {
-        // Ne seed que si aucun type n'existe
-        if (Type::count() > 0) {
-            return;
-        }
-
         $types = [
             [
                 'libelle' => 'Bateau Moteur',

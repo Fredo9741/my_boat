@@ -7,13 +7,17 @@ use Illuminate\Database\Seeder;
 
 class ZoneSeeder extends Seeder
 {
+    /**
+     * Seed des zones géographiques
+     *
+     * COMPORTEMENT INTELLIGENT :
+     * - Ajoute les zones manquantes
+     * - Met à jour les zones existantes (via slug)
+     * - Préserve les zones ajoutées manuellement en production
+     * - Peut être exécuté à chaque déploiement sans risque
+     */
     public function run(): void
     {
-        // Ne seed que si aucune zone n'existe
-        if (Zone::count() > 0) {
-            return;
-        }
-
         $zones = [
             ['libelle' => 'La Réunion', 'slug' => 'la-reunion', 'libelle_translations' => null],
             ['libelle' => 'Madagascar', 'slug' => 'madagascar', 'libelle_translations' => null],

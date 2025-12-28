@@ -7,13 +7,18 @@ use Illuminate\Support\Facades\DB;
 
 class EquipementSeeder extends Seeder
 {
+    /**
+     * Seed des équipements disponibles
+     *
+     * COMPORTEMENT INTELLIGENT :
+     * - Ajoute les équipements manquants
+     * - Met à jour les équipements existants (via libelle + catégorie)
+     * - Préserve les équipements ajoutés manuellement en production
+     * - Met à jour icône et ordre si modifiés dans le code
+     * - Peut être exécuté à chaque déploiement sans risque
+     */
     public function run(): void
     {
-        // Ne seed que si aucun équipement n'existe
-        if (\App\Models\Equipement::count() > 0) {
-            return;
-        }
-
         $equipements = [
             // Navigation
             ['libelle' => 'GPS', 'categorie' => 'navigation', 'icone' => 'fa-location-dot', 'ordre' => 1],

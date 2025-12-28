@@ -52,7 +52,7 @@ class UpdateDescriptionsSeeder extends Seeder
             return;
         }
 
-        $this->command->info("   ✓ {count($boatsData)} bateaux trouvés dans le JSON\n");
+        $this->command->info("   ✓ " . count($boatsData) . " bateaux trouvés dans le JSON\n");
 
         // Compteurs pour le rapport final
         $stats = [

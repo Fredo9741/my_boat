@@ -7,13 +7,18 @@ use Illuminate\Database\Seeder;
 
 class ActionSeeder extends Seeder
 {
+    /**
+     * Seed des actions/badges (avec couleurs)
+     *
+     * COMPORTEMENT INTELLIGENT :
+     * - Ajoute les badges manquants
+     * - Met à jour les badges existants (via slug)
+     * - Préserve les badges ajoutés manuellement en production
+     * - Met à jour les couleurs si modifiées dans le code
+     * - Peut être exécuté à chaque déploiement sans risque
+     */
     public function run(): void
     {
-        // Ne seed que si aucune action n'existe
-        if (Action::count() > 0) {
-            return;
-        }
-
         $actions = [
             ['libelle' => 'Affaire à saisir', 'slug' => 'affaire-a-saisir', 'libelle_translations' => null, 'color' => 'orange'],
             ['libelle' => 'Coup de coeur', 'slug' => 'coup-de-coeur', 'libelle_translations' => null, 'color' => 'pink'],
