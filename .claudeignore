@@ -1,0 +1,57 @@
+# Claude Ignore File
+# Files and directories that Claude Code should not modify or delete
+
+# Critical project instructions - NEVER modify or delete
+CLAUDE_INSTRUCTIONS.md
+
+# Production data sources - Handle with extreme care
+database/seeders/bateaux_scraped_data.json
+database/seeders/*.json.backup.*
+
+# Seeder documentation - Keep updated but never delete
+database/seeders/README_SEEDER_WORKFLOW.md
+database/seeders/QUICK_REFERENCE.md
+database/seeders/SYSTEM_OVERVIEW.md
+database/seeders/FILES_CREATED.md
+
+# Environment files - Never commit changes without user approval
+.env
+.env.production
+.env.local
+
+# Git files
+.git/
+.gitignore
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build artifacts
+/public/build/
+/public/hot
+
+# Storage (user uploads, logs)
+/storage/*.key
+/storage/app/public/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+
+# IDE files
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+nul
