@@ -32,5 +32,10 @@ class DatabaseSeeder extends Seeder
         //     BateauSeeder::class,         // 55 bateaux scrapés
         //     BateauMediaSeeder::class,    // 457 images
         // ]);
+
+        // Mise à jour des dates de publication (safe, ne touche que les bateaux sans date)
+        $this->call([
+            UpdatePublishedDatesSeeder::class,
+        ]);
     }
 }
