@@ -97,17 +97,20 @@ class DatabaseSeeder extends Seeder
         // ──────────────────────────────────────────────────────────────────────────
         // UpdateDescriptionsSeeder
         // ──────────────────────────────────────────────────────────────────────────
-        // Dernière exécution : 2025-12-28 (EN COURS - Tentative 2 avec bug fix)
+        // Dernière exécution : 2025-12-28 ✅ SUCCÈS (Tentative 2)
+        // Résultat : 52 descriptions mises à jour, 3 identiques, 55 total
         // Action : Met à jour uniquement le champ 'description' des bateaux
         // Comportement : Idempotent, affiche un rapport détaillé
         // Sécurité : Ne crée ni ne supprime de bateaux
         //
-        // ⚠️ ACTIVÉ TEMPORAIREMENT - Bug corrigé dans commit c21545c
-        // TODO: Attendre résultat Railway avant de re-commenter
+        // Pour exécuter à nouveau sans modifier ce fichier :
+        //   railway run php artisan db:seed --class=UpdateDescriptionsSeeder
+        //   OU
+        //   railway run php artisan boat:update-descriptions
         // ──────────────────────────────────────────────────────────────────────────
-        $this->call([
-            UpdateDescriptionsSeeder::class,
-        ]);
+        // $this->call([
+        //     UpdateDescriptionsSeeder::class,
+        // ]);
 
         // ============================================================================
         // 🔧 MODE SEEDER (Optionnel - Variable d'environnement)
