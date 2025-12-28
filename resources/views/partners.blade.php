@@ -152,79 +152,115 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <!-- Partenaire 1: Sailoé Seychelles -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Partenaire 1: SAILOÉ -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl group">
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
                             <i class="fas fa-ship text-3xl text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Sailoé Seychelles</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">SAILOÉ</h3>
                         <p class="text-gray-600 text-sm mb-3">
                             <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
-                            Seychelles
+                            Réunion - Seychelles - Corsica
                         </p>
-                        <p class="text-gray-600 text-sm">
-                            Location & vente de voiliers
+                        <p class="text-gray-700 text-sm font-semibold mb-2">Distributeur Lagoon</p>
+                        <p class="text-gray-600 text-xs mb-4">
+                            Location & vente de catamarans, yacht management
                         </p>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="https://www.sailoe.com" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fas fa-globe text-xl"></i>
+                            </a>
+                            <a href="mailto:sailoe@sailoe.com" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Partenaire 2: Pro Plaisance -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                <!-- Partenaire 2: Plaisance Pro / Athanaze -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl group">
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
                             <i class="fas fa-anchor text-3xl text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Pro Plaisance</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Plaisance Pro</h3>
                         <p class="text-gray-600 text-sm mb-3">
                             <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
                             Le Port, La Réunion
                         </p>
-                        <p class="text-gray-600 text-sm">
-                            Accastillage & équipement nautique
+                        <p class="text-gray-700 text-sm font-semibold mb-2">Athanaze</p>
+                        <p class="text-gray-600 text-xs mb-4">
+                            Vente & réparation de bateaux, accastillage
                         </p>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="https://www.facebook.com/ATHANAZE/" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="https://www.plaisance-pro.com" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fas fa-globe text-xl"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Partenaire 3: Aurélien Bilh -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                <!-- Partenaire 3: Yacht Mauritius -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl group">
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                            <i class="fas fa-sailboat text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Yacht Mauritius</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
+                            La Balise Marina, Maurice
+                        </p>
+                        <p class="text-gray-700 text-sm font-semibold mb-2">Distributeur Beneteau</p>
+                        <p class="text-gray-600 text-xs mb-4">
+                            Vente, charter & gestion de yachts
+                        </p>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="https://yachtmauritius.com/fr/" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fas fa-globe text-xl"></i>
+                            </a>
+                            <a href="mailto:info@yachtmauritius.com" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                            <a href="https://www.instagram.com/yacht_mauritius_ltd" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partenaire 4: Aurélien Bilh - CNC Marine -->
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl group">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
                             <i class="fas fa-hammer text-3xl text-white"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Aurélien Bilh</h3>
                         <p class="text-gray-600 text-sm mb-3">
                             <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
-                            Océan Indien
+                            La Réunion
                         </p>
-                        <p class="text-gray-600 text-sm">
-                            Fabricant de bateaux
+                        <p class="text-gray-700 text-sm font-semibold mb-2">Bateaux CNC Marine</p>
+                        <p class="text-gray-600 text-xs mb-4">
+                            Fabrication bateaux aluminium sur-mesure
                         </p>
-                    </div>
-                </div>
-
-                <!-- Partenaire 4: Yacht Management Maurice -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-sailboat text-3xl text-white"></i>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="https://cncmarine.com.au" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fas fa-globe text-xl"></i>
+                            </a>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Yacht Management</h3>
-                        <p class="text-gray-600 text-sm mb-3">
-                            <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
-                            Maurice
-                        </p>
-                        <p class="text-gray-600 text-sm">
-                            Distributeur Beneteau
-                        </p>
                     </div>
                 </div>
 
                 <!-- Partenaire 5: MadaNautique -->
-                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl">
+                <div class="bg-white rounded-xl border-2 border-gray-200 p-8 hover:border-blue-500 transition hover:shadow-xl group">
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
                             <i class="fas fa-wrench text-3xl text-white"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">MadaNautique</h3>
@@ -232,9 +268,15 @@
                             <i class="fas fa-map-marker-alt mr-1 text-blue-600"></i>
                             Nosy-Bé, Madagascar
                         </p>
-                        <p class="text-gray-600 text-sm">
-                            Travaux, acastillage & gestion
+                        <p class="text-gray-700 text-sm font-semibold mb-2">Chantier naval</p>
+                        <p class="text-gray-600 text-xs mb-4">
+                            Travaux, acastillage & gestion de bateaux
                         </p>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="https://www.facebook.com/profile.php?id=61572523351163" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
