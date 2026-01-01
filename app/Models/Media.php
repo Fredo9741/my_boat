@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Media extends Model
 {
@@ -22,6 +23,32 @@ class Media extends Model
         'ordre' => 'integer',
         'is_youtube' => 'boolean',
     ];
+
+    /**
+     * Boot the model and add event listeners
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // When a media is deleted, delete the file from R2
+        static::deleting(function ($media) {
+            // Only delete files from R2, not YouTube videos
+            if (!$media->is_youtube && $media->attributes['url']) {
+                $path = $media->attributes['url'];
+
+                // Only delete if it's a R2 path (not an external URL)
+                if (!str_starts_with($path, 'http://') && !str_starts_with($path, 'https://')) {
+                    try {
+                        Storage::disk('cloudflare')->delete($path);
+                    } catch (\Exception $e) {
+                        // Log error but don't block deletion
+                        \Log::warning("Failed to delete R2 file: {$path}", ['error' => $e->getMessage()]);
+                    }
+                }
+            }
+        });
+    }
 
     /**
      * Get the bateau that owns the media

@@ -34,14 +34,8 @@ class MediaService
         // Store file
         $file->storeAs($fullPath, $filename, $disk);
 
-        // Generate URL based on disk type
-        if ($disk === 'cloudflare') {
-            // For Cloudflare R2, use the public URL
-            $url = config('filesystems.disks.cloudflare.url') . '/' . $fullPath . '/' . $filename;
-        } else {
-            // For local storage, use Laravel storage URL
-            $url = '/storage/' . $fullPath . '/' . $filename;
-        }
+        // Store only the relative path (Media accessor will transform to full URL)
+        $relativePath = $fullPath . '/' . $filename;
 
         // Create media record
         $lastOrder = $bateau->medias()->where('type', $type)->max('ordre') ?? 0;
@@ -49,7 +43,7 @@ class MediaService
         return Media::create([
             'bateau_id' => $bateau->id,
             'type' => $type,
-            'url' => $url,
+            'url' => $relativePath,  // Store relative path, accessor will add R2 URL
             'description' => $description,
             'ordre' => $lastOrder + 1,
         ]);
@@ -84,25 +78,8 @@ class MediaService
      */
     public function deleteMedia(Media $media): bool
     {
-        // Get configured disk
-        $disk = config('filesystems.default');
-
-        // Extract file path from URL
-        if ($disk === 'cloudflare') {
-            // For Cloudflare R2, extract path from full URL
-            $cloudflareUrl = config('filesystems.disks.cloudflare.url');
-            $filePath = str_replace($cloudflareUrl . '/', '', $media->url);
-        } else {
-            // For local storage, remove /storage/ prefix
-            $filePath = str_replace('/storage/', '', $media->url);
-        }
-
-        // Remove file from storage
-        if (Storage::disk($disk)->exists($filePath)) {
-            Storage::disk($disk)->delete($filePath);
-        }
-
-        // Delete database record
+        // The Media model's deleting event will handle R2 file deletion
+        // Just delete the database record
         return $media->delete();
     }
 

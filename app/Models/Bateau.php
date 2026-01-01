@@ -70,6 +70,22 @@ class Bateau extends Model
     ];
 
     /**
+     * Boot the model and add event listeners
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // When a bateau is force deleted, delete all its medias (which will trigger R2 deletion)
+        static::forceDeleting(function ($bateau) {
+            // Delete all medias (this will trigger Media::deleting event which deletes from R2)
+            $bateau->medias()->each(function ($media) {
+                $media->delete();
+            });
+        });
+    }
+
+    /**
      * Get the type that owns the bateau
      */
     public function type(): BelongsTo
