@@ -48,28 +48,46 @@ class Media extends Model
     }
 
     /**
+     * Get the full R2 URL for the media
+     *
+     * @return string
+     */
+    public function getUrlAttribute($value): string
+    {
+        // If it's a YouTube video, return the URL as is
+        if ($this->is_youtube) {
+            return $value;
+        }
+
+        // For images, use the r2_url helper
+        return r2_url($value);
+    }
+
+    /**
      * Get YouTube video ID from URL
      *
      * @return string|null
      */
     public function getYoutubeIdAttribute(): ?string
     {
-        if (!$this->is_youtube || !$this->url) {
+        if (!$this->is_youtube || !$this->attributes['url']) {
             return null;
         }
 
+        $url = $this->attributes['url'];
+
         // Format: https://www.youtube.com/watch?v=VIDEO_ID
-        if (preg_match('/[?&]v=([^&]+)/', $this->url, $matches)) {
+        if (preg_match('/[?&]v=([^&]+)/', $url, $matches)) {
             return $matches[1];
         }
 
         // Format: https://youtu.be/VIDEO_ID
-        if (preg_match('/youtu\.be\/([^?]+)/', $this->url, $matches)) {
+        if (preg_match('/youtu\.be\/([^?]+)/', $url, $matches)) {
             return $matches[1];
         }
 
         // Format: https://www.youtube.com/embed/VIDEO_ID
-        if (preg_match('/youtube\.com\/embed\/([^?]+)/', $this->url, $matches)) {
+        if (preg_match('/youtube\.com\/embed\/([^?]+)/', $url, $matches)) {
             return $matches[1];
         }
 

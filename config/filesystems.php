@@ -72,6 +72,9 @@ return [
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
+            'http' => [
+                'verify' => false, // Disable SSL verification for Windows/XAMPP
+            ],
         ],
 
     ],
