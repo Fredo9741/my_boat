@@ -40,6 +40,34 @@ Route::get('/mentions-legales', [PageController::class, 'mentionsLegales'])->nam
 Route::get('/cgv', [PageController::class, 'cgv'])->name('cgv');
 Route::get('/confidentialite', [PageController::class, 'confidentialite'])->name('confidentialite');
 
+// Demo Design Page (Test)
+Route::get('/demo-design', function () {
+    // Get featured boats
+    $featuredBateaux = \App\Models\Bateau::with(['type', 'zone', 'slogan', 'images'])
+        ->visible()
+        ->where('featured', true)
+        ->orderBy('published_at', 'desc')
+        ->limit(4)
+        ->get();
+
+    // Get all types with boat count
+    $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
+        $query->visible();
+    }])->get();
+
+    // Get all zones
+    $zones = \App\Models\Zone::all();
+
+    // Get statistics
+    $stats = [
+        'total_bateaux' => \App\Models\Bateau::visible()->count(),
+        'total_types' => \App\Models\Type::has('bateaux')->count(),
+        'total_zones' => \App\Models\Zone::has('bateaux')->count(),
+    ];
+
+    return view('demo-design', compact('featuredBateaux', 'types', 'zones', 'stats'));
+})->name('demo-design');
+
 // Auth routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('admin.login');

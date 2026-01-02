@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "ui-designer",
+      "source": "daymade/claude-code-skills",
+      "enabled": true
+    }
+  ]
+}
