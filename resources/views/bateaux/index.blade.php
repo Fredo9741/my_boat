@@ -10,7 +10,7 @@
             <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-4xl md:text-6xl font-black mb-4">Toutes nos annonces</h1>
                 <p class="text-xl md:text-2xl text-ocean-100 dark:text-ocean-200 mb-6">
-                    {{ number_format($bateaux->total()) }} {{ $bateaux->total() > 1 ? 'bateaux disponibles' : 'bateau disponible' }}
+                    {{ number_format($bateaux->count()) }} {{ $bateaux->count() > 1 ? 'bateaux disponibles' : 'bateau disponible' }}
                 </p>
                 <div class="flex flex-wrap justify-center gap-2 mt-6">
                     @php
@@ -32,7 +32,7 @@
         <button id="mobileFilterBtn" class="w-full bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-6 py-4 rounded-2xl font-bold flex items-center justify-center shadow-lg transition-all transform hover:scale-105">
             <i class="fas fa-filter mr-2"></i>
             Filtres
-            <span class="ml-2 px-2 py-1 bg-white/20 rounded-full text-xs">{{ number_format($bateaux->total()) }}</span>
+            <span class="ml-2 px-2 py-1 bg-white/20 rounded-full text-xs">{{ number_format($bateaux->count()) }}</span>
         </button>
     </div>
 
@@ -260,12 +260,7 @@
                     @endforelse
                 </div>
 
-                <!-- Pagination -->
-                @if($bateaux->hasPages())
-                <div class="mt-12">
-                    {{ $bateaux->links() }}
-                </div>
-                @endif
+                <!-- Pagination - Removed since we're using get() instead of paginate() -->
 
             </main>
 

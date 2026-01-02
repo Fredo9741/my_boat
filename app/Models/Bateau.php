@@ -158,7 +158,7 @@ class Bateau extends Model
      */
     public function getMainImageAttribute(): ?string
     {
-        $firstImage = $this->images()->first();
+        $firstImage = $this->images->first();
         return $firstImage ? $firstImage->url : 'https://placehold.co/800x600/cccccc/666666?text=No+Image';
     }
 
