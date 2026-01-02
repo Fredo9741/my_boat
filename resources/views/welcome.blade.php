@@ -5,148 +5,186 @@
 
 @section('content')
 
-    <!-- Hero Section avec Recherche -->
-    <section class="relative bg-blue-900 text-white">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+    <!-- Hero Section Premium -->
+    <section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-luxe-navy via-ocean-950 to-slate-950 dark:from-black dark:via-ocean-950 dark:to-luxe-navy">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1974&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-ocean-950/40 to-luxe-navy/80"></div>
 
-        <div class="relative container mx-auto px-4 py-16 md:py-20 lg:py-32">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-6">
-                    Trouvez votre bateau de rêve
-                </h2>
-                <p class="text-base md:text-xl lg:text-2xl mb-6 md:mb-10 text-blue-100">
+            <!-- Animated Gradient Blobs -->
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-20 left-10 w-96 h-96 bg-ocean-500 rounded-full filter blur-3xl animate-float"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-luxe-cyan rounded-full filter blur-3xl animate-float" style="animation-delay: 2s;"></div>
+            </div>
+        </div>
+
+        <div class="relative container mx-auto px-4 py-20 md:py-32">
+            <div class="max-w-6xl mx-auto">
+                <!-- Badge -->
+                <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-white mb-6 animate-fadeInUp backdrop-blur-xl border border-white/20">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
+                    <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} bateaux disponibles</span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 animate-fadeInUp leading-tight" style="animation-delay: 0.1s;">
+                    Trouvez le bateau<br>
+                    de <span class="relative inline-block">
+                        <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent">vos rêves</span>
+                        <div class="absolute bottom-3 left-0 w-full h-6 bg-gradient-to-r from-ocean-400/30 to-luxe-cyan/30 transform -rotate-1 rounded-lg blur-sm"></div>
+                    </span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-ocean-100 mb-12 animate-fadeInUp max-w-2xl" style="animation-delay: 0.2s;">
                     Votre courtier maritime de confiance dans l'océan Indien
                 </p>
 
-                <!-- Barre de Recherche Avancée - Version Desktop -->
-                <div class="hidden md:block bg-white rounded-xl shadow-2xl p-6">
-                    <form action="{{ route('bateaux.index') }}" method="GET" class="grid grid-cols-4 gap-4">
-                        <!-- Type de bateau -->
-                        <div class="text-left">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Type de bateau</label>
-                            <select name="type_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">Tous les types</option>
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->libelle }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <!-- Premium Search Bar -->
+                <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
+                    <form action="{{ route('bateaux.index') }}" method="GET" class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl dark:shadow-ocean-950/50 p-3 md:p-4 backdrop-blur-xl border border-gray-100 dark:border-white/10">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <!-- Type -->
+                            <div class="relative group">
+                                <select name="type_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
+                                    <option value="">Type de bateau</option>
+                                    @foreach($types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->libelle }}</option>
+                                    @endforeach
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none group-hover:text-ocean-500 transition-colors"></i>
+                            </div>
 
-                        <!-- Localisation -->
-                        <div class="text-left">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Localisation</label>
-                            <select name="zone_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">Toutes les îles</option>
-                                @foreach($zones as $zone)
-                                    <option value="{{ $zone->id }}">{{ $zone->libelle }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            <!-- Location -->
+                            <div class="relative group">
+                                <select name="zone_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
+                                    <option value="">Localisation</option>
+                                    @foreach($zones as $zone)
+                                        <option value="{{ $zone->id }}">{{ $zone->libelle }}</option>
+                                    @endforeach
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none group-hover:text-ocean-500 transition-colors"></i>
+                            </div>
 
-                        <!-- Prix max -->
-                        <div class="text-left">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Prix maximum</label>
-                            <select name="prix_max" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="">Tous les prix</option>
-                                <option value="10000">10 000 €</option>
-                                <option value="25000">25 000 €</option>
-                                <option value="50000">50 000 €</option>
-                                <option value="100000">100 000 €</option>
-                                <option value="250000">250 000 €</option>
-                                <option value="500000">500 000 €+</option>
-                            </select>
-                        </div>
+                            <!-- Price -->
+                            <div class="relative group">
+                                <select name="prix_max" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
+                                    <option value="">Budget max</option>
+                                    <option value="10000">10 000 €</option>
+                                    <option value="25000">25 000 €</option>
+                                    <option value="50000">50 000 €</option>
+                                    <option value="100000">100 000 €</option>
+                                    <option value="250000">250 000 €</option>
+                                    <option value="500000">500 000 €+</option>
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none group-hover:text-ocean-500 transition-colors"></i>
+                            </div>
 
-                        <!-- Bouton Rechercher -->
-                        <div class="text-left">
-                            <label class="block text-sm font-medium text-gray-700 mb-2 invisible">Rechercher</label>
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition transform hover:scale-105">
-                                <i class="fas fa-search mr-2"></i> Rechercher
+                            <!-- Search Button -->
+                            <button type="submit" class="group relative px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl transform hover:scale-105 overflow-hidden">
+                                <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                                <span class="relative z-10 flex items-center justify-center">
+                                    <i class="fas fa-search mr-2"></i>
+                                    <span class="hidden md:inline">Rechercher</span>
+                                </span>
                             </button>
                         </div>
                     </form>
-                </div>
 
-                <!-- Barre de Recherche Simplifiée - Version Mobile -->
-                <div class="md:hidden space-y-3">
-                    <a href="{{ route('bateaux.index') }}" class="block w-full bg-white hover:bg-gray-50 text-gray-800 px-6 py-4 rounded-xl font-semibold transition shadow-lg">
-                        <i class="fas fa-search mr-2"></i> Voir toutes les annonces
-                    </a>
-                    <a href="{{ route('categories') }}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition shadow-lg">
-                        <i class="fas fa-th-large mr-2"></i> Explorer par catégorie
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="bg-white py-8 md:py-12 border-b">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ number_format($stats['total_bateaux']) }}</div>
-                    <div class="text-sm md:text-base text-gray-600">Annonces actives</div>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ $stats['total_types'] }}</div>
-                    <div class="text-sm md:text-base text-gray-600">Types de bateaux</div>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ $stats['total_zones'] }}</div>
-                    <div class="text-sm md:text-base text-gray-600">Zones disponibles</div>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-4xl font-bold text-blue-600 mb-1 md:mb-2">{{ $zones->count() }}</div>
-                    <div class="text-sm md:text-base text-gray-600">Îles couvertes</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Catégories - Hidden on mobile, shown on desktop -->
-    <section id="categories" class="hidden md:block py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Explorer par catégorie</h3>
-                <p class="text-gray-600 text-sm md:text-lg">Trouvez le type de bateau qui vous correspond</p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                @foreach($types->take(6) as $type)
-                    @php
-                        // Use type's icon if available, otherwise default
-                        $typeIcon = $type->icone ?? 'fa-ship';
-                    @endphp
-                    <a href="{{ route('bateaux.index', ['type_id' => $type->id]) }}" class="group">
-                        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 text-center">
-                            <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition">
-                                <i class="fas {{ $typeIcon }} text-3xl text-blue-600 group-hover:text-white transition"></i>
-                            </div>
-                            <h4 class="font-semibold text-gray-800 group-hover:text-blue-600 transition">{{ $type->libelle }}</h4>
-                            <p class="text-sm text-gray-500 mt-1">{{ $type->bateaux_count }} annonce{{ $type->bateaux_count > 1 ? 's' : '' }}</p>
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-10 text-white">
+                        <div class="text-center group">
+                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">{{ $stats['total_bateaux'] }}+</div>
+                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Bateaux disponibles</div>
                         </div>
+                        <div class="text-center group">
+                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">{{ $stats['total_zones'] }}</div>
+                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Îles couvertes</div>
+                        </div>
+                        <div class="text-center group">
+                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>
+                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Temps de réponse</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-8 h-12 border-2 border-white/50 rounded-full p-2">
+                <div class="w-1.5 h-3 bg-white rounded-full mx-auto animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-20 md:py-28 bg-gradient-to-b from-white via-gray-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+        <div class="container mx-auto px-4">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block px-4 py-2 bg-ocean-100 dark:bg-ocean-950/30 text-ocean-600 dark:text-ocean-400 rounded-full text-sm font-bold mb-4 border border-ocean-200 dark:border-ocean-800">
+                    CATÉGORIES
+                </span>
+                <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">
+                    Explorez notre sélection
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">
+                    Trouvez le type de bateau parfait pour votre aventure maritime
+                </p>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                @foreach($types->take(6) as $index => $type)
+                    @php
+                        $typeIcon = $type->icone ?? 'fa-ship';
+                        $colors = [
+                            ['bg' => 'from-ocean-500/10', 'gradient' => 'from-ocean-500 to-ocean-600', 'text' => 'text-ocean-600 dark:text-ocean-400'],
+                            ['bg' => 'from-luxe-cyan/10', 'gradient' => 'from-luxe-cyan to-ocean-500', 'text' => 'text-luxe-cyan dark:text-luxe-cyan'],
+                            ['bg' => 'from-purple-500/10', 'gradient' => 'from-purple-500 to-violet-600', 'text' => 'text-purple-600 dark:text-purple-400'],
+                            ['bg' => 'from-amber-500/10', 'gradient' => 'from-amber-500 to-orange-600', 'text' => 'text-amber-600 dark:text-amber-400'],
+                            ['bg' => 'from-emerald-500/10', 'gradient' => 'from-emerald-500 to-green-600', 'text' => 'text-emerald-600 dark:text-emerald-400'],
+                            ['bg' => 'from-rose-500/10', 'gradient' => 'from-rose-500 to-pink-600', 'text' => 'text-rose-600 dark:text-rose-400'],
+                        ];
+                        $color = $colors[$index % count($colors)];
+                    @endphp
+                    <a href="{{ route('bateaux.index', ['type_id' => $type->id]) }}" class="group bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl dark:shadow-slate-950/50 transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-white/10">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br {{ $color['gradient'] }} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                            <i class="fas {{ $typeIcon }} text-2xl text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 dark:text-white group-hover:{{ $color['text'] }} transition-colors text-center mb-2">{{ $type->libelle }}</h4>
+                        <p class="text-sm {{ $color['text'] }} text-center font-semibold">{{ $type->bateaux_count }} annonce{{ $type->bateaux_count > 1 ? 's' : '' }}</p>
                     </a>
                 @endforeach
             </div>
         </div>
     </section>
 
-    <!-- Annonces à la Une -->
-    <section class="py-12 md:py-16 bg-white">
+    <!-- Featured Boats Section -->
+    <section class="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-xl md:text-4xl font-bold text-gray-800 mb-2">Annonces à la une</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Les meilleures offres du moment</p>
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+                <div class="mb-6 md:mb-0">
+                    <span class="inline-block px-4 py-2 bg-ocean-100 dark:bg-ocean-950/30 text-ocean-600 dark:text-ocean-400 rounded-full text-sm font-bold mb-4 border border-ocean-200 dark:border-ocean-800">
+                        SÉLECTION
+                    </span>
+                    <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4">
+                        Bateaux en vedette
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400">
+                        Découvrez notre sélection exclusive du moment
+                    </p>
                 </div>
-                <a href="{{ route('bateaux.index') }}" class="hidden md:flex text-blue-600 hover:text-blue-700 font-semibold items-center">
-                    Voir tout <i class="fas fa-arrow-right ml-2"></i>
+                <a href="{{ route('bateaux.index') }}" class="hidden md:flex items-center px-6 py-3 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
+                    Voir tout
+                    <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <!-- Boats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse($featuredBateaux->take(4) as $bateau)
                     <x-boat-card
                         :slug="$bateau->slug"
@@ -161,121 +199,107 @@
                         :badge-color="$bateau->badge['color'] ?? 'green'"
                     />
                 @empty
-                    <div class="col-span-4 text-center py-12 text-gray-500">
-                        <i class="fas fa-anchor text-6xl mb-4 opacity-30"></i>
-                        <p class="text-xl">Aucune annonce disponible pour le moment</p>
+                    <div class="col-span-4 text-center py-20">
+                        <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950 dark:to-ocean-900 rounded-full flex items-center justify-center">
+                            <i class="fas fa-anchor text-4xl text-ocean-400 dark:text-ocean-600"></i>
+                        </div>
+                        <p class="text-xl text-gray-500 dark:text-gray-400">Aucune annonce disponible pour le moment</p>
                     </div>
                 @endforelse
             </div>
 
-            <!-- Bouton "Voir toutes les annonces" - Mobile uniquement -->
-            <div class="mt-8 text-center md:hidden">
-                <a href="{{ route('bateaux.index') }}" class="inline-block w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-lg">
-                    <i class="fas fa-list mr-2"></i> Voir toutes les annonces
+            <!-- Mobile CTA -->
+            <div class="mt-10 text-center md:hidden">
+                <a href="{{ route('bateaux.index') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl">
+                    Voir tous les bateaux
+                    <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Pourquoi nous choisir -->
-    <section class="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
+    <!-- Why Choose Us Section -->
+    <section class="py-20 md:py-28 bg-gradient-to-br from-ocean-50 via-cyan-50 to-ocean-100 dark:from-slate-950 dark:via-ocean-950 dark:to-slate-900">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h3 class="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Pourquoi Myboat-oi ?</h3>
-                <p class="text-gray-600 text-sm md:text-lg">La plateforme de confiance pour l'océan Indien</p>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block px-4 py-2 bg-white dark:bg-slate-900 text-ocean-600 dark:text-ocean-400 rounded-full text-sm font-bold mb-4 border border-ocean-200 dark:border-ocean-800">
+                    AVANTAGES
+                </span>
+                <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">
+                    Pourquoi Myboat-oi ?
+                </h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Avantage 1 -->
-                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-shield-alt text-3xl text-blue-600"></i>
-                    </div>
-                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Sécurisé</h4>
-                    <p class="text-gray-600 text-sm md:text-base">Paiements sécurisés et vérification des vendeurs pour votre tranquillité</p>
-                </div>
+                @php
+                $advantages = [
+                    ['icon' => 'fa-shield-check', 'title' => '100% Sécurisé', 'desc' => 'Transactions protégées et vendeurs vérifiés pour votre tranquillité d\'esprit', 'gradient' => 'from-ocean-500 to-ocean-600'],
+                    ['icon' => 'fa-bolt', 'title' => 'Réponse Rapide', 'desc' => 'Estimation et réponse à vos demandes sous 48h maximum, 7j/7', 'gradient' => 'from-luxe-cyan to-ocean-500'],
+                    ['icon' => 'fa-users', 'title' => 'Experts Locaux', 'desc' => 'Une équipe passionnée qui connaît parfaitement l\'océan Indien', 'gradient' => 'from-purple-500 to-purple-600'],
+                    ['icon' => 'fa-chart-line', 'title' => 'Prix Justes', 'desc' => 'Estimation gratuite et transparence sur les prix du marché', 'gradient' => 'from-amber-500 to-amber-600'],
+                ];
+                @endphp
 
-                <!-- Avantage 2 -->
-                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-search text-3xl text-blue-600"></i>
+                @foreach($advantages as $advantage)
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br {{ $advantage['gradient'] }} rounded-3xl opacity-0 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity"></div>
+                    <div class="relative bg-white dark:bg-slate-900 border-2 border-gray-100 dark:border-white/10 rounded-3xl p-8 group-hover:border-ocean-200 dark:group-hover:border-ocean-800 transition-all transform hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-br {{ $advantage['gradient'] }} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas {{ $advantage['icon'] }} text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">{{ $advantage['title'] }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400">{{ $advantage['desc'] }}</p>
                     </div>
-                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Large choix</h4>
-                    <p class="text-gray-600 text-sm md:text-base">Des milliers d'annonces pour tous les budgets et tous les besoins</p>
                 </div>
-
-                <!-- Avantage 3 -->
-                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-headset text-3xl text-blue-600"></i>
-                    </div>
-                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Support 7j/7</h4>
-                    <p class="text-gray-600 text-sm md:text-base">Notre équipe vous accompagne à chaque étape de votre achat</p>
-                </div>
-
-                <!-- Avantage 4 -->
-                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-line text-3xl text-blue-600"></i>
-                    </div>
-                    <h4 class="font-bold text-lg md:text-xl text-gray-800 mb-3">Prix justes</h4>
-                    <p class="text-gray-600 text-sm md:text-base">Estimation gratuite et transparence sur les prix du marché</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section id="contact" class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h3 class="text-2xl md:text-4xl font-bold mb-4">Vous souhaitez vendre votre bateau ?</h3>
-                    <p class="text-lg md:text-xl text-blue-100">Confiez la vente de votre bateau à notre équipe d'experts</p>
+    <!-- CTA Section -->
+    <section class="relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-ocean-50 via-cyan-50 to-ocean-100 dark:from-slate-950 dark:via-ocean-950/50 dark:to-slate-900"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-ocean-300 dark:bg-ocean-600 rounded-full filter blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-luxe-cyan rounded-full filter blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="relative container mx-auto px-4">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-4xl md:text-6xl font-black mb-6 text-gray-900 dark:text-white">
+                    Prêt à vendre votre bateau ?
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Confiez-nous votre bateau et bénéficiez de notre expertise pour une vente rapide et au meilleur prix.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                    <a href="{{ route('sell') }}" class="group relative px-10 py-5 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-2xl font-black text-lg overflow-hidden transition-all hover:shadow-2xl transform hover:scale-105">
+                        <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                        <span class="relative z-10 flex items-center">
+                            <i class="fas fa-rocket mr-3"></i>
+                            Estimer mon bateau
+                        </span>
+                    </a>
+                    <a href="{{ route('contact') }}" class="group px-10 py-5 border-2 border-ocean-600 dark:border-ocean-400 text-ocean-600 dark:text-ocean-400 rounded-2xl font-black text-lg hover:bg-ocean-600 hover:dark:bg-ocean-500 hover:text-white transition-all transform hover:scale-105">
+                        <i class="fas fa-phone mr-3"></i>
+                        Nous contacter
+                    </a>
                 </div>
 
-                <div class="bg-white rounded-xl p-8 text-gray-800">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-base md:text-lg mb-2">Estimation gratuite</h4>
-                                <p class="text-gray-600 text-sm md:text-base">Nous évaluons votre bateau au meilleur prix du marché</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-base md:text-lg mb-2">Gestion complète</h4>
-                                <p class="text-gray-600 text-sm md:text-base">Photos professionnelles, annonces et visites</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-base md:text-lg mb-2">Réseau d'acheteurs</h4>
-                                <p class="text-gray-600 text-sm md:text-base">Accès à notre base de clients qualifiés</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fas fa-check-circle text-green-500 text-2xl mr-4 mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-base md:text-lg mb-2">Accompagnement juridique</h4>
-                                <p class="text-gray-600 text-sm md:text-base">Sécurisation de la transaction de A à Z</p>
-                            </div>
-                        </div>
+                <!-- Trust Indicators -->
+                <div class="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+                    <div class="group">
+                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">100%</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">Gratuit</div>
                     </div>
-
-                    <div class="text-center">
-                        <p class="text-gray-700 text-base md:text-lg mb-8">
-                            Remplissez notre formulaire détaillé et recevez une estimation gratuite de votre bateau sous 48h.
-                        </p>
-                        <a href="{{ route('sell') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 md:px-12 py-4 md:py-5 rounded-lg font-bold text-lg md:text-xl transition transform hover:scale-105 shadow-lg">
-                            <i class="fas fa-edit mr-2 md:mr-3"></i> Remplir le formulaire de vente
-                        </a>
-                        <p class="text-gray-500 text-sm mt-6">
-                            <i class="fas fa-clock mr-2"></i> Réponse sous 48h • <i class="fas fa-shield-alt mr-2"></i> Totalement gratuit et sans engagement
-                        </p>
+                    <div class="group">
+                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">Réponse</div>
+                    </div>
+                    <div class="group">
+                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">0€</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">Frais cachés</div>
                     </div>
                 </div>
             </div>

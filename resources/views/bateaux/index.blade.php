@@ -4,202 +4,234 @@
 
 @section('content')
 
-    <!-- Breadcrumb -->
-    <x-breadcrumb :items="[
-        ['label' => __('Annonces de bateaux'), 'url' => '#']
-    ]" />
-
-    <!-- Page Title & Stats -->
-    <div class="bg-white border-b">
-        <div class="container mx-auto px-4 py-8">
-            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-2">{{ __('Toutes les annonces') }}</h1>
-            <p class="text-gray-600 text-sm md:text-lg">{{ number_format($bateaux->count()) }} {{ $bateaux->count() > 1 ? __('bateaux') : __('bateau') }} {{ $bateaux->count() > 1 ? __('trouvés') : __('trouvé') }}</p>
+    <!-- Page Header -->
+    <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-slate-950 dark:via-ocean-950 dark:to-luxe-navy text-white py-16 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-black mb-4">Toutes nos annonces</h1>
+                <p class="text-xl md:text-2xl text-ocean-100 dark:text-ocean-200 mb-6">
+                    {{ number_format($bateaux->total()) }} {{ $bateaux->total() > 1 ? 'bateaux disponibles' : 'bateau disponible' }}
+                </p>
+                <div class="flex flex-wrap justify-center gap-2 mt-6">
+                    @php
+                        $activeFilters = collect(request()->except(['page', 'sort_by', 'search']))->filter();
+                    @endphp
+                    @if($activeFilters->count() > 0)
+                        <span class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm border border-white/20">
+                            <i class="fas fa-filter mr-2"></i>
+                            {{ $activeFilters->count() }} filtre{{ $activeFilters->count() > 1 ? 's' : '' }} actif{{ $activeFilters->count() > 1 ? 's' : '' }}
+                        </span>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Mobile Filter Button -->
-    <div class="container mx-auto px-4 py-4 lg:hidden">
-        <button id="mobileFilterBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium flex items-center justify-center">
-            <i class="fas fa-filter mr-2"></i> Afficher les filtres <span class="ml-2 text-xs">({{ number_format($bateaux->count()) }} bateaux)</span>
+    <div class="container mx-auto px-4 py-4 lg:hidden sticky top-20 z-30 bg-gray-50 dark:bg-slate-950">
+        <button id="mobileFilterBtn" class="w-full bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-6 py-4 rounded-2xl font-bold flex items-center justify-center shadow-lg transition-all transform hover:scale-105">
+            <i class="fas fa-filter mr-2"></i>
+            Filtres
+            <span class="ml-2 px-2 py-1 bg-white/20 rounded-full text-xs">{{ number_format($bateaux->total()) }}</span>
         </button>
     </div>
 
-    <!-- Filters & Listings -->
-    <div class="container mx-auto px-4 pb-8 lg:py-8">
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 lg:py-12">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
             <!-- Sidebar Filters -->
             <aside class="lg:col-span-1">
-                <!-- Mobile Filter Overlay -->
-                <div id="mobileFilterOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+                <!-- Mobile Overlay -->
+                <div id="mobileFilterOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden hidden transition-opacity"></div>
 
                 <!-- Filter Panel -->
-                <div id="filterPanel" class="fixed lg:relative inset-x-0 bottom-0 lg:inset-auto bg-white rounded-t-2xl lg:rounded-xl shadow-lg lg:shadow-md p-6 lg:sticky lg:top-24 max-h-[85vh] lg:max-h-none overflow-y-auto z-50 transform translate-y-full lg:translate-y-0 transition-transform duration-300">
-                    <!-- Mobile Header -->
-                    <div class="flex items-center justify-between mb-4 lg:mb-6 lg:block">
-                        <h3 class="text-xl font-bold text-gray-800 flex items-center">
-                            <i class="fas fa-filter text-blue-600 mr-2"></i> Filtres
+                <div id="filterPanel" class="fixed lg:relative inset-x-0 bottom-0 lg:inset-auto bg-white dark:bg-slate-900 rounded-t-3xl lg:rounded-3xl shadow-2xl lg:shadow-xl p-6 lg:sticky lg:top-28 max-h-[85vh] lg:max-h-[calc(100vh-8rem)] overflow-y-auto z-50 transform translate-y-full lg:translate-y-0 transition-all duration-300 border border-gray-100 dark:border-white/10">
+
+                    <!-- Panel Header -->
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-white/10">
+                        <h3 class="text-2xl font-black text-gray-900 dark:text-white flex items-center">
+                            <div class="w-10 h-10 bg-gradient-to-br from-ocean-600 to-luxe-cyan rounded-xl flex items-center justify-center mr-3">
+                                <i class="fas fa-filter text-white"></i>
+                            </div>
+                            Filtres
                         </h3>
-                        <button id="closeFilterBtn" class="lg:hidden text-gray-500 hover:text-gray-700 p-2">
-                            <i class="fas fa-times text-2xl"></i>
+                        <button id="closeFilterBtn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                            <i class="fas fa-times text-2xl text-gray-500 dark:text-gray-400"></i>
                         </button>
                     </div>
 
                     <form id="filterForm" method="GET" action="{{ route('bateaux.index') }}">
                         @php
-                            // Ensure request parameters are arrays
                             $selectedTypeIds = is_array(request('type_id')) ? request('type_id') : (request('type_id') ? [request('type_id')] : []);
                             $selectedZoneIds = is_array(request('zone_id')) ? request('zone_id') : (request('zone_id') ? [request('zone_id')] : []);
                         @endphp
 
                         <!-- Type de bateau -->
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">{{ __('Type de bateau') }}</label>
+                            <label class="block text-sm font-black text-gray-900 dark:text-white mb-4 flex items-center">
+                                <i class="fas fa-ship text-ocean-600 dark:text-ocean-400 mr-2"></i>
+                                Type de bateau
+                            </label>
                             <div class="space-y-2">
                                 @foreach($types as $type)
-                                    <label class="flex items-center cursor-pointer">
+                                    <label class="flex items-center cursor-pointer group p-2 rounded-xl hover:bg-ocean-50 dark:hover:bg-ocean-950/30 transition-colors">
                                         <input type="checkbox" name="type_id[]" value="{{ $type->id }}"
-                                               class="w-4 h-4 text-blue-600 rounded filter-checkbox"
+                                               class="w-5 h-5 text-ocean-600 dark:text-ocean-400 rounded focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-checkbox"
                                                {{ in_array($type->id, $selectedTypeIds) ? 'checked' : '' }}>
-                                        <span class="ml-2 text-gray-700">{{ $type->libelle }}</span>
-                                        <span class="ml-auto text-gray-500 text-sm">({{ $type->bateaux_count }})</span>
+                                        <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium flex-1">{{ $type->libelle }}</span>
+                                        <span class="ml-auto px-2 py-1 bg-ocean-100 dark:bg-ocean-950/50 text-ocean-600 dark:text-ocean-400 text-xs font-bold rounded-full">{{ $type->bateaux_count }}</span>
                                     </label>
                                 @endforeach
                             </div>
                         </div>
 
-                        <hr class="my-6">
+                        <hr class="my-6 border-gray-200 dark:border-white/10">
 
                         <!-- Prix -->
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Prix (€)</label>
-                            <div class="grid grid-cols-2 gap-2">
+                            <label class="block text-sm font-black text-gray-900 dark:text-white mb-4 flex items-center">
+                                <i class="fas fa-euro-sign text-ocean-600 dark:text-ocean-400 mr-2"></i>
+                                Budget (€)
+                            </label>
+                            <div class="grid grid-cols-2 gap-3">
                                 <input type="number" name="prix_min" value="{{ request('prix_min') }}"
-                                       placeholder="Min" class="px-3 py-2 border rounded-lg text-sm filter-input">
+                                       placeholder="Min"
+                                       class="px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium filter-input placeholder-gray-400 dark:placeholder-gray-500">
                                 <input type="number" name="prix_max" value="{{ request('prix_max') }}"
-                                       placeholder="Max" class="px-3 py-2 border rounded-lg text-sm filter-input">
+                                       placeholder="Max"
+                                       class="px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium filter-input placeholder-gray-400 dark:placeholder-gray-500">
                             </div>
                         </div>
 
-                        <hr class="my-6">
+                        <hr class="my-6 border-gray-200 dark:border-white/10">
 
                         <!-- Localisation -->
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Localisation</label>
+                            <label class="block text-sm font-black text-gray-900 dark:text-white mb-4 flex items-center">
+                                <i class="fas fa-map-marker-alt text-ocean-600 dark:text-ocean-400 mr-2"></i>
+                                Localisation
+                            </label>
                             <div class="space-y-2">
                                 @foreach($zones as $zone)
-                                    <label class="flex items-center cursor-pointer">
+                                    <label class="flex items-center cursor-pointer group p-2 rounded-xl hover:bg-ocean-50 dark:hover:bg-ocean-950/30 transition-colors">
                                         <input type="checkbox" name="zone_id[]" value="{{ $zone->id }}"
-                                               class="w-4 h-4 text-blue-600 rounded filter-checkbox"
+                                               class="w-5 h-5 text-ocean-600 dark:text-ocean-400 rounded focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-checkbox"
                                                {{ in_array($zone->id, $selectedZoneIds) ? 'checked' : '' }}>
-                                        <span class="ml-2 text-gray-700">{{ $zone->libelle }}</span>
-                                        <span class="ml-auto text-gray-500 text-sm">({{ $zone->bateaux_count }})</span>
+                                        <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium flex-1">{{ $zone->libelle }}</span>
+                                        <span class="ml-auto px-2 py-1 bg-ocean-100 dark:bg-ocean-950/50 text-ocean-600 dark:text-ocean-400 text-xs font-bold rounded-full">{{ $zone->bateaux_count }}</span>
                                     </label>
                                 @endforeach
                             </div>
                         </div>
 
-                        <hr class="my-6">
+                        <hr class="my-6 border-gray-200 dark:border-white/10">
 
                         <!-- Année -->
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Année</label>
-                            <div class="grid grid-cols-2 gap-2">
+                            <label class="block text-sm font-black text-gray-900 dark:text-white mb-4 flex items-center">
+                                <i class="fas fa-calendar-alt text-ocean-600 dark:text-ocean-400 mr-2"></i>
+                                Année
+                            </label>
+                            <div class="grid grid-cols-2 gap-3">
                                 <input type="number" name="annee_min" value="{{ request('annee_min') }}"
-                                       placeholder="De" class="px-3 py-2 border rounded-lg text-sm filter-input">
+                                       placeholder="De"
+                                       class="px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium filter-input placeholder-gray-400 dark:placeholder-gray-500">
                                 <input type="number" name="annee_max" value="{{ request('annee_max') }}"
-                                       placeholder="À" class="px-3 py-2 border rounded-lg text-sm filter-input">
+                                       placeholder="À"
+                                       class="px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium filter-input placeholder-gray-400 dark:placeholder-gray-500">
                             </div>
                         </div>
 
-                        <hr class="my-6">
+                        <hr class="my-6 border-gray-200 dark:border-white/10">
 
                         <!-- État -->
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">État</label>
+                            <label class="block text-sm font-black text-gray-900 dark:text-white mb-4 flex items-center">
+                                <i class="fas fa-check-circle text-ocean-600 dark:text-ocean-400 mr-2"></i>
+                                État
+                            </label>
                             <div class="space-y-2">
-                                <label class="flex items-center cursor-pointer">
+                                <label class="flex items-center cursor-pointer group p-2 rounded-xl hover:bg-ocean-50 dark:hover:bg-ocean-950/30 transition-colors">
                                     <input type="radio" name="etat" value=""
-                                           class="w-4 h-4 text-blue-600 filter-radio"
+                                           class="w-5 h-5 text-ocean-600 dark:text-ocean-400 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-radio"
                                            {{ request('etat') === null ? 'checked' : '' }}>
-                                    <span class="ml-2 text-gray-700">Tous</span>
+                                    <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium">Tous</span>
                                 </label>
-                                <label class="flex items-center cursor-pointer">
+                                <label class="flex items-center cursor-pointer group p-2 rounded-xl hover:bg-ocean-50 dark:hover:bg-ocean-950/30 transition-colors">
                                     <input type="radio" name="etat" value="neuf"
-                                           class="w-4 h-4 text-blue-600 filter-radio"
+                                           class="w-5 h-5 text-ocean-600 dark:text-ocean-400 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-radio"
                                            {{ request('etat') === 'neuf' ? 'checked' : '' }}>
-                                    <span class="ml-2 text-gray-700">Neuf</span>
+                                    <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium">Neuf</span>
                                 </label>
-                                <label class="flex items-center cursor-pointer">
+                                <label class="flex items-center cursor-pointer group p-2 rounded-xl hover:bg-ocean-50 dark:hover:bg-ocean-950/30 transition-colors">
                                     <input type="radio" name="etat" value="occasion"
-                                           class="w-4 h-4 text-blue-600 filter-radio"
+                                           class="w-5 h-5 text-ocean-600 dark:text-ocean-400 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-radio"
                                            {{ request('etat') === 'occasion' ? 'checked' : '' }}>
-                                    <span class="ml-2 text-gray-700">Occasion</span>
+                                    <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium">Occasion</span>
                                 </label>
                             </div>
                         </div>
 
-                        <!-- Hidden field for search -->
+                        <!-- Hidden fields -->
                         <input type="hidden" name="search" id="hiddenSearch" value="{{ request('search') }}">
-
-                        <!-- Hidden field for sort -->
                         <input type="hidden" name="sort_by" id="hiddenSort" value="{{ request('sort_by', 'created_at') }}">
 
-                        <!-- Boutons -->
-                        <div class="flex gap-2 mt-6">
-                            <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition">
+                        <!-- Action Buttons -->
+                        <div class="flex gap-3 mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
+                            <button type="submit" class="flex-1 px-6 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
                                 Appliquer
                             </button>
-                            <a href="{{ route('bateaux.index') }}" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center justify-center">
-                                <i class="fas fa-redo text-gray-600"></i>
+                            <a href="{{ route('bateaux.index') }}" class="px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-all flex items-center justify-center">
+                                <i class="fas fa-redo text-gray-600 dark:text-gray-400"></i>
                             </a>
                         </div>
                     </form>
                 </div>
             </aside>
 
-            <!-- Listings -->
+            <!-- Main Content -->
             <main class="lg:col-span-3">
 
                 <!-- Toolbar -->
-                <div class="bg-white rounded-xl shadow-md p-4 mb-6">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg dark:shadow-slate-950/50 p-4 md:p-6 mb-8 border border-gray-100 dark:border-white/10">
                     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                         <!-- Search -->
                         <div class="flex-1 w-full">
-                            <div class="relative">
+                            <div class="relative group">
                                 <input type="text" id="searchInput" value="{{ request('search') }}"
                                        placeholder="Rechercher un bateau..."
-                                       class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                       class="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium placeholder-gray-400 dark:placeholder-gray-500 transition-all">
+                                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 group-focus-within:text-ocean-500 transition-colors"></i>
                             </div>
                         </div>
 
-                        <!-- Sort -->
-                        <div class="flex gap-2 items-center">
-                            <label class="text-sm text-gray-600 whitespace-nowrap">Trier par:</label>
-                            <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <!-- Sort & View -->
+                        <div class="flex gap-3 items-center w-full md:w-auto">
+                            <label class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap font-medium hidden md:block">Trier :</label>
+                            <select id="sortSelect" class="flex-1 md:flex-none px-4 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer">
                                 <option value="created_at" {{ request('sort_by') === 'created_at' ? 'selected' : '' }}>Plus récents</option>
-                                <option value="prix_asc" {{ request('sort_by') === 'prix_asc' ? 'selected' : '' }}>Prix croissant</option>
-                                <option value="prix_desc" {{ request('sort_by') === 'prix_desc' ? 'selected' : '' }}>Prix décroissant</option>
+                                <option value="prix_asc" {{ request('sort_by') === 'prix_asc' ? 'selected' : '' }}>Prix ↑</option>
+                                <option value="prix_desc" {{ request('sort_by') === 'prix_desc' ? 'selected' : '' }}>Prix ↓</option>
                                 <option value="annee_desc" {{ request('sort_by') === 'annee_desc' ? 'selected' : '' }}>Année récente</option>
                                 <option value="annee_asc" {{ request('sort_by') === 'annee_asc' ? 'selected' : '' }}>Année ancienne</option>
                             </select>
-                        </div>
 
-                        <!-- View Toggle -->
-                        <div class="flex gap-1 border border-gray-300 rounded-lg overflow-hidden">
-                            <button id="gridView" class="px-3 py-2 bg-blue-600 text-white">
-                                <i class="fas fa-th-large"></i>
-                            </button>
-                            <button id="listView" class="px-3 py-2 hover:bg-gray-100">
-                                <i class="fas fa-list"></i>
-                            </button>
+                            <!-- View Toggle -->
+                            <div class="hidden md:flex gap-1 border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden p-1">
+                                <button id="gridView" class="px-4 py-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl transition-all">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button id="listView" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition-all text-gray-600 dark:text-gray-400">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Grid de bateaux -->
-                <div id="boatsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <!-- Boats Grid -->
+                <div id="boatsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
                     @forelse($bateaux as $bateau)
                         <x-boat-card
                             :slug="$bateau->slug"
@@ -214,13 +246,26 @@
                             :badge-color="$bateau->badge['color'] ?? 'green'"
                         />
                     @empty
-                        <div class="col-span-3 text-center py-12 text-gray-500">
-                            <i class="fas fa-anchor text-6xl mb-4 opacity-30"></i>
-                            <p class="text-xl mb-2">Aucun bateau trouvé</p>
-                            <p>Essayez de modifier vos critères de recherche</p>
+                        <div class="col-span-3 text-center py-20">
+                            <div class="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950 dark:to-ocean-900 rounded-full flex items-center justify-center">
+                                <i class="fas fa-anchor text-6xl text-ocean-400 dark:text-ocean-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Aucun bateau trouvé</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-6">Essayez de modifier vos critères de recherche</p>
+                            <a href="{{ route('bateaux.index') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
+                                <i class="fas fa-redo mr-2"></i>
+                                Réinitialiser les filtres
+                            </a>
                         </div>
                     @endforelse
                 </div>
+
+                <!-- Pagination -->
+                @if($bateaux->hasPages())
+                <div class="mt-12">
+                    {{ $bateaux->links() }}
+                </div>
+                @endif
 
             </main>
 
@@ -251,95 +296,91 @@ function closeFilters() {
     document.body.style.overflow = 'auto';
 }
 
-mobileFilterBtn.addEventListener('click', openFilters);
-closeFilterBtn.addEventListener('click', closeFilters);
-mobileFilterOverlay.addEventListener('click', closeFilters);
-</script>
-@endpush
+mobileFilterBtn?.addEventListener('click', openFilters);
+closeFilterBtn?.addEventListener('click', closeFilters);
+mobileFilterOverlay?.addEventListener('click', closeFilters);
 
-@push('scripts')
-<script>
-    // Auto-submit form when filters change
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('filterForm');
-        const checkboxes = document.querySelectorAll('.filter-checkbox');
-        const radios = document.querySelectorAll('.filter-radio');
-        const inputs = document.querySelectorAll('.filter-input');
-        const searchInput = document.getElementById('searchInput');
-        const hiddenSearch = document.getElementById('hiddenSearch');
-        const sortSelect = document.getElementById('sortSelect');
-        const hiddenSort = document.getElementById('hiddenSort');
+// Auto-submit form when filters change
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('filterForm');
+    const checkboxes = document.querySelectorAll('.filter-checkbox');
+    const radios = document.querySelectorAll('.filter-radio');
+    const inputs = document.querySelectorAll('.filter-input');
+    const searchInput = document.getElementById('searchInput');
+    const hiddenSearch = document.getElementById('hiddenSearch');
+    const sortSelect = document.getElementById('sortSelect');
+    const hiddenSort = document.getElementById('hiddenSort');
 
-        // Submit form when checkbox changes
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                form.submit();
-            });
+    // Submit form when checkbox changes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            form.submit();
         });
+    });
 
-        // Submit form when radio changes
-        radios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                form.submit();
-            });
+    // Submit form when radio changes
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            form.submit();
         });
+    });
 
-        // Submit form when input loses focus or Enter is pressed
-        let inputTimeout;
-        inputs.forEach(input => {
-            input.addEventListener('keyup', function(e) {
-                clearTimeout(inputTimeout);
-                if (e.key === 'Enter') {
-                    form.submit();
-                } else {
-                    inputTimeout = setTimeout(() => {
-                        form.submit();
-                    }, 2000); // Wait 2 seconds after last keystroke
-                }
-            });
-        });
-
-        // Handle search input
-        let searchTimeout;
-        searchInput.addEventListener('keyup', function(e) {
-            clearTimeout(searchTimeout);
-            hiddenSearch.value = this.value;
-
+    // Submit form when input loses focus or Enter is pressed
+    let inputTimeout;
+    inputs.forEach(input => {
+        input.addEventListener('keyup', function(e) {
+            clearTimeout(inputTimeout);
             if (e.key === 'Enter') {
                 form.submit();
             } else {
-                searchTimeout = setTimeout(() => {
+                inputTimeout = setTimeout(() => {
                     form.submit();
-                }, 800); // Wait 800ms after last keystroke
+                }, 2000);
             }
         });
-
-        // Handle sort select
-        sortSelect.addEventListener('change', function() {
-            hiddenSort.value = this.value;
-            form.submit();
-        });
-
-        // View toggle functionality
-        const gridView = document.getElementById('gridView');
-        const listView = document.getElementById('listView');
-        const boatsGrid = document.getElementById('boatsGrid');
-
-        gridView.addEventListener('click', function() {
-            boatsGrid.className = 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6';
-            gridView.classList.add('bg-blue-600', 'text-white');
-            gridView.classList.remove('hover:bg-gray-100');
-            listView.classList.remove('bg-blue-600', 'text-white');
-            listView.classList.add('hover:bg-gray-100');
-        });
-
-        listView.addEventListener('click', function() {
-            boatsGrid.className = 'grid grid-cols-1 gap-6';
-            listView.classList.add('bg-blue-600', 'text-white');
-            listView.classList.remove('hover:bg-gray-100');
-            gridView.classList.remove('bg-blue-600', 'text-white');
-            gridView.classList.add('hover:bg-gray-100');
-        });
     });
+
+    // Handle search input
+    let searchTimeout;
+    searchInput?.addEventListener('keyup', function(e) {
+        clearTimeout(searchTimeout);
+        hiddenSearch.value = this.value;
+
+        if (e.key === 'Enter') {
+            form.submit();
+        } else {
+            searchTimeout = setTimeout(() => {
+                form.submit();
+            }, 800);
+        }
+    });
+
+    // Handle sort select
+    sortSelect?.addEventListener('change', function() {
+        hiddenSort.value = this.value;
+        form.submit();
+    });
+
+    // View toggle functionality
+    const gridView = document.getElementById('gridView');
+    const listView = document.getElementById('listView');
+    const boatsGrid = document.getElementById('boatsGrid');
+
+    gridView?.addEventListener('click', function() {
+        boatsGrid.className = 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8';
+        gridView.classList.add('bg-gradient-to-r', 'from-ocean-600', 'to-luxe-cyan', 'text-white');
+        gridView.classList.remove('hover:bg-gray-100', 'dark:hover:bg-slate-800', 'text-gray-600', 'dark:text-gray-400');
+        listView.classList.remove('bg-gradient-to-r', 'from-ocean-600', 'to-luxe-cyan', 'text-white');
+        listView.classList.add('hover:bg-gray-100', 'dark:hover:bg-slate-800', 'text-gray-600', 'dark:text-gray-400');
+    });
+
+    listView?.addEventListener('click', function() {
+        boatsGrid.className = 'grid grid-cols-1 gap-6 md:gap-8';
+        listView.classList.add('bg-gradient-to-r', 'from-ocean-600', 'to-luxe-cyan', 'text-white');
+        listView.classList.remove('hover:bg-gray-100', 'dark:hover:bg-slate-800', 'text-gray-600', 'dark:text-gray-400');
+        gridView.classList.remove('bg-gradient-to-r', 'from-ocean-600', 'to-luxe-cyan', 'text-white');
+        gridView.classList.add('hover:bg-gray-100', 'dark:hover:bg-slate-800', 'text-gray-600', 'dark:text-gray-400');
+    });
+});
 </script>
 @endpush
