@@ -148,26 +148,23 @@
                 </div>
             </div>
 
-            <!-- Partenaire 4: Aurélien Bilh - CNC Marine -->
+            <!-- Partenaire 4: Aurélien Bilh - A.B.S -->
             <div class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-gray-200 dark:border-white/10 p-8 hover:border-ocean-500 dark:hover:border-ocean-500 transition-all hover:shadow-2xl transform hover:-translate-y-2 group">
                 <div class="flex flex-col items-center text-center h-full">
                     <div class="h-20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <img src="https://cncmarine.com.au/wp-content/uploads/2023/03/Cnc-marine-logo-01-300x77.png" alt="CNC Marine Logo" class="h-16 w-auto object-contain brightness-0 dark:brightness-0 dark:invert">
+                        <div class="w-20 h-20 bg-gradient-to-br from-ocean-600 to-luxe-cyan rounded-2xl flex items-center justify-center text-white font-black text-3xl shadow-xl">
+                            AB
+                        </div>
                     </div>
                     <h3 class="text-2xl font-black text-gray-800 dark:text-white mb-3">Aurélien Bilh</h3>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
                         <i class="fas fa-map-marker-alt mr-2 text-ocean-600 dark:text-ocean-400"></i>
                         La Réunion
                     </p>
-                    <p class="text-ocean-700 dark:text-ocean-300 text-sm font-bold mb-3">Bateaux CNC Marine</p>
+                    <p class="text-ocean-700 dark:text-ocean-300 text-sm font-bold mb-3">A.B.S</p>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
-                        Fabrication bateaux aluminium sur-mesure
+                        Constructeur de bateaux aluminium
                     </p>
-                    <div class="flex gap-4 mt-auto">
-                        <a href="https://cncmarine.com.au" target="_blank" rel="noopener" class="text-ocean-600 dark:text-ocean-400 hover:text-ocean-700 dark:hover:text-ocean-300 transition text-2xl" title="Site web">
-                            <i class="fas fa-globe"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
 
