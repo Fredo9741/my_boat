@@ -65,11 +65,11 @@ CACHE_STORE=database
 
 # Cloudflare R2 Storage
 FILESYSTEM_DISK=cloudflare
-CLOUDFLARE_R2_ACCESS_KEY_ID=3b40201c3df3c5640859889e1874c872
-CLOUDFLARE_R2_SECRET_ACCESS_KEY=13132322a9edbef95ce049d6c7eefca5ac9af73c4d34d72d2f8a2e071cfaf382
-CLOUDFLARE_R2_BUCKET=myboat
-CLOUDFLARE_R2_URL=https://files.fredlabs.org
-CLOUDFLARE_R2_ENDPOINT=https://898047b4c422ffe9966cc1cb7493ceed.r2.cloudflarestorage.com
+CLOUDFLARE_R2_ACCESS_KEY_ID=<your-r2-access-key-id>
+CLOUDFLARE_R2_SECRET_ACCESS_KEY=<your-r2-secret-access-key>
+CLOUDFLARE_R2_BUCKET=<your-bucket-name>
+CLOUDFLARE_R2_URL=<your-public-r2-url>
+CLOUDFLARE_R2_ENDPOINT=https://<your-account-id>.r2.cloudflarestorage.com
 ```
 
 ### Configuration Cloudflare R2
