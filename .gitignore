@@ -20,3 +20,9 @@ clear-opcache.php
 check_opcache.php
 /database/database.sqlite
 *.sqlite
+
+# MCP Configuration with secrets
+.mcp.json
+
+# Scripts with credentials
+scripts/scrape_backoffice.py
