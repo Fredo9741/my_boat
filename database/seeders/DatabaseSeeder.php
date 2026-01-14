@@ -130,7 +130,7 @@ class DatabaseSeeder extends Seeder
         // Décommentez le bloc ci-dessous pour activer cette fonctionnalité :
         // ============================================================================
 
-        /*
+
         // Import initial si mode 'fresh' ou 'development'
         if (in_array($mode, ['fresh', 'development'])) {
             $this->call([
@@ -147,7 +147,6 @@ class DatabaseSeeder extends Seeder
                 UpdatePublishedDatesSeeder::class,
             ]);
         }
-        */
 
         // ============================================================================
         // 📚 DOCUMENTATION COMPLÈTE

@@ -14,6 +14,15 @@ php artisan migrate --force
 echo "🌱 Seeding essential data (types, zones, slogans, equipment)..."
 php artisan db:seed --force
 
+# Import boats (only on fresh deployments - comment out after first run)
+if [ "$SEED_BOATS" = "true" ]; then
+    echo "🚤 Importing boats from JSON..."
+    php artisan db:seed --class=CleanBateauxSeeder --force
+    php artisan db:seed --class=BateauSeeder --force
+    php artisan db:seed --class=BateauMediaSeeder --force
+    echo "✅ Boats imported successfully!"
+fi
+
 # Clear cache
 echo "🧹 Clearing Laravel cache..."
 php artisan optimize:clear
