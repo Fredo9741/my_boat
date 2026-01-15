@@ -74,31 +74,11 @@ else
 fi
 
 # ============================================================================
-# NETTOYAGE DES DESCRIPTIONS (OPTIONNEL)
-# ============================================================================
-# Nettoie les descriptions des bateaux (remplace \n par de vrais sauts de ligne)
-# Définir CLEAN_DESCRIPTIONS=true dans Railway pour activer
-# ============================================================================
-echo "🔍 DEBUG: CLEAN_DESCRIPTIONS = '$CLEAN_DESCRIPTIONS'"
-
-if [ "$CLEAN_DESCRIPTIONS" = "true" ]; then
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "🧹 NETTOYAGE DES DESCRIPTIONS"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
-    echo "🚤 Cleaning boat descriptions..."
-    php artisan boats:clean-descriptions || {
-        echo "⚠️  Description cleaning failed, continuing anyway..."
-        echo "💡 You can retry manually: railway run php artisan boats:clean-descriptions"
-    }
-
-    echo "✅ Descriptions cleaned!"
-else
-    echo "⏭️  Description cleaning skipped (CLEAN_DESCRIPTIONS = '$CLEAN_DESCRIPTIONS')"
-fi
-
-# ============================================================================
 # OPTIMISATIONS (TOUJOURS EXÉCUTÉES)
+# ============================================================================
+# NOTE: Le nettoyage des descriptions est maintenant fait au démarrage
+# dans railway/startup.sh car les variables d'environnement ne sont pas
+# disponibles pendant le pre-deploy avec Nixpacks
 # ============================================================================
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "⚡ Optimizing Laravel..."
