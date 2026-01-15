@@ -8,4 +8,6 @@ cmds = ['...']
 cmds = ['...']
 
 [start]
-cmd = "bash railway/init-app.sh && frankenphp php-server --listen :$PORT"
+# Note: startCommand et preDeployCommand sont définis dans .railway.toml
+# Ce fichier nixpacks.toml est gardé pour compatibilité mais .railway.toml a la priorité
+cmd = "frankenphp php-server --listen :$PORT"
