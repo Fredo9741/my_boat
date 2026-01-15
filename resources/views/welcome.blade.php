@@ -9,7 +9,7 @@
     <section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-luxe-navy via-ocean-950 to-slate-950 dark:from-black dark:via-ocean-950 dark:to-luxe-navy">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('https://images.unsplash.com/photo-1542397284385-6010376c5337?q=80&w=1974&auto=format&fit=crop');"></div>
+            <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('{{ asset('images/herobateau.webp') }}');"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-ocean-950/30 to-luxe-navy/60"></div>
 
             <!-- Animated Gradient Blobs -->
