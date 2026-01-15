@@ -6,8 +6,9 @@ builder = "NIXPACKS"
 # Exécuté UNE FOIS avant le démarrage
 preDeployCommand = "bash railway/init-app.sh"
 
-# Start: Démarrage de l'application
-startCommand = "frankenphp php-server --listen :$PORT"
+# Start: Démarrage de l'application avec Laravel Octane
+# Octane garde l'app en mémoire = 10x plus rapide que php artisan serve
+startCommand = "php artisan octane:start --server=frankenphp --host=0.0.0.0 --port=$PORT"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"

@@ -26,3 +26,9 @@ check_opcache.php
 
 # Scripts with credentials
 scripts/scrape_backoffice.py
+
+**/caddy
+frankenphp
+frankenphp-worker.php
+rr
+.rr.yaml
