@@ -8,6 +8,5 @@ cmds = ['...']
 cmds = ['...']
 
 [start]
-# Note: startCommand et preDeployCommand sont définis dans .railway.toml
-# Ce fichier nixpacks.toml est gardé pour compatibilité mais .railway.toml a la priorité
-cmd = "frankenphp php-server --listen :$PORT"
+# Laravel Octane avec FrankenPHP pour performances optimales
+cmd = "php artisan octane:start --server=frankenphp --host=0.0.0.0 --port=$PORT"
