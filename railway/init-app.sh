@@ -79,6 +79,8 @@ fi
 # Nettoie les descriptions des bateaux (remplace \n par de vrais sauts de ligne)
 # Définir CLEAN_DESCRIPTIONS=true dans Railway pour activer
 # ============================================================================
+echo "🔍 DEBUG: CLEAN_DESCRIPTIONS = '$CLEAN_DESCRIPTIONS'"
+
 if [ "$CLEAN_DESCRIPTIONS" = "true" ]; then
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo "🧹 NETTOYAGE DES DESCRIPTIONS"
@@ -92,7 +94,7 @@ if [ "$CLEAN_DESCRIPTIONS" = "true" ]; then
 
     echo "✅ Descriptions cleaned!"
 else
-    echo "⏭️  Description cleaning skipped (CLEAN_DESCRIPTIONS not set)"
+    echo "⏭️  Description cleaning skipped (CLEAN_DESCRIPTIONS = '$CLEAN_DESCRIPTIONS')"
 fi
 
 # ============================================================================
