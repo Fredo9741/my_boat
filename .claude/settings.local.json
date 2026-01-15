@@ -20,7 +20,9 @@
       "Bash(icacls:*)",
       "Bash(php -m:*)",
       "Bash(echo.)",
-      "Bash(where npx:*)"
+      "Bash(where npx:*)",
+      "Bash(grep:*)",
+      "Bash(xargs ls:*)"
     ]
   }
 }
