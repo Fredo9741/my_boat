@@ -74,6 +74,28 @@ else
 fi
 
 # ============================================================================
+# NETTOYAGE DES DESCRIPTIONS (OPTIONNEL)
+# ============================================================================
+# Nettoie les descriptions des bateaux (remplace \n par de vrais sauts de ligne)
+# Définir CLEAN_DESCRIPTIONS=true dans Railway pour activer
+# ============================================================================
+if [ "$CLEAN_DESCRIPTIONS" = "true" ]; then
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "🧹 NETTOYAGE DES DESCRIPTIONS"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    echo "🚤 Cleaning boat descriptions..."
+    php artisan boats:clean-descriptions || {
+        echo "⚠️  Description cleaning failed, continuing anyway..."
+        echo "💡 You can retry manually: railway run php artisan boats:clean-descriptions"
+    }
+
+    echo "✅ Descriptions cleaned!"
+else
+    echo "⏭️  Description cleaning skipped (CLEAN_DESCRIPTIONS not set)"
+fi
+
+# ============================================================================
 # OPTIMISATIONS (TOUJOURS EXÉCUTÉES)
 # ============================================================================
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
