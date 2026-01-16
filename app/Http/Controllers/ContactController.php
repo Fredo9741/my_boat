@@ -23,6 +23,12 @@ class ContactController extends Controller
         // Détecter le type de formulaire
         $formType = $this->detectFormType($request);
 
+        \Log::info('Contact form submitted', [
+            'type' => $formType,
+            'mailer' => config('mail.default'),
+            'from' => config('mail.from.address'),
+        ]);
+
         return match($formType) {
             'boat_inquiry' => $this->handleBoatInquiry($request),
             'estimation' => $this->handleEstimation($request),
@@ -101,9 +107,12 @@ class ContactController extends Controller
             return redirect()->back()
                 ->with('success', 'Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.');
         } catch (\Exception $e) {
-            \Log::error('Email sending failed: ' . $e->getMessage());
+            \Log::error('Email sending failed (general contact): ' . $e->getMessage(), [
+                'exception' => get_class($e),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->back()
-                ->with('error', 'Erreur lors de l\'envoi du message. Veuillez réessayer plus tard.')
+                ->with('error', 'Erreur lors de l\'envoi du message: ' . $e->getMessage())
                 ->withInput();
         }
     }
@@ -137,9 +146,12 @@ class ContactController extends Controller
             return redirect()->back()
                 ->with('success', 'Votre demande d\'estimation a été envoyée! Nous vous recontacterons sous 24h.');
         } catch (\Exception $e) {
-            \Log::error('Email sending failed: ' . $e->getMessage());
+            \Log::error('Email sending failed (estimation): ' . $e->getMessage(), [
+                'exception' => get_class($e),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->back()
-                ->with('error', 'Erreur lors de l\'envoi de la demande. Veuillez réessayer plus tard.')
+                ->with('error', 'Erreur lors de l\'envoi: ' . $e->getMessage())
                 ->withInput();
         }
     }
@@ -169,9 +181,12 @@ class ContactController extends Controller
             return redirect()->back()
                 ->with('success', 'Votre demande de partenariat a été envoyée! Nous vous recontacterons sous 24h.');
         } catch (\Exception $e) {
-            \Log::error('Email sending failed: ' . $e->getMessage());
+            \Log::error('Email sending failed (partnership): ' . $e->getMessage(), [
+                'exception' => get_class($e),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->back()
-                ->with('error', 'Erreur lors de l\'envoi de la demande. Veuillez réessayer plus tard.')
+                ->with('error', 'Erreur lors de l\'envoi: ' . $e->getMessage())
                 ->withInput();
         }
     }
