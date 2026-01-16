@@ -69,17 +69,25 @@ class ContactController extends Controller
             'message' => 'required|string|max:2000',
             'bateau_id' => 'required|exists:bateaux,id',
             'bateau_titre' => 'required|string',
+            'bateau_slug' => 'required|string',
         ]);
 
         try {
-            Mail::to($this->contactEmail)->send(new ContactFormMail($validated));
+            Mail::send('emails.boat-inquiry', ['data' => $validated], function ($message) use ($validated) {
+                $message->to($this->contactEmail)
+                    ->subject('Demande bateau: ' . $validated['bateau_titre'])
+                    ->replyTo($validated['email'], $validated['nom']);
+            });
 
             return redirect()->back()
                 ->with('success', 'Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.');
         } catch (\Exception $e) {
-            \Log::error('Email sending failed: ' . $e->getMessage());
+            \Log::error('Email sending failed (boat inquiry): ' . $e->getMessage(), [
+                'exception' => get_class($e),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->back()
-                ->with('error', 'Erreur lors de l\'envoi du message. Veuillez réessayer plus tard.')
+                ->with('error', 'Erreur lors de l\'envoi: ' . $e->getMessage())
                 ->withInput();
         }
     }
