@@ -292,7 +292,7 @@
             <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                 @csrf
                 <input type="hidden" name="bateau_id" value="{{ $bateau->id }}">
-                <input type="hidden" name="bateau_titre" value="{{ $bateau->nom }}">
+                <input type="hidden" name="bateau_titre" value="{{ $bateau->modele }}">
                 <input type="hidden" name="bateau_slug" value="{{ $bateau->slug }}">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
