@@ -62,6 +62,8 @@ class ContactController extends Controller
      */
     private function handleBoatInquiry(Request $request)
     {
+        \Log::info('handleBoatInquiry called', ['request' => $request->all()]);
+
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'email' => 'required|email',
@@ -72,12 +74,22 @@ class ContactController extends Controller
             'bateau_slug' => 'required|string',
         ]);
 
+        \Log::info('Boat inquiry validation passed', ['validated' => $validated]);
+
         try {
+            \Log::info('Attempting to send boat inquiry email', [
+                'to' => $this->contactEmail,
+                'subject' => 'Demande bateau: ' . $validated['bateau_titre'],
+                'mailer' => config('mail.default'),
+            ]);
+
             Mail::send('emails.boat-inquiry', ['data' => $validated], function ($message) use ($validated) {
                 $message->to($this->contactEmail)
                     ->subject('Demande bateau: ' . $validated['bateau_titre'])
                     ->replyTo($validated['email'], $validated['nom']);
             });
+
+            \Log::info('Boat inquiry email sent successfully');
 
             return redirect()->back()
                 ->with('success', 'Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.');
