@@ -29,7 +29,7 @@
 
                 <!-- Main Title -->
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 animate-fadeInUp leading-tight" style="animation-delay: 0.1s;">
-                    Trouvez le bateau<br>
+                    Trouvez ou vendez le bateau<br>
                     de <span class="relative inline-block">
                         <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent">vos rêves</span>
                         <div class="absolute bottom-3 left-0 w-full h-6 bg-gradient-to-r from-ocean-400/30 to-luxe-cyan/30 transform -rotate-1 rounded-lg blur-sm"></div>
@@ -98,8 +98,8 @@
                             <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Bateaux disponibles</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">{{ $stats['total_zones'] }}</div>
-                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Îles couvertes</div>
+                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">5</div>
+                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Îles couvertes + Europe/DOM-TOM</div>
                         </div>
                         <div class="text-center group">
                             <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>

@@ -249,6 +249,8 @@
                                 <option value="">Sélectionnez</option>
                                 <option value="Voilier">Voilier</option>
                                 <option value="Catamaran">Catamaran</option>
+                                <option value="Catamaran à moteur">Catamaran à moteur</option>
+                                <option value="Trimaran">Trimaran</option>
                                 <option value="Yacht à moteur">Yacht à moteur</option>
                                 <option value="Semi-rigide">Semi-rigide</option>
                                 <option value="Bateau de pêche">Bateau de pêche</option>
@@ -308,6 +310,9 @@
                                 <option value="Madagascar">Madagascar</option>
                                 <option value="Mayotte">Mayotte</option>
                                 <option value="Seychelles">Seychelles</option>
+                                <option value="Zanzibar">Zanzibar</option>
+                                <option value="France">France</option>
+                                <option value="Europe">Europe</option>
                                 <option value="Autre">Autre</option>
                             </select>
                         </div>

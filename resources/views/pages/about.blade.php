@@ -137,12 +137,16 @@
                 <div class="text-ocean-200 dark:text-ocean-300">Clients Satisfaits</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
-                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">8+</div>
+                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">10+</div>
                 <div class="text-ocean-200 dark:text-ocean-300">Années d'Expérience</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
-                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">3</div>
+                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">5</div>
                 <div class="text-ocean-200 dark:text-ocean-300">Îles Couvertes</div>
+            </div>
+            <div class="text-center transform hover:scale-110 transition-all col-span-2 md:col-span-4">
+                <div class="text-4xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">Europe / DOM-TOM</div>
+                <div class="text-ocean-200 dark:text-ocean-300">Couverture Étendue</div>
             </div>
         </div>
     </div>

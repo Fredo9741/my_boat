@@ -56,15 +56,15 @@
                 <ul class="space-y-3">
                     <li class="flex items-start group">
                         <i class="fas fa-map-marker-alt text-ocean-500 dark:text-ocean-400 mt-1 mr-3 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-gray-400 dark:text-gray-500">Port de Saint-Gilles<br>97434 La Réunion</span>
+                        <span class="text-gray-400 dark:text-gray-500">La Darse du Port<br>97407 La Réunion</span>
                     </li>
                     <li class="flex items-center group">
                         <i class="fas fa-phone text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-gray-400 dark:text-gray-500">+262 692 XX XX XX</span>
+                        <span class="text-gray-400 dark:text-gray-500">Ghislain PAILLOT (Run.): +262 692 706 610</span>
                     </li>
                     <li class="flex items-center group">
                         <i class="fas fa-envelope text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-gray-400 dark:text-gray-500">contact@oceanboats.re</span>
+                        <span class="text-gray-400 dark:text-gray-500">contact@myboat-oi.com</span>
                     </li>
                 </ul>
             </div>

@@ -428,11 +428,6 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nombre estimé de bateaux</label>
-                        <input type="number" name="boat_count" min="1" placeholder="Ex: 5" class="w-full px-4 py-3 border-2 border-gray-300 dark:border-slate-700 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 transition">
-                    </div>
-
-                    <div>
                         <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Message</label>
                         <textarea name="message" rows="5" placeholder="Parlez-nous de votre activité et de vos besoins..." class="w-full px-4 py-3 border-2 border-gray-300 dark:border-slate-700 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 transition"></textarea>
                     </div>

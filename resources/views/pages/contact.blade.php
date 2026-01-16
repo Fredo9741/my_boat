@@ -155,8 +155,8 @@
                         <div class="ml-4">
                             <h4 class="font-bold text-gray-900 dark:text-white mb-1">Adresse</h4>
                             <p class="text-gray-600 dark:text-gray-400 text-sm">
-                                Port de Saint-Gilles<br>
-                                97434 La Réunion<br>
+                                La Darse du Port<br>
+                                97407 La Réunion<br>
                                 Océan Indien
                             </p>
                         </div>
@@ -168,7 +168,7 @@
                         </div>
                         <div class="ml-4">
                             <h4 class="font-bold text-gray-900 dark:text-white mb-1">Téléphone</h4>
-                            <a href="tel:+262692000000" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium">+262 692 XX XX XX</a>
+                            <a href="tel:+262692706610" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium">+262 692 706 610</a>
                         </div>
                     </div>
 
@@ -178,7 +178,7 @@
                         </div>
                         <div class="ml-4">
                             <h4 class="font-bold text-gray-900 dark:text-white mb-1">WhatsApp</h4>
-                            <a href="https://wa.me/262692000000" target="_blank" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium text-sm">Discuter sur WhatsApp</a>
+                            <a href="https://wa.me/262692706610" target="_blank" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium text-sm">Discuter sur WhatsApp</a>
                         </div>
                     </div>
 
@@ -188,7 +188,7 @@
                         </div>
                         <div class="ml-4">
                             <h4 class="font-bold text-gray-900 dark:text-white mb-1">Email</h4>
-                            <a href="mailto:contact@myboat.re" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium text-sm">contact@myboat.re</a>
+                            <a href="mailto:contact@myboat-oi.com" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium text-sm">contact@myboat-oi.com</a>
                         </div>
                     </div>
                 </div>
@@ -229,10 +229,9 @@
                 <p class="text-ocean-100 dark:text-ocean-200 text-sm mb-5">
                     Pour les demandes urgentes, contactez-nous directement par téléphone ou WhatsApp.
                 </p>
-                <a href="https://wa.me/262692000000"
-                   target="_blank"
+                <a href="tel:+262692706610"
                    class="block w-full bg-white hover:bg-ocean-50 text-ocean-900 text-center px-4 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
-                    <i class="fab fa-whatsapp mr-2"></i>
+                    <i class="fas fa-phone mr-2"></i>
                     Contacter maintenant
                 </a>
             </div>
