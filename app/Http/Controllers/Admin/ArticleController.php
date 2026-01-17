@@ -38,7 +38,8 @@ class ArticleController extends Controller
         if ($request->hasFile('featured_image')) {
             $file = $request->file('featured_image');
             $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('articles/featured', $filename, 'cloudflare');
+            $disk = config('filesystems.default');
+            $path = $file->storeAs('articles/featured', $filename, $disk);
             $validated['featured_image'] = $path;
         }
 
@@ -75,15 +76,16 @@ class ArticleController extends Controller
         ]);
 
         // Handle featured image upload
+        $disk = config('filesystems.default');
         if ($request->hasFile('featured_image')) {
             // Delete old image if exists
             if ($article->featured_image) {
-                Storage::disk('cloudflare')->delete($article->featured_image);
+                Storage::disk($disk)->delete($article->featured_image);
             }
 
             $file = $request->file('featured_image');
             $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('articles/featured', $filename, 'cloudflare');
+            $path = $file->storeAs('articles/featured', $filename, $disk);
             $validated['featured_image'] = $path;
         }
 
@@ -102,9 +104,10 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
-        // Delete featured image from R2
+        // Delete featured image from storage
+        $disk = config('filesystems.default');
         if ($article->featured_image) {
-            Storage::disk('cloudflare')->delete($article->featured_image);
+            Storage::disk($disk)->delete($article->featured_image);
         }
 
         $article->delete();
@@ -118,8 +121,9 @@ class ArticleController extends Controller
      */
     public function removeFeaturedImage(Article $article)
     {
+        $disk = config('filesystems.default');
         if ($article->featured_image) {
-            Storage::disk('cloudflare')->delete($article->featured_image);
+            Storage::disk($disk)->delete($article->featured_image);
             $article->update(['featured_image' => null]);
         }
 
@@ -140,7 +144,8 @@ class ArticleController extends Controller
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
             $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('articles/content', $filename, 'cloudflare');
+            $disk = config('filesystems.default');
+            $path = $file->storeAs('articles/content', $filename, $disk);
             $url = r2_url($path);
 
             // CKEditor 5 expects this response format

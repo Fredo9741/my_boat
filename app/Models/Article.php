@@ -44,10 +44,11 @@ class Article extends Model
             }
         });
 
-        // Delete featured image from R2 when article is deleted
+        // Delete featured image from storage when article is deleted
         static::deleting(function ($article) {
             if ($article->featured_image) {
-                Storage::disk('cloudflare')->delete($article->featured_image);
+                $disk = config('filesystems.default');
+                Storage::disk($disk)->delete($article->featured_image);
             }
         });
     }
@@ -120,7 +121,10 @@ class Article extends Model
      */
     public function getExcerptAttribute(): string
     {
-        $text = strip_tags($this->content);
+        // First decode HTML entities, then strip tags
+        $text = html_entity_decode(strip_tags($this->content), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        // Remove extra whitespace and normalize spaces
+        $text = preg_replace('/\s+/', ' ', trim($text));
         return Str::limit($text, 200);
     }
 
