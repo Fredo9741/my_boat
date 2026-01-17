@@ -5,6 +5,7 @@ use App\Http\Controllers\BateauController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TypeController as AdminTypeController;
@@ -40,6 +41,10 @@ Route::get('/partenaires', [PartnerController::class, 'index'])->name('partners'
 Route::get('/mentions-legales', [PageController::class, 'mentionsLegales'])->name('mentions-legales');
 Route::get('/cgv', [PageController::class, 'cgv'])->name('cgv');
 Route::get('/confidentialite', [PageController::class, 'confidentialite'])->name('confidentialite');
+
+// Articles (blog)
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 
 // Demo Design Page (Test)
 Route::get('/demo-design', function () {

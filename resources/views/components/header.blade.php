@@ -38,6 +38,12 @@
                         <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
                     @endif
                 </a>
+                <a href="/articles" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->is('articles*') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+                    Articles
+                    @if(request()->is('articles*'))
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
+                    @endif
+                </a>
                 <a href="/contact" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->is('contact') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
                     Contact
                     @if(request()->is('contact'))
@@ -87,6 +93,9 @@
             </a>
             <a href="/partenaires" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-colors {{ request()->is('partenaires') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
                 <i class="fas fa-handshake w-6"></i> Partenaires
+            </a>
+            <a href="/articles" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-colors {{ request()->is('articles*') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
+                <i class="fas fa-newspaper w-6"></i> Articles
             </a>
             <a href="/contact" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-colors {{ request()->is('contact') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
                 <i class="fas fa-envelope w-6"></i> Contact

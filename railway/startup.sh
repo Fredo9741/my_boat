@@ -4,6 +4,18 @@
 echo "🚀 Starting application..."
 
 # ============================================================================
+# MIGRATIONS (exécutées au démarrage car Nixpacks n'a pas accès aux env vars en pre-deploy)
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📊 Running database migrations..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+php artisan migrate --force || {
+    echo "⚠️  Migration failed, continuing anyway..."
+}
+echo "✅ Migrations complete!"
+echo ""
+
+# ============================================================================
 # NETTOYAGE DES DESCRIPTIONS (OPTIONNEL - AU PREMIER DÉMARRAGE)
 # ============================================================================
 echo "🔍 DEBUG: CLEAN_DESCRIPTIONS = '$CLEAN_DESCRIPTIONS'"
