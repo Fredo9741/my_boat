@@ -6,43 +6,38 @@
 @section('content')
 
     <!-- Hero Section Premium -->
-    <section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-luxe-navy via-ocean-950 to-slate-950 dark:from-black dark:via-ocean-950 dark:to-luxe-navy">
-        <!-- Background Image with Overlay -->
+    <section class="relative min-h-screen flex items-end lg:items-center overflow-hidden">
+        <!-- Background Image -->
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('{{ asset('images/herobateau.webp') }}');"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-ocean-950/30 to-luxe-navy/60"></div>
-
-            <!-- Animated Gradient Blobs -->
-            <div class="absolute inset-0 opacity-20">
-                <div class="absolute top-20 left-10 w-96 h-96 bg-ocean-500 rounded-full filter blur-3xl animate-float"></div>
-                <div class="absolute bottom-20 right-10 w-96 h-96 bg-luxe-cyan rounded-full filter blur-3xl animate-float" style="animation-delay: 2s;"></div>
-            </div>
+            <img src="{{ asset('images/herobateau.webp') }}" alt="Hero bateau" class="absolute inset-0 w-full h-full object-cover object-[42%_65%] md:object-[50%_50%] lg:object-[30%_50%] xl:object-[25%_50%]">
         </div>
 
-        <div class="relative container mx-auto px-4 py-20 md:py-32">
-            <div class="max-w-6xl mx-auto">
-                <!-- Badge -->
-                <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-white mb-6 animate-fadeInUp backdrop-blur-xl border border-white/20">
-                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
-                    <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} bateaux disponibles</span>
+        <!-- Content Container - Left aligned -->
+        <div class="relative w-full pb-8 pt-24 lg:py-0">
+            <div class="container mx-auto px-4">
+                <div class="lg:max-w-2xl xl:max-w-3xl">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white mb-6 animate-fadeInUp border border-white/20">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
+                        <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} bateaux disponibles</span>
+                    </div>
+
+                    <!-- Main Title - Fixed minimum size for readability -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 animate-fadeInUp leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" style="animation-delay: 0.1s;">
+                        Trouvez ou vendez<br class="hidden sm:block"> le bateau de <span class="relative inline-block">
+                            <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent drop-shadow-lg">vos rêves</span>
+                            <div class="absolute bottom-1 sm:bottom-2 left-0 w-full h-3 sm:h-4 bg-gradient-to-r from-ocean-400/30 to-luxe-cyan/30 transform -rotate-1 rounded-lg blur-sm"></div>
+                        </span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl lg:text-2xl text-white mb-8 animate-fadeInUp drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" style="animation-delay: 0.2s;">
+                        Votre courtier maritime de confiance dans l'océan Indien
+                    </p>
                 </div>
 
-                <!-- Main Title -->
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 animate-fadeInUp leading-tight" style="animation-delay: 0.1s;">
-                    Trouvez ou vendez le bateau<br>
-                    de <span class="relative inline-block">
-                        <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent">vos rêves</span>
-                        <div class="absolute bottom-3 left-0 w-full h-6 bg-gradient-to-r from-ocean-400/30 to-luxe-cyan/30 transform -rotate-1 rounded-lg blur-sm"></div>
-                    </span>
-                </h1>
-
-                <p class="text-xl md:text-2xl text-ocean-100 mb-12 animate-fadeInUp max-w-2xl" style="animation-delay: 0.2s;">
-                    Votre courtier maritime de confiance dans l'océan Indien
-                </p>
-
-                <!-- Premium Search Bar -->
-                <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
-                    <form action="{{ route('bateaux.index') }}" method="GET" class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl dark:shadow-ocean-950/50 p-3 md:p-4 backdrop-blur-xl border border-gray-100 dark:border-white/10">
+                <!-- Centered Search Bar and Stats -->
+                <div class="max-w-4xl mx-auto animate-fadeInUp" style="animation-delay: 0.3s;">
+                    <form action="{{ route('bateaux.index') }}" method="GET" class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl shadow-2xl p-3 md:p-4 border border-white/20">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
                             <!-- Type -->
                             <div class="relative group">
@@ -92,18 +87,18 @@
                     </form>
 
                     <!-- Quick Stats -->
-                    <div class="grid grid-cols-3 gap-6 mt-10 text-white">
+                    <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 p-4 max-w-2xl mx-auto">
                         <div class="text-center group">
-                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">{{ $stats['total_bateaux'] }}+</div>
-                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Bateaux disponibles</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform drop-shadow-lg">{{ $stats['total_bateaux'] }}+</div>
+                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Bateaux disponibles</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">5</div>
-                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Îles couvertes + Europe/DOM-TOM</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform drop-shadow-lg">5</div>
+                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Îles couvertes</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>
-                            <div class="text-ocean-200 dark:text-ocean-300 text-sm md:text-base">Temps de réponse</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform drop-shadow-lg">48h</div>
+                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Temps de réponse</div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +106,7 @@
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce hidden lg:block">
             <div class="w-8 h-12 border-2 border-white/50 rounded-full p-2">
                 <div class="w-1.5 h-3 bg-white rounded-full mx-auto animate-pulse"></div>
             </div>
