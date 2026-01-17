@@ -45,7 +45,7 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.articles.update', $article) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.articles.update', $article) }}" method="POST" enctype="multipart/form-data" id="article-form">
                 @csrf
                 @method('PUT')
 
@@ -104,18 +104,14 @@
                             </label>
 
                             @if($article->featured_image)
-                            <div class="mb-4 relative inline-block">
+                            <div class="mb-4 relative inline-block" id="current-featured-image">
                                 <img src="{{ $article->featured_image_url }}" alt="Image actuelle" class="max-h-48 rounded-lg border">
-                                <form action="{{ route('admin.articles.remove-featured-image', $article) }}" method="POST" class="absolute top-2 right-2">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                            class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition"
-                                            onclick="return confirm('Supprimer cette image ?')"
-                                            title="Supprimer l'image">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </form>
+                                <button type="button"
+                                        id="delete-featured-image-btn"
+                                        class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition"
+                                        title="Supprimer l'image">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
                             @endif
 
@@ -180,15 +176,11 @@
 
                 <!-- Boutons d'action -->
                 <div class="flex items-center justify-between">
-                    <form action="{{ route('admin.articles.destroy', $article) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                                class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
-                            <i class="fas fa-trash mr-2"></i>Supprimer
-                        </button>
-                    </form>
+                    <button type="button"
+                            id="delete-article-btn"
+                            class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition">
+                        <i class="fas fa-trash mr-2"></i>Supprimer
+                    </button>
 
                     <div class="flex items-center space-x-4">
                         <a href="{{ route('admin.articles.index') }}" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition">
@@ -200,6 +192,20 @@
                     </div>
                 </div>
             </form>
+
+            <!-- Formulaire de suppression de l'article (en dehors du formulaire principal) -->
+            <form id="delete-article-form" action="{{ route('admin.articles.destroy', $article) }}" method="POST" class="hidden">
+                @csrf
+                @method('DELETE')
+            </form>
+
+            <!-- Formulaire de suppression de l'image (en dehors du formulaire principal) -->
+            @if($article->featured_image)
+            <form id="delete-featured-image-form" action="{{ route('admin.articles.remove-featured-image', $article) }}" method="POST" class="hidden">
+                @csrf
+                @method('DELETE')
+            </form>
+            @endif
         </main>
     </div>
 </div>
@@ -227,8 +233,8 @@
 @endpush
 
 @push('scripts')
-<!-- CKEditor 5 CDN -->
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+<!-- CKEditor 5 Classic CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -275,118 +281,55 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(file);
     }
 
-    // CKEditor 5 initialization
-    CKEDITOR.ClassicEditor.create(document.getElementById('content'), {
-        toolbar: {
-            items: [
-                'heading', '|',
-                'bold', 'italic', 'underline', 'strikethrough', '|',
-                'link', 'uploadImage', 'mediaEmbed', 'blockQuote', '|',
-                'bulletedList', 'numberedList', 'outdent', 'indent', '|',
-                'alignment', '|',
-                'insertTable', 'horizontalLine', '|',
-                'undo', 'redo', '|',
-                'sourceEditing'
-            ],
-            shouldNotGroupWhenFull: true
-        },
-        heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraphe', class: 'ck-heading_paragraph' },
-                { model: 'heading2', view: 'h2', title: 'Titre 2', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: 'Titre 3', class: 'ck-heading_heading3' },
-                { model: 'heading4', view: 'h4', title: 'Titre 4', class: 'ck-heading_heading4' }
-            ]
-        },
-        image: {
+    // Delete article button
+    const deleteArticleBtn = document.getElementById('delete-article-btn');
+    const deleteArticleForm = document.getElementById('delete-article-form');
+    if (deleteArticleBtn && deleteArticleForm) {
+        deleteArticleBtn.addEventListener('click', function() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+                deleteArticleForm.submit();
+            }
+        });
+    }
+
+    // Delete featured image button
+    const deleteFeaturedImageBtn = document.getElementById('delete-featured-image-btn');
+    const deleteFeaturedImageForm = document.getElementById('delete-featured-image-form');
+    if (deleteFeaturedImageBtn && deleteFeaturedImageForm) {
+        deleteFeaturedImageBtn.addEventListener('click', function() {
+            if (confirm('Supprimer cette image ?')) {
+                deleteFeaturedImageForm.submit();
+            }
+        });
+    }
+
+    // CKEditor 5 Classic initialization
+    ClassicEditor
+        .create(document.getElementById('content'), {
             toolbar: [
-                'imageTextAlternative', 'toggleImageCaption', '|',
-                'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', '|',
-                'linkImage'
+                'heading', '|',
+                'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                'outdent', 'indent', '|',
+                'blockQuote', 'insertTable', 'mediaEmbed', '|',
+                'undo', 'redo'
             ],
-            upload: {
-                types: ['jpeg', 'png', 'gif', 'webp']
-            }
-        },
-        simpleUpload: {
-            uploadUrl: '{{ route('admin.articles.upload-image') }}',
-            withCredentials: true,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        },
-        mediaEmbed: {
-            previewsInData: true,
-            providers: [
-                {
-                    name: 'youtube',
-                    url: [
-                        /^(?:m\.)?youtube\.com\/watch\?v=([\w-]+)(?:&t=(\d+))?/,
-                        /^(?:m\.)?youtube\.com\/v\/([\w-]+)(?:\?t=(\d+))?/,
-                        /^youtube\.com\/embed\/([\w-]+)(?:\?start=(\d+))?/,
-                        /^youtu\.be\/([\w-]+)(?:\?t=(\d+))?/
-                    ],
-                    html: match => {
-                        const id = match[1];
-                        const time = match[2] || 0;
-                        return `<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                            <iframe src="https://www.youtube.com/embed/${id}${time ? '?start=' + time : ''}"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        </div>`;
-                    }
-                },
-                {
-                    name: 'vimeo',
-                    url: /^vimeo\.com\/(\d+)/,
-                    html: match => {
-                        const id = match[1];
-                        return `<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                            <iframe src="https://player.vimeo.com/video/${id}"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                frameborder="0"
-                                allow="autoplay; fullscreen; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        </div>`;
-                    }
-                }
-            ]
-        },
-        table: {
-            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
-        },
-        language: 'fr',
-        placeholder: 'Commencez à rédiger votre article...',
-        removePlugins: [
-            'CKBox',
-            'CKFinder',
-            'EasyImage',
-            'RealTimeCollaborativeComments',
-            'RealTimeCollaborativeTrackChanges',
-            'RealTimeCollaborativeRevisionHistory',
-            'PresenceList',
-            'Comments',
-            'TrackChanges',
-            'TrackChangesData',
-            'RevisionHistory',
-            'Pagination',
-            'WProofreader',
-            'MathType',
-            'SlashCommand',
-            'Template',
-            'DocumentOutline',
-            'FormatPainter',
-            'TableOfContents',
-            'PasteFromOfficeEnhanced',
-            'CaseChange'
-        ]
-    }).catch(error => {
-        console.error('CKEditor error:', error);
-    });
+            heading: {
+                options: [
+                    { model: 'paragraph', title: 'Paragraphe', class: 'ck-heading_paragraph' },
+                    { model: 'heading2', view: 'h2', title: 'Titre 2', class: 'ck-heading_heading2' },
+                    { model: 'heading3', view: 'h3', title: 'Titre 3', class: 'ck-heading_heading3' },
+                    { model: 'heading4', view: 'h4', title: 'Titre 4', class: 'ck-heading_heading4' }
+                ]
+            },
+            table: {
+                contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+            },
+            language: 'fr',
+            placeholder: 'Commencez à rédiger votre article...'
+        })
+        .catch(error => {
+            console.error('CKEditor error:', error);
+        });
 });
 </script>
 @endpush

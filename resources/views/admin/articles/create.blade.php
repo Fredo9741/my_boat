@@ -167,8 +167,8 @@
 @endpush
 
 @push('scripts')
-<!-- CKEditor 5 CDN -->
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+<!-- CKEditor 5 Classic CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -215,118 +215,33 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(file);
     }
 
-    // CKEditor 5 initialization
-    CKEDITOR.ClassicEditor.create(document.getElementById('content'), {
-        toolbar: {
-            items: [
-                'heading', '|',
-                'bold', 'italic', 'underline', 'strikethrough', '|',
-                'link', 'uploadImage', 'mediaEmbed', 'blockQuote', '|',
-                'bulletedList', 'numberedList', 'outdent', 'indent', '|',
-                'alignment', '|',
-                'insertTable', 'horizontalLine', '|',
-                'undo', 'redo', '|',
-                'sourceEditing'
-            ],
-            shouldNotGroupWhenFull: true
-        },
-        heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraphe', class: 'ck-heading_paragraph' },
-                { model: 'heading2', view: 'h2', title: 'Titre 2', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: 'Titre 3', class: 'ck-heading_heading3' },
-                { model: 'heading4', view: 'h4', title: 'Titre 4', class: 'ck-heading_heading4' }
-            ]
-        },
-        image: {
+    // CKEditor 5 Classic initialization
+    ClassicEditor
+        .create(document.getElementById('content'), {
             toolbar: [
-                'imageTextAlternative', 'toggleImageCaption', '|',
-                'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', '|',
-                'linkImage'
+                'heading', '|',
+                'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                'outdent', 'indent', '|',
+                'blockQuote', 'insertTable', 'mediaEmbed', '|',
+                'undo', 'redo'
             ],
-            upload: {
-                types: ['jpeg', 'png', 'gif', 'webp']
-            }
-        },
-        simpleUpload: {
-            uploadUrl: '{{ route('admin.articles.upload-image') }}',
-            withCredentials: true,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        },
-        mediaEmbed: {
-            previewsInData: true,
-            providers: [
-                {
-                    name: 'youtube',
-                    url: [
-                        /^(?:m\.)?youtube\.com\/watch\?v=([\w-]+)(?:&t=(\d+))?/,
-                        /^(?:m\.)?youtube\.com\/v\/([\w-]+)(?:\?t=(\d+))?/,
-                        /^youtube\.com\/embed\/([\w-]+)(?:\?start=(\d+))?/,
-                        /^youtu\.be\/([\w-]+)(?:\?t=(\d+))?/
-                    ],
-                    html: match => {
-                        const id = match[1];
-                        const time = match[2] || 0;
-                        return `<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                            <iframe src="https://www.youtube.com/embed/${id}${time ? '?start=' + time : ''}"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        </div>`;
-                    }
-                },
-                {
-                    name: 'vimeo',
-                    url: /^vimeo\.com\/(\d+)/,
-                    html: match => {
-                        const id = match[1];
-                        return `<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                            <iframe src="https://player.vimeo.com/video/${id}"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                frameborder="0"
-                                allow="autoplay; fullscreen; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        </div>`;
-                    }
-                }
-            ]
-        },
-        table: {
-            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
-        },
-        language: 'fr',
-        placeholder: 'Commencez à rédiger votre article...',
-        removePlugins: [
-            'CKBox',
-            'CKFinder',
-            'EasyImage',
-            'RealTimeCollaborativeComments',
-            'RealTimeCollaborativeTrackChanges',
-            'RealTimeCollaborativeRevisionHistory',
-            'PresenceList',
-            'Comments',
-            'TrackChanges',
-            'TrackChangesData',
-            'RevisionHistory',
-            'Pagination',
-            'WProofreader',
-            'MathType',
-            'SlashCommand',
-            'Template',
-            'DocumentOutline',
-            'FormatPainter',
-            'TableOfContents',
-            'PasteFromOfficeEnhanced',
-            'CaseChange'
-        ]
-    }).catch(error => {
-        console.error('CKEditor error:', error);
-    });
+            heading: {
+                options: [
+                    { model: 'paragraph', title: 'Paragraphe', class: 'ck-heading_paragraph' },
+                    { model: 'heading2', view: 'h2', title: 'Titre 2', class: 'ck-heading_heading2' },
+                    { model: 'heading3', view: 'h3', title: 'Titre 3', class: 'ck-heading_heading3' },
+                    { model: 'heading4', view: 'h4', title: 'Titre 4', class: 'ck-heading_heading4' }
+                ]
+            },
+            table: {
+                contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+            },
+            language: 'fr',
+            placeholder: 'Commencez à rédiger votre article...'
+        })
+        .catch(error => {
+            console.error('CKEditor error:', error);
+        });
 });
 </script>
 @endpush
