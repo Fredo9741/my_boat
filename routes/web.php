@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TypeController as AdminTypeController;
 use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 use App\Http\Controllers\Admin\ActionController as AdminActionController;
 use App\Http\Controllers\Admin\BateauController as AdminBateauController;
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use Illuminate\Support\Facades\Route;
 
 // Home page
@@ -102,6 +103,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Equipment quick create
     Route::post('/equipements/quick-create', [AdminBateauController::class, 'quickCreateEquipement'])->name('equipements.quick-create');
+
+    // Articles CRUD
+    Route::resource('articles', AdminArticleController::class);
+    Route::delete('/articles/{article}/remove-featured-image', [AdminArticleController::class, 'removeFeaturedImage'])->name('articles.remove-featured-image');
+    Route::post('/articles/upload-image', [AdminArticleController::class, 'uploadImage'])->name('articles.upload-image');
 
     // Settings
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');

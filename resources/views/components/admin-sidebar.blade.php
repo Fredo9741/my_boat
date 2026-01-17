@@ -25,6 +25,13 @@
                 Slogans
             </a>
 
+            <div class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-3">Contenu</div>
+
+            <a href="{{ route('admin.articles.index') }}" class="flex items-center px-4 py-3 {{ request()->routeIs('admin.articles.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50' }} rounded-lg font-medium mb-1 transition">
+                <i class="fas fa-newspaper mr-3 w-5"></i>
+                Articles
+            </a>
+
             <div class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-3">Configuration</div>
 
             <a href="{{ route('admin.settings.index') }}" class="flex items-center px-4 py-3 {{ request()->routeIs('admin.settings.*') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50' }} rounded-lg font-medium mb-1 transition">
