@@ -5,12 +5,35 @@
 
 @section('content')
 
+
     <!-- Hero Section Premium -->
     <section class="relative min-h-screen flex items-end lg:items-center overflow-hidden">
-        <!-- Background Image -->
-        <div class="absolute inset-0">
-            <img src="{{ asset('images/herobateau.webp') }}" alt="Hero bateau" class="absolute inset-0 w-full h-full object-cover object-[42%_65%] md:object-[50%_50%] lg:object-[30%_50%] xl:object-[25%_50%]">
-        </div>
+<!-- Background Image -->
+<div class="absolute inset-0">
+<picture>
+    <source 
+        media="(max-width: 768px)" 
+        srcset="https://files.fredlabs.org/hero/herosmart.webp"
+    >
+
+    <img 
+        src="https://files.fredlabs.org/hero/herodesk.webp"
+        alt="Marketplace de vente de bateaux dans l’océan Indien"
+        loading="eager"
+        fetchpriority="high"
+        class="
+            w-full h-full object-cover
+            object-[35%_50%]
+            md:object-[60%_45%]
+            lg:object-[72%_43%]
+            xl:object-[78%_43%]
+        "
+    >
+</picture>
+
+    <div class="absolute inset-0 bg-gradient-to-r from-black/10 via-black/2 to-transparent"></div>
+</div>
+
 
         <!-- Content Container - Left aligned -->
         <div class="relative w-full pb-8 pt-24 lg:py-0">
