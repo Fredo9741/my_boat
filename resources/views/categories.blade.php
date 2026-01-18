@@ -5,7 +5,19 @@
 
 @section('content')
 
-<!-- Hero Section -->
+@php
+    // Configuration des descriptions par type
+    $descriptionMap = [
+        'voilier'     => 'Naviguez à la force du vent avec nos voiliers de croisière et de course.',
+        'catamaran'    => 'Stabilité et espace pour vos croisières en famille ou charters.',
+        'yacht'        => 'Luxe et prestige pour des moments d\'exception sur l\'eau.',
+        'moteur'       => 'Rapidité et confort pour vos sorties en mer et pêche sportive.',
+        'semi-rigide'  => 'Polyvalence et sécurité pour toutes vos activités nautiques.',
+        'pêche'        => 'Équipements spécialisés pour la pêche au gros et sportive.',
+        'default'      => 'Découvrez nos bateaux de qualité pour tous vos besoins nautiques.'
+    ];
+@endphp
+
 <div class="relative bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-luxe-navy dark:via-ocean-950 dark:to-black text-white py-24 overflow-hidden">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-20 left-20 w-96 h-96 bg-luxe-cyan rounded-full blur-3xl animate-float"></div>
@@ -19,55 +31,41 @@
     </div>
 </div>
 
-<!-- Catégories Grid -->
 <div class="container mx-auto px-4 py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        @php
-            $descriptionMap = [
-                'voilier' => 'Naviguez à la force du vent avec nos voiliers de croisière et de course.',
-                'catamaran' => 'Stabilité et espace pour vos croisières en famille ou charters.',
-                'yacht' => 'Luxe et prestige pour des moments d\'exception sur l\'eau.',
-                'moteur' => 'Rapidité et confort pour vos sorties en mer et pêche sportive.',
-                'semi-rigide' => 'Polyvalence et sécurité pour toutes vos activités nautiques.',
-                'pêche' => 'Équipements spécialisés pour la pêche au gros et sportive.',
-                'default' => 'Découvrez nos bateaux de qualité pour tous vos besoins nautiques.'
-            ];
-
-            function getDescriptionForType($libelle, $descriptionMap) {
-                $libelleLower = strtolower($libelle);
-                foreach ($descriptionMap as $key => $description) {
-                    if (str_contains($libelleLower, $key)) {
-                        return $description;
-                    }
-                }
-                return $descriptionMap['default'];
-            }
-        @endphp
-
         @foreach($types as $type)
             @php
+                $libelleLower = strtolower($type->libelle);
+                
+                // Détermination de la description (Logique inline sécurisée)
+                $description = $descriptionMap['default'];
+                foreach ($descriptionMap as $key => $text) {
+                    if ($key !== 'default' && str_contains($libelleLower, $key)) {
+                        $description = $text;
+                        break;
+                    }
+                }
+
                 $typeImage = $type->photo ?? 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80';
                 $typeIcon = $type->icone ?? 'fa-ship';
             @endphp
 
             <a href="{{ route('bateaux.index', ['type_id' => $type->id]) }}" class="group block">
-                <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-100 dark:border-white/10">
-                    <!-- Image with Overlay -->
-                    <div class="relative h-64 overflow-hidden">
+                <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-100 dark:border-white/10 h-full flex flex-col">
+                    
+                    <div class="relative h-64 overflow-hidden bg-gray-200 dark:bg-slate-800">
                         <img src="{{ $typeImage }}"
                              class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                              alt="{{ $type->libelle }}"
                              loading="lazy"
-                             onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200', 'dark:bg-slate-700');">
+                             onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80';">
 
-                        <!-- Gradient Overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
-                        <!-- Icon & Title on Image -->
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <div class="flex items-center">
-                                <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                                <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mr-4 shadow-lg border border-white/30">
                                     <i class="fas {{ $typeIcon }} text-2xl text-white"></i>
                                 </div>
                                 <div>
@@ -81,11 +79,11 @@
                         </div>
                     </div>
 
-                    <!-- Content -->
-                    <div class="p-6">
-                        <p class="text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">
-                            {{ getDescriptionForType($type->libelle, $descriptionMap) }}
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            {{ $description }}
                         </p>
+                        
                         <div class="flex items-center text-ocean-600 dark:text-ocean-400 font-bold group-hover:translate-x-2 transition-transform">
                             Voir les annonces
                             <i class="fas fa-arrow-right ml-2"></i>
@@ -98,7 +96,6 @@
     </div>
 </div>
 
-<!-- CTA Section -->
 <div class="container mx-auto px-4 pb-16">
     <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-luxe-navy dark:via-ocean-900 dark:to-black rounded-3xl shadow-2xl p-12 md:p-16 text-white text-center border border-ocean-500/30">
         <h2 class="text-4xl font-black mb-5">Vous ne trouvez pas ce que vous cherchez ?</h2>
