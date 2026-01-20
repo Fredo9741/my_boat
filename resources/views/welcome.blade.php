@@ -112,15 +112,15 @@
                     <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 p-4 max-w-2xl mx-auto">
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-200 group-hover:scale-110 transition-transform drop-shadow-lg">54+</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">54+</div>
                             <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Bateaux disponibles</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-200 group-hover:scale-110 transition-transform drop-shadow-lg">5</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">5</div>
                             <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Îles couvertes</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-200 group-hover:scale-110 transition-transform drop-shadow-lg">48h</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">48h</div>
                             <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Temps de réponse</div>
                         </div>
                     </div>

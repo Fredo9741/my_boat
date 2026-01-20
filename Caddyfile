@@ -1,0 +1,38 @@
+{
+    auto_https off
+    admin off
+}
+
+:{$PORT} {
+    root * /app/public
+
+    encode gzip
+
+    # Handle PHP files
+    php_fastcgi 127.0.0.1:9000 {
+        resolve_root_symlink
+    }
+
+    # Serve static files
+    file_server
+
+    # Laravel routing - try files, then pass to index.php
+    try_files {path} {path}/ /index.php?{query}
+
+    # Cache static assets
+    @static {
+        path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.webp
+    }
+    header @static Cache-Control "public, max-age=31536000"
+
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        -Server
+    }
+
+    log {
+        output stdout
+    }
+}
