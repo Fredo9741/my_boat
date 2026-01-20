@@ -38,33 +38,8 @@ fi
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "🚀 Starting PHP-FPM + Caddy..."
+echo "🚀 Starting Laravel server..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# Create PHP-FPM config (using current user)
-mkdir -p /tmp/php-fpm
-cat > /tmp/php-fpm/php-fpm.conf << 'FPMCONF'
-[global]
-error_log = /dev/stderr
-daemonize = no
-
-[www]
-listen = 127.0.0.1:9000
-pm = dynamic
-pm.max_children = 10
-pm.start_servers = 2
-pm.min_spare_servers = 1
-pm.max_spare_servers = 4
-pm.max_requests = 500
-clear_env = no
-catch_workers_output = yes
-FPMCONF
-
-# Start PHP-FPM in background
-php-fpm -y /tmp/php-fpm/php-fpm.conf &
-
-# Wait for PHP-FPM to start
-sleep 2
-
-# Start Caddy (blocks and keeps container running)
-exec caddy run --config /app/Caddyfile --adapter caddyfile
+# Start Laravel with built-in server (simple and works on Railway)
+exec php artisan serve --host=0.0.0.0 --port=$PORT

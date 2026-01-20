@@ -8,8 +8,5 @@ cmds = [
     "php artisan view:cache"
 ]
 
-[phases.setup]
-aptPkgs = ["caddy"]
-
 [start]
 cmd = "bash railway/startup.sh"
