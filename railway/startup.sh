@@ -41,12 +41,14 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "🚀 Starting PHP-FPM + Caddy..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# Create PHP-FPM config
+# Create PHP-FPM config (using current user)
 mkdir -p /tmp/php-fpm
-cat > /tmp/php-fpm/www.conf << 'FPMCONF'
+cat > /tmp/php-fpm/php-fpm.conf << 'FPMCONF'
+[global]
+error_log = /dev/stderr
+daemonize = no
+
 [www]
-user = nobody
-group = nobody
 listen = 127.0.0.1:9000
 pm = dynamic
 pm.max_children = 10
@@ -55,10 +57,11 @@ pm.min_spare_servers = 1
 pm.max_spare_servers = 4
 pm.max_requests = 500
 clear_env = no
+catch_workers_output = yes
 FPMCONF
 
 # Start PHP-FPM in background
-php-fpm -y /tmp/php-fpm/www.conf &
+php-fpm -y /tmp/php-fpm/php-fpm.conf &
 
 # Wait for PHP-FPM to start
 sleep 2
