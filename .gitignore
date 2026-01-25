@@ -32,3 +32,29 @@ frankenphp
 frankenphp-worker.php
 rr
 .rr.yaml
+
+# ==========================================
+# Fichiers de migration/debug temporaires
+# ==========================================
+
+# Dossier de migration données
+/migration/
+
+# Scripts PHP de debug/diagnostic (racine du projet)
+analyze_missing_data.php
+check_ids.php
+check_mapping.php
+check_r2_mapping.php
+diagnose_problem.php
+list_tables.php
+recover_missing_data.php
+nul
+
+# Commandes Artisan temporaires de migration
+app/Console/Commands/CleanR2Bateaux.php
+app/Console/Commands/FixMediaMapping.php
+app/Console/Commands/ImportAdditionalImages.php
+app/Console/Commands/ImportMissingImages.php
+app/Console/Commands/MigrateAllImages.php
+app/Console/Commands/MigrateImages.php
+app/Console/Commands/SyncMediasFromR2.php
