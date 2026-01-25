@@ -6,81 +6,63 @@
                 <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-12 md:h-14 w-auto transition-transform group-hover:scale-105 drop-shadow-lg">
             </a>
 
-            <!-- Navigation Desktop -->
+            <!-- Navigation Desktop (épurée) -->
             <nav class="hidden lg:flex items-center space-x-1">
-                <a href="{{ route('home') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('home') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
-                    {{ __('Accueil') }}
-                    @if(request()->routeIs('home'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
-                </a>
-                <a href="{{ route('bateaux.index') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('bateaux.*') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+                <!-- Annonces -->
+                <a href="{{ route('bateaux.index') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('bateaux.*') || request()->routeIs('categories') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
                     {{ __('Annonces') }}
-                    @if(request()->routeIs('bateaux.*'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
                 </a>
-                <a href="{{ route('categories') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('categories') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
-                    {{ __('Catégories') }}
-                    @if(request()->routeIs('categories'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
-                </a>
-                <a href="{{ route('about') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('about') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
-                    {{ __('À propos') }}
-                    @if(request()->routeIs('about'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
-                </a>
-                <a href="{{ route('partners') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('partners') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
-                    {{ __('Partenaires') }}
-                    @if(request()->routeIs('partners'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
-                </a>
-                <a href="{{ route('articles.index') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('articles.*') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
-                    {{ __('Articles') }}
-                    @if(request()->routeIs('articles.*'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
-                </a>
-                <a href="{{ route('contact') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('contact') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+
+                <!-- Info (Dropdown) -->
+                <div class="relative" id="aboutDropdown">
+                    <button class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('about') || request()->routeIs('partners') || request()->routeIs('articles.*') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
+                        Info
+                        <i class="fas fa-chevron-down ml-1.5 text-xs transition-transform" id="aboutChevron"></i>
+                    </button>
+                    <div id="aboutMenu" class="hidden absolute left-0 mt-1 w-48 rounded-xl bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black/5 dark:ring-white/10 py-2 z-50">
+                        <a href="{{ route('about') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-ocean-50 dark:hover:bg-ocean-950/30 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors {{ request()->routeIs('about') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+                            <i class="fas fa-info-circle w-5 text-ocean-500"></i>
+                            {{ __('À propos') }}
+                        </a>
+                        <a href="{{ route('partners') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-ocean-50 dark:hover:bg-ocean-950/30 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors {{ request()->routeIs('partners') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+                            <i class="fas fa-handshake w-5 text-ocean-500"></i>
+                            {{ __('Partenaires') }}
+                        </a>
+                        <a href="{{ route('articles.index') }}" class="flex items-center px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-ocean-50 dark:hover:bg-ocean-950/30 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors {{ request()->routeIs('articles.*') ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+                            <i class="fas fa-newspaper w-5 text-ocean-500"></i>
+                            {{ __('Articles') }}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <a href="{{ route('contact') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('contact') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
                     {{ __('Contact') }}
-                    @if(request()->routeIs('contact'))
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-full"></span>
-                    @endif
                 </a>
             </nav>
 
             <!-- Actions Desktop -->
-            <div class="flex items-center space-x-3">
-                <!-- Language Selector -->
-                <div class="relative">
-                    <button id="langSelectorBtn" class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 shadow-md uppercase font-semibold text-sm">
+            <div class="flex items-center space-x-2">
+                <!-- Language Selector (discret) -->
+                <div class="relative hidden lg:block">
+                    <button id="langSelectorBtn" class="flex items-center px-2.5 py-1.5 rounded-lg text-gray-500 dark:text-gray-400 hover:text-ocean-600 dark:hover:text-ocean-400 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all text-sm font-medium uppercase">
                         {{ app()->getLocale() }}
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
                     </button>
-                    <div id="langSelectorMenu" class="hidden absolute right-0 mt-2 w-40 rounded-xl bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 py-1 z-50">
+                    <div id="langSelectorMenu" class="hidden absolute right-0 mt-1 w-36 rounded-xl bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black/5 dark:ring-white/10 py-1 z-50">
                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="flex items-center px-4 py-2 text-sm {{ app()->getLocale() == $localeCode ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30 font-medium' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700' }} transition-colors">
-                                <span class="uppercase font-semibold w-6">{{ $localeCode }}</span>
-                                <span class="ml-2">{{ $properties['native'] }}</span>
+                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="flex items-center px-3 py-2 text-sm {{ app()->getLocale() == $localeCode ? 'text-ocean-600 dark:text-ocean-400 bg-ocean-50 dark:bg-ocean-950/30 font-medium' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700' }} transition-colors">
+                                <span class="uppercase font-semibold w-6 text-xs">{{ $localeCode }}</span>
+                                <span class="ml-1.5">{{ $properties['native'] }}</span>
                             </a>
                         @endforeach
                     </div>
                 </div>
 
-                <!-- Dark Mode Toggle -->
-                <button id="darkModeToggle" class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 shadow-md">
-                    <i class="fas fa-moon dark:hidden text-lg"></i>
-                    <i class="fas fa-sun hidden dark:block text-lg"></i>
-                </button>
-
                 <!-- CTA Button Desktop -->
-                <a href="{{ route('sell') }}" class="hidden sm:flex items-center bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-5 md:px-6 py-2.5 rounded-xl font-semibold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105 text-sm md:text-base relative overflow-hidden group">
-                    <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-                    <i class="fas fa-plus-circle mr-2 relative z-10"></i>
-                    <span class="hidden md:inline relative z-10">{{ __('Vendre mon bateau') }}</span>
-                    <span class="md:hidden relative z-10">{{ __('Vendre') }}</span>
+                <a href="{{ route('sell') }}" class="hidden lg:flex items-center bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-5 py-2 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-[1.02] text-sm">
+                    <i class="fas fa-plus-circle mr-2"></i>
+                    {{ __('Vendre mon bateau') }}
                 </a>
 
                 <!-- Menu Hamburger Mobile -->
@@ -179,12 +161,32 @@ const langMenu = document.getElementById('langSelectorMenu');
 langBtn?.addEventListener('click', function(e) {
     e.stopPropagation();
     langMenu.classList.toggle('hidden');
+    // Close about menu if open
+    aboutMenu?.classList.add('hidden');
+    aboutChevron?.classList.remove('rotate-180');
 });
 
-// Close language menu when clicking outside
+// About dropdown toggle
+const aboutDropdown = document.getElementById('aboutDropdown');
+const aboutMenu = document.getElementById('aboutMenu');
+const aboutChevron = document.getElementById('aboutChevron');
+
+aboutDropdown?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    aboutMenu.classList.toggle('hidden');
+    aboutChevron.classList.toggle('rotate-180');
+    // Close language menu if open
+    langMenu?.classList.add('hidden');
+});
+
+// Close menus when clicking outside
 document.addEventListener('click', function(e) {
     if (langMenu && !langMenu.contains(e.target) && e.target !== langBtn) {
         langMenu.classList.add('hidden');
+    }
+    if (aboutMenu && !aboutDropdown.contains(e.target)) {
+        aboutMenu.classList.add('hidden');
+        aboutChevron?.classList.remove('rotate-180');
     }
 });
 </script>
