@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Myboat-oi - Marketplace de Bateaux | Océan Indien')
-@section('description', 'La première marketplace de vente de bateaux dans l\'océan Indien. Trouvez votre bateau idéal à La Réunion, Maurice et Madagascar.')
+@section('title', __('Myboat-oi - Marketplace de Bateaux | Océan Indien'))
+@section('description', __('La première marketplace de vente de bateaux dans l\'océan Indien. Trouvez votre bateau idéal à La Réunion, Maurice et Madagascar.'))
 
 @section('content')
 
@@ -11,14 +11,14 @@
 <!-- Background Image -->
 <div class="absolute inset-0">
 <picture>
-    <source 
-        media="(max-width: 768px)" 
+    <source
+        media="(max-width: 768px)"
         srcset="https://files.fredlabs.org/hero/herosmart.webp"
     >
 
-    <img 
+    <img
         src="https://files.fredlabs.org/hero/herodesk.webp"
-        alt="Marketplace de vente de bateaux dans l’océan Indien"
+        alt="{{ __('Marketplace de vente de bateaux dans l\'océan Indien') }}"
         loading="eager"
         fetchpriority="high"
         class="
@@ -42,19 +42,19 @@
                     <!-- Badge -->
                     <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white mb-6 animate-fadeInUp border border-white/20">
                         <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
-                        <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} bateaux disponibles</span>
+                        <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} {{ __('bateaux disponibles') }}</span>
                     </div>
 
                     <!-- Main Title - Fixed minimum size for readability -->
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 animate-fadeInUp leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" style="animation-delay: 0.1s;">
-                        Trouvez ou vendez<br class="hidden sm:block"> le bateau de <span class="relative inline-block">
-                            <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent drop-shadow-lg">vos rêves</span>
+                        {{ __('Trouvez ou vendez') }}<br class="hidden sm:block"> {{ __('le bateau de') }} <span class="relative inline-block">
+                            <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent drop-shadow-lg">{{ __('vos rêves') }}</span>
                             <div class="absolute bottom-1 sm:bottom-2 left-0 w-full h-3 sm:h-4 bg-gradient-to-r from-ocean-400/30 to-luxe-cyan/30 transform -rotate-1 rounded-lg blur-sm"></div>
                         </span>
                     </h1>
 
                     <p class="text-lg sm:text-xl lg:text-2xl text-white mb-8 animate-fadeInUp drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" style="animation-delay: 0.2s;">
-                        Votre courtier maritime de confiance dans l'océan Indien
+                        {{ __('Votre courtier maritime de confiance dans l\'océan Indien') }}
                     </p>
                 </div>
 
@@ -65,7 +65,7 @@
                             <!-- Type -->
                             <div class="relative group">
                                 <select name="type_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
-                                    <option value="">Type de bateau</option>
+                                    <option value="">{{ __('Type de bateau') }}</option>
                                     @foreach($types as $type)
                                         <option value="{{ $type->id }}">{{ $type->libelle }}</option>
                                     @endforeach
@@ -76,7 +76,7 @@
                             <!-- Location -->
                             <div class="relative group">
                                 <select name="zone_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
-                                    <option value="">Localisation</option>
+                                    <option value="">{{ __('Localisation') }}</option>
                                     @foreach($zones as $zone)
                                         <option value="{{ $zone->id }}">{{ $zone->libelle }}</option>
                                     @endforeach
@@ -87,7 +87,7 @@
                             <!-- Price -->
                             <div class="relative group">
                                 <select name="prix_max" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
-                                    <option value="">Budget max</option>
+                                    <option value="">{{ __('Budget max') }}</option>
                                     <option value="10000">10 000 €</option>
                                     <option value="25000">25 000 €</option>
                                     <option value="50000">50 000 €</option>
@@ -103,7 +103,7 @@
                                 <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
                                 <span class="relative z-10 flex items-center justify-center">
                                     <i class="fas fa-search mr-2"></i>
-                                    <span class="hidden md:inline">Rechercher</span>
+                                    <span class="hidden md:inline">{{ __('Rechercher') }}</span>
                                 </span>
                             </button>
                         </div>
@@ -113,15 +113,15 @@
                     <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 p-4 max-w-2xl mx-auto">
                         <div class="text-center group">
                             <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">54+</div>
-                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Bateaux disponibles</div>
+                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">{{ __('Bateaux disponibles') }}</div>
                         </div>
                         <div class="text-center group">
                             <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">5</div>
-                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Îles couvertes</div>
+                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">{{ __('Îles couvertes') }}</div>
                         </div>
                         <div class="text-center group">
                             <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">48h</div>
-                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">Temps de réponse</div>
+                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">{{ __('Temps de réponse') }}</div>
                         </div>
                     </div>
                 </div>
@@ -142,13 +142,13 @@
             <!-- Section Header -->
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="inline-block px-4 py-2 bg-ocean-100 dark:bg-ocean-950/30 text-ocean-600 dark:text-ocean-400 rounded-full text-sm font-bold mb-4 border border-ocean-200 dark:border-ocean-800">
-                    CATÉGORIES
+                    {{ __('CATÉGORIES') }}
                 </span>
                 <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">
-                    Explorez notre sélection
+                    {{ __('Explorez notre sélection') }}
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400">
-                    Trouvez le type de bateau parfait pour votre aventure maritime
+                    {{ __('Trouvez le type de bateau parfait pour votre aventure maritime') }}
                 </p>
             </div>
 
@@ -172,7 +172,7 @@
                             <i class="fas {{ $typeIcon }} text-2xl text-white"></i>
                         </div>
                         <h4 class="font-bold text-gray-900 dark:text-white group-hover:{{ $color['text'] }} transition-colors text-center mb-2">{{ $type->libelle }}</h4>
-                        <p class="text-sm {{ $color['text'] }} text-center font-semibold">{{ $type->bateaux_count }} annonce{{ $type->bateaux_count > 1 ? 's' : '' }}</p>
+                        <p class="text-sm {{ $color['text'] }} text-center font-semibold">{{ $type->bateaux_count }} {{ __('annonce') }}{{ $type->bateaux_count > 1 ? 's' : '' }}</p>
                     </a>
                 @endforeach
             </div>
@@ -186,17 +186,17 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
                 <div class="mb-6 md:mb-0">
                     <span class="inline-block px-4 py-2 bg-ocean-100 dark:bg-ocean-950/30 text-ocean-600 dark:text-ocean-400 rounded-full text-sm font-bold mb-4 border border-ocean-200 dark:border-ocean-800">
-                        SÉLECTION
+                        {{ __('SÉLECTION') }}
                     </span>
                     <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4">
-                        Bateaux en vedette
+                        {{ __('Bateaux en vedette') }}
                     </h2>
                     <p class="text-xl text-gray-600 dark:text-gray-400">
-                        Découvrez notre sélection exclusive du moment
+                        {{ __('Découvrez notre sélection exclusive du moment') }}
                     </p>
                 </div>
                 <a href="{{ route('bateaux.index') }}" class="hidden md:flex items-center px-6 py-3 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
-                    Voir tout
+                    {{ __('Voir tout') }}
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -221,7 +221,7 @@
                         <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950 dark:to-ocean-900 rounded-full flex items-center justify-center">
                             <i class="fas fa-anchor text-4xl text-ocean-400 dark:text-ocean-600"></i>
                         </div>
-                        <p class="text-xl text-gray-500 dark:text-gray-400">Aucune annonce disponible pour le moment</p>
+                        <p class="text-xl text-gray-500 dark:text-gray-400">{{ __('Aucune annonce disponible pour le moment') }}</p>
                     </div>
                 @endforelse
             </div>
@@ -229,7 +229,7 @@
             <!-- Mobile CTA -->
             <div class="mt-10 text-center md:hidden">
                 <a href="{{ route('bateaux.index') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl">
-                    Voir tous les bateaux
+                    {{ __('Voir tous les bateaux') }}
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -241,20 +241,20 @@
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="inline-block px-4 py-2 bg-white dark:bg-slate-900 text-ocean-600 dark:text-ocean-400 rounded-full text-sm font-bold mb-4 border border-ocean-200 dark:border-ocean-800">
-                    AVANTAGES
+                    {{ __('AVANTAGES') }}
                 </span>
                 <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">
-                    Pourquoi Myboat-oi ?
+                    {{ __('Pourquoi Myboat-oi ?') }}
                 </h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @php
                 $advantages = [
-                    ['icon' => 'fa-shield-check', 'title' => '100% Sécurisé', 'desc' => 'Transactions protégées et vendeurs vérifiés pour votre tranquillité d\'esprit', 'gradient' => 'from-ocean-500 to-ocean-600'],
-                    ['icon' => 'fa-bolt', 'title' => 'Réponse Rapide', 'desc' => 'Estimation et réponse à vos demandes sous 48h maximum, 7j/7', 'gradient' => 'from-luxe-cyan to-ocean-500'],
-                    ['icon' => 'fa-users', 'title' => 'Experts Locaux', 'desc' => 'Une équipe passionnée qui connaît parfaitement l\'océan Indien', 'gradient' => 'from-purple-500 to-purple-600'],
-                    ['icon' => 'fa-chart-line', 'title' => 'Prix Justes', 'desc' => 'Estimation gratuite et transparence sur les prix du marché', 'gradient' => 'from-amber-500 to-amber-600'],
+                    ['icon' => 'fa-shield-check', 'title' => __('100% Sécurisé'), 'desc' => __('Transactions protégées et vendeurs vérifiés pour votre tranquillité d\'esprit'), 'gradient' => 'from-ocean-500 to-ocean-600'],
+                    ['icon' => 'fa-bolt', 'title' => __('Réponse Rapide'), 'desc' => __('Estimation et réponse à vos demandes sous 48h maximum, 7j/7'), 'gradient' => 'from-luxe-cyan to-ocean-500'],
+                    ['icon' => 'fa-users', 'title' => __('Experts Locaux'), 'desc' => __('Une équipe passionnée qui connaît parfaitement l\'océan Indien'), 'gradient' => 'from-purple-500 to-purple-600'],
+                    ['icon' => 'fa-chart-line', 'title' => __('Prix Justes'), 'desc' => __('Estimation gratuite et transparence sur les prix du marché'), 'gradient' => 'from-amber-500 to-amber-600'],
                 ];
                 @endphp
 
@@ -285,10 +285,10 @@
         <div class="relative container mx-auto px-4">
             <div class="max-w-5xl mx-auto text-center">
                 <h2 class="text-4xl md:text-6xl font-black mb-6 text-gray-900 dark:text-white">
-                    Prêt à vendre votre bateau ?
+                    {{ __('Prêt à vendre votre bateau ?') }}
                 </h2>
                 <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
-                    Confiez-nous votre bateau et bénéficiez de notre expertise pour une vente rapide et au meilleur prix.
+                    {{ __('Confiez-nous votre bateau et bénéficiez de notre expertise pour une vente rapide et au meilleur prix.') }}
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -296,12 +296,12 @@
                         <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
                         <span class="relative z-10 flex items-center">
                             <i class="fas fa-rocket mr-3"></i>
-                            Estimer mon bateau
+                            {{ __('Estimer mon bateau') }}
                         </span>
                     </a>
                     <a href="{{ route('contact') }}" class="group px-10 py-5 border-2 border-ocean-600 dark:border-ocean-400 text-ocean-600 dark:text-ocean-400 rounded-2xl font-black text-lg hover:bg-ocean-600 hover:dark:bg-ocean-500 hover:text-white transition-all transform hover:scale-105">
                         <i class="fas fa-phone mr-3"></i>
-                        Nous contacter
+                        {{ __('Nous contacter') }}
                     </a>
                 </div>
 
@@ -309,15 +309,15 @@
                 <div class="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
                     <div class="group">
                         <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">100%</div>
-                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">Gratuit</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Gratuit') }}</div>
                     </div>
                     <div class="group">
                         <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>
-                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">Réponse</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Réponse') }}</div>
                     </div>
                     <div class="group">
                         <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">0€</div>
-                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">Frais cachés</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Frais cachés') }}</div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,8 @@
 <?php
 
+// Inclure les redirections 301 pour la migration Symfony -> Laravel
+require __DIR__ . '/redirects.php';
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BateauController;
 use App\Http\Controllers\ContactController;
@@ -14,65 +17,72 @@ use App\Http\Controllers\Admin\ActionController as AdminActionController;
 use App\Http\Controllers\Admin\BateauController as AdminBateauController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-// Home page
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Routes multilingues (public)
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function () {
+    // Home page
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Bateaux routes
-Route::get('/bateaux', [BateauController::class, 'index'])->name('bateaux.index');
-Route::get('/bateaux/{slug}', [BateauController::class, 'show'])->name('bateaux.show');
+    // Bateaux routes
+    Route::get(LaravelLocalization::transRoute('routes.bateaux'), [BateauController::class, 'index'])->name('bateaux.index');
+    Route::get(LaravelLocalization::transRoute('routes.bateaux') . '/{slug}', [BateauController::class, 'show'])->name('bateaux.show');
 
-// Categories page
-Route::get('/categories', function () {
-    $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
-        $query->visible();
-    }])->get();
-    return view('categories', compact('types'));
-})->name('categories');
+    // Categories page
+    Route::get(LaravelLocalization::transRoute('routes.categories'), function () {
+        $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
+            $query->visible();
+        }])->get();
+        return view('categories', compact('types'));
+    })->name('categories');
 
-// Contact form
-Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+    // Contact form
+    Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
-// Pages statiques
-Route::get('/a-propos', [PageController::class, 'about'])->name('about');
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::get('/vendre', [PageController::class, 'sell'])->name('sell');
-Route::get('/partenaires', [PartnerController::class, 'index'])->name('partners');
-Route::get('/mentions-legales', [PageController::class, 'mentionsLegales'])->name('mentions-legales');
-Route::get('/cgv', [PageController::class, 'cgv'])->name('cgv');
-Route::get('/confidentialite', [PageController::class, 'confidentialite'])->name('confidentialite');
+    // Pages statiques
+    Route::get(LaravelLocalization::transRoute('routes.about'), [PageController::class, 'about'])->name('about');
+    Route::get(LaravelLocalization::transRoute('routes.contact'), [PageController::class, 'contact'])->name('contact');
+    Route::get(LaravelLocalization::transRoute('routes.sell'), [PageController::class, 'sell'])->name('sell');
+    Route::get(LaravelLocalization::transRoute('routes.partners'), [PartnerController::class, 'index'])->name('partners');
+    Route::get(LaravelLocalization::transRoute('routes.legal'), [PageController::class, 'mentionsLegales'])->name('mentions-legales');
+    Route::get(LaravelLocalization::transRoute('routes.terms'), [PageController::class, 'cgv'])->name('cgv');
+    Route::get(LaravelLocalization::transRoute('routes.privacy'), [PageController::class, 'confidentialite'])->name('confidentialite');
 
-// Articles (blog)
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+    // Articles (blog)
+    Route::get(LaravelLocalization::transRoute('routes.articles'), [ArticleController::class, 'index'])->name('articles.index');
+    Route::get(LaravelLocalization::transRoute('routes.articles') . '/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 
-// Demo Design Page (Test)
-Route::get('/demo-design', function () {
-    // Get featured boats
-    $featuredBateaux = \App\Models\Bateau::with(['type', 'zone', 'slogan', 'images'])
-        ->visible()
-        ->where('featured', true)
-        ->orderBy('published_at', 'desc')
-        ->limit(4)
-        ->get();
+    // Demo Design Page (Test)
+    Route::get('/demo-design', function () {
+        // Get featured boats
+        $featuredBateaux = \App\Models\Bateau::with(['type', 'zone', 'slogan', 'images'])
+            ->visible()
+            ->where('featured', true)
+            ->orderBy('published_at', 'desc')
+            ->limit(4)
+            ->get();
 
-    // Get all types with boat count
-    $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
-        $query->visible();
-    }])->get();
+        // Get all types with boat count
+        $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
+            $query->visible();
+        }])->get();
 
-    // Get all zones
-    $zones = \App\Models\Zone::all();
+        // Get all zones
+        $zones = \App\Models\Zone::all();
 
-    // Get statistics
-    $stats = [
-        'total_bateaux' => \App\Models\Bateau::visible()->count(),
-        'total_types' => \App\Models\Type::has('bateaux')->count(),
-        'total_zones' => \App\Models\Zone::has('bateaux')->count(),
-    ];
+        // Get statistics
+        $stats = [
+            'total_bateaux' => \App\Models\Bateau::visible()->count(),
+            'total_types' => \App\Models\Type::has('bateaux')->count(),
+            'total_zones' => \App\Models\Zone::has('bateaux')->count(),
+        ];
 
-    return view('demo-design', compact('featuredBateaux', 'types', 'zones', 'stats'));
-})->name('demo-design');
+        return view('demo-design', compact('featuredBateaux', 'types', 'zones', 'stats'));
+    })->name('demo-design');
+});
 
 // Auth routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

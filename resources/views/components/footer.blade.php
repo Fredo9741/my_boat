@@ -13,7 +13,7 @@
                 <div class="mb-4">
                     <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-10 w-auto">
                 </div>
-                <p class="text-gray-400 dark:text-gray-500 mb-6">Votre courtier maritime de confiance dans l'océan Indien. Excellence et passion depuis 2024.</p>
+                <p class="text-gray-400 dark:text-gray-500 mb-6">{{ __('Votre courtier maritime de confiance dans l\'océan Indien.') }} {{ __('Excellence et passion depuis 2024.') }}</p>
                 <div class="flex space-x-3">
                     <a href="#" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
                         <i class="fab fa-facebook-f text-gray-400 group-hover:text-white transition-colors"></i>
@@ -29,30 +29,30 @@
 
             <!-- Navigation -->
             <div>
-                <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">Navigation</h5>
+                <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">{{ __('Navigation') }}</h5>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('home') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Accueil</a></li>
-                    <li><a href="{{ route('bateaux.index') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Toutes les annonces</a></li>
-                    <li><a href="{{ route('sell') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Vendre mon bateau</a></li>
-                    <li><a href="{{ route('about') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> À propos</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Contact</a></li>
+                    <li><a href="{{ route('home') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Accueil') }}</a></li>
+                    <li><a href="{{ route('bateaux.index') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Toutes les annonces') }}</a></li>
+                    <li><a href="{{ route('sell') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Vendre mon bateau') }}</a></li>
+                    <li><a href="{{ route('about') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('À propos') }}</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Contact') }}</a></li>
                 </ul>
             </div>
 
             <!-- Catégories -->
             <div>
-                <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">Catégories</h5>
+                <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">{{ __('Catégories') }}</h5>
                 <ul class="space-y-2">
-                    <li><a href="/bateaux?type=voilier" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Voiliers</a></li>
-                    <li><a href="/bateaux?type=catamaran" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Catamarans</a></li>
-                    <li><a href="/bateaux?type=yacht" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Yachts</a></li>
-                    <li><a href="/bateaux?type=semi-rigide" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> Semi-rigides</a></li>
+                    <li><a href="{{ route('bateaux.index', ['type' => 'voilier']) }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Voiliers') }}</a></li>
+                    <li><a href="{{ route('bateaux.index', ['type' => 'catamaran']) }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Catamarans') }}</a></li>
+                    <li><a href="{{ route('bateaux.index', ['type' => 'yacht']) }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Yachts') }}</a></li>
+                    <li><a href="{{ route('bateaux.index', ['type' => 'semi-rigide']) }}" class="text-gray-400 dark:text-gray-500 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors flex items-center group"><i class="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></i> {{ __('Semi-rigides') }}</a></li>
                 </ul>
             </div>
 
             <!-- Contact -->
             <div>
-                <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">Contact</h5>
+                <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">{{ __('Contact') }}</h5>
                 <ul class="space-y-3">
                     <li class="flex items-start group">
                         <i class="fas fa-map-marker-alt text-ocean-500 dark:text-ocean-400 mt-1 mr-3 group-hover:scale-110 transition-transform"></i>
@@ -74,12 +74,12 @@
         <div class="border-t border-gray-800 dark:border-white/10 pt-8 mt-8">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <p class="text-gray-500 dark:text-gray-600 text-sm">
-                    &copy; 2025 <span class="font-semibold text-white dark:text-gray-300">Myboat-oi</span> - Courtage Maritime. Tous droits réservés.
+                    &copy; 2025 <span class="font-semibold text-white dark:text-gray-300">Myboat-oi</span> - {{ __('Courtage Maritime') }}. {{ __('Tous droits réservés') }}.
                 </p>
                 <div class="flex flex-wrap justify-center gap-6">
-                    <a href="{{ route('mentions-legales') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">Mentions légales</a>
-                    <a href="{{ route('cgv') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">CGV</a>
-                    <a href="{{ route('confidentialite') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">Confidentialité</a>
+                    <a href="{{ route('mentions-legales') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">{{ __('Mentions légales') }}</a>
+                    <a href="{{ route('cgv') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">{{ __('CGV') }}</a>
+                    <a href="{{ route('confidentialite') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">{{ __('Confidentialité') }}</a>
                     <a href="{{ route('login') }}" class="text-gray-600 dark:text-gray-700 hover:text-gray-400 dark:hover:text-gray-500 text-xs transition-all opacity-50 hover:opacity-100" title="Administration">•</a>
                 </div>
             </div>
