@@ -1,8 +1,5 @@
 <?php
 
-// Inclure les redirections 301 pour la migration Symfony -> Laravel
-require __DIR__ . '/redirects.php';
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BateauController;
 use App\Http\Controllers\ContactController;
@@ -129,3 +126,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
     Route::put('/settings/password', [\App\Http\Controllers\Admin\SettingController::class, 'updatePassword'])->name('settings.password.update');
 });
+
+// ==========================================
+// REDIRECTIONS 301 - Migration Symfony -> Laravel
+// IMPORTANT: Charger APRÈS les routes multilingues pour éviter les conflits
+// ==========================================
+require __DIR__ . '/redirects.php';
