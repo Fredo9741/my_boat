@@ -189,10 +189,10 @@
                         {{ __('SÉLECTION') }}
                     </span>
                     <h2 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4">
-                        {{ __('Bateaux en vedette') }}
+                        {{ __('selection_title') }}
                     </h2>
                     <p class="text-xl text-gray-600 dark:text-gray-400">
-                        {{ __('Découvrez notre sélection exclusive du moment') }}
+                        {{ __('selection_subtitle') }}
                     </p>
                 </div>
                 <a href="{{ route('bateaux.index') }}" class="hidden md:flex items-center px-6 py-3 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
