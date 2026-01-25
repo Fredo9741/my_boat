@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'À propos - Myboat-oi | Courtage Maritime Océan Indien')
-@section('description', 'Découvrez Myboat-oi, votre courtier maritime de confiance dans l\'océan Indien. Expertise, passion et service de qualité pour l\'achat et la vente de bateaux.')
+@section('title', __('À propos - Myboat-oi | Courtage Maritime Océan Indien'))
+@section('description', __('Découvrez Myboat-oi, votre courtier maritime de confiance dans l\'océan Indien. Expertise, passion et service de qualité pour l\'achat et la vente de bateaux.'))
 
 @section('content')
 
@@ -13,8 +13,8 @@
     </div>
     <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl font-black mb-6">À propos de Myboat-oi</h1>
-            <p class="text-xl md:text-2xl text-ocean-100 dark:text-ocean-200">Votre partenaire de confiance pour l'achat et la vente de bateaux dans l'océan Indien</p>
+            <h1 class="text-5xl md:text-7xl font-black mb-6">{{ __('À propos de Myboat-oi') }}</h1>
+            <p class="text-xl md:text-2xl text-ocean-100 dark:text-ocean-200">{{ __('Votre partenaire de confiance pour l\'achat et la vente de bateaux dans l\'océan Indien') }}</p>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
         <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-10 md:p-12 border border-gray-100 dark:border-white/10">
             <h2 class="text-4xl font-black text-gray-900 dark:text-white mb-8 text-center flex items-center justify-center">
                 <i class="fas fa-anchor text-ocean-600 dark:text-ocean-400 mr-4"></i>
-                Notre Histoire
+                {{ __('Notre Histoire') }}
             </h2>
             <div class="prose prose-lg max-w-none space-y-5">
                 <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
@@ -48,7 +48,7 @@
             <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
                 <i class="fas fa-heart text-4xl"></i>
             </div>
-            <h3 class="text-2xl font-black mb-4">Notre Mission</h3>
+            <h3 class="text-2xl font-black mb-4">{{ __('Notre Mission') }}</h3>
             <p class="text-ocean-50 dark:text-ocean-100">
                 Faciliter l'achat et la vente de bateaux en offrant une plateforme moderne, transparente et accessible à tous les passionnés de navigation de l'océan Indien.
             </p>
@@ -58,7 +58,7 @@
             <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
                 <i class="fas fa-eye text-4xl"></i>
             </div>
-            <h3 class="text-2xl font-black mb-4">Notre Vision</h3>
+            <h3 class="text-2xl font-black mb-4">{{ __('Notre Vision') }}</h3>
             <p class="text-cyan-50 dark:text-cyan-100">
                 Devenir la référence incontournable du courtage maritime dans l'océan Indien, reconnue pour son expertise, son intégrité et la qualité de son service.
             </p>
@@ -68,7 +68,7 @@
             <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
                 <i class="fas fa-star text-4xl"></i>
             </div>
-            <h3 class="text-2xl font-black mb-4">Nos Valeurs</h3>
+            <h3 class="text-2xl font-black mb-4">{{ __('Nos Valeurs') }}</h3>
             <p class="text-teal-50 dark:text-teal-100">
                 Intégrité, expertise, passion, transparence et accompagnement personnalisé. Chaque client mérite le meilleur service pour réaliser son projet maritime.
             </p>
@@ -79,14 +79,14 @@
     <div class="mb-20">
         <h2 class="text-4xl font-black text-gray-900 dark:text-white mb-12 text-center flex items-center justify-center">
             <i class="fas fa-cogs text-ocean-600 dark:text-ocean-400 mr-4"></i>
-            Nos Services
+            {{ __('Nos Services') }}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl p-7 hover:shadow-2xl transition-all transform hover:-translate-y-2 border border-gray-100 dark:border-white/10">
                 <div class="w-16 h-16 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950/30 dark:to-ocean-900/30 rounded-2xl flex items-center justify-center mb-5">
                     <i class="fas fa-handshake text-ocean-600 dark:text-ocean-400 text-3xl"></i>
                 </div>
-                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Courtage</h3>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">{{ __('Courtage') }}</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Accompagnement complet pour la vente ou l'achat de votre bateau, de A à Z.
                 </p>
@@ -96,7 +96,7 @@
                 <div class="w-16 h-16 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950/30 dark:to-ocean-900/30 rounded-2xl flex items-center justify-center mb-5">
                     <i class="fas fa-search text-ocean-600 dark:text-ocean-400 text-3xl"></i>
                 </div>
-                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Expertise</h3>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">{{ __('Expertise') }}</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Évaluation précise et professionnelle de la valeur de votre bateau par des experts certifiés.
                 </p>
@@ -106,7 +106,7 @@
                 <div class="w-16 h-16 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950/30 dark:to-ocean-900/30 rounded-2xl flex items-center justify-center mb-5">
                     <i class="fas fa-camera text-ocean-600 dark:text-ocean-400 text-3xl"></i>
                 </div>
-                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Mise en Valeur</h3>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">{{ __('Mise en Valeur') }}</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Photos et vidéos professionnelles pour maximiser l'attractivité de votre annonce.
                 </p>
@@ -116,7 +116,7 @@
                 <div class="w-16 h-16 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950/30 dark:to-ocean-900/30 rounded-2xl flex items-center justify-center mb-5">
                     <i class="fas fa-file-contract text-ocean-600 dark:text-ocean-400 text-3xl"></i>
                 </div>
-                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Juridique</h3>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">{{ __('Juridique') }}</h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Assistance administrative et juridique pour sécuriser votre transaction.
                 </p>
@@ -126,27 +126,27 @@
 
     <!-- Chiffres Clés -->
     <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-luxe-navy dark:via-ocean-900 dark:to-black rounded-3xl shadow-2xl p-12 md:p-16 mb-20 text-white border border-ocean-500/30">
-        <h2 class="text-4xl font-black mb-14 text-center">Nos Résultats en Chiffres</h2>
+        <h2 class="text-4xl font-black mb-14 text-center">{{ __('Nos Résultats en Chiffres') }}</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
             <div class="text-center transform hover:scale-110 transition-all">
                 <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">150+</div>
-                <div class="text-ocean-200 dark:text-ocean-300">Bateaux Vendus</div>
+                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Bateaux Vendus') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
                 <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">98%</div>
-                <div class="text-ocean-200 dark:text-ocean-300">Clients Satisfaits</div>
+                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Clients Satisfaits') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
                 <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">10+</div>
-                <div class="text-ocean-200 dark:text-ocean-300">Années d'Expérience</div>
+                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Années d\'Expérience') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
                 <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">5</div>
-                <div class="text-ocean-200 dark:text-ocean-300">Îles Couvertes</div>
+                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Îles Couvertes') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all col-span-2 md:col-span-4">
                 <div class="text-4xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">Europe / DOM-TOM</div>
-                <div class="text-ocean-200 dark:text-ocean-300">Couverture Étendue</div>
+                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Couverture Étendue') }}</div>
             </div>
         </div>
     </div>
@@ -155,7 +155,7 @@
     <div class="mb-20">
         <h2 class="text-4xl font-black text-gray-900 dark:text-white mb-12 text-center flex items-center justify-center">
             <i class="fas fa-trophy text-ocean-600 dark:text-ocean-400 mr-4"></i>
-            Pourquoi Choisir Myboat-oi ?
+            {{ __('Pourquoi Choisir Myboat-oi ?') }}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl p-8 border border-gray-100 dark:border-white/10 hover:shadow-2xl transition-all">
@@ -164,9 +164,9 @@
                         <i class="fas fa-check text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
                     <div class="ml-5">
-                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Expertise Locale</h3>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">{{ __('Expertise Locale') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Une équipe de passionnés, avec un collaborateur sur chaque île.
+                            {{ __('Une équipe de passionnés, avec un collaborateur sur chaque île.') }}
                         </p>
                     </div>
                 </div>
@@ -178,9 +178,9 @@
                         <i class="fas fa-check text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
                     <div class="ml-5">
-                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Transparence Totale</h3>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">{{ __('Transparence Totale') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Pas de frais cachés, des prix clairs et une communication honnête.
+                            {{ __('Pas de frais cachés, des prix clairs et une communication honnête.') }}
                         </p>
                     </div>
                 </div>
@@ -192,9 +192,9 @@
                         <i class="fas fa-check text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
                     <div class="ml-5">
-                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Accompagnement</h3>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">{{ __('Accompagnement') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Un conseiller dédié du début à la fin de votre projet.
+                            {{ __('Un conseiller dédié du début à la fin de votre projet.') }}
                         </p>
                     </div>
                 </div>
@@ -206,9 +206,9 @@
                         <i class="fas fa-check text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
                     <div class="ml-5">
-                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Réseau Étendu</h3>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">{{ __('Réseau Étendu') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Présence sur 5 îles de l'océan Indien pour maximiser la visibilité.
+                            {{ __('Présence sur 5 îles de l\'océan Indien pour maximiser la visibilité.') }}
                         </p>
                     </div>
                 </div>
@@ -220,9 +220,9 @@
                         <i class="fas fa-check text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
                     <div class="ml-5">
-                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Plateforme Moderne</h3>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">{{ __('Plateforme Moderne') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Site web optimisé, recherche avancée et alertes email.
+                            {{ __('Site web optimisé, recherche avancée et alertes email.') }}
                         </p>
                     </div>
                 </div>
@@ -234,9 +234,9 @@
                         <i class="fas fa-check text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
                     <div class="ml-5">
-                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Après-Vente</h3>
+                        <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">{{ __('Après-Vente') }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
-                            Notre relation ne s'arrête pas à la transaction.
+                            {{ __('Notre relation ne s\'arrête pas à la transaction.') }}
                         </p>
                     </div>
                 </div>
@@ -248,7 +248,7 @@
     <div class="mb-20">
         <h2 class="text-4xl font-black text-gray-900 dark:text-white mb-12 text-center flex items-center justify-center">
             <i class="fas fa-quote-left text-ocean-600 dark:text-ocean-400 mr-4"></i>
-            Ils Nous Font Confiance
+            {{ __('Ils Nous Font Confiance') }}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl p-7 border border-gray-100 dark:border-white/10 hover:shadow-2xl transition-all">
@@ -318,16 +318,16 @@
 
     <!-- CTA -->
     <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-luxe-navy dark:via-ocean-900 dark:to-black rounded-3xl shadow-2xl p-12 md:p-16 text-white text-center border border-ocean-500/30">
-        <h2 class="text-4xl font-black mb-5">Prêt à Réaliser Votre Projet Maritime ?</h2>
-        <p class="text-xl text-ocean-100 dark:text-ocean-200 mb-10">Contactez-nous dès aujourd'hui pour un accompagnement personnalisé</p>
+        <h2 class="text-4xl font-black mb-5">{{ __('Prêt à Réaliser Votre Projet Maritime ?') }}</h2>
+        <p class="text-xl text-ocean-100 dark:text-ocean-200 mb-10">{{ __('Contactez-nous dès aujourd\'hui pour un accompagnement personnalisé') }}</p>
         <div class="flex flex-col sm:flex-row gap-5 justify-center">
             <a href="{{ route('contact') }}" class="bg-white hover:bg-ocean-50 text-ocean-900 px-10 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl transform hover:scale-105">
                 <i class="fas fa-envelope mr-2"></i>
-                Nous Contacter
+                {{ __('Nous contacter') }}
             </a>
             <a href="{{ route('bateaux.index') }}" class="bg-ocean-500/20 hover:bg-ocean-500/30 backdrop-blur-sm text-white px-10 py-4 rounded-2xl font-black text-lg transition-all shadow-xl border-2 border-white/50">
                 <i class="fas fa-search mr-2"></i>
-                Voir les Annonces
+                {{ __('Voir les Annonces') }}
             </a>
         </div>
     </div>

@@ -8,9 +8,9 @@
 
             <!-- Navigation Desktop (épurée) -->
             <nav class="hidden lg:flex items-center space-x-1">
-                <!-- Annonces -->
-                <a href="{{ route('bateaux.index') }}" class="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 font-medium transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('bateaux.*') || request()->routeIs('categories') ? 'text-ocean-600 dark:text-ocean-400' : '' }}">
-                    {{ __('Annonces') }}
+                <!-- Annonces (mis en avant) -->
+                <a href="{{ route('bateaux.index') }}" class="relative px-4 py-2 text-ocean-600 dark:text-ocean-400 hover:text-ocean-700 dark:hover:text-ocean-300 font-semibold transition-all rounded-lg hover:bg-ocean-50 dark:hover:bg-ocean-950/30 {{ request()->routeIs('bateaux.*') || request()->routeIs('categories') ? 'bg-ocean-50 dark:bg-ocean-950/30' : '' }}">
+                    <i class="fas fa-ship mr-1.5 text-sm"></i>{{ __('Annonces') }}
                 </a>
 
                 <!-- Info (Dropdown) -->
