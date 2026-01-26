@@ -54,13 +54,21 @@
             <div>
                 <h5 class="text-white dark:text-gray-200 font-bold mb-4 text-lg">{{ __('Contact') }}</h5>
                 <ul class="space-y-3">
-                    <li class="flex items-start group">
-                        <i class="fas fa-map-marker-alt text-ocean-500 dark:text-ocean-400 mt-1 mr-3 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-gray-400 dark:text-gray-500">La Darse du Port<br>97407 La Réunion</span>
+                    <li class="flex items-center group">
+                        <i class="fas fa-user text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-gray-400 dark:text-gray-500">Ghislain PAILLOT</span>
                     </li>
                     <li class="flex items-center group">
                         <i class="fas fa-phone text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-gray-400 dark:text-gray-500">Ghislain PAILLOT (Run.): +262 692 706 610</span>
+                        <a href="tel:+262692706610" class="text-gray-400 dark:text-gray-500 hover:text-ocean-400 transition-colors">+262 692 706 610</a>
+                    </li>
+                    <li class="flex items-center group">
+                        <i class="fab fa-whatsapp text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
+                        <a href="https://wa.me/262692706610" target="_blank" class="text-gray-400 dark:text-gray-500 hover:text-ocean-400 transition-colors">{{ __('WhatsApp') }}</a>
+                    </li>
+                    <li class="flex items-start group">
+                        <i class="fas fa-map-marker-alt text-ocean-500 dark:text-ocean-400 mt-1 mr-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-gray-400 dark:text-gray-500">La Darse du Port<br>97407 La Réunion</span>
                     </li>
                     <li class="flex items-center group">
                         <i class="fas fa-envelope text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>

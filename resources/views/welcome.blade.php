@@ -40,10 +40,10 @@
             <div class="container mx-auto px-4">
                 <div class="lg:max-w-2xl xl:max-w-3xl">
                     <!-- Badge -->
-                    <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white mb-6 animate-fadeInUp border border-white/20">
+                    <a href="{{ route('bateaux.index') }}" class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white mb-6 animate-fadeInUp border border-white/20 hover:bg-white/20 transition-all cursor-pointer">
                         <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
                         <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} {{ __('bateaux disponibles') }}</span>
-                    </div>
+                    </a>
 
                     <!-- Main Title - Fixed minimum size for readability -->
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 animate-fadeInUp leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" style="animation-delay: 0.1s;">
@@ -212,7 +212,6 @@
                         :location="$bateau->location"
                         :length="$bateau->length"
                         :year="$bateau->annee"
-                        :published-at="$bateau->published_at ? $bateau->published_at->format('d/m/Y') : null"
                         :badge="$bateau->badge['label'] ?? null"
                         :badge-color="$bateau->badge['color'] ?? 'green'"
                     />

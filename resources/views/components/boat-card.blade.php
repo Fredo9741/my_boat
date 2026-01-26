@@ -6,7 +6,6 @@
     'location' => 'La Réunion',
     'length' => '0m',
     'year' => 2024,
-    'publishedAt' => null,
     'badge' => null,
     'badgeColor' => 'green'
 ])
@@ -65,12 +64,6 @@
                 <i class="fas fa-calendar-alt mr-1 text-ocean-500 dark:text-ocean-400"></i> {{ $year }}
             </span>
         </div>
-
-        @if($publishedAt)
-        <div class="text-xs text-gray-400 dark:text-gray-500 mb-3 flex items-center">
-            <i class="fas fa-clock mr-1"></i> Publié le {{ $publishedAt }}
-        </div>
-        @endif
 
         <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-gray-200 dark:border-white/10">
             <div class="text-lg md:text-2xl font-black bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent">

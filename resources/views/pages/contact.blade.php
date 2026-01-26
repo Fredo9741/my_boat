@@ -150,15 +150,11 @@
                 <div class="space-y-5">
                     <div class="flex items-start group">
                         <div class="w-12 h-12 bg-ocean-100 dark:bg-ocean-950/30 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110">
-                            <i class="fas fa-map-marker-alt text-ocean-600 dark:text-ocean-400 text-lg"></i>
+                            <i class="fas fa-user text-ocean-600 dark:text-ocean-400 text-lg"></i>
                         </div>
                         <div class="ml-4">
-                            <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ __('Adresse') }}</h4>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm">
-                                {{ __('La Darse du Port') }}<br>
-                                97407 {{ __('La Réunion') }}<br>
-                                {{ __('Océan Indien') }}
-                            </p>
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ __('Contact') }}</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-medium">Ghislain PAILLOT</p>
                         </div>
                     </div>
 
@@ -169,6 +165,20 @@
                         <div class="ml-4">
                             <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ __('Téléphone') }}</h4>
                             <a href="tel:+262692706610" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium">+262 692 706 610</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start group">
+                        <div class="w-12 h-12 bg-ocean-100 dark:bg-ocean-950/30 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110">
+                            <i class="fas fa-map-marker-alt text-ocean-600 dark:text-ocean-400 text-lg"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ __('Adresse') }}</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">
+                                {{ __('La Darse du Port') }}<br>
+                                97407 {{ __('La Réunion') }}<br>
+                                {{ __('Océan Indien') }}
+                            </p>
                         </div>
                     </div>
 
@@ -259,7 +269,7 @@
                         {{ __('Proposez-vous un service d\'expertise ?') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300 text-sm">
-                        {{ __('Oui ! Nous pouvons faire expertiser votre bateau par des professionnels certifiés pour garantir sa valeur.') }}
+                        {{ __('Oui ! Nous réalisons nous-mêmes les expertises de bateaux. Notre équipe d\'experts qualifiés effectue une évaluation complète et professionnelle de votre embarcation pour garantir sa valeur sur le marché.') }}
                     </p>
                 </div>
 

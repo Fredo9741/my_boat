@@ -125,28 +125,28 @@
     </div>
 
     <!-- Chiffres Clés -->
-    <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-luxe-navy dark:via-ocean-900 dark:to-black rounded-3xl shadow-2xl p-12 md:p-16 mb-20 text-white border border-ocean-500/30">
-        <h2 class="text-4xl font-black mb-14 text-center">{{ __('Nos Résultats en Chiffres') }}</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+    <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-luxe-navy dark:via-ocean-900 dark:to-black rounded-3xl shadow-2xl p-8 md:p-16 mb-20 text-white border border-ocean-500/30">
+        <h2 class="text-3xl md:text-4xl font-black mb-10 md:mb-14 text-center">{{ __('Nos Résultats en Chiffres') }}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
             <div class="text-center transform hover:scale-110 transition-all">
-                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">150+</div>
-                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Bateaux Vendus') }}</div>
+                <div class="text-3xl sm:text-4xl md:text-6xl font-black mb-2 md:mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">150+</div>
+                <div class="text-ocean-200 dark:text-ocean-300 text-xs sm:text-sm md:text-base">{{ __('Bateaux Vendus') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
-                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">98%</div>
-                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Clients Satisfaits') }}</div>
+                <div class="text-3xl sm:text-4xl md:text-6xl font-black mb-2 md:mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">98%</div>
+                <div class="text-ocean-200 dark:text-ocean-300 text-xs sm:text-sm md:text-base">{{ __('Clients Satisfaits') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
-                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">10+</div>
-                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Années d\'Expérience') }}</div>
+                <div class="text-3xl sm:text-4xl md:text-6xl font-black mb-2 md:mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">10+</div>
+                <div class="text-ocean-200 dark:text-ocean-300 text-xs sm:text-sm md:text-base">{{ __('Années d\'Expérience') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all">
-                <div class="text-6xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">5</div>
-                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Îles Couvertes') }}</div>
+                <div class="text-3xl sm:text-4xl md:text-6xl font-black mb-2 md:mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">5</div>
+                <div class="text-ocean-200 dark:text-ocean-300 text-xs sm:text-sm md:text-base">{{ __('Îles Couvertes') }}</div>
             </div>
             <div class="text-center transform hover:scale-110 transition-all col-span-2 md:col-span-4">
-                <div class="text-4xl font-black mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">Europe / DOM-TOM</div>
-                <div class="text-ocean-200 dark:text-ocean-300">{{ __('Couverture Étendue') }}</div>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-black mb-2 md:mb-3 bg-gradient-to-r from-white to-ocean-100 bg-clip-text text-transparent">Europe / DOM-TOM</div>
+                <div class="text-ocean-200 dark:text-ocean-300 text-xs sm:text-sm md:text-base">{{ __('Couverture Étendue') }}</div>
             </div>
         </div>
     </div>
