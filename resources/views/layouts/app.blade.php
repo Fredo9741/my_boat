@@ -11,6 +11,13 @@
     <link rel="alternate icon" type="image/png" href="{{ asset('images/favicon-boat.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/favicon-boat.png') }}">
 
+    <!-- Hreflang Tags for SEO - Indicates alternate language versions -->
+    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+    @endforeach
+    <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], true) }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
