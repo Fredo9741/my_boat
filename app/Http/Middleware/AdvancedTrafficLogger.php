@@ -90,7 +90,7 @@ class AdvancedTrafficLogger
     /**
      * Multilingual boat route variants for SEO tracking.
      */
-    private const BOAT_VARIANTS = ['bateaux', 'boats', 'boote', 'boten', 'barcos'];
+    private const BOAT_VARIANTS = ['bateaux', 'boats', 'boote', 'boten', 'barcos', 'barche'];
 
     /**
      * Correct boat route per locale.
@@ -101,6 +101,7 @@ class AdvancedTrafficLogger
         'de' => 'boote',
         'nl' => 'boten',
         'es' => 'barcos',
+        'it' => 'barche',
     ];
 
     public function handle(Request $request, Closure $next): Response
@@ -214,7 +215,7 @@ class AdvancedTrafficLogger
         $segments = explode('/', trim($path, '/'));
         $firstSegment = $segments[0] ?? '';
 
-        $supportedLocales = ['fr', 'en', 'de', 'nl', 'es'];
+        $supportedLocales = ['fr', 'en', 'de', 'nl', 'es', 'it'];
 
         if (in_array($firstSegment, $supportedLocales, true)) {
             return strtoupper($firstSegment);

@@ -21,19 +21,20 @@ class RedirectMultilingualBoatRoutes
         'de' => 'boote',
         'nl' => 'boten',
         'es' => 'barcos',
+        'it' => 'barche',
     ];
 
     /**
      * All known boat route variants (for detection).
      */
-    private const ALL_VARIANTS = ['bateaux', 'boats', 'boote', 'boten', 'barcos'];
+    private const ALL_VARIANTS = ['bateaux', 'boats', 'boote', 'boten', 'barcos', 'barche'];
 
     public function handle(Request $request, Closure $next): Response
     {
         $path = $request->path();
 
         // Match pattern: /{locale}/{boat-variant}...
-        if (preg_match('#^(fr|en|de|nl|es)/(' . implode('|', self::ALL_VARIANTS) . ')(/.*)?$#', $path, $matches)) {
+        if (preg_match('#^(fr|en|de|nl|es|it)/(' . implode('|', self::ALL_VARIANTS) . ')(/.*)?$#', $path, $matches)) {
             $locale = $matches[1];
             $currentVariant = $matches[2];
             $rest = $matches[3] ?? '';
