@@ -11,6 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Global middlewares (executed before route resolution)
+        $middleware->prepend([
+            \App\Http\Middleware\AdvancedTrafficLogger::class,
+            \App\Http\Middleware\CanonicalDomainRedirect::class,
+            \App\Http\Middleware\RedirectMultilingualBoatRoutes::class,
+        ]);
+
         // Register laravel-localization middleware aliases
         $middleware->alias([
             'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
@@ -19,5 +26,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Don't log 404 errors to prevent log saturation from bot requests
+        $exceptions->dontReport([
+            \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
+        ]);
     })->create();

@@ -8,8 +8,8 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon-boat.svg') }}">
-    <link rel="alternate icon" type="image/png" href="{{ asset('images/favicon-boat.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/favicon-boat.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-boat.svg') }}">
 
     <!-- Hreflang Tags for SEO - Indicates alternate language versions -->
     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)

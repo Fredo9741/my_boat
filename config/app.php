@@ -56,6 +56,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Canonical Domain Redirect
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, all traffic from non-canonical domains will be 301
+    | redirected to APP_URL. Enable this when migrating to a new domain.
+    |
+    */
+
+    'canonical_redirect_enabled' => env('CANONICAL_REDIRECT_ENABLED', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
