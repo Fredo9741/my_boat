@@ -1011,7 +1011,8 @@ Route::get('/en/buy/boat/{slug}', function ($slug) {
 Route::permanentRedirect('/boats', '/en/boats');
 Route::permanentRedirect('/about', '/en/about');
 Route::permanentRedirect('/sell', '/en/sell');
-Route::permanentRedirect('/articles', '/en/articles');
+// Note: '/articles' is the French route (default locale, no prefix), so no redirect needed
+// The English route is '/en/articles' which doesn't need a redirect from '/articles'
 Route::permanentRedirect('/legal-notice', '/en/legal-notice');
 Route::permanentRedirect('/terms', '/en/terms');
 Route::permanentRedirect('/privacy', '/en/privacy');
