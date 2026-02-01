@@ -24,9 +24,9 @@
             <!-- Breadcrumb -->
             <nav class="mb-6">
                 <ol class="flex items-center space-x-2 text-sm text-ocean-200">
-                    <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Accueil</a></li>
+                    <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">{{ __('Accueil') }}</a></li>
                     <li><i class="fas fa-chevron-right text-xs"></i></li>
-                    <li><a href="{{ route('articles.index') }}" class="hover:text-white transition-colors">Articles</a></li>
+                    <li><a href="{{ route('articles.index') }}" class="hover:text-white transition-colors">{{ __('Articles') }}</a></li>
                     <li><i class="fas fa-chevron-right text-xs"></i></li>
                     <li class="text-white font-medium truncate max-w-xs">{{ $article->title }}</li>
                 </ol>
@@ -65,7 +65,7 @@
         <!-- Share Buttons -->
         <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-white/10 mb-12">
             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                <i class="fas fa-share-alt mr-2 text-ocean-500"></i>Partager cet article
+                <i class="fas fa-share-alt mr-2 text-ocean-500"></i>{{ __('Partager cet article') }}
             </h3>
             <div class="flex items-center space-x-3">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" rel="noopener" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex items-center justify-center transition-all hover:scale-110 shadow-lg">
@@ -91,7 +91,7 @@
         <div class="mb-12">
             <h2 class="text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center">
                 <i class="fas fa-newspaper mr-3 text-ocean-500"></i>
-                Articles similaires
+                {{ __('Articles similaires') }}
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach($relatedArticles as $related)
@@ -123,7 +123,7 @@
         <div class="text-center">
             <a href="{{ route('articles.index') }}" class="inline-flex items-center bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-8 py-4 rounded-xl font-semibold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
                 <i class="fas fa-arrow-left mr-2"></i>
-                Voir tous les articles
+                {{ __('Voir tous les articles') }}
             </a>
         </div>
 

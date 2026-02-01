@@ -19,7 +19,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // Routes multilingues (public)
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    'middleware' => ['localeSessionRedirect', 'localeCookieRedirect', 'localizationRedirect', 'localeViewPath']
 ], function () {
     // Home page
     Route::get('/', [HomeController::class, 'index'])->name('home');

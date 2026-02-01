@@ -2,8 +2,8 @@
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4 md:py-5">
             <!-- Logo -->
-            <a href="/" class="flex items-center group">
-                <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-12 md:h-14 w-auto transition-transform group-hover:scale-105 drop-shadow-lg">
+            <a href="{{ route('home') }}" class="flex items-center group">
+                <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-12 md:h-14 w-auto transition-transform group-hover:scale-105 drop-shadow-lg" loading="eager" decoding="async">
             </a>
 
             <!-- Navigation Desktop (épurée) -->

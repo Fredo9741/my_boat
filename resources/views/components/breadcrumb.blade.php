@@ -3,7 +3,7 @@
 <div class="bg-gray-100 border-b">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center text-sm text-gray-600">
-            <a href="/" class="hover:text-blue-600">Accueil</a>
+            <a href="{{ route('home') }}" class="hover:text-blue-600">{{ __('Accueil') }}</a>
 
             @foreach($items as $item)
                 <i class="fas fa-chevron-right mx-2 text-xs"></i>
