@@ -19,20 +19,36 @@ class BateauController extends Controller
         $query = Bateau::with(['type', 'zone', 'slogan', 'images'])
             ->visible();
 
-        // Filter by type
+        // Filter by type (support both type_id and type slug for SEO-friendly URLs)
         if ($request->filled('type_id')) {
             $typeIds = is_array($request->type_id)
                 ? $request->type_id
                 : [$request->type_id];
             $query->whereIn('type_id', $typeIds);
+        } elseif ($request->filled('type')) {
+            $typeSlugs = is_array($request->type)
+                ? $request->type
+                : [$request->type];
+            $typeIds = Type::whereIn('slug', $typeSlugs)->pluck('id')->toArray();
+            if (!empty($typeIds)) {
+                $query->whereIn('type_id', $typeIds);
+            }
         }
 
-        // Filter by zone
+        // Filter by zone (support both zone_id and zone slug for SEO-friendly URLs)
         if ($request->filled('zone_id')) {
             $zoneIds = is_array($request->zone_id)
                 ? $request->zone_id
                 : [$request->zone_id];
             $query->whereIn('zone_id', $zoneIds);
+        } elseif ($request->filled('zone')) {
+            $zoneSlugs = is_array($request->zone)
+                ? $request->zone
+                : [$request->zone];
+            $zoneIds = Zone::whereIn('slug', $zoneSlugs)->pluck('id')->toArray();
+            if (!empty($zoneIds)) {
+                $query->whereIn('zone_id', $zoneIds);
+            }
         }
 
         // Filter by price range
@@ -103,11 +119,66 @@ class BateauController extends Controller
 
         $totalCount = Bateau::visible()->count();
 
+        // Get active filter labels for dynamic page title
+        $activeTypeFilter = null;
+        $activeZoneFilter = null;
+
+        // Mapping for plural labels (used in page titles)
+        $pluralLabels = [
+            'voilier-monocoque' => 'Voiliers Monocoques',
+            'catamaran-a-voile' => 'Catamarans à voile',
+            'catamaran-a-moteur' => 'Catamarans à moteur',
+            'bateau-moteur' => 'Bateaux à moteur',
+            'trimaran' => 'Trimarans',
+        ];
+
+        // Check for type filter (by ID or slug)
+        if ($request->filled('type_id')) {
+            $typeIds = is_array($request->type_id) ? $request->type_id : [$request->type_id];
+            if (count($typeIds) === 1) {
+                $type = Type::find($typeIds[0]);
+                if ($type) {
+                    $pluralLabel = $pluralLabels[$type->slug] ?? $type->libelle;
+                    $activeTypeFilter = (object) ['libelle' => $pluralLabel, 'slug' => $type->slug];
+                }
+            }
+        } elseif ($request->filled('type')) {
+            $typeSlugs = is_array($request->type) ? $request->type : [$request->type];
+            if (count($typeSlugs) === 1) {
+                $type = Type::where('slug', $typeSlugs[0])->first();
+                if ($type) {
+                    $pluralLabel = $pluralLabels[$type->slug] ?? $type->libelle;
+                    $activeTypeFilter = (object) ['libelle' => $pluralLabel, 'slug' => $type->slug];
+                }
+            } elseif (count($typeSlugs) === 2) {
+                // Special case for catamarans (voile + moteur)
+                $cataSlugs = ['catamaran-a-voile', 'catamaran-a-moteur'];
+                if (empty(array_diff($typeSlugs, $cataSlugs)) && empty(array_diff($cataSlugs, $typeSlugs))) {
+                    $activeTypeFilter = (object) ['libelle' => 'Catamarans'];
+                }
+            }
+        }
+
+        // Check for zone filter (by ID or slug)
+        if ($request->filled('zone_id')) {
+            $zoneIds = is_array($request->zone_id) ? $request->zone_id : [$request->zone_id];
+            if (count($zoneIds) === 1) {
+                $activeZoneFilter = Zone::find($zoneIds[0]);
+            }
+        } elseif ($request->filled('zone')) {
+            $zoneSlugs = is_array($request->zone) ? $request->zone : [$request->zone];
+            if (count($zoneSlugs) === 1) {
+                $activeZoneFilter = Zone::where('slug', $zoneSlugs[0])->first();
+            }
+        }
+
         return view('bateaux.index', compact(
             'bateaux',
             'types',
             'zones',
-            'totalCount'
+            'totalCount',
+            'activeTypeFilter',
+            'activeZoneFilter'
         ));
     }
 

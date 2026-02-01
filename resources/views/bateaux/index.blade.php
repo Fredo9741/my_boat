@@ -1,6 +1,26 @@
 @extends('layouts.app')
 
-@section('title', 'Annonces de Bateaux - Myboat-oi')
+@php
+    // Generate dynamic page title based on active filters
+    $pageTitle = __('Toutes nos annonces');
+    $metaTitle = __('Annonces de Bateaux - My Boat');
+
+    if (isset($activeTypeFilter) && $activeTypeFilter && isset($activeZoneFilter) && $activeZoneFilter) {
+        // Both type and zone filters
+        $pageTitle = __('Nos') . ' ' . $activeTypeFilter->libelle . ' ' . __('à') . ' ' . $activeZoneFilter->libelle;
+        $metaTitle = $activeTypeFilter->libelle . ' ' . __('à vendre à') . ' ' . $activeZoneFilter->libelle . ' - My Boat';
+    } elseif (isset($activeTypeFilter) && $activeTypeFilter) {
+        // Only type filter
+        $pageTitle = __('Nos') . ' ' . $activeTypeFilter->libelle;
+        $metaTitle = $activeTypeFilter->libelle . ' ' . __('à vendre dans l\'Océan Indien') . ' - My Boat';
+    } elseif (isset($activeZoneFilter) && $activeZoneFilter) {
+        // Only zone filter
+        $pageTitle = __('Nos bateaux à') . ' ' . $activeZoneFilter->libelle;
+        $metaTitle = __('Bateaux à vendre à') . ' ' . $activeZoneFilter->libelle . ' - My Boat';
+    }
+@endphp
+
+@section('title', $metaTitle)
 
 @section('content')
 
@@ -8,9 +28,9 @@
     <div class="bg-gradient-to-br from-ocean-600 via-ocean-700 to-luxe-navy dark:from-slate-950 dark:via-ocean-950 dark:to-luxe-navy text-white py-16 md:py-20">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-4xl md:text-6xl font-black mb-4">Toutes nos annonces</h1>
+                <h1 class="text-4xl md:text-6xl font-black mb-4">{{ $pageTitle }}</h1>
                 <p class="text-xl md:text-2xl text-ocean-100 dark:text-ocean-200 mb-6">
-                    {{ number_format($bateaux->count()) }} {{ $bateaux->count() > 1 ? 'bateaux disponibles' : 'bateau disponible' }}
+                    {{ number_format($bateaux->count()) }} {{ $bateaux->count() > 1 ? __('bateaux disponibles') : __('bateau disponible') }}
                 </p>
                 <div class="flex flex-wrap justify-center gap-2 mt-6">
                     @php

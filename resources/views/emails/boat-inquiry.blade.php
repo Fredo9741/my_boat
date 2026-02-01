@@ -70,7 +70,7 @@
     </div>
 
     <div class="footer">
-        <p>Cette demande a ete envoyee depuis la page du bateau sur Myboat-oi</p>
+        <p>Cette demande a été envoyée depuis la page du bateau sur Myboat-oi</p>
         <p>Vous pouvez repondre directement a cet email pour contacter le client.</p>
     </div>
 </body>
