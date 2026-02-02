@@ -1027,6 +1027,7 @@ Route::permanentRedirect('/artikel', '/de/artikel');
 Route::permanentRedirect('/impressum', '/de/impressum');
 Route::permanentRedirect('/agb', '/de/agb');
 Route::permanentRedirect('/datenschutz', '/de/datenschutz');
+Route::permanentRedirect('/kontakt', '/de/kontakt');
 
 // URLs espagnoles sans préfixe -> /es/...
 Route::permanentRedirect('/barcos', '/es/barcos');
@@ -1037,6 +1038,7 @@ Route::permanentRedirect('/articulos', '/es/articulos');
 Route::permanentRedirect('/aviso-legal', '/es/aviso-legal');
 Route::permanentRedirect('/terminos', '/es/terminos');
 Route::permanentRedirect('/privacidad', '/es/privacidad');
+Route::permanentRedirect('/contacto', '/es/contacto');
 
 // URLs néerlandaises sans préfixe -> /nl/...
 Route::permanentRedirect('/boten', '/nl/boten');
@@ -1047,6 +1049,18 @@ Route::permanentRedirect('/artikelen', '/nl/artikelen');
 Route::permanentRedirect('/juridisch', '/nl/juridisch');
 Route::permanentRedirect('/voorwaarden', '/nl/voorwaarden');
 Route::permanentRedirect('/privacybeleid', '/nl/privacybeleid');
+
+// URLs italiennes sans préfixe -> /it/...
+Route::permanentRedirect('/barche', '/it/barche');
+Route::permanentRedirect('/chi-siamo', '/it/chi-siamo');
+Route::permanentRedirect('/vendere', '/it/vendere');
+Route::permanentRedirect('/categorie', '/it/categorie');
+Route::permanentRedirect('/articoli', '/it/articoli');
+Route::permanentRedirect('/note-legali', '/it/note-legali');
+Route::permanentRedirect('/termini', '/it/termini');
+// Note: '/privacy' est identique en FR et IT, pas de redirect nécessaire
+Route::permanentRedirect('/partner', '/it/partner');
+Route::permanentRedirect('/contatto', '/it/contatto');
 
 // ==========================================
 // NETTOYAGE DES ASSETS - ANCIEN DOSSIER UPLOADS
