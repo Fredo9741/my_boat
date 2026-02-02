@@ -7,7 +7,7 @@
     @foreach($staticPages as $routeName => $config)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route($routeName), [], true);
+                $url = LaravelLocalization::getLocalizedURL($locale, route($routeName), [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -16,9 +16,9 @@
                 <priority>{{ $config['priority'] }}</priority>
                 {{-- Hreflang for all locales --}}
                 @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route($routeName), [], true) }}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route($routeName), [], false) }}" />
                 @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route($routeName), [], true) }}" />
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route($routeName), [], false) }}" />
             </url>
         @endforeach
     @endforeach
@@ -27,7 +27,7 @@
     @foreach($visibleBoats as $boat)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.show', $boat->slug), [], true);
+                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.show', $boat->slug), [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -35,9 +35,9 @@
                 <changefreq>weekly</changefreq>
                 <priority>0.8</priority>
                 @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.show', $boat->slug), [], true) }}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.show', $boat->slug), [], false) }}" />
                 @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.show', $boat->slug), [], true) }}" />
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.show', $boat->slug), [], false) }}" />
             </url>
         @endforeach
     @endforeach
@@ -47,7 +47,7 @@
     @foreach($soldBoats as $boat)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.show', $boat->slug), [], true);
+                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.show', $boat->slug), [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -55,9 +55,9 @@
                 <changefreq>monthly</changefreq>
                 <priority>0.4</priority>
                 @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.show', $boat->slug), [], true) }}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.show', $boat->slug), [], false) }}" />
                 @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.show', $boat->slug), [], true) }}" />
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.show', $boat->slug), [], false) }}" />
             </url>
         @endforeach
     @endforeach
@@ -66,7 +66,7 @@
     @foreach($articles as $article)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('articles.show', $article->slug), [], true);
+                $url = LaravelLocalization::getLocalizedURL($locale, route('articles.show', $article->slug), [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -74,9 +74,9 @@
                 <changefreq>monthly</changefreq>
                 <priority>0.7</priority>
                 @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('articles.show', $article->slug), [], true) }}" />
+                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('articles.show', $article->slug), [], false) }}" />
                 @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('articles.show', $article->slug), [], true) }}" />
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('articles.show', $article->slug), [], false) }}" />
             </url>
         @endforeach
     @endforeach
@@ -85,7 +85,7 @@
     @foreach($types as $type)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.index', ['type' => $type->slug]), [], true);
+                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.index', ['type' => $type->slug]), [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -100,7 +100,7 @@
     @foreach($zones as $zone)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.index', ['zone' => $zone->slug]), [], true);
+                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.index', ['zone' => $zone->slug]), [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
