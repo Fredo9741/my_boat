@@ -199,7 +199,19 @@ class BateauController extends Controller
         ])
         ->where('slug', $slug)
         ->where('visible', true)
-        ->firstOrFail();
+        ->first();
+
+        // If boat not found or not visible, show "sold" page
+        if (!$bateau) {
+            // Get some featured boats to suggest
+            $suggestedBoats = Bateau::with(['type', 'zone', 'images'])
+                ->visible()
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+
+            return view('bateaux.sold', compact('suggestedBoats', 'slug'));
+        }
 
         // Get similar boats (same type, different id)
         $similaires = Bateau::with(['type', 'zone', 'images'])
