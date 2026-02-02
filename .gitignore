@@ -58,3 +58,6 @@ app/Console/Commands/ImportMissingImages.php
 app/Console/Commands/MigrateAllImages.php
 app/Console/Commands/MigrateImages.php
 app/Console/Commands/SyncMediasFromR2.php
+
+# Vite build output
+/public/build
