@@ -83,6 +83,11 @@ class Bateau extends Model
                 $media->delete();
             });
         });
+
+        // Invalidate sitemap cache on any changes (lazy rebuild on next request)
+        static::created(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
+        static::updated(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
+        static::deleted(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
     }
 
     /**

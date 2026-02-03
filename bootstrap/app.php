@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Global middlewares (executed before route resolution)
         $middleware->prepend([
+            \App\Http\Middleware\BlockMaliciousRequests::class,
             \App\Http\Middleware\AdvancedTrafficLogger::class,
             \App\Http\Middleware\CanonicalDomainRedirect::class,
             \App\Http\Middleware\RedirectMultilingualBoatRoutes::class,

@@ -1,2 +1,69 @@
+# My Boat Ocean Indien - Robots.txt
+
+# General rules for all bots
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login
+Disallow: /logout
+Disallow: /api/
+Disallow: /_debugbar/
+Disallow: /storage/
+Disallow: /vendor/
+
+# Sitemap location
+Sitemap: https://myboat-oi.com/sitemap.xml
+
+# Crawl delay for general bots (ignored by Google, respected by Bing/others)
+Crawl-delay: 1
+
+# Google-specific (ignores Crawl-delay)
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /login
+Allow: /
+
+# Bing-specific
+User-agent: Bingbot
+Crawl-delay: 2
+Disallow: /admin/
+Disallow: /login
+Allow: /
+
+# Slow down aggressive SEO crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+Disallow: /admin/
+Disallow: /login
+
+User-agent: SemrushBot
+Crawl-delay: 10
+Disallow: /admin/
+Disallow: /login
+
+# Block Majestic completely (70% of bot traffic)
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# AI crawlers - Allowed (user choice)
+User-agent: GPTBot
+Disallow: /admin/
+Disallow: /login
+Allow: /
+
+User-agent: CCBot
+Disallow: /admin/
+Disallow: /login
+Allow: /
+
+User-agent: anthropic-ai
+Disallow: /admin/
+Disallow: /login
+Allow: /
+
+User-agent: Claude-Web
+Disallow: /admin/
+Disallow: /login
+Allow: /

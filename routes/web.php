@@ -40,8 +40,10 @@ Route::group([
         return view('categories', compact('types'));
     })->name('categories');
 
-    // Contact form
-    Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+    // Contact form (rate limited: 5 submissions per hour)
+    Route::post('/contact/send', [ContactController::class, 'send'])
+        ->middleware('throttle:contact')
+        ->name('contact.send');
 
     // Pages statiques
     Route::get(LaravelLocalization::transRoute('routes.about'), [PageController::class, 'about'])->name('about');
@@ -87,7 +89,9 @@ Route::group([
 
 // Auth routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('admin.login');
+Route::post('/login', [AuthController::class, 'login'])
+    ->middleware('throttle:login')
+    ->name('admin.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 // Admin routes (protected by auth middleware)

@@ -51,6 +51,11 @@ class Article extends Model
                 Storage::disk($disk)->delete($article->featured_image);
             }
         });
+
+        // Invalidate sitemap cache on any changes (lazy rebuild on next request)
+        static::created(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
+        static::updated(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
+        static::deleted(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
     }
 
     /**

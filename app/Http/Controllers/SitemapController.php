@@ -7,14 +7,39 @@ use App\Models\Bateau;
 use App\Models\Type;
 use App\Models\Zone;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class SitemapController extends Controller
 {
     /**
-     * Generate the sitemap.xml
+     * Cache key for sitemap.
+     */
+    public const CACHE_KEY = 'sitemap_xml';
+
+    /**
+     * Cache TTL in seconds (1 hour).
+     */
+    public const CACHE_TTL = 3600;
+
+    /**
+     * Generate the sitemap.xml with caching.
      */
     public function index(): Response
+    {
+        $content = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
+            return $this->generateSitemap();
+        });
+
+        return response($content, 200)
+            ->header('Content-Type', 'text/xml; charset=utf-8')
+            ->header('X-Sitemap-Cached', Cache::has(self::CACHE_KEY) ? 'hit' : 'miss');
+    }
+
+    /**
+     * Generate the sitemap content.
+     */
+    private function generateSitemap(): string
     {
         // Get all boats (visible and non-visible for SEO continuity)
         $visibleBoats = Bateau::where('visible', true)
@@ -50,7 +75,7 @@ class SitemapController extends Controller
             'categories' => ['priority' => '0.6', 'changefreq' => 'weekly'],
         ];
 
-        $content = view('sitemap', compact(
+        return view('sitemap', compact(
             'visibleBoats',
             'soldBoats',
             'articles',
@@ -60,8 +85,15 @@ class SitemapController extends Controller
             'defaultLocale',
             'staticPages'
         ))->render();
+    }
 
-        return response($content, 200)
-            ->header('Content-Type', 'text/xml; charset=utf-8');
+    /**
+     * Invalidate the sitemap cache.
+     * Called from model observers when boats or articles change.
+     * Only clears cache - regeneration happens on next request (lazy rebuild).
+     */
+    public static function invalidateCache(): void
+    {
+        Cache::forget(self::CACHE_KEY);
     }
 }
