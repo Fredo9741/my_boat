@@ -13,24 +13,25 @@
 @push('structured-data')
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    "@@context": "https://schema.org",
+    "@@type": "Product",
     "name": "{{ e($bateau->modele) }}",
     "description": "{{ e(Str::limit(strip_tags($bateau->description), 300)) }}",
     "image": [
         @foreach($bateau->images->take(5) as $image)
         "{{ $image->url }}"@if(!$loop->last),@endif
+
         @endforeach
     ],
     "brand": {
-        "@type": "Brand",
+        "@@type": "Brand",
         "name": "{{ e($bateau->chantier ?? 'Non spécifié') }}"
     },
     "model": "{{ e($bateau->modele) }}",
     "productionDate": "{{ $bateau->annee ?? '' }}",
     "category": "{{ e($bateau->type->libelle ?? 'Bateau') }}",
     "offers": {
-        "@type": "Offer",
+        "@@type": "Offer",
         "url": "{{ url()->current() }}",
         "priceCurrency": "EUR",
         @if($bateau->afficher_prix && $bateau->prix)
@@ -42,31 +43,31 @@
         "availability": "https://schema.org/{{ $bateau->visible ? 'InStock' : 'SoldOut' }}",
         "itemCondition": "https://schema.org/{{ $bateau->occasion ? 'UsedCondition' : 'NewCondition' }}",
         "seller": {
-            "@type": "Organization",
+            "@@type": "Organization",
             "name": "My Boat Océan Indien",
             "url": "{{ config('app.url') }}"
         }
     },
     "additionalProperty": [
         {
-            "@type": "PropertyValue",
+            "@@type": "PropertyValue",
             "name": "Longueur",
             "value": "{{ $bateau->longueurht ?? 'N/A' }}",
             "unitCode": "MTR"
         },
         {
-            "@type": "PropertyValue",
+            "@@type": "PropertyValue",
             "name": "Année",
             "value": "{{ $bateau->annee ?? 'N/A' }}"
         },
         {
-            "@type": "PropertyValue",
+            "@@type": "PropertyValue",
             "name": "Localisation",
             "value": "{{ e($bateau->location) }}"
         }
         @if($bateau->cabines)
         ,{
-            "@type": "PropertyValue",
+            "@@type": "PropertyValue",
             "name": "Cabines",
             "value": "{{ $bateau->cabines }}"
         }
