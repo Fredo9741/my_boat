@@ -49,15 +49,17 @@
                     </a>
 
                     <!-- Main Title - SEO optimized with geographic keywords -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 animate-fadeInUp leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" style="animation-delay: 0.1s;">
-                        {{ __('Acheter ou vendre un bateau') }}<br class="hidden sm:block"> {{ __('dans l\'') }}<span class="relative inline-block">
-                            <span class="relative z-10 bg-gradient-to-r from-ocean-400 to-luxe-cyan bg-clip-text text-transparent drop-shadow-lg">{{ __('Océan Indien') }}</span>
-                            <div class="absolute bottom-1 sm:bottom-2 left-0 w-full h-3 sm:h-4 bg-gradient-to-r from-ocean-400/30 to-luxe-cyan/30 transform -rotate-1 rounded-lg blur-sm"></div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 animate-fadeInUp leading-tight" style="animation-delay: 0.1s; text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">
+                        <span class="text-white">{{ __('Acheter ou vendre un bateau') }}</span><br class="hidden sm:block">
+                        <span class="text-white">{{ __('dans l\'') }}</span><span class="relative inline-block">
+                            <span class="relative z-10 text-[#fdbb27] italic">{{ __('Océan Indien') }}</span>
+                            <div class="absolute bottom-1 sm:bottom-2 left-0 w-full h-3 sm:h-4 bg-white/20 transform -rotate-1 rounded-lg blur-sm"></div>
                         </span>
                     </h1>
 
-                    <p class="text-lg sm:text-xl lg:text-2xl text-white mb-8 animate-fadeInUp drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" style="animation-delay: 0.2s;">
-                        {{ __('Votre courtier maritime à La Réunion, Maurice, Madagascar, Seychelles et Mayotte') }}
+                    <p class="text-lg sm:text-xl lg:text-2xl font-semibold mb-8 animate-fadeInUp" style="animation-delay: 0.2s; text-shadow: 0 1px 3px rgba(0,0,0,0.4), -1px -1px 0 rgba(0,0,0,0.15), 1px -1px 0 rgba(0,0,0,0.15), -1px 1px 0 rgba(0,0,0,0.15), 1px 1px 0 rgba(0,0,0,0.15);">
+                        <span class="text-white">{{ __('Votre courtier maritime à') }}</span>
+                        <span class="text-[#fdbb27] italic">{{ __('La Réunion, Maurice, Madagascar, Seychelles et Mayotte') }}</span>
                     </p>
                 </div>
 
@@ -115,16 +117,16 @@
                     <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 p-4 max-w-2xl mx-auto">
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">54+</div>
-                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">{{ __('Bateaux disponibles') }}</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-[#fdbb27] group-hover:scale-110 transition-transform" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">54+</div>
+                            <div class="text-white text-sm sm:text-base font-semibold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">{{ __('Bateaux disponibles') }}</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">5</div>
-                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">{{ __('Îles couvertes') }}</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-[#fdbb27] group-hover:scale-110 transition-transform" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">5</div>
+                            <div class="text-white text-sm sm:text-base font-semibold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">{{ __('Îles couvertes') }}</div>
                         </div>
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-ocean-900 dark:text-ocean-900 group-hover:scale-110 transition-transform drop-shadow-lg">48h</div>
-                            <div class="text-white/90 text-xs sm:text-sm drop-shadow-md">{{ __('Temps de réponse') }}</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-[#fdbb27] group-hover:scale-110 transition-transform" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">48h</div>
+                            <div class="text-white text-sm sm:text-base font-semibold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">{{ __('Temps de réponse') }}</div>
                         </div>
                     </div>
                 </div>
