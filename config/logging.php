@@ -127,6 +127,14 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'blocked_bots' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/blocked-bots.log'),
+            'level' => 'info',
+            'days' => 7,
+            'replace_placeholders' => true,
+        ],
+
     ],
 
 ];

@@ -127,6 +127,11 @@ class AdvancedTrafficLogger
 
         $userAgent = $request->userAgent() ?? '';
         $botInfo = $this->detectBot($userAgent);
+
+        // Filter: Skip redirects (301/302/303/307/308) for bots to reduce log noise
+        if ($botInfo['isBot'] && in_array($status, [301, 302, 303, 307, 308], true)) {
+            return;
+        }
         $locale = $this->detectLocale($path);
         $duration = round((microtime(true) - $startTime) * 1000);
         $referer = $this->formatReferer($request->header('Referer'));
