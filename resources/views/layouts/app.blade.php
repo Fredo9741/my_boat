@@ -24,9 +24,9 @@
 
     <!-- Hreflang Tags for SEO - Indicates alternate language versions -->
     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+        <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], false) }}">
     @endforeach
-    <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], true) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], false) }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- Google Fonts - Inter -->
