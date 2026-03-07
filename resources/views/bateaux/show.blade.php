@@ -311,17 +311,20 @@
                 <!-- Share & Favorite -->
                 <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6 border border-gray-100 dark:border-white/10">
                     <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Partager cette annonce</h4>
-                    <div class="flex gap-3">
-                        <button onclick="shareOnFacebook()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md">
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="shareOnFacebook()" class="flex-1 min-w-[60px] bg-blue-600 hover:bg-blue-700 text-white px-3 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md" title="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </button>
-                        <button onclick="shareOnTwitter()" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white px-4 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md">
-                            <i class="fab fa-twitter"></i>
+                        <button onclick="shareOnMessenger()" class="flex-1 min-w-[60px] bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md" title="Messenger">
+                            <i class="fab fa-facebook-messenger"></i>
                         </button>
-                        <button onclick="shareOnWhatsApp()" class="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md">
+                        <button onclick="shareOnWhatsApp()" class="flex-1 min-w-[60px] bg-green-600 hover:bg-green-700 text-white px-3 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md" title="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </button>
-                        <button onclick="copyLink()" class="flex-1 bg-gray-600 hover:bg-gray-700 dark:bg-slate-700 dark:hover:bg-slate-600 text-white px-4 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md" title="Copier le lien">
+                        <button onclick="shareByEmail()" class="flex-1 min-w-[60px] bg-red-500 hover:bg-red-600 text-white px-3 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        <button onclick="copyLink()" class="flex-1 min-w-[60px] bg-gray-600 hover:bg-gray-700 dark:bg-slate-700 dark:hover:bg-slate-600 text-white px-3 py-3 rounded-xl font-medium transition-all hover:scale-105 shadow-md" title="Copier le lien">
                             <i class="fas fa-link"></i>
                         </button>
                     </div>
@@ -460,7 +463,17 @@ function shareOnTwitter() {
 }
 
 function shareOnWhatsApp() {
-    window.open('https://wa.me/?text=' + encodeURIComponent('{{ $bateau->nom }} - ' + window.location.href), '_blank');
+    window.open('https://wa.me/?text=' + encodeURIComponent('{{ $nomBateau }} - ' + window.location.href), '_blank');
+}
+
+function shareOnMessenger() {
+    window.open('https://www.facebook.com/dialog/send?link=' + encodeURIComponent(window.location.href) + '&app_id=291494419107518&redirect_uri=' + encodeURIComponent(window.location.href), '_blank');
+}
+
+function shareByEmail() {
+    var subject = encodeURIComponent('{{ $nomBateau }} - {{ $typeBateau }}');
+    var body = encodeURIComponent('Regarde ce bateau sur My Boat :\n\n{{ $nomBateau }}\n\n' + window.location.href);
+    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
 }
 
 function copyLink() {
