@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="khnsY4EOXA9a9-F07reTdBySXwmf-m8xFoCYo8sDscY" />
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6J2VH924Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L6J2VH924Y');
+    </script>
+
     <title>@yield('title', 'Acheter un Bateau Océan Indien | Réunion, Maurice, Madagascar - My Boat')</title>
     <meta name="description" content="@yield('description', 'Vente de bateaux neufs et d\'occasion dans l\'Océan Indien : monocoques, catamarans, multicoques à La Réunion, Maurice, Madagascar, Seychelles et Mayotte. Estimation gratuite.')">
 
