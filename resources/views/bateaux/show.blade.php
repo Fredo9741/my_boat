@@ -467,7 +467,16 @@ function shareOnWhatsApp() {
 }
 
 function shareOnMessenger() {
-    window.open('https://www.facebook.com/dialog/send?link=' + encodeURIComponent(window.location.href) + '&app_id=291494419107518&redirect_uri=' + encodeURIComponent(window.location.href), '_blank');
+    var url = encodeURIComponent(window.location.href);
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Deep link vers l'app Messenger
+        window.location.href = 'fb-messenger://share?link=' + url;
+    } else {
+        // Version desktop
+        window.open('https://www.facebook.com/dialog/send?link=' + url + '&app_id=291494419107518&redirect_uri=' + encodeURIComponent(window.location.href), '_blank');
+    }
 }
 
 function shareByEmail() {
