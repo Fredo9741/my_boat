@@ -14,6 +14,9 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/og-myboat.jpg'))">
 
+    <!-- Additional meta tags from child views -->
+    @stack('head')
+
     <!-- Structured Data -->
     @stack('structured-data')
 
