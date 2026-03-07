@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
 @section('title', $bateau->nom . ' - ' . ($bateau->type->libelle ?? 'Bateau'))
-@section('meta_description', 'Découvrez ' . $bateau->nom . ' - ' . Str::limit($bateau->description, 150))
-
-@push('head')
-<meta property="og:title" content="{{ $bateau->nom }} - {{ $bateau->type->libelle ?? 'Bateau' }}">
-<meta property="og:description" content="{{ Str::limit($bateau->description, 200) }}">
-<meta property="og:image" content="{{ $bateau->photo_principale ? Storage::disk('r2')->url($bateau->photo_principale) : asset('images/default-boat.jpg') }}">
-<meta property="og:type" content="product">
-@endpush
+@section('description', 'Découvrez ' . $bateau->nom . ' - ' . Str::limit($bateau->description, 150))
+@section('og_title', $bateau->nom . ' - ' . ($bateau->type->libelle ?? 'Bateau'))
+@section('og_description', Str::limit(strip_tags($bateau->description), 200))
+@section('og_image', $bateau->photo_principale ? Storage::disk('r2')->url($bateau->photo_principale) : asset('images/default-boat.jpg'))
 
 @push('structured-data')
 <script type="application/ld+json">
