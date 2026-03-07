@@ -17,6 +17,24 @@
     <!-- Structured Data -->
     @stack('structured-data')
 
+    <!-- Organization Schema (for logo in search results) -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "My Boat Océan Indien",
+        "url": "https://www.myboat-oi.com",
+        "logo": "https://www.myboat-oi.com/images/logo-myboat.svg",
+        "description": "Courtier maritime spécialisé dans la vente de bateaux dans l'Océan Indien",
+        "areaServed": ["Réunion", "Maurice", "Madagascar", "Mayotte", "Seychelles"],
+        "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+262-692-706-610",
+            "contactType": "sales"
+        }
+    }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon-boat.svg') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
