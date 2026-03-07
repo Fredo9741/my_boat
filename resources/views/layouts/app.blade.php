@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="khnsY4EOXA9a9-F07reTdBySXwmf-m8xFoCYo8sDscY" />
     <title>@yield('title', 'Acheter un Bateau Océan Indien | Réunion, Maurice, Madagascar - My Boat')</title>
     <meta name="description" content="@yield('description', 'Vente de bateaux neufs et d\'occasion dans l\'Océan Indien : monocoques, catamarans, multicoques à La Réunion, Maurice, Madagascar, Seychelles et Mayotte. Estimation gratuite.')">
 
@@ -14,25 +13,8 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/og-myboat.jpg'))">
 
-    <!-- Additional head tags from child views -->
-    @stack('head')
-
     <!-- Structured Data -->
     @stack('structured-data')
-
-    <!-- Organization Schema (for logo in search results) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "My Boat Océan Indien",
-        "url": "{{ config('app.url') }}",
-        "logo": "{{ asset('images/logo-myboat.svg') }}",
-        "description": "Courtier maritime spécialisé dans la vente de bateaux dans l'Océan Indien",
-        "areaServed": ["Réunion", "Maurice", "Madagascar", "Mayotte", "Seychelles"],
-        "sameAs": []
-    }
-    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon-boat.svg') }}">
