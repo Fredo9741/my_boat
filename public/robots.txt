@@ -11,7 +11,7 @@ Disallow: /storage/
 Disallow: /vendor/
 
 # Sitemap location
-Sitemap: https://myboat-oi.com/sitemap.xml
+Sitemap: https://www.myboat-oi.com/sitemap.xml
 
 # Crawl delay for general bots (ignored by Google, respected by Bing/others)
 Crawl-delay: 1
