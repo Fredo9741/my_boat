@@ -293,7 +293,7 @@
                         @foreach($bateau->medias as $media)
                         <div class="relative group">
                             @if($media->type === 'image')
-                                <img src="{{ $media->url }}" alt="Photo bateau" class="w-full h-32 object-cover rounded-lg">
+                                <img src="{{ $media->url }}" alt="Photo bateau" data-media-id="{{ $media->id }}" class="w-full h-32 object-cover rounded-lg">
                             @else
                                 <div class="w-full h-32 bg-gray-800 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-video text-white text-3xl"></i>
@@ -315,6 +315,14 @@
                                             class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
                                             title="Définir comme photo principale">
                                         <i class="fas fa-star text-sm"></i>
+                                    </button>
+                                @endif
+                                @if($media->type === 'image')
+                                    <button type="button"
+                                            onclick="openCropModal({{ $media->id }}, '{{ $media->url }}')"
+                                            class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+                                            title="Recadrer cette photo">
+                                        <i class="fas fa-crop-alt text-sm"></i>
                                     </button>
                                 @endif
                                 <button type="button"
@@ -507,9 +515,141 @@
         </form>
     </div>
 </div>
+<!-- Modal Recadrage -->
+<div id="cropModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl">
+        <div class="flex items-center justify-between p-4 border-b">
+            <h3 class="text-lg font-bold text-gray-800">
+                <i class="fas fa-crop-alt text-green-600 mr-2"></i>Recadrer la photo
+            </h3>
+            <button onclick="closeCropModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+        <div class="p-4">
+            <div class="max-h-[60vh] overflow-hidden flex items-center justify-center bg-gray-100 rounded-lg">
+                <img id="cropImage" src="" alt="Image à recadrer" class="max-w-full max-h-[60vh]">
+            </div>
+        </div>
+        <div class="flex items-center justify-between p-4 border-t gap-3">
+            <div class="flex gap-2">
+                <button onclick="cropperInstance.rotate(-90)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm transition" title="Rotation gauche">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <button onclick="cropperInstance.rotate(90)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm transition" title="Rotation droite">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <button onclick="cropperInstance.reset()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm transition">
+                    <i class="fas fa-sync mr-1"></i>Réinitialiser
+                </button>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="closeCropModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-5 py-2 rounded-lg font-semibold transition">
+                    Annuler
+                </button>
+                <button onclick="applyCrop()" id="applyCropBtn" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-semibold transition">
+                    <i class="fas fa-check mr-2"></i>Appliquer le recadrage
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+<script>
+// ===================== CROP FEATURE =====================
+let cropperInstance = null;
+let currentMediaId = null;
+
+window.openCropModal = function(mediaId, imageUrl) {
+    currentMediaId = mediaId;
+    const modal = document.getElementById('cropModal');
+    const img = document.getElementById('cropImage');
+
+    img.src = imageUrl;
+    modal.classList.remove('hidden');
+
+    // Init Cropper.js after image loads
+    img.onload = function() {
+        if (cropperInstance) {
+            cropperInstance.destroy();
+        }
+        cropperInstance = new Cropper(img, {
+            viewMode: 1,
+            autoCropArea: 1,
+            movable: true,
+            zoomable: true,
+            rotatable: true,
+            scalable: false,
+        });
+    };
+
+    // If already loaded (cached)
+    if (img.complete) {
+        img.onload();
+    }
+};
+
+window.closeCropModal = function() {
+    document.getElementById('cropModal').classList.add('hidden');
+    if (cropperInstance) {
+        cropperInstance.destroy();
+        cropperInstance = null;
+    }
+    currentMediaId = null;
+};
+
+window.applyCrop = function() {
+    if (!cropperInstance || !currentMediaId) return;
+
+    const btn = document.getElementById('applyCropBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Recadrage en cours...';
+
+    const data = cropperInstance.getData(true); // true = rounded integers
+
+    fetch(`/admin/media/${currentMediaId}/crop`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            x: data.x,
+            y: data.y,
+            width: data.width,
+            height: data.height,
+        })
+    })
+    .then(res => res.json())
+    .then(response => {
+        if (response.success) {
+            // Update all images with this media ID on the page
+            document.querySelectorAll(`img[data-media-id="${currentMediaId}"]`).forEach(img => {
+                img.src = response.url;
+            });
+            closeCropModal();
+            // Flash success message
+            const flash = document.createElement('div');
+            flash.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 font-semibold';
+            flash.textContent = '✓ Photo recadrée avec succès !';
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 3000);
+        } else {
+            alert(response.error || 'Erreur lors du recadrage.');
+        }
+    })
+    .catch(() => alert('Erreur réseau.'))
+    .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Appliquer le recadrage';
+    });
+};
+// =========================================================
+</script>
 <script>
 // Fonction pour définir une photo comme principale
 window.setMainMedia = function(mediaId) {

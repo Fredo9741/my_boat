@@ -120,6 +120,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/media/bulk-delete', [AdminBateauController::class, 'bulkDeleteMedia'])->name('media.bulk-delete');
     Route::delete('/media/{media}', [AdminBateauController::class, 'deleteMedia'])->name('media.delete');
     Route::patch('/media/{media}/set-main', [AdminBateauController::class, 'setMainMedia'])->name('media.set-main');
+    Route::post('/media/{media}/crop', [AdminBateauController::class, 'cropMedia'])->name('media.crop');
 
     // Equipment quick create
     Route::post('/equipements/quick-create', [AdminBateauController::class, 'quickCreateEquipement'])->name('equipements.quick-create');

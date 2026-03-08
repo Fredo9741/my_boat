@@ -11,7 +11,10 @@ use App\Models\Media;
 use App\Models\Equipement;
 use App\Services\MediaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class BateauController extends Controller
 {
@@ -342,6 +345,50 @@ class BateauController extends Controller
 
         return redirect()->route('admin.bateaux.edit', $bateau)
             ->with('success', 'Photo principale mise à jour avec succès.');
+    }
+
+    /**
+     * Crop an image and replace it on R2
+     */
+    public function cropMedia(Request $request, Media $media)
+    {
+        $request->validate([
+            'x'      => 'required|numeric',
+            'y'      => 'required|numeric',
+            'width'  => 'required|numeric|min:1',
+            'height' => 'required|numeric|min:1',
+        ]);
+
+        if ($media->type !== 'image') {
+            return response()->json(['error' => 'Seules les images peuvent être recadrées.'], 422);
+        }
+
+        $disk = config('filesystems.default');
+        $relativePath = $media->getRawOriginal('url');
+
+        // Download original image from R2
+        $imageContent = Storage::disk($disk)->get($relativePath);
+        if (!$imageContent) {
+            return response()->json(['error' => 'Image introuvable.'], 404);
+        }
+
+        // Crop with Intervention Image
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($imageContent);
+        $image->crop(
+            (int) $request->width,
+            (int) $request->height,
+            (int) $request->x,
+            (int) $request->y
+        );
+
+        // Re-upload to R2 (same path, replaces original)
+        Storage::disk($disk)->put($relativePath, $image->toJpeg(90)->toString());
+
+        // Build fresh URL with cache-buster
+        $freshUrl = $media->fresh()->url . '?t=' . time();
+
+        return response()->json(['success' => true, 'url' => $freshUrl]);
     }
 
     /**
