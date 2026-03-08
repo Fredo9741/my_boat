@@ -11,7 +11,7 @@
             <!-- À propos -->
             <div>
                 <div class="mb-4">
-                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="Myboat-oi Logo" class="h-10 w-auto">
+                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="My Boat - Courtier Maritime Océan Indien" class="h-10 w-auto">
                 </div>
                 <p class="text-gray-400 dark:text-gray-500 mb-6">{{ __('Votre courtier maritime de confiance dans l\'océan Indien.') }} {{ __('Excellence et passion depuis 2024.') }}</p>
                 <div class="flex space-x-3">
@@ -82,7 +82,7 @@
         <div class="border-t border-gray-800 dark:border-white/10 pt-8 mt-8">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <p class="text-gray-500 dark:text-gray-600 text-sm">
-                    &copy; 2025 <span class="font-semibold text-white dark:text-gray-300">Myboat-oi</span> - {{ __('Courtage Maritime') }}. {{ __('Tous droits réservés') }}.
+                    &copy; {{ date('Y') }} <span class="font-semibold text-white dark:text-gray-300">Myboat-oi</span> - {{ __('Courtage Maritime') }}. {{ __('Tous droits réservés') }}.
                 </p>
                 <div class="flex flex-wrap justify-center gap-6">
                     <a href="{{ route('mentions-legales') }}" class="text-gray-500 dark:text-gray-600 hover:text-ocean-500 dark:hover:text-ocean-400 transition-colors text-sm">{{ __('Mentions légales') }}</a>
