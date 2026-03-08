@@ -210,7 +210,7 @@ class BateauController extends Controller
                 ->limit(4)
                 ->get();
 
-            return view('bateaux.sold', compact('suggestedBoats', 'slug'));
+            return response()->view('bateaux.sold', compact('suggestedBoats', 'slug'), 410);
         }
 
         // Get similar boats (same type, different id)
