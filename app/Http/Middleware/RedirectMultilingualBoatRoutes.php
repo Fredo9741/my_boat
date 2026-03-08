@@ -42,9 +42,12 @@ class RedirectMultilingualBoatRoutes
 
             // If the variant doesn't match the locale, redirect 301
             if ($currentVariant !== $correctVariant) {
-                $newPath = "/{$locale}/{$correctVariant}{$rest}";
-                $queryString = $request->getQueryString();
+                // French is the default locale — no /fr/ prefix needed
+                $newPath = $locale === 'fr'
+                    ? "/{$correctVariant}{$rest}"
+                    : "/{$locale}/{$correctVariant}{$rest}";
 
+                $queryString = $request->getQueryString();
                 if ($queryString) {
                     $newPath .= '?' . $queryString;
                 }
