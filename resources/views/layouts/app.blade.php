@@ -35,7 +35,7 @@
     {
         "@@context": "https://schema.org",
         "@@type": "Organization",
-        "name": "My Boat Océan Indien",
+        "name": "MyBoat-oi",
         "url": "https://www.myboat-oi.com",
         "logo": "https://www.myboat-oi.com/images/logo-myboat.svg",
         "description": "Courtier maritime spécialisé dans la vente de bateaux dans l'Océan Indien",
