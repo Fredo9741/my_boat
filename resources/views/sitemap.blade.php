@@ -24,10 +24,13 @@
     @endforeach
 
     {{-- ==================== VISIBLE BOATS (priority 0.8) ==================== --}}
+    {{-- Fixed: Use getLocalizedURL on index route + slug to get properly translated segments --}}
     @foreach($visibleBoats as $boat)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.show', $boat->slug), [], false);
+                // Get the localized base URL (e.g., /en/boats, /de/boote)
+                $baseUrl = LaravelLocalization::getLocalizedURL($locale, route('bateaux.index'), [], false);
+                $url = $baseUrl . '/' . $boat->slug;
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -35,38 +38,30 @@
                 <changefreq>weekly</changefreq>
                 <priority>0.8</priority>
                 @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.show', $boat->slug), [], false) }}" />
+                    @php
+                        $hrefBaseUrl = LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.index'), [], false);
+                    @endphp
+                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ $hrefBaseUrl }}/{{ $boat->slug }}" />
                 @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.show', $boat->slug), [], false) }}" />
+                @php
+                    $defaultBaseUrl = LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.index'), [], false);
+                @endphp
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ $defaultBaseUrl }}/{{ $boat->slug }}" />
             </url>
         @endforeach
     @endforeach
 
-    {{-- ==================== SOLD/NON-VISIBLE BOATS (priority 0.4) ==================== --}}
-    {{-- Keep them indexed to avoid losing SEO value, they redirect to "sold" page --}}
-    @foreach($soldBoats as $boat)
-        @foreach($locales as $locale)
-            @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.show', $boat->slug), [], false);
-            @endphp
-            <url>
-                <loc>{{ $url }}</loc>
-                <lastmod>{{ $boat->updated_at->toAtomString() }}</lastmod>
-                <changefreq>monthly</changefreq>
-                <priority>0.4</priority>
-                @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('bateaux.show', $boat->slug), [], false) }}" />
-                @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('bateaux.show', $boat->slug), [], false) }}" />
-            </url>
-        @endforeach
-    @endforeach
+    {{-- SOLD BOATS REMOVED - They were causing soft 404 in Google Search Console --}}
+    {{-- If needed later, redirect them to category with 301 or return 410 Gone --}}
 
     {{-- ==================== ARTICLES (priority 0.7) ==================== --}}
+    {{-- Fixed: Use getLocalizedURL on index route + slug to get properly translated segments --}}
     @foreach($articles as $article)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('articles.show', $article->slug), [], false);
+                // Get the localized base URL for articles
+                $baseUrl = LaravelLocalization::getLocalizedURL($locale, route('articles.index'), [], false);
+                $url = $baseUrl . '/' . $article->slug;
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
@@ -74,9 +69,15 @@
                 <changefreq>monthly</changefreq>
                 <priority>0.7</priority>
                 @foreach($locales as $hrefLocale)
-                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ LaravelLocalization::getLocalizedURL($hrefLocale, route('articles.show', $article->slug), [], false) }}" />
+                    @php
+                        $hrefBaseUrl = LaravelLocalization::getLocalizedURL($hrefLocale, route('articles.index'), [], false);
+                    @endphp
+                    <xhtml:link rel="alternate" hreflang="{{ $hrefLocale }}" href="{{ $hrefBaseUrl }}/{{ $article->slug }}" />
                 @endforeach
-                <xhtml:link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL($defaultLocale, route('articles.show', $article->slug), [], false) }}" />
+                @php
+                    $defaultBaseUrl = LaravelLocalization::getLocalizedURL($defaultLocale, route('articles.index'), [], false);
+                @endphp
+                <xhtml:link rel="alternate" hreflang="x-default" href="{{ $defaultBaseUrl }}/{{ $article->slug }}" />
             </url>
         @endforeach
     @endforeach
