@@ -555,8 +555,11 @@
 
 @endsection
 
-@push('scripts')
+@push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+@endpush
+
+@push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
 <script>
 // ===================== CROP FEATURE =====================
@@ -568,36 +571,31 @@ window.openCropModal = function(mediaId, imageUrl) {
     const modal = document.getElementById('cropModal');
     const img = document.getElementById('cropImage');
 
-    img.src = imageUrl;
+    // Strip cache-busting params so Cropper gets a clean URL
+    img.src = imageUrl.split('?')[0];
     modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 
-    // Init Cropper.js after image loads
     img.onload = function() {
-        if (cropperInstance) {
-            cropperInstance.destroy();
-        }
+        if (cropperInstance) cropperInstance.destroy();
         cropperInstance = new Cropper(img, {
             viewMode: 1,
-            autoCropArea: 1,
+            autoCropArea: 0.9,
             movable: true,
             zoomable: true,
             rotatable: true,
-            scalable: false,
+            scalable: true,
+            responsive: true,
         });
     };
 
-    // If already loaded (cached)
-    if (img.complete) {
-        img.onload();
-    }
+    if (img.complete && img.naturalWidth > 0) img.onload();
 };
 
 window.closeCropModal = function() {
     document.getElementById('cropModal').classList.add('hidden');
-    if (cropperInstance) {
-        cropperInstance.destroy();
-        cropperInstance = null;
-    }
+    document.body.style.overflow = '';
+    if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
     currentMediaId = null;
 };
 
@@ -608,45 +606,46 @@ window.applyCrop = function() {
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Recadrage en cours...';
 
-    const data = cropperInstance.getData(true); // true = rounded integers
-
-    fetch(`/admin/media/${currentMediaId}/crop`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-            x: data.x,
-            y: data.y,
-            width: data.width,
-            height: data.height,
-        })
-    })
-    .then(res => res.json())
-    .then(response => {
-        if (response.success) {
-            // Update all images with this media ID on the page
-            document.querySelectorAll(`img[data-media-id="${currentMediaId}"]`).forEach(img => {
-                img.src = response.url;
-            });
-            closeCropModal();
-            // Flash success message
-            const flash = document.createElement('div');
-            flash.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 font-semibold';
-            flash.textContent = '✓ Photo recadrée avec succès !';
-            document.body.appendChild(flash);
-            setTimeout(() => flash.remove(), 3000);
-        } else {
-            alert(response.error || 'Erreur lors du recadrage.');
-        }
-    })
-    .catch(() => alert('Erreur réseau.'))
-    .finally(() => {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Appliquer le recadrage';
+    // getCroppedCanvas handles rotation + crop + scale internally
+    const canvas = cropperInstance.getCroppedCanvas({
+        maxWidth: 2048,
+        maxHeight: 2048,
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high',
     });
+
+    canvas.toBlob((blob) => {
+        const formData = new FormData();
+        formData.append('image', blob, 'cropped.webp');
+        formData.append('_token', '{{ csrf_token() }}');
+
+        fetch(`/admin/media/${currentMediaId}/crop`, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: formData,
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.success) {
+                document.querySelectorAll(`img[data-media-id="${currentMediaId}"]`).forEach(img => {
+                    img.src = response.url;
+                });
+                closeCropModal();
+                const flash = document.createElement('div');
+                flash.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 font-semibold';
+                flash.textContent = '✓ Photo recadrée avec succès !';
+                document.body.appendChild(flash);
+                setTimeout(() => flash.remove(), 3000);
+            } else {
+                alert(response.error || 'Erreur lors du recadrage.');
+            }
+        })
+        .catch(() => alert('Erreur réseau.'))
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Appliquer le recadrage';
+        });
+    }, 'image/webp', 0.92);
 };
 // =========================================================
 </script>
@@ -866,14 +865,48 @@ document.addEventListener('DOMContentLoaded', function() {
         handleImageFiles(files);
     });
 
-    function handleImageFiles(files) {
-        files.forEach(file => {
-            if (file.size > 10 * 1024 * 1024) {
-                alert(`Le fichier ${file.name} dépasse 10 Mo`);
-                return;
-            }
-            selectedImages.push(file);
+    // Resize to max 1920px and convert to WebP client-side
+    function processImageFile(file) {
+        return new Promise((resolve) => {
+            const MAX = 1920;
+            const img = new Image();
+            const url = URL.createObjectURL(file);
+            img.onload = function() {
+                URL.revokeObjectURL(url);
+                let w = img.naturalWidth;
+                let h = img.naturalHeight;
+                if (w > MAX || h > MAX) {
+                    if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
+                    else { w = Math.round(w * MAX / h); h = MAX; }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                canvas.toBlob((blob) => {
+                    const name = file.name.replace(/\.[^/.]+$/, '') + '.webp';
+                    resolve(new File([blob], name, { type: 'image/webp' }));
+                }, 'image/webp', 0.85);
+            };
+            img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+            img.src = url;
         });
+    }
+
+    async function handleImageFiles(files) {
+        const spinner = document.createElement('div');
+        spinner.className = 'col-span-4 text-center py-4 text-blue-600 text-sm';
+        spinner.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Optimisation des photos...';
+        imagePreviewGrid.appendChild(spinner);
+
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            if (file.size > 20 * 1024 * 1024) { alert(`${file.name} dépasse 20 Mo`); continue; }
+            const processed = await processImageFile(file);
+            selectedImages.push(processed);
+        }
+
+        spinner.remove();
         updateImagePreview();
         updateImageInput();
     }
@@ -881,23 +914,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateImagePreview() {
         imagePreviewGrid.innerHTML = '';
         selectedImages.forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const div = document.createElement('div');
-                div.className = 'relative group';
-                div.innerHTML = `
-                    <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg border-2 border-gray-200">
-                    <button type="button" onclick="removeImage(${index})"
-                            class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                        ${(file.size / 1024).toFixed(0)} Ko
-                    </div>
-                `;
-                imagePreviewGrid.appendChild(div);
-            };
-            reader.readAsDataURL(file);
+            const url = URL.createObjectURL(file);
+            const div = document.createElement('div');
+            div.className = 'relative group';
+            div.innerHTML = `
+                <img src="${url}" class="w-full h-32 object-cover rounded-lg border-2 border-gray-200" onload="URL.revokeObjectURL(this.src)">
+                <button type="button" onclick="removeImage(${index})"
+                        class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    ${(file.size / 1024).toFixed(0)} Ko · WebP
+                </div>
+            `;
+            imagePreviewGrid.appendChild(div);
         });
     }
 

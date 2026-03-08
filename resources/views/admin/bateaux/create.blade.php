@@ -525,14 +525,48 @@ document.addEventListener('DOMContentLoaded', function() {
         handleImageFiles(files);
     });
 
-    function handleImageFiles(files) {
-        files.forEach(file => {
-            if (file.size > 10 * 1024 * 1024) {
-                alert(`Le fichier ${file.name} dépasse 10 Mo`);
-                return;
-            }
-            selectedImages.push(file);
+    // Resize to max 1920px and convert to WebP client-side
+    function processImageFile(file) {
+        return new Promise((resolve) => {
+            const MAX = 1920;
+            const img = new Image();
+            const url = URL.createObjectURL(file);
+            img.onload = function() {
+                URL.revokeObjectURL(url);
+                let w = img.naturalWidth;
+                let h = img.naturalHeight;
+                if (w > MAX || h > MAX) {
+                    if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
+                    else { w = Math.round(w * MAX / h); h = MAX; }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                canvas.toBlob((blob) => {
+                    const name = file.name.replace(/\.[^/.]+$/, '') + '.webp';
+                    resolve(new File([blob], name, { type: 'image/webp' }));
+                }, 'image/webp', 0.85);
+            };
+            img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+            img.src = url;
         });
+    }
+
+    async function handleImageFiles(files) {
+        const spinner = document.createElement('div');
+        spinner.className = 'col-span-4 text-center py-4 text-blue-600 text-sm';
+        spinner.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Optimisation des photos...';
+        imagePreviewGrid.appendChild(spinner);
+
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            if (file.size > 20 * 1024 * 1024) { alert(`${file.name} dépasse 20 Mo`); continue; }
+            const processed = await processImageFile(file);
+            selectedImages.push(processed);
+        }
+
+        spinner.remove();
         updateImagePreview();
         updateImageInput();
     }
@@ -540,23 +574,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateImagePreview() {
         imagePreviewGrid.innerHTML = '';
         selectedImages.forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const div = document.createElement('div');
-                div.className = 'relative group';
-                div.innerHTML = `
-                    <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg border-2 border-gray-200">
-                    <button type="button" onclick="removeImage(${index})"
-                            class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                        ${(file.size / 1024).toFixed(0)} Ko
-                    </div>
-                `;
-                imagePreviewGrid.appendChild(div);
-            };
-            reader.readAsDataURL(file);
+            const url = URL.createObjectURL(file);
+            const div = document.createElement('div');
+            div.className = 'relative group';
+            div.innerHTML = `
+                <img src="${url}" class="w-full h-32 object-cover rounded-lg border-2 border-gray-200" onload="URL.revokeObjectURL(this.src)">
+                <button type="button" onclick="removeImage(${index})"
+                        class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    ${(file.size / 1024).toFixed(0)} Ko · WebP
+                </div>
+            `;
+            imagePreviewGrid.appendChild(div);
         });
     }
 

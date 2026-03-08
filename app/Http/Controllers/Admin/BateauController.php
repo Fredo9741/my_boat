@@ -353,10 +353,7 @@ class BateauController extends Controller
     public function cropMedia(Request $request, Media $media)
     {
         $request->validate([
-            'x'      => 'required|numeric',
-            'y'      => 'required|numeric',
-            'width'  => 'required|numeric|min:1',
-            'height' => 'required|numeric|min:1',
+            'image' => 'required|file|mimes:jpeg,jpg,png,gif,webp|max:20480',
         ]);
 
         if ($media->type !== 'image') {
@@ -366,24 +363,12 @@ class BateauController extends Controller
         $disk = config('filesystems.default');
         $relativePath = $media->getRawOriginal('url');
 
-        // Download original image from R2
-        $imageContent = Storage::disk($disk)->get($relativePath);
-        if (!$imageContent) {
-            return response()->json(['error' => 'Image introuvable.'], 404);
-        }
-
-        // Crop with Intervention Image
+        // Read the cropped image sent by the client (already cropped + rotated via getCroppedCanvas)
         $manager = new ImageManager(new Driver());
-        $image = $manager->read($imageContent);
-        $image->crop(
-            (int) $request->width,
-            (int) $request->height,
-            (int) $request->x,
-            (int) $request->y
-        );
+        $image = $manager->read($request->file('image')->get());
 
         // Re-upload to R2 (same path, replaces original)
-        Storage::disk($disk)->put($relativePath, $image->toJpeg(90)->toString());
+        Storage::disk($disk)->put($relativePath, $image->toWebp(92)->toString());
 
         // Build fresh URL with cache-buster
         $freshUrl = $media->fresh()->url . '?t=' . time();
