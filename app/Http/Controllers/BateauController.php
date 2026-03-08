@@ -6,6 +6,7 @@ use App\Models\Bateau;
 use App\Models\Type;
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class BateauController extends Controller
@@ -185,7 +186,7 @@ class BateauController extends Controller
     /**
      * Display the specified boat details
      */
-    public function show(Request $request, string $slug): View
+    public function show(Request $request, string $slug): View|Response
     {
         // Find boat by slug with all relations
         $bateau = Bateau::with([
