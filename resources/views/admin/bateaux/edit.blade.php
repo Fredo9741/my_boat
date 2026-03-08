@@ -525,8 +525,9 @@
             <button onclick="closeCropModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
         </div>
         <div class="p-4">
-            <div class="max-h-[60vh] overflow-hidden flex items-center justify-center bg-gray-100 rounded-lg">
-                <img id="cropImage" src="" alt="Image à recadrer" class="max-w-full max-h-[60vh]">
+            <!-- overflow:visible required so Cropper.js handles aren't clipped; height fixed so Cropper calculates correct dimensions -->
+            <div class="bg-gray-100 rounded-lg" style="height:60vh;position:relative;">
+                <img id="cropImage" src="" alt="Image à recadrer" style="display:block;max-width:100%;">
             </div>
         </div>
         <div class="flex items-center justify-between p-4 border-t gap-3">
@@ -571,13 +572,13 @@ window.openCropModal = function(mediaId, imageUrl) {
     const modal = document.getElementById('cropModal');
     const img = document.getElementById('cropImage');
 
-    // Strip cache-busting params so Cropper gets a clean URL
-    img.src = imageUrl.split('?')[0];
+    if (cropperInstance) { cropperInstance.destroy(); cropperInstance = null; }
+
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 
+    // Define onload BEFORE setting src (handles both cached and uncached cases)
     img.onload = function() {
-        if (cropperInstance) cropperInstance.destroy();
         cropperInstance = new Cropper(img, {
             viewMode: 1,
             autoCropArea: 0.9,
@@ -589,7 +590,8 @@ window.openCropModal = function(mediaId, imageUrl) {
         });
     };
 
-    if (img.complete && img.naturalWidth > 0) img.onload();
+    // Load via same-origin proxy → getCroppedCanvas() works without CORS headers on R2
+    img.src = `/admin/media/${mediaId}/image`;
 };
 
 window.closeCropModal = function() {
@@ -627,8 +629,10 @@ window.applyCrop = function() {
         .then(res => res.json())
         .then(response => {
             if (response.success) {
+                // Refresh thumbnail via proxy (same-origin, avoids R2 CORS + Edge tracking prevention)
+                const refreshUrl = `/admin/media/${currentMediaId}/image?t=${Date.now()}`;
                 document.querySelectorAll(`img[data-media-id="${currentMediaId}"]`).forEach(img => {
-                    img.src = response.url;
+                    img.src = refreshUrl;
                 });
                 closeCropModal();
                 const flash = document.createElement('div');

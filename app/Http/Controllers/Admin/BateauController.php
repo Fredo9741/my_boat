@@ -348,6 +348,34 @@ class BateauController extends Controller
     }
 
     /**
+     * Proxy an image from R2 (same-origin, avoids CORS issues for canvas operations)
+     */
+    public function proxyImage(Media $media)
+    {
+        $disk = config('filesystems.default');
+        $relativePath = $media->getRawOriginal('url');
+
+        try {
+            $content = Storage::disk($disk)->get($relativePath);
+        } catch (\Exception $e) {
+            $content = null;
+        }
+
+        // Fallback: redirect to original URL (e.g., in local dev when images are on R2)
+        if (!$content) {
+            return redirect()->away($media->url);
+        }
+
+        $ext = strtolower(pathinfo($relativePath, PATHINFO_EXTENSION));
+        $mimeTypes = ['png' => 'image/png', 'webp' => 'image/webp', 'gif' => 'image/gif'];
+        $mimeType = $mimeTypes[$ext] ?? 'image/jpeg';
+
+        return response($content, 200)
+            ->header('Content-Type', $mimeType)
+            ->header('Cache-Control', 'private, max-age=600');
+    }
+
+    /**
      * Crop an image and replace it on R2
      */
     public function cropMedia(Request $request, Media $media)
