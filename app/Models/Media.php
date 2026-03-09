@@ -86,8 +86,10 @@ class Media extends Model
             return $value;
         }
 
-        // For images, use the r2_url helper
-        return r2_url($value);
+        // For images, use the r2_url helper + version param to bust cache after crop
+        $url = r2_url($value);
+        $updatedAt = $this->updated_at?->timestamp;
+        return $updatedAt ? "{$url}?v={$updatedAt}" : $url;
     }
 
     /**

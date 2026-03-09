@@ -395,10 +395,10 @@ class BateauController extends Controller
         $fileContent = file_get_contents($request->file('image')->getRealPath());
         Storage::disk($disk)->put($relativePath, $fileContent);
 
-        // Build fresh URL with cache-buster
-        $freshUrl = $media->fresh()->url . '?t=' . time();
+        // Touch updated_at so the public URL version param changes (cache-bust on public site)
+        $media->touch();
 
-        return response()->json(['success' => true, 'url' => $freshUrl]);
+        return response()->json(['success' => true, 'url' => $media->fresh()->url]);
     }
 
     /**
