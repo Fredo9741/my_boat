@@ -391,12 +391,9 @@ class BateauController extends Controller
         $disk = config('filesystems.default');
         $relativePath = $media->getRawOriginal('url');
 
-        // Read the cropped image sent by the client (already cropped + rotated via getCroppedCanvas)
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($request->file('image')->getRealPath());
-
-        // Re-upload to R2 (same path, replaces original)
-        Storage::disk($disk)->put($relativePath, $image->toWebp(92)->toString());
+        // The client sends the canvas blob (already cropped + rotated), save it directly
+        $fileContent = file_get_contents($request->file('image')->getRealPath());
+        Storage::disk($disk)->put($relativePath, $fileContent);
 
         // Build fresh URL with cache-buster
         $freshUrl = $media->fresh()->url . '?t=' . time();
