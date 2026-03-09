@@ -393,7 +393,7 @@ class BateauController extends Controller
 
         // Read the cropped image sent by the client (already cropped + rotated via getCroppedCanvas)
         $manager = new ImageManager(new Driver());
-        $image = $manager->read($request->file('image')->get());
+        $image = $manager->read($request->file('image')->getRealPath());
 
         // Re-upload to R2 (same path, replaces original)
         Storage::disk($disk)->put($relativePath, $image->toWebp(92)->toString());
