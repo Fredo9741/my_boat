@@ -53,6 +53,11 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "🚀 Starting PHP-FPM + Caddy..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
+# Make caddy executable and locate it
+CADDY_BIN=$(which caddy 2>/dev/null || echo "/usr/local/bin/caddy")
+chmod +x "$CADDY_BIN" 2>/dev/null || true
+echo "Caddy binary: $CADDY_BIN"
+
 # Start PHP-FPM (daemonized)
 php-fpm -y /app/railway/php-fpm.conf
 echo "✅ PHP-FPM started on 127.0.0.1:9000"
@@ -61,4 +66,4 @@ echo "✅ PHP-FPM started on 127.0.0.1:9000"
 sleep 1
 
 # Start Caddy (foreground, keeps container alive)
-exec caddy run --config /app/railway/Caddyfile --adapter caddyfile
+exec "$CADDY_BIN" run --config /app/railway/Caddyfile --adapter caddyfile
