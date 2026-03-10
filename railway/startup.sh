@@ -62,8 +62,8 @@ echo "Caddy binary: $CADDY_BIN"
 chmod -R 777 /app/storage /app/bootstrap/cache
 echo "✅ Storage permissions set"
 
-# Start PHP-FPM (daemonized)
-php-fpm -y /app/railway/php-fpm.conf
+# Start PHP-FPM in background (daemonize=no keeps stderr connected to Railway logs)
+php-fpm -y /app/railway/php-fpm.conf &
 echo "✅ PHP-FPM started on 127.0.0.1:9000"
 
 # Wait for PHP-FPM to be ready
