@@ -21,13 +21,8 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🧹 Clearing application caches..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-php artisan optimize:clear || {
-    echo "⚠️  Cache clearing failed, continuing anyway..."
-}
+php artisan view:clear || true
 echo "✅ Caches cleared!"
-
-# Rebuild caches so PHP-FPM workers don't have to parse config/routes/views on each request
-php artisan config:cache && php artisan route:cache && php artisan view:cache && echo "✅ Caches rebuilt!" || echo "⚠️  Cache rebuild failed, continuing anyway..."
 echo ""
 
 # ============================================================================
