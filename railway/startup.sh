@@ -58,6 +58,10 @@ CADDY_BIN=$(which caddy 2>/dev/null || echo "/usr/local/bin/caddy")
 chmod +x "$CADDY_BIN" 2>/dev/null || true
 echo "Caddy binary: $CADDY_BIN"
 
+# Allow PHP-FPM (nobody) to write to storage and bootstrap cache
+chmod -R 777 /app/storage /app/bootstrap/cache
+echo "✅ Storage permissions set"
+
 # Start PHP-FPM (daemonized)
 php-fpm -y /app/railway/php-fpm.conf
 echo "✅ PHP-FPM started on 127.0.0.1:9000"
