@@ -50,8 +50,15 @@ fi
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "🚀 Starting Laravel server..."
+echo "🚀 Starting PHP-FPM + Caddy..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# Start Laravel with built-in server (simple and works on Railway)
-exec php artisan serve --host=0.0.0.0 --port=$PORT
+# Start PHP-FPM (daemonized)
+php-fpm -y /app/railway/php-fpm.conf
+echo "✅ PHP-FPM started on 127.0.0.1:9000"
+
+# Wait for PHP-FPM to be ready
+sleep 1
+
+# Start Caddy (foreground, keeps container alive)
+exec caddy run --config /app/railway/Caddyfile --adapter caddyfile
