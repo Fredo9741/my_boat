@@ -23,13 +23,45 @@ class BateauController extends Controller
         $this->mediaService = $mediaService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $bateaux = Bateau::with(['type', 'zone', 'slogan', 'medias'])
-            ->orderBy('published_at', 'desc')
-            ->paginate(20);
+        $query = Bateau::with(['type', 'zone', 'slogan', 'medias']);
 
-        return view('admin.bateaux.index', compact('bateaux'));
+        if ($request->filled('search')) {
+            $query->search($request->search);
+        }
+        if ($request->filled('type_id')) {
+            $query->where('type_id', $request->type_id);
+        }
+        if ($request->filled('zone_id')) {
+            $query->where('zone_id', $request->zone_id);
+        }
+        if ($request->get('visible') !== null && $request->get('visible') !== '') {
+            $query->where('visible', (bool) $request->visible);
+        }
+        if ($request->filled('occasion') && $request->occasion !== '') {
+            $query->where('occasion', (bool) $request->occasion);
+        }
+        if ($request->filled('prix_min')) {
+            $query->where('prix', '>=', $request->prix_min);
+        }
+        if ($request->filled('prix_max')) {
+            $query->where('prix', '<=', $request->prix_max);
+        }
+
+        $sort = $request->get('sort', 'date_desc');
+        match ($sort) {
+            'prix_asc'   => $query->orderBy('prix', 'asc'),
+            'prix_desc'  => $query->orderBy('prix', 'desc'),
+            'modele_asc' => $query->orderBy('modele', 'asc'),
+            default      => $query->orderBy('published_at', 'desc'),
+        };
+
+        $bateaux = $query->paginate(20)->withQueryString();
+        $types   = Type::orderBy('libelle')->get();
+        $zones   = Zone::orderBy('libelle')->get();
+
+        return view('admin.bateaux.index', compact('bateaux', 'types', 'zones'));
     }
 
     public function create()

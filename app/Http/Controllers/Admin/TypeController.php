@@ -101,6 +101,11 @@ class TypeController extends Controller
 
     public function destroy(Type $type)
     {
+        if ($type->bateaux()->exists()) {
+            return redirect()->route('admin.types.index')
+                ->with('error', "Impossible de supprimer « {$type->libelle} » : {$type->bateaux()->count()} bateau(x) utilisent encore ce type.");
+        }
+
         $type->delete();
 
         return redirect()->route('admin.types.index')
