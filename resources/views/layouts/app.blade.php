@@ -46,7 +46,7 @@
         "@@type": "Organization",
         "name": "MyBoat-oi",
         "url": "https://www.myboat-oi.com",
-        "logo": "https://www.myboat-oi.com/images/logo-myboat.svg",
+        "logo": "https://www.myboat-oi.com/images/logo-myboat.png",
         "description": "Courtier maritime spécialisé dans la vente de bateaux dans l'Océan Indien",
         "areaServed": ["Réunion", "Maurice", "Madagascar", "Mayotte", "Seychelles"],
         "contactPoint": {
