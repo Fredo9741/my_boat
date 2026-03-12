@@ -10,6 +10,19 @@ Disallow: /_debugbar/
 Disallow: /storage/
 Disallow: /vendor/
 
+# Flux RSS/Atom - supprimés définitivement (410 Gone)
+Disallow: /feed
+Disallow: /feed/
+Disallow: /feed.xml
+Disallow: /rss
+Disallow: /rss.xml
+Disallow: /atom
+Disallow: /atom.xml
+Disallow: /comments/feed
+
+# Pages de test - ne pas indexer
+Disallow: /demo-design
+
 # Sitemap location
 Sitemap: https://www.myboat-oi.com/sitemap.xml
 

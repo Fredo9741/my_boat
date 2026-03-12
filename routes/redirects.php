@@ -1118,6 +1118,26 @@ Route::get('/acheter/{category}/{slug}', function ($category, $slug) {
 })->where('slug', '.*');
 
 // ==========================================
+// FLUX RSS/ATOM - 410 Gone
+// Ces URLs existaient sur l'ancien site, Google les crawle encore.
+// 410 = "définitivement supprimé" → meilleur signal que 404 pour le SEO.
+// ==========================================
+Route::get('/feed', function () { abort(410); });
+Route::get('/feed/', function () { abort(410); });
+Route::get('/feed.xml', function () { abort(410); });
+Route::get('/atom', function () { abort(410); });
+Route::get('/atom.xml', function () { abort(410); });
+Route::get('/rss', function () { abort(410); });
+Route::get('/rss.xml', function () { abort(410); });
+Route::get('/rss2', function () { abort(410); });
+Route::get('/comments/feed', function () { abort(410); });
+Route::get('/comments/feed/', function () { abort(410); });
+Route::get('{path}/feed', function () { abort(410); })->where('path', '.+');
+Route::get('{path}/feed/', function () { abort(410); })->where('path', '.+');
+Route::get('{path}/comments/feed', function () { abort(410); })->where('path', '.+');
+Route::get('{path}/comments/feed/', function () { abort(410); })->where('path', '.+');
+
+// ==========================================
 // CATCH-ALL POUR LES ANCIENNES URLs .html
 // ==========================================
 
