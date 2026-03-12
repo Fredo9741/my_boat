@@ -29,6 +29,15 @@
             </div>
             @endif
 
+            @if (session('error'))
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
+                    <p class="text-red-700">{{ session('error') }}</p>
+                </div>
+            </div>
+            @endif
+
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 @if($types->count() > 0)
                 <div class="overflow-x-auto">
@@ -65,18 +74,25 @@
                                            title="Modifier">
                                             <i class="fas fa-edit text-lg"></i>
                                         </a>
-                                        <form action="{{ route('admin.types.destroy', $type) }}"
-                                              method="POST"
-                                              class="inline"
-                                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce type ? {{ $type->bateaux_count > 0 ? 'Attention : ' . $type->bateaux_count . ' bateau(x) utilisent ce type.' : '' }}');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                    class="text-red-600 hover:text-red-900 transition {{ $type->bateaux_count > 0 ? 'opacity-50' : '' }}"
-                                                    title="Supprimer">
-                                                <i class="fas fa-trash text-lg"></i>
-                                            </button>
-                                        </form>
+                                        @if($type->bateaux_count > 0)
+                                            <span class="text-gray-300 cursor-not-allowed"
+                                                  title="{{ $type->bateaux_count }} bateau(x) utilisent ce type — suppression impossible">
+                                                <i class="fas fa-lock text-lg"></i>
+                                            </span>
+                                        @else
+                                            <form action="{{ route('admin.types.destroy', $type) }}"
+                                                  method="POST"
+                                                  class="inline"
+                                                  onsubmit="return confirm('Supprimer le type « {{ $type->libelle }} » ? Cette action est irréversible.');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="text-red-500 hover:text-red-700 transition"
+                                                        title="Supprimer">
+                                                    <i class="fas fa-trash text-lg"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

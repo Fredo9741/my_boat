@@ -55,6 +55,11 @@ class ZoneController extends Controller
 
     public function destroy(Zone $zone)
     {
+        if ($zone->bateaux()->exists()) {
+            return redirect()->route('admin.zones.index')
+                ->with('error', "Impossible de supprimer « {$zone->libelle} » : {$zone->bateaux()->count()} bateau(x) utilisent encore cette zone.");
+        }
+
         $zone->delete();
 
         return redirect()->route('admin.zones.index')
