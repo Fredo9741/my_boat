@@ -50,8 +50,24 @@ fi
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "🚀 Starting Laravel server..."
+echo "🚀 Starting PHP-FPM + Caddy..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# Start Laravel with built-in server (simple and works on Railway)
-exec php artisan serve --host=0.0.0.0 --port=$PORT
+# Make caddy executable and locate it
+CADDY_BIN=$(which caddy 2>/dev/null || echo "/usr/local/bin/caddy")
+chmod +x "$CADDY_BIN" 2>/dev/null || true
+echo "Caddy binary: $CADDY_BIN"
+
+# Allow PHP-FPM (nobody) to write to storage and bootstrap cache
+chmod -R 777 /app/storage /app/bootstrap/cache
+echo "✅ Storage permissions set"
+
+# Start PHP-FPM in background (daemonize=no keeps stderr connected to Railway logs)
+php-fpm -y /app/railway/php-fpm.conf &
+echo "✅ PHP-FPM started on 127.0.0.1:9000"
+
+# Wait for PHP-FPM to be ready
+sleep 1
+
+# Start Caddy (foreground, keeps container alive)
+exec "$CADDY_BIN" run --config /app/railway/Caddyfile --adapter caddyfile

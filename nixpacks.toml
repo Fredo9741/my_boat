@@ -1,5 +1,6 @@
 [phases.build]
 cmds = [
+    "curl -fsSL https://github.com/caddyserver/caddy/releases/download/v2.9.1/caddy_2.9.1_linux_amd64.tar.gz | tar -xzC /usr/local/bin caddy",
     "composer install --no-dev --optimize-autoloader",
     "npm ci",
     "npm run build",
