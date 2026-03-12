@@ -1063,22 +1063,27 @@ Route::permanentRedirect('/partner', '/it/partner');
 Route::permanentRedirect('/contatto', '/it/contatto');
 
 // ==========================================
-// NETTOYAGE DES ASSETS - ANCIEN DOSSIER UPLOADS
-// Redirection globale pour les images de l'ancien site
+// NETTOYAGE DES ASSETS - ANCIENS DOSSIERS IMAGES
+// Ces URLs pointaient vers des images de l'ancien site Symfony.
+// Les images sont maintenant sur Cloudflare R2 — 410 Gone (pas de 301 inutile).
 // ==========================================
 
+Route::any('/images/{path?}', function () {
+    abort(410);
+})->where('path', '.*');
+
 Route::any('/uploads/{path?}', function () {
-    return redirect('/', 301);
+    abort(410);
 })->where('path', '.*');
 
 // Ancien dossier media/images
 Route::any('/media/{path?}', function () {
-    return redirect('/', 301);
+    abort(410);
 })->where('path', '.*');
 
 // Ancien dossier assets
 Route::any('/assets/images/{path?}', function () {
-    return redirect('/', 301);
+    abort(410);
 })->where('path', '.*');
 
 // ==========================================
