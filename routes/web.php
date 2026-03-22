@@ -58,33 +58,6 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.articles'), [ArticleController::class, 'index'])->name('articles.index');
     Route::get(LaravelLocalization::transRoute('routes.articles') . '/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 
-    // Demo Design Page (Test)
-    Route::get('/demo-design', function () {
-        // Get featured boats
-        $featuredBateaux = \App\Models\Bateau::with(['type', 'zone', 'slogan', 'images'])
-            ->visible()
-            ->where('featured', true)
-            ->orderBy('published_at', 'desc')
-            ->limit(4)
-            ->get();
-
-        // Get all types with boat count
-        $types = \App\Models\Type::withCount(['bateaux' => function ($query) {
-            $query->visible();
-        }])->get();
-
-        // Get all zones
-        $zones = \App\Models\Zone::all();
-
-        // Get statistics
-        $stats = [
-            'total_bateaux' => \App\Models\Bateau::visible()->count(),
-            'total_types' => \App\Models\Type::has('bateaux')->count(),
-            'total_zones' => \App\Models\Zone::has('bateaux')->count(),
-        ];
-
-        return view('demo-design', compact('featuredBateaux', 'types', 'zones', 'stats'));
-    })->name('demo-design');
 });
 
 // Auth routes
