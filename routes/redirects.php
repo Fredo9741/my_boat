@@ -25,6 +25,14 @@ Route::permanentRedirect('/acheter-bateau-madagascar.html', '/bateaux?zone=madag
 Route::permanentRedirect('/acheter/acheter-bateau-madagascar.html', '/bateaux?zone=madagascar');
 Route::permanentRedirect('/acheter/acheter-bateau-madagascar', '/bateaux?zone=madagascar');
 
+// NOSY BÉ (longue traîne - intent achat spécifique)
+Route::permanentRedirect('/acheter-bateau-nosy-be', '/bateaux?zone=nosy-be');
+Route::permanentRedirect('/acheter-bateau-nosy-be.html', '/bateaux?zone=nosy-be');
+Route::permanentRedirect('/bateau-nosy-be', '/bateaux?zone=nosy-be');
+Route::permanentRedirect('/bateau-a-vendre-nosy-be', '/bateaux?zone=nosy-be');
+Route::permanentRedirect('/acheter/acheter-bateau-nosy-be', '/bateaux?zone=nosy-be');
+Route::permanentRedirect('/acheter/acheter-bateau-nosy-be.html', '/bateaux?zone=nosy-be');
+
 // LA RÉUNION (Top 2 - Volume élevé)
 Route::permanentRedirect('/acheter-bateau-reunion', '/bateaux?zone=la-reunion');
 Route::permanentRedirect('/acheter-bateau-reunion.html', '/bateaux?zone=la-reunion');

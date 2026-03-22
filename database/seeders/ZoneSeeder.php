@@ -21,6 +21,7 @@ class ZoneSeeder extends Seeder
         $zones = [
             ['libelle' => 'La Réunion', 'slug' => 'la-reunion', 'libelle_translations' => null],
             ['libelle' => 'Madagascar', 'slug' => 'madagascar', 'libelle_translations' => null],
+            ['libelle' => 'Nosy Bé', 'slug' => 'nosy-be', 'libelle_translations' => null],
             ['libelle' => 'Maurice', 'slug' => 'maurice', 'libelle_translations' => null],
             ['libelle' => 'Mayotte', 'slug' => 'mayotte', 'libelle_translations' => null],
             ['libelle' => 'Seychelles', 'slug' => 'seychelles', 'libelle_translations' => null],
