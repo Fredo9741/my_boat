@@ -390,6 +390,7 @@
             <div class="bg-white dark:bg-slate-900 rounded-3xl p-10 md:p-12 text-gray-800 dark:text-white shadow-2xl border border-gray-100 dark:border-white/10">
                 <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                     @csrf
+                    <x-honeypot />
                     <input type="hidden" name="subject" value="Demande de partenariat">
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -27,6 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
             'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
             'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+            'honeypot' => \App\Http\Middleware\HoneypotMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

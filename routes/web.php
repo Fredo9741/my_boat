@@ -42,7 +42,7 @@ Route::group([
 
     // Contact form (rate limited: 5 submissions per hour)
     Route::post('/contact/send', [ContactController::class, 'send'])
-        ->middleware('throttle:contact')
+        ->middleware(['honeypot', 'throttle:contact'])
         ->name('contact.send');
 
     // Pages statiques

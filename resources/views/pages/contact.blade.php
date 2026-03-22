@@ -52,6 +52,7 @@
 
                 <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                     @csrf
+                    <x-honeypot />
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>

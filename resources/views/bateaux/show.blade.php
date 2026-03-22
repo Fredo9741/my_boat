@@ -362,6 +362,7 @@
 
             <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                 @csrf
+                <x-honeypot />
                 <input type="hidden" name="bateau_id" value="{{ $bateau->id }}">
                 <input type="hidden" name="bateau_titre" value="{{ $bateau->modele }}">
                 <input type="hidden" name="bateau_slug" value="{{ $bateau->slug }}">
