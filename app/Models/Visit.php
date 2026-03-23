@@ -50,7 +50,14 @@ class Visit extends Model
      */
     public function getShortUrlAttribute(): string
     {
-        $path = parse_url($this->url, PHP_URL_PATH) ?? $this->url;
+        $path = parse_url($this->url, PHP_URL_PATH) ?? '';
+        if ($path === '' || $path === '/') {
+            $path = '/';
+        }
+        $query = parse_url($this->url, PHP_URL_QUERY);
+        if ($query) {
+            $path .= '?' . $query;
+        }
         return strlen($path) > 55 ? substr($path, 0, 52) . '...' : $path;
     }
 }

@@ -149,10 +149,18 @@ class TrackVisits
         $cacheKey = 'visit_geo_' . md5($ip);
 
         return Cache::remember($cacheKey, 86400, function () use ($ip) {
+            // ipapi.co — HTTPS, free tier, no key required
             try {
-                $response = Http::timeout(2)->get("http://ip-api.com/json/{$ip}?fields=country,countryCode,city");
+                $response = Http::timeout(3)->get("https://ipapi.co/{$ip}/json/");
                 if ($response->successful()) {
-                    return $response->json();
+                    $data = $response->json();
+                    if (!empty($data['city'])) {
+                        return [
+                            'city'        => $data['city'],
+                            'country'     => $data['country_name'],
+                            'countryCode' => $data['country_code'],
+                        ];
+                    }
                 }
             } catch (\Throwable) {
                 // Geo is optional — fail silently
