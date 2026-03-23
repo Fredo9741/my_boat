@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\AdvancedTrafficLogger::class,
             \App\Http\Middleware\CanonicalDomainRedirect::class,
             \App\Http\Middleware\RedirectMultilingualBoatRoutes::class,
+            \App\Http\Middleware\TrackVisits::class,
         ]);
 
         // Register laravel-localization middleware aliases

@@ -108,6 +108,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
     Route::put('/settings/password', [\App\Http\Controllers\Admin\SettingController::class, 'updatePassword'])->name('settings.password.update');
+
+    // Visits monitoring
+    Route::get('/visits', [\App\Http\Controllers\Admin\VisitController::class, 'index'])->name('visits.index');
+    Route::delete('/visits', [\App\Http\Controllers\Admin\VisitController::class, 'destroy'])->name('visits.destroy');
 });
 
 // ==========================================
