@@ -10,8 +10,13 @@ class VisitController extends Controller
 {
     public function index(Request $request)
     {
-        // Last 20 human visits (live radar)
+        // Last 20 active sessions — one row per visitor (latest page of each session)
         $recentVisits = Visit::with('boat')
+            ->whereIn('id', function ($q) {
+                $q->selectRaw('MAX(id)')
+                  ->from('visits')
+                  ->groupBy('session_id');
+            })
             ->latest('created_at')
             ->limit(20)
             ->get();

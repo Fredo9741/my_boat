@@ -15,6 +15,7 @@ class Visit extends Model
         'user_agent',
         'url',
         'method',
+        'referer',
         'boat_id',
         'city',
         'country',

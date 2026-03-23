@@ -100,6 +100,7 @@ class TrackVisits
             'user_agent'    => substr($ua, 0, 500),
             'url'           => substr($request->fullUrl(), 0, 500),
             'method'        => $request->method(),
+            'referer'       => $this->formatReferer($request->header('Referer')),
             'boat_id'       => $boatId,
             'city'          => $geo['city'] ?? null,
             'country'       => $geo['country'] ?? null,
@@ -155,6 +156,47 @@ class TrackVisits
             }
             return [];
         });
+    }
+
+    /**
+     * Extract and shorten referrer — keeps only the domain/source.
+     */
+    private function formatReferer(?string $referer): ?string
+    {
+        if (empty($referer)) {
+            return null;
+        }
+
+        $host = strtolower(parse_url($referer, PHP_URL_HOST) ?? '');
+        if (!$host) {
+            return null;
+        }
+
+        // Strip www.
+        $host = preg_replace('/^www\./', '', $host);
+
+        // Skip self-referrals
+        $appHost = strtolower(parse_url(config('app.url'), PHP_URL_HOST) ?? '');
+        $appHost = preg_replace('/^www\./', '', $appHost);
+        if ($host === $appHost) {
+            return null;
+        }
+
+        $shortcuts = [
+            'google.com' => 'Google', 'google.fr' => 'Google FR', 'google.de' => 'Google DE',
+            'google.co.uk' => 'Google UK', 'google.mg' => 'Google MG', 'google.mu' => 'Google MU',
+            'google.re' => 'Google RE', 'bing.com' => 'Bing', 'duckduckgo.com' => 'DuckDuckGo',
+            'facebook.com' => 'Facebook', 'instagram.com' => 'Instagram', 'linkedin.com' => 'LinkedIn',
+            't.co' => 'Twitter/X', 'pinterest.com' => 'Pinterest', 'whatsapp.com' => 'WhatsApp',
+            'youtube.com' => 'YouTube',
+        ];
+
+        // Google country variants
+        if (preg_match('/^google\.[a-z]{2,3}$/', $host)) {
+            return 'Google (' . strtoupper(substr($host, 7)) . ')';
+        }
+
+        return $shortcuts[$host] ?? $host;
     }
 
     /**

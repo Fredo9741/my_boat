@@ -62,9 +62,9 @@
                         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
                             <h2 class="font-bold text-gray-800 flex items-center">
                                 <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-                                Live Radar — 20 dernières visites
+                                Live Radar — 20 visiteurs actifs
                             </h2>
-                            <span class="text-xs text-gray-400">Cliquez sur une session pour voir le parcours</span>
+                            <span class="text-xs text-gray-400">1 ligne = 1 visiteur · cliquez <i class="fas fa-route"></i> pour son parcours</span>
                         </div>
 
                         @if($recentVisits->isEmpty())
@@ -77,9 +77,10 @@
                             <table class="w-full text-sm">
                                 <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
                                     <tr>
-                                        <th class="px-4 py-3 text-left">Localisation</th>
-                                        <th class="px-4 py-3 text-left">Page</th>
-                                        <th class="px-4 py-3 text-left">Bateau</th>
+                                        <th class="px-4 py-3 text-left">Visiteur</th>
+                                        <th class="px-4 py-3 text-left">Provenance</th>
+                                        <th class="px-4 py-3 text-left">Dernière page</th>
+                                        <th class="px-4 py-3 text-left">Bateau vu</th>
                                         <th class="px-4 py-3 text-right">Tps</th>
                                         <th class="px-4 py-3 text-right">Il y a</th>
                                         <th class="px-4 py-3"></th>
@@ -95,6 +96,9 @@
                                             default                        => 'text-red-600',
                                         };
                                     @endphp
+                                    @php
+                                        $pageCount = \App\Models\Visit::where('session_id', $visit->session_id)->count();
+                                    @endphp
                                     <tr class="{{ $isSelected ? 'bg-blue-50' : 'hover:bg-gray-50' }} transition">
                                         <td class="px-4 py-3">
                                             <div class="flex items-center gap-2">
@@ -105,23 +109,36 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 max-w-[160px]">
-                                            <span class="text-gray-600 truncate block" title="{{ $visit->url }}">
+                                        <td class="px-4 py-3">
+                                            @if($visit->referer)
+                                            <span class="inline-flex items-center gap-1 text-xs bg-indigo-50 text-indigo-700 px-2 py-1 rounded font-medium">
+                                                <i class="fas fa-external-link-alt text-indigo-400"></i>
+                                                {{ $visit->referer }}
+                                            </span>
+                                            @else
+                                            <span class="text-xs text-gray-400">Direct / Inconnu</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-3 max-w-[140px]">
+                                            <span class="text-gray-600 truncate block text-xs" title="{{ $visit->url }}">
                                                 {{ $visit->short_url }}
                                             </span>
+                                            @if($pageCount > 1)
+                                            <span class="text-xs text-gray-400">{{ $pageCount }} pages vues</span>
+                                            @endif
                                         </td>
                                         <td class="px-4 py-3">
                                             @if($visit->boat)
                                             <a href="{{ route('bateaux.show', $visit->boat->slug) }}" target="_blank"
                                                class="text-blue-600 hover:underline text-xs font-medium">
-                                                {{ Str::limit($visit->boat->modele, 20) }}
+                                                {{ Str::limit($visit->boat->modele, 18) }}
                                             </a>
                                             @else
                                             <span class="text-gray-300 text-xs">—</span>
                                             @endif
                                         </td>
-                                        <td class="px-4 py-3 text-right font-mono {{ $rtColor }} font-semibold">
-                                            {{ $visit->response_time ?? '—' }}<span class="text-gray-400 font-normal text-xs">ms</span>
+                                        <td class="px-4 py-3 text-right font-mono {{ $rtColor }} font-semibold text-xs">
+                                            {{ $visit->response_time ?? '—' }}<span class="text-gray-400 font-normal">ms</span>
                                         </td>
                                         <td class="px-4 py-3 text-right text-gray-400 text-xs whitespace-nowrap">
                                             {{ $visit->created_at->diffForHumans() }}
