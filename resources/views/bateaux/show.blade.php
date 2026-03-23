@@ -138,7 +138,7 @@
                 <div class="relative bg-gray-100 dark:bg-slate-800 aspect-video overflow-hidden">
                     <img id="mainImage"
                          src="{{ $photos[0] }}"
-                         alt="{{ $bateau->nom }}"
+                         alt="{{ $bateau->alt_text }}"
                          class="w-full h-full object-cover"
                          onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200', 'dark:bg-slate-700');">
 
@@ -166,7 +166,7 @@
                         @foreach($photos as $index => $photo)
                         <button onclick="changeImage({{ $index }})"
                                 class="thumbnail-btn flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden border-3 transition-all hover:scale-105 {{ $index === 0 ? 'border-ocean-600 ring-2 ring-ocean-500' : 'border-gray-300 dark:border-slate-600' }}">
-                            <img src="{{ $photo }}" alt="Photo {{ $index + 1 }}" class="w-full h-full object-cover">
+                            <img src="{{ $photo }}" alt="{{ $bateau->alt_text }} - photo {{ $index + 1 }}" class="w-full h-full object-cover">
                         </button>
                         @endforeach
                     </div>

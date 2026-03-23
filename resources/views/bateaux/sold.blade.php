@@ -53,7 +53,7 @@
             <article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all transform hover:-translate-y-1 border border-gray-100 dark:border-white/10 group">
                 <a href="{{ route('bateaux.show', $boat->slug) }}" class="block">
                     @if($boat->main_image)
-                    <img src="{{ $boat->main_image }}" alt="{{ $boat->titre }}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <img src="{{ $boat->main_image }}" alt="{{ $boat->alt_text }}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
                     @else
                     <div class="w-full h-48 bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950 dark:to-ocean-900 flex items-center justify-center">
                         <i class="fas fa-ship text-4xl text-ocean-400"></i>

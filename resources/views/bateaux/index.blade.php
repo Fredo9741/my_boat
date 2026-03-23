@@ -263,6 +263,7 @@
                             :year="$bateau->annee"
                             :badge="$bateau->badge['label'] ?? null"
                             :badge-color="$bateau->badge['color'] ?? 'green'"
+                            :alt="$bateau->alt_text"
                         />
                     @empty
                         <div class="col-span-3 text-center py-20">

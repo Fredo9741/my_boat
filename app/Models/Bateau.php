@@ -197,6 +197,25 @@ class Bateau extends Model
     /**
      * Get badge info for display
      */
+    /**
+     * Build a rich SEO alt text for images
+     */
+    public function getAltTextAttribute(): string
+    {
+        $parts = array_filter([
+            $this->chantier,
+            $this->modele ?: $this->nom,
+            $this->type->libelle ?? null,
+            $this->longueurht ? $this->longueurht . 'm' : null,
+            $this->annee ? 'de ' . $this->annee : null,
+            'à vendre',
+            $this->zone->libelle ?? null,
+            'Océan Indien',
+        ]);
+
+        return implode(' ', $parts);
+    }
+
     public function getBadgeAttribute(): ?array
     {
         if (!$this->slogan) {

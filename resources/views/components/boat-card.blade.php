@@ -7,7 +7,8 @@
     'length' => '0m',
     'year' => 2024,
     'badge' => null,
-    'badgeColor' => 'green'
+    'badgeColor' => 'green',
+    'alt' => null,
 ])
 
 <div class="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-2xl dark:shadow-slate-950/50 transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-100 dark:border-white/10">
@@ -15,7 +16,7 @@
         <div class="w-full h-48 md:h-56 relative overflow-hidden">
             <img src="{{ $image }}"
                  class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
-                 alt="{{ $title }}"
+                 alt="{{ $alt ?? $title . ' à vendre - MyBoat Océan Indien' }}"
                  loading="lazy"
                  onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200', 'dark:bg-slate-700');">
 
