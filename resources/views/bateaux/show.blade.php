@@ -214,47 +214,38 @@
                     <i class="fas fa-cog text-ocean-600 dark:text-ocean-400 mr-3"></i>
                     Caractéristiques techniques
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @php
+                    $specs = [
+                        ['label' => 'Type de bateau',    'value' => $bateau->type->libelle ?? null],
+                        ['label' => 'Chantier',          'value' => $bateau->chantier],
+                        ['label' => 'Architecte',        'value' => $bateau->architecte],
+                        ['label' => 'Année',             'value' => $bateau->annee],
+                        ['label' => 'Pavillon',          'value' => $bateau->pavillon],
+                        ['label' => 'Matériaux',         'value' => $bateau->materiaux],
+                        ['label' => 'Longueur HT',       'value' => $bateau->longueurht ? $bateau->longueurht . ' m' : null],
+                        ['label' => 'Largeur',           'value' => $bateau->largeur ? $bateau->largeur . ' m' : null],
+                        ['label' => 'Tirant d\'eau',     'value' => $bateau->tirantdeau ? $bateau->tirantdeau . ' m' : null],
+                        ['label' => 'Poids (lège/chargé)', 'value' => $bateau->poidslegeencharges],
+                        ['label' => 'Surface au près',   'value' => $bateau->surfaceaupres ? $bateau->surfaceaupres . ' m²' : null],
+                        ['label' => 'Moteur',            'value' => $bateau->moteur],
+                        ['label' => 'Nombre de moteurs', 'value' => $bateau->nombre_moteurs],
+                        ['label' => 'Puissance',         'value' => $bateau->puissance ? $bateau->puissance . ' CV' : null],
+                        ['label' => 'Heures moteur',     'value' => $bateau->heuresmoteur ? number_format($bateau->heuresmoteur, 0, ',', ' ') . ' h' : null],
+                        ['label' => 'Système anti-dérive', 'value' => $bateau->systemeantiderive],
+                        ['label' => 'Cabines',           'value' => $bateau->cabines],
+                        ['label' => 'Passagers',         'value' => $bateau->passagers],
+                        ['label' => 'État',              'value' => $bateau->etat ? ucfirst($bateau->etat) : null],
+                        ['label' => 'Localisation',      'value' => $bateau->location],
+                    ];
+                    $specs = array_filter($specs, fn($s) => !is_null($s['value']) && $s['value'] !== '');
+                @endphp
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    @foreach($specs as $spec)
                     <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Type de bateau</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->type->libelle ?? 'Bateau' }}</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">{{ $spec['label'] }}</div>
+                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $spec['value'] }}</div>
                     </div>
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Longueur</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->length }}</div>
-                    </div>
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Année</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->annee }}</div>
-                    </div>
-                    @if($bateau->cabines)
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Cabines</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->cabines }}</div>
-                    </div>
-                    @endif
-                    @if($bateau->passagers)
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Passagers</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->passagers }}</div>
-                    </div>
-                    @endif
-                    @if($bateau->puissance)
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Puissance moteur</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->puissance }} CV</div>
-                    </div>
-                    @endif
-                    @if($bateau->etat)
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">État</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ ucfirst($bateau->etat) }}</div>
-                    </div>
-                    @endif
-                    <div class="bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
-                        <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Localisation</div>
-                        <div class="text-lg font-bold text-gray-900 dark:text-white">{{ $bateau->location }}</div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
