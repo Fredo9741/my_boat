@@ -97,7 +97,7 @@
         <!-- Title & Quick Info -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h1 class="text-3xl md:text-4xl font-black mb-3">{{ $bateau->nom }}</h1>
+                <h1 class="text-3xl md:text-4xl font-black mb-3">{{ $nomBateau }}</h1>
                 <div class="flex flex-wrap items-center gap-4 text-ocean-100">
                     <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> {{ $bateau->location }}</span>
                     <span class="flex items-center"><i class="fas fa-calendar-alt mr-2"></i> {{ $bateau->annee }}</span>
