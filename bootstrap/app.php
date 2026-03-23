@@ -11,6 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust Railway's load balancer so $request->ip() returns the real client IP
+        $middleware->trustProxies(at: '*');
+
         // Global middlewares (executed before route resolution)
         // Order matters: BlockUnwantedBots runs first to reject bots before logging
         $middleware->prepend([

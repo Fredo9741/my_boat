@@ -138,9 +138,12 @@ class TrackVisits
      */
     private function resolveGeo(string $ip): array
     {
-        // Skip private/localhost IPs
-        if (in_array($ip, ['127.0.0.1', '::1'], true) || str_starts_with($ip, '192.168.') || str_starts_with($ip, '10.')) {
-            return ['city' => 'Local', 'country' => 'Local', 'countryCode' => 'XX'];
+        // Skip private/localhost IPs (local dev only — on Railway these won't appear)
+        if (in_array($ip, ['127.0.0.1', '::1'], true)
+            || str_starts_with($ip, '192.168.')
+            || str_starts_with($ip, '10.')
+            || str_starts_with($ip, '172.')) {
+            return [];
         }
 
         $cacheKey = 'visit_geo_' . md5($ip);
