@@ -10,9 +10,12 @@
 @section('og_type', 'product')
 @section('og_title', e($nomBateau . ' à vendre – MyBoat Océan Indien'))
 @section('og_description', e(Str::limit(strip_tags($bateau->description), 200)))
-@section('og_image', $bateau->photo_principale ? strtok(Storage::disk('r2')->url($bateau->photo_principale), '?') : asset('images/og-myboat.jpg'))
+@section('og_image', $bateau->photo_principale ? strtok(Storage::disk('r2')->url($bateau->photo_principale), '?') : asset('images/og-default.jpg'))
 
 @push('head')
+@if($bateau->photo_principale)
+<meta property="og:image:secure_url" content="{{ strtok(Storage::disk('r2')->url($bateau->photo_principale), '?') }}">
+@endif
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 @endpush

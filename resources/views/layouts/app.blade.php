@@ -32,7 +32,7 @@
     <meta property="og:description" content="@yield('og_description', 'Courtier maritime spécialisé dans la vente de bateaux dans l\'Océan Indien. Voiliers, catamarans, bateaux à moteur.')">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-myboat.jpg'))">
+    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
 
     <!-- Additional meta tags from child views -->
     @stack('head')

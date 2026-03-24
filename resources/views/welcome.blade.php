@@ -560,7 +560,7 @@
     "description": "Courtier maritime spécialisé dans la vente de bateaux dans l'Océan Indien. Voiliers, catamarans et bateaux à moteur à La Réunion, Maurice, Madagascar, Seychelles et Mayotte.",
     "url": "{{ config('app.url') }}",
     "logo": "{{ asset('images/logo-myboat.png') }}",
-    "image": "{{ asset('images/og-myboat.jpg') }}",
+    "image": "{{ asset('images/og-default.jpg') }}",
     "telephone": "+262692706610",
     "email": "contact@myboat-oi.com",
     "address": {
