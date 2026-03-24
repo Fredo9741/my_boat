@@ -12,6 +12,11 @@
 @section('og_description', e(Str::limit(strip_tags($bateau->description), 200)))
 @section('og_image', $bateau->photo_principale ? strtok(Storage::disk('r2')->url($bateau->photo_principale), '?') : asset('images/og-myboat.jpg'))
 
+@push('head')
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+@endpush
+
 @push('structured-data')
 <script type="application/ld+json">
 {
