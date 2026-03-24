@@ -30,10 +30,11 @@ class ContactController extends Controller
         ]);
 
         return match($formType) {
-            'boat_inquiry' => $this->handleBoatInquiry($request),
-            'estimation' => $this->handleEstimation($request),
-            'partnership' => $this->handlePartnership($request),
-            default => $this->handleGeneralContact($request),
+            'boat_inquiry'  => $this->handleBoatInquiry($request),
+            'estimation'    => $this->handleEstimation($request),
+            'partnership'   => $this->handlePartnership($request),
+            'fiche_bateau'  => $this->handleFicheBateau($request),
+            default         => $this->handleGeneralContact($request),
         };
     }
 
@@ -52,6 +53,10 @@ class ContactController extends Controller
 
         if ($request->has('company') || $request->has('activity_type')) {
             return 'partnership';
+        }
+
+        if ($request->input('form_type') === 'fiche_bateau') {
+            return 'fiche_bateau';
         }
 
         return 'general';
@@ -172,6 +177,34 @@ class ContactController extends Controller
             ]);
             return redirect()->back()
                 ->with('error', 'Erreur lors de l\'envoi: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Handle boat intake form (fiche-bateau)
+     */
+    private function handleFicheBateau(Request $request)
+    {
+        $validated = $request->validate([
+            'nom'       => 'required|string|max:255',
+            'email'     => 'required|email',
+            'telephone' => 'nullable|string|max:20',
+            'message'   => 'required|string',
+        ]);
+
+        try {
+            Mail::send('emails.fiche-bateau', ['data' => $validated], function ($message) use ($validated) {
+                $message->to($this->contactEmail)
+                    ->subject('Nouvelle fiche bateau – ' . $validated['nom'])
+                    ->replyTo($validated['email'], $validated['nom']);
+            });
+
+            return redirect()->back()->with('success', 'Formulaire envoyé !');
+        } catch (\Exception $e) {
+            \Log::error('Email sending failed (fiche bateau): ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Erreur lors de l\'envoi : ' . $e->getMessage())
                 ->withInput();
         }
     }

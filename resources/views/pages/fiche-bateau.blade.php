@@ -325,6 +325,14 @@
     Vos données sont <strong>sauvegardées dans votre navigateur</strong>. Vous pouvez fermer cette page et reprendre plus tard.
 </div>
 
+<form id="fiche-form" method="POST" action="{{ route('contact.send') }}" onsubmit="return prepareSubmit()">
+@csrf
+<input type="hidden" name="form_type" value="fiche_bateau">
+<input type="hidden" id="h_nom" name="nom" value="">
+<input type="hidden" id="h_email" name="email" value="">
+<input type="hidden" id="h_tel" name="telephone" value="">
+<textarea name="message" id="h_message" style="display:none"></textarea>
+
 <div class="container">
 
     <!-- SECTION : VENDEUR -->
@@ -551,20 +559,11 @@
     <div class="section">
         <div class="section-title"><i class="fas fa-camera"></i> Photos du bateau</div>
         <div class="section-body">
-            <div class="photos-box">
-                <p>
-                    <strong>Envoyez vos photos directement par WhatsApp ou par email.</strong><br>
-                    Idéalement : extérieur tribord/bâbord, proue, poupe, cockpit, carré, cabines, moteur.
-                </p>
-                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
-                    <a href="https://wa.me/262629926538?text=Bonjour%2C%20je%20vous%20envoie%20les%20photos%20de%20mon%20bateau%20pour%20une%20annonce%20sur%20MyBoat."
-                       class="wa-btn" target="_blank">
-                        <i class="fab fa-whatsapp" style="font-size:18px;"></i> Envoyer par WhatsApp
-                    </a>
-                    <a href="mailto:contact@myboat-oi.com?subject=Photos%20bateau%20annonce&body=Bonjour%2C%20je%20vous%20transmets%20les%20photos%20de%20mon%20bateau."
-                       class="btn btn-secondary" style="text-decoration:none;">
-                        <i class="fas fa-envelope"></i> Envoyer par Email
-                    </a>
+            <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:14px 18px;display:flex;align-items:flex-start;gap:14px;">
+                <i class="fas fa-circle-info" style="color:#16a34a;font-size:20px;flex-shrink:0;margin-top:2px;"></i>
+                <div>
+                    <p style="margin:0 0 4px;font-weight:700;color:#166534;">Les photos seront demandées après l'envoi du formulaire.</p>
+                    <p style="margin:0;font-size:12px;color:#166534;">Idéalement : extérieur tribord/bâbord, proue, poupe, cockpit, carré, cabines, moteur.</p>
                 </div>
             </div>
 
@@ -605,20 +604,16 @@
     </div>
 
 </div>
+</form>
 
 <!-- STICKY BOTTOM BAR -->
 <div class="bottom-bar">
-    <button class="btn btn-danger" onclick="confirmReset()">
+    <button type="button" class="btn btn-danger" onclick="confirmReset()">
         <i class="fas fa-trash"></i> <span class="hidden-mobile">Effacer tout</span>
     </button>
-    <div class="btn-group">
-        <button class="btn btn-secondary" onclick="sendByEmail()">
-            <i class="fas fa-envelope"></i> Envoyer par email
-        </button>
-        <a id="wa-send-btn" href="#" class="btn btn-wa" onclick="sendByWhatsApp(event)">
-            <i class="fab fa-whatsapp"></i> Envoyer par WhatsApp
-        </a>
-    </div>
+    <button type="submit" form="fiche-form" class="btn btn-secondary">
+        <i class="fas fa-paper-plane"></i> Envoyer le formulaire
+    </button>
 </div>
 
 <script>
@@ -801,27 +796,18 @@ function buildMessage() {
 // ═══════════════════════════════════════════════
 //  ENVOI
 // ═══════════════════════════════════════════════
-function sendByEmail() {
+function prepareSubmit() {
     const missing = validate();
     if (missing.length) {
         alert('Champs obligatoires manquants :\n• ' + missing.join('\n• '));
-        return;
+        return false;
     }
     const { g } = collectData();
-    const subject = `Demande de mise en annonce – ${g('modele') || 'Bateau'}`;
-    const body = buildMessage();
-    window.location.href = `mailto:contact@myboat-oi.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-function sendByWhatsApp(e) {
-    e.preventDefault();
-    const missing = validate();
-    if (missing.length) {
-        alert('Champs obligatoires manquants :\n• ' + missing.join('\n• '));
-        return;
-    }
-    const msg = buildMessage();
-    window.open(`https://wa.me/262629926538?text=${encodeURIComponent(msg)}`, '_blank');
+    document.getElementById('h_nom').value     = (g('vendeur_prenom') + ' ' + g('vendeur_nom')).trim();
+    document.getElementById('h_email').value   = g('vendeur_email');
+    document.getElementById('h_tel').value     = g('vendeur_tel');
+    document.getElementById('h_message').value = buildMessage();
+    return true;
 }
 
 // ═══════════════════════════════════════════════
@@ -849,6 +835,35 @@ function debounce(fn, delay) {
     return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
 }
 </script>
+
+@if(session('success'))
+<script>localStorage.removeItem('myboat_fiche');</script>
+<div id="success-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;">
+    <div style="background:#fff;border-radius:16px;max-width:480px;width:100%;padding:32px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);">
+        <div style="width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+            <i class="fas fa-check" style="font-size:28px;color:#16a34a;"></i>
+        </div>
+        <h2 style="font-size:20px;font-weight:800;color:#1e293b;margin-bottom:8px;">Formulaire envoyé !</h2>
+        <p style="color:#475569;font-size:14px;margin-bottom:20px;">
+            Nous avons bien reçu votre demande.<br>
+            Il ne reste plus qu'à nous envoyer les <strong>photos de votre bateau</strong> directement par WhatsApp.
+        </p>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:20px;">
+            Idéalement : extérieur tribord/bâbord, proue, poupe, cockpit, carré, cabines, moteur.
+        </p>
+        <a href="https://wa.me/262692706610?text=Bonjour%2C%20je%20viens%20d'envoyer%20ma%20fiche%20bateau%20sur%20MyBoat.%20Voici%20mes%20photos."
+           target="_blank"
+           style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;padding:13px 24px;border-radius:10px;font-weight:700;font-size:15px;margin-bottom:12px;">
+            <i class="fab fa-whatsapp" style="font-size:20px;"></i> Envoyer mes photos par WhatsApp
+        </a>
+        <br>
+        <button onclick="document.getElementById('success-overlay').remove()"
+                style="background:none;border:none;color:#94a3b8;font-size:13px;cursor:pointer;margin-top:8px;text-decoration:underline;">
+            Fermer
+        </button>
+    </div>
+</div>
+@endif
 
 </body>
 </html>
