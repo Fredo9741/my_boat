@@ -319,8 +319,22 @@
     </div>
 </div>
 
+<!-- SENT BANNER (affiché si formulaire déjà envoyé) -->
+<div id="sent-banner" style="display:none;background:#fefce8;border-bottom:2px solid #fde047;padding:10px 24px;align-items:center;gap:12px;flex-wrap:wrap;">
+    <i class="fas fa-circle-check" style="color:#ca8a04;font-size:18px;flex-shrink:0;"></i>
+    <span style="font-size:13px;color:#854d0e;flex:1;"><strong>Formulaire envoyé !</strong> N'oubliez pas d'envoyer vos photos par WhatsApp.</span>
+    <a href="https://wa.me/262692706610?text=Bonjour%2C%20je%20viens%20d'envoyer%20ma%20fiche%20bateau%20sur%20MyBoat.%20Voici%20mes%20photos."
+       target="_blank"
+       style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;text-decoration:none;padding:8px 16px;border-radius:8px;font-weight:700;font-size:13px;white-space:nowrap;">
+        <i class="fab fa-whatsapp"></i> Envoyer les photos
+    </a>
+    <button onclick="newForm()" style="background:#fff;border:1.5px solid #d97706;color:#92400e;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">
+        Nouveau formulaire
+    </button>
+</div>
+
 <!-- SAVE BANNER -->
-<div class="save-banner">
+<div id="save-banner" class="save-banner">
     <i class="fas fa-shield-alt"></i>
     Vos données sont <strong>sauvegardées dans votre navigateur</strong>. Vous pouvez fermer cette page et reprendre plus tard.
 </div>
@@ -686,6 +700,12 @@ function saveForm() {
 
 // ── Écouter tous les changements ──
 document.addEventListener('DOMContentLoaded', function() {
+    // Bandeau "formulaire envoyé" persistant
+    if (localStorage.getItem('myboat_fiche_sent') === '1') {
+        document.getElementById('sent-banner').style.display = 'flex';
+        document.getElementById('save-banner').style.display = 'none';
+    }
+
     loadForm();
 
     TEXT_FIELDS.forEach(id => {
@@ -816,8 +836,15 @@ function prepareSubmit() {
 function confirmReset() {
     if (confirm('Effacer tous les champs et repartir de zéro ?')) {
         localStorage.removeItem('myboat_fiche');
+        localStorage.removeItem('myboat_fiche_sent');
         location.reload();
     }
+}
+
+function newForm() {
+    localStorage.removeItem('myboat_fiche');
+    localStorage.removeItem('myboat_fiche_sent');
+    location.reload();
 }
 
 // ═══════════════════════════════════════════════
@@ -837,7 +864,10 @@ function debounce(fn, delay) {
 </script>
 
 @if(session('success'))
-<script>localStorage.removeItem('myboat_fiche');</script>
+<script>
+    localStorage.removeItem('myboat_fiche');
+    localStorage.setItem('myboat_fiche_sent', '1');
+</script>
 <div id="success-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;">
     <div style="background:#fff;border-radius:16px;max-width:480px;width:100%;padding:32px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);">
         <div style="width:64px;height:64px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
