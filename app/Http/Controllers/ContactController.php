@@ -187,8 +187,8 @@ class ContactController extends Controller
     private function handleFicheBateau(Request $request)
     {
         $validated = $request->validate([
-            'nom'       => 'required|string|max:255',
-            'email'     => 'required|email',
+            'nom'       => 'nullable|string|max:255',
+            'email'     => 'nullable|email',
             'telephone' => 'nullable|string|max:20',
             'message'   => 'required|string',
         ]);

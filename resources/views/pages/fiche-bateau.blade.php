@@ -735,13 +735,8 @@ function collectData() {
 function validate() {
     const { g } = collectData();
     const missing = [];
-    if (!g('vendeur_nom'))   missing.push('Nom');
-    if (!g('vendeur_prenom')) missing.push('Prénom');
-    if (!g('vendeur_tel'))   missing.push('Téléphone');
-    if (!g('vendeur_email')) missing.push('Email');
-    if (!g('modele'))        missing.push('Modèle du bateau');
-    if (!g('prix'))          missing.push('Prix');
-    if (!g('description'))   missing.push('Description');
+    if (!g('vendeur_tel')) missing.push('Téléphone');
+    if (!g('modele'))      missing.push('Modèle du bateau');
     return missing;
 }
 
@@ -865,7 +860,6 @@ function debounce(fn, delay) {
 
 @if(session('success'))
 <script>
-    localStorage.removeItem('myboat_fiche');
     localStorage.setItem('myboat_fiche_sent', '1');
 </script>
 <div id="success-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;">
