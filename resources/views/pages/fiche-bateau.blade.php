@@ -3,471 +3,852 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de renseignement – MyBoat Océan Indien</title>
+    <title>Déposer mon bateau – MyBoat Océan Indien</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-myboat.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            color: #1a1a1a;
-            background: #fff;
-            padding: 20px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 14px;
+            background: #f0f9ff;
+            color: #1e293b;
+            padding-bottom: 80px;
         }
 
         /* ── HEADER ── */
         .header {
+            background: linear-gradient(135deg, #0369a1, #0ea5e9);
+            color: #fff;
+            padding: 20px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 3px solid #0ea5e9;
-            padding-bottom: 12px;
-            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(3,105,161,.3);
         }
-        .header img { height: 48px; }
-        .header-right { text-align: right; }
-        .header-right h1 { font-size: 18px; font-weight: 800; color: #0ea5e9; }
-        .header-right p { font-size: 10px; color: #666; margin-top: 2px; }
+        .header img { height: 44px; filter: brightness(0) invert(1); }
+        .header-text h1 { font-size: 20px; font-weight: 800; }
+        .header-text p { font-size: 12px; opacity: .85; margin-top: 2px; }
+
+        /* ── SAVE BANNER ── */
+        .save-banner {
+            background: #dcfce7;
+            border-bottom: 2px solid #86efac;
+            padding: 8px 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #166534;
+        }
+        .save-banner i { color: #16a34a; }
+
+        /* ── CONTAINER ── */
+        .container { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
 
         /* ── SECTIONS ── */
         .section {
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            margin-bottom: 14px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 6px rgba(0,0,0,.08);
+            margin-bottom: 20px;
             overflow: hidden;
         }
         .section-title {
             background: #0ea5e9;
             color: #fff;
-            font-size: 11px;
+            padding: 10px 18px;
             font-weight: 700;
-            padding: 6px 12px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-        .section-body { padding: 12px; }
-
-        /* ── GRID ── */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
-        .col-span-2 { grid-column: span 2; }
-        .col-span-3 { grid-column: span 3; }
-        .col-span-4 { grid-column: span 4; }
-
-        /* ── CHAMP ── */
-        .field { display: flex; flex-direction: column; }
-        .field label {
-            font-size: 9px;
-            font-weight: 700;
-            color: #374151;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 3px;
-        }
-        .field label .req { color: #ef4444; }
-        .field .line {
-            border-bottom: 1.5px solid #9ca3af;
-            height: 22px;
-            width: 100%;
-        }
-        .field .box {
-            border: 1.5px solid #9ca3af;
-            border-radius: 3px;
-            height: 60px;
-            width: 100%;
-        }
-        .field .box-lg {
-            border: 1.5px solid #9ca3af;
-            border-radius: 3px;
-            height: 90px;
-            width: 100%;
-        }
-
-        /* ── CHECKBOXES ── */
-        .check-group { margin-bottom: 10px; }
-        .check-group-title {
-            font-size: 10px;
-            font-weight: 700;
-            color: #0ea5e9;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 3px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-        .check-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4px 8px;
-        }
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 10px;
-        }
-        .check-item .cb {
-            width: 11px;
-            height: 11px;
-            border: 1.5px solid #9ca3af;
-            border-radius: 2px;
-            flex-shrink: 0;
-        }
-
-        /* ── INFOS VENDEUR ── */
-        .vendeur-box {
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            border-radius: 6px;
-            padding: 10px 14px;
-            margin-bottom: 14px;
-        }
-        .vendeur-box h3 {
-            font-size: 11px;
-            font-weight: 700;
-            color: #0369a1;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        /* ── FOOTER ── */
-        .footer {
-            border-top: 1px solid #e5e7eb;
-            padding-top: 10px;
-            margin-top: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 9px;
-            color: #9ca3af;
-        }
-
-        /* ── PRINT BUTTON (screen only) ── */
-        .print-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #0ea5e9;
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(14,165,233,0.4);
+            font-size: 13px;
+            letter-spacing: .4px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        .section-body { padding: 18px; }
+
+        /* ── GRID ── */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+        .col-2 { grid-column: span 2; }
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+        @media(max-width:640px) {
+            .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr 1fr; }
+            .col-3,.col-4 { grid-column: span 2; }
+        }
+        @media(max-width:400px) {
+            .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; }
+            .col-2,.col-3,.col-4 { grid-column: span 1; }
+        }
+
+        /* ── FIELD ── */
+        .field { display: flex; flex-direction: column; gap: 5px; }
+        .field label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: .3px;
+        }
+        .field label .req { color: #ef4444; margin-left: 2px; }
+        .field input[type="text"],
+        .field input[type="email"],
+        .field input[type="tel"],
+        .field input[type="number"],
+        .field select,
+        .field textarea {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 7px;
+            padding: 9px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #1e293b;
+            background: #f8fafc;
+            transition: border-color .2s, box-shadow .2s;
+            width: 100%;
+        }
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14,165,233,.15);
+            outline: none;
+            background: #fff;
+        }
+        .field textarea { resize: vertical; min-height: 90px; }
+        .field .hint { font-size: 11px; color: #94a3b8; }
+
+        /* ── RADIO / CHECK INLINE ── */
+        .radio-group, .check-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2px;
+        }
+        .radio-group label, .check-inline label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            cursor: pointer;
+            padding: 6px 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 20px;
+            transition: all .2s;
+            color: #334155;
+        }
+        .radio-group label:has(input:checked),
+        .check-inline label:has(input:checked) {
+            border-color: #0ea5e9;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
+        }
+        .radio-group input, .check-inline input { display: none; }
+
+        /* ── EQUIPEMENTS ── */
+        .equip-category { margin-bottom: 16px; }
+        .equip-category-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0369a1;
+            text-transform: uppercase;
+            letter-spacing: .3px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+        .equip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 6px;
+        }
+        .equip-grid label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            color: #334155;
+            transition: all .15s;
+        }
+        .equip-grid label:has(input:checked) {
+            border-color: #0ea5e9;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
+        }
+        .equip-grid input { display: none; }
+        .equip-grid .cb-icon {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: transparent;
+            transition: all .15s;
+        }
+        .equip-grid label:has(input:checked) .cb-icon {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+            color: #fff;
+        }
+
+        /* ── PHOTOS WHATSAPP BOX ── */
+        .photos-box {
+            background: #f0fdf4;
+            border: 2px dashed #86efac;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .photos-box p { color: #166534; font-size: 13px; margin-bottom: 10px; }
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25d366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+        .wa-btn:hover { background: #1ebe5d; }
+
+        /* ── STICKY BOTTOM BAR ── */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-top: 2px solid #e2e8f0;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,.1);
+            z-index: 100;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: all .2s;
+        }
+        .btn-primary { background: #0ea5e9; color: #fff; }
+        .btn-primary:hover { background: #0284c7; }
+        .btn-secondary { background: #f1f5f9; color: #475569; border: 1.5px solid #cbd5e1; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-danger { background: #fee2e2; color: #dc2626; border: 1.5px solid #fca5a5; }
+        .btn-danger:hover { background: #fecaca; }
+        .btn-wa { background: #25d366; color: #fff; }
+        .btn-wa:hover { background: #1ebe5d; }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        /* ── DIVIDER ── */
+        .divider {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 14px 0;
+        }
+
+        /* ── TOAST ── */
+        #toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #166534;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            gap: 8px;
             z-index: 999;
-        }
-        .print-btn:hover { background: #0284c7; }
-
-        /* ── MEDIA PRINT ── */
-        @media print {
-            body { padding: 10px; font-size: 10px; }
-            .print-btn { display: none; }
-            .section { page-break-inside: avoid; }
-            .header { margin-bottom: 12px; }
+            box-shadow: 0 4px 15px rgba(0,0,0,.2);
         }
 
-        @page { margin: 12mm; size: A4; }
+        @media(max-width:600px) {
+            .bottom-bar { flex-direction: column; align-items: stretch; }
+            .btn-group { justify-content: stretch; }
+            .btn { justify-content: center; }
+        }
     </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">
-    🖨️ Imprimer / Enregistrer en PDF
-</button>
+<!-- TOAST -->
+<div id="toast"><i class="fas fa-check-circle"></i> <span id="toast-msg">Sauvegardé !</span></div>
 
 <!-- HEADER -->
 <div class="header">
-    <img src="{{ asset('images/logo-myboat.svg') }}" alt="MyBoat Océan Indien" onerror="this.style.display='none'">
-    <div class="header-right">
-        <h1>Fiche de renseignement bateau</h1>
-        <p>MyBoat Océan Indien · myboat-oi.com · +262 629 926 538</p>
-        <p style="margin-top:4px;color:#9ca3af;">Date : _____ / _____ / 20_____</p>
+    <img src="{{ asset('images/logo-myboat.svg') }}" alt="MyBoat" onerror="this.style.display='none'">
+    <div class="header-text">
+        <h1>Déposer mon bateau</h1>
+        <p>Remplissez ce formulaire — votre progression est sauvegardée automatiquement</p>
     </div>
 </div>
 
-<!-- INFORMATIONS VENDEUR -->
-<div class="vendeur-box">
-    <h3>📋 Informations du vendeur</h3>
-    <div class="grid-4" style="gap:10px;">
-        <div class="field">
-            <label>Nom <span class="req">*</span></label>
-            <div class="line"></div>
-        </div>
-        <div class="field">
-            <label>Prénom <span class="req">*</span></label>
-            <div class="line"></div>
-        </div>
-        <div class="field">
-            <label>Téléphone <span class="req">*</span></label>
-            <div class="line"></div>
-        </div>
-        <div class="field">
-            <label>Email <span class="req">*</span></label>
-            <div class="line"></div>
-        </div>
-        <div class="field col-span-2">
-            <label>Adresse / Localisation</label>
-            <div class="line"></div>
-        </div>
-        <div class="field">
-            <label>WhatsApp</label>
-            <div class="line"></div>
-        </div>
-        <div class="field">
-            <label>Disponibilité pour visite</label>
-            <div class="line"></div>
-        </div>
-    </div>
+<!-- SAVE BANNER -->
+<div class="save-banner">
+    <i class="fas fa-shield-alt"></i>
+    Vos données sont <strong>sauvegardées dans votre navigateur</strong>. Vous pouvez fermer cette page et reprendre plus tard.
 </div>
 
-<!-- SECTION 1 : INFORMATIONS GÉNÉRALES -->
-<div class="section">
-    <div class="section-title">⚓ 1. Informations générales</div>
-    <div class="section-body">
-        <div class="grid-2" style="gap:10px;">
-            <div class="field col-span-2">
-                <label>Modèle / Nom du bateau <span class="req">*</span></label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Type de bateau <span class="req">*</span><br><span style="font-weight:400;font-size:9px;text-transform:none;">(Voilier / Catamaran / Vedette / Semi-rigide / Autre)</span></label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Zone géographique (localisation actuelle)</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Prix demandé (€) <span class="req">*</span></label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Prix négociable ?</label>
-                <div style="display:flex;gap:16px;margin-top:6px;">
-                    <div class="check-item"><div class="cb"></div> Oui</div>
-                    <div class="check-item"><div class="cb"></div> Non</div>
+<div class="container">
+
+    <!-- SECTION : VENDEUR -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-user"></i> Vos coordonnées</div>
+        <div class="section-body">
+            <div class="grid-2">
+                <div class="field">
+                    <label>Nom <span class="req">*</span></label>
+                    <input type="text" id="vendeur_nom" placeholder="Votre nom de famille">
                 </div>
-            </div>
-            <div class="field">
-                <label>Afficher le prix sur l'annonce ?</label>
-                <div style="display:flex;gap:16px;margin-top:6px;">
-                    <div class="check-item"><div class="cb"></div> Oui</div>
-                    <div class="check-item"><div class="cb"></div> Non (prix sur demande)</div>
+                <div class="field">
+                    <label>Prénom <span class="req">*</span></label>
+                    <input type="text" id="vendeur_prenom" placeholder="Votre prénom">
                 </div>
-            </div>
-            <div class="field">
-                <label>État du bateau</label>
-                <div style="display:flex;gap:16px;margin-top:6px;">
-                    <div class="check-item"><div class="cb"></div> Neuf</div>
-                    <div class="check-item"><div class="cb"></div> Occasion</div>
+                <div class="field">
+                    <label>Téléphone <span class="req">*</span></label>
+                    <input type="tel" id="vendeur_tel" placeholder="+262 6XX XXX XXX">
                 </div>
-            </div>
-            <div class="field col-span-2">
-                <label>Description de l'annonce <span class="req">*</span> <span style="font-weight:400;text-transform:none;">(état général, historique, travaux récents…)</span></label>
-                <div class="box-lg"></div>
+                <div class="field">
+                    <label>WhatsApp</label>
+                    <input type="tel" id="vendeur_wa" placeholder="+262 6XX XXX XXX (si différent)">
+                </div>
+                <div class="field col-2">
+                    <label>Email <span class="req">*</span></label>
+                    <input type="email" id="vendeur_email" placeholder="votre@email.com">
+                </div>
+                <div class="field col-2">
+                    <label>Disponibilité pour visites</label>
+                    <input type="text" id="vendeur_dispo" placeholder="Ex: en semaine après 17h, week-end matin...">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- SECTION 2 : CARACTÉRISTIQUES TECHNIQUES -->
-<div class="section">
-    <div class="section-title">⚙️ 2. Caractéristiques techniques</div>
-    <div class="section-body">
-        <div class="grid-3" style="gap:10px;">
-            <div class="field">
-                <label>Chantier constructeur</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Architecte naval</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Année de construction</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Pavillon</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Matériaux de coque</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Longueur hors tout (m)</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Largeur / Bau (m)</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Tirant d'eau (m)</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Poids lège / en charges (kg)</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Surface de voilure au près (m²)</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Système anti-dérive</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Nombre de cabines</label>
-                <div class="line"></div>
-            </div>
-            <div class="field">
-                <label>Capacité passagers</label>
-                <div class="line"></div>
+    <!-- SECTION : INFOS GÉNÉRALES -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-anchor"></i> Informations générales</div>
+        <div class="section-body">
+            <div class="grid-2">
+                <div class="field col-2">
+                    <label>Modèle / Nom du bateau <span class="req">*</span></label>
+                    <input type="text" id="modele" placeholder="Ex: Lagoon 420, Sun Odyssey 45, Iris 37...">
+                </div>
+                <div class="field">
+                    <label>Type de bateau <span class="req">*</span></label>
+                    <select id="type">
+                        <option value="">-- Choisir --</option>
+                        @foreach(\App\Models\Type::orderBy('libelle')->get() as $t)
+                        <option value="{{ $t->libelle }}">{{ $t->libelle }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Zone / Localisation actuelle</label>
+                    <select id="zone">
+                        <option value="">-- Choisir --</option>
+                        @foreach(\App\Models\Zone::orderBy('libelle')->get() as $z)
+                        <option value="{{ $z->libelle }}">{{ $z->libelle }}</option>
+                        @endforeach
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Prix demandé (€) <span class="req">*</span></label>
+                    <input type="number" id="prix" placeholder="Ex: 45000" min="0">
+                </div>
+                <div class="field">
+                    <label>Prix négociable ?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="negociable" value="Oui"> Oui</label>
+                        <label><input type="radio" name="negociable" value="Non"> Non</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>État</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="occasion" value="Occasion"> Occasion</label>
+                        <label><input type="radio" name="occasion" value="Neuf"> Neuf</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Afficher le prix sur l'annonce ?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="afficher_prix" value="Oui" checked> Oui</label>
+                        <label><input type="radio" name="afficher_prix" value="Non"> Non (sur demande)</label>
+                    </div>
+                </div>
+                <div class="field col-2">
+                    <label>Description <span class="req">*</span></label>
+                    <textarea id="description" placeholder="Décrivez votre bateau : état général, historique, travaux récents, points forts, raison de la vente..."></textarea>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Sous-section moteur -->
-        <div style="margin-top:12px;border-top:1px solid #e5e7eb;padding-top:10px;">
-            <div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;">🔧 Motorisation</div>
-            <div class="grid-4" style="gap:10px;">
-                <div class="field col-span-2">
+    <!-- SECTION : CARACTÉRISTIQUES TECHNIQUES -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-cog"></i> Caractéristiques techniques</div>
+        <div class="section-body">
+            <div class="grid-3">
+                <div class="field">
+                    <label>Chantier constructeur</label>
+                    <input type="text" id="chantier" placeholder="Ex: Lagoon, Jeanneau...">
+                </div>
+                <div class="field">
+                    <label>Architecte naval</label>
+                    <input type="text" id="architecte" placeholder="Ex: VPLP, Marc Lombard...">
+                </div>
+                <div class="field">
+                    <label>Année de construction</label>
+                    <input type="number" id="annee" placeholder="Ex: 2008" min="1900" max="{{ date('Y') + 1 }}">
+                </div>
+                <div class="field">
+                    <label>Pavillon</label>
+                    <input type="text" id="pavillon" placeholder="Ex: Français, Malgache...">
+                </div>
+                <div class="field">
+                    <label>Matériaux de coque</label>
+                    <input type="text" id="materiaux" placeholder="Ex: Polyester, Alu, Acier...">
+                </div>
+                <div class="field">
+                    <label>Longueur hors tout (m)</label>
+                    <input type="number" id="longueurht" placeholder="Ex: 12.60" step="0.01">
+                </div>
+                <div class="field">
+                    <label>Largeur / Bau (m)</label>
+                    <input type="number" id="largeur" placeholder="Ex: 6.90" step="0.01">
+                </div>
+                <div class="field">
+                    <label>Tirant d'eau (m)</label>
+                    <input type="number" id="tirantdeau" placeholder="Ex: 1.20" step="0.01">
+                </div>
+                <div class="field">
+                    <label>Poids lège / en charges (kg)</label>
+                    <input type="number" id="poids" placeholder="Ex: 8500" step="0.01">
+                </div>
+                <div class="field">
+                    <label>Surface voilure au près (m²)</label>
+                    <input type="number" id="surface" placeholder="Ex: 112" step="0.01">
+                </div>
+                <div class="field">
+                    <label>Système anti-dérive</label>
+                    <input type="text" id="antiderive" placeholder="Ex: Dérive pivotante, Quille fixe...">
+                </div>
+                <div class="field">
+                    <label>Nombre de cabines</label>
+                    <input type="number" id="cabines" placeholder="Ex: 4" min="0">
+                </div>
+                <div class="field">
+                    <label>Capacité passagers</label>
+                    <input type="number" id="passagers" placeholder="Ex: 10" min="0">
+                </div>
+            </div>
+
+            <hr class="divider">
+            <div style="font-size:12px;font-weight:700;color:#475569;text-transform:uppercase;margin-bottom:12px;"><i class="fas fa-wrench mr-1"></i> Motorisation</div>
+            <div class="grid-4">
+                <div class="field col-2">
                     <label>Marque / Modèle moteur</label>
-                    <div class="line"></div>
+                    <input type="text" id="moteur" placeholder="Ex: Yanmar 4JH45, Volvo D2-55...">
                 </div>
                 <div class="field">
                     <label>Nombre de moteurs</label>
-                    <div class="line"></div>
+                    <input type="number" id="nb_moteurs" placeholder="Ex: 2" min="0">
                 </div>
                 <div class="field">
                     <label>Puissance (CV)</label>
-                    <div class="line"></div>
+                    <input type="number" id="puissance" placeholder="Ex: 55" min="0">
                 </div>
                 <div class="field">
                     <label>Heures moteur</label>
-                    <div class="line"></div>
+                    <input type="number" id="heures" placeholder="Ex: 1200" min="0">
                 </div>
-                <div class="field col-span-3">
-                    <label>Observations moteur (révisions, travaux…)</label>
-                    <div class="line"></div>
+                <div class="field col-3">
+                    <label>Observations moteur</label>
+                    <input type="text" id="obs_moteur" placeholder="Révisions, travaux récents, état...">
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- SECTION 3 : ÉQUIPEMENTS -->
-<div class="section">
-    <div class="section-title">✅ 3. Équipements à bord</div>
-    <div class="section-body">
-        @if($equipements->isNotEmpty())
+    <!-- SECTION : ÉQUIPEMENTS -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-list-check"></i> Équipements à bord</div>
+        <div class="section-body">
             @php
-                $labels = [
-                    'navigation'   => '🧭 Navigation',
-                    'electronique' => '📡 Électronique',
-                    'securite'     => '🛟 Sécurité',
-                    'manoeuvre'    => '⚓ Manœuvre',
-                    'confort'      => '🛋️ Confort',
-                    'loisirs'      => '🎣 Loisirs',
+                $catLabels = [
+                    'navigation'   => ['icon' => 'fas fa-compass',       'label' => 'Navigation'],
+                    'electronique' => ['icon' => 'fas fa-satellite-dish', 'label' => 'Électronique'],
+                    'securite'     => ['icon' => 'fas fa-shield-alt',     'label' => 'Sécurité'],
+                    'manoeuvre'    => ['icon' => 'fas fa-anchor',         'label' => 'Manœuvre'],
+                    'confort'      => ['icon' => 'fas fa-couch',          'label' => 'Confort'],
+                    'loisirs'      => ['icon' => 'fas fa-fish',           'label' => 'Loisirs'],
                 ];
             @endphp
+
             @foreach($equipements as $categorie => $items)
-            <div class="check-group">
-                <div class="check-group-title">{{ $labels[$categorie] ?? ucfirst($categorie) }}</div>
-                <div class="check-grid">
+            @php $cat = $catLabels[$categorie] ?? ['icon' => 'fas fa-check', 'label' => ucfirst($categorie)]; @endphp
+            <div class="equip-category">
+                <div class="equip-category-title">
+                    <i class="{{ $cat['icon'] }}"></i> {{ $cat['label'] }}
+                </div>
+                <div class="equip-grid">
                     @foreach($items as $eq)
-                    <div class="check-item">
-                        <div class="cb"></div>
-                        <span>{{ $eq->libelle }}</span>
-                    </div>
+                    <label>
+                        <input type="checkbox" class="equip-cb" data-id="{{ $eq->id }}" data-label="{{ $eq->libelle }}">
+                        <span class="cb-icon"><i class="fas fa-check" style="font-size:9px;"></i></span>
+                        {{ $eq->libelle }}
+                    </label>
                     @endforeach
-                    <div class="check-item">
-                        <div class="cb"></div>
-                        <span>Autre : _______________</span>
-                    </div>
                 </div>
             </div>
             @endforeach
-        @else
-            <div class="grid-4" style="gap:6px;">
-                @foreach(['GPS chartplotter','VHF DSC','Pilote automatique','Radar','AIS','Sondeur','Guindeau électrique','Génois enrouleur','Lazy bag / Lazy jack','Électronique NMEA','Panneaux solaires','Groupe électrogène','Désalinisateur','Réfrigérateur','Climatisation','Dinghy / Annexe','Moteur annexe','Balise EPIRB','Radeau de survie','Gilets gonflables','Extincteurs','Pompe de cale auto','Jack-stay / Filières','Bimini / Taud'] as $eq)
-                <div class="check-item">
-                    <div class="cb"></div>
-                    <span>{{ $eq }}</span>
+
+            <div class="field" style="margin-top:8px;">
+                <label>Autres équipements non listés</label>
+                <input type="text" id="autres_equip" placeholder="Ex: Radar couleur, guindeau hydraulique, bimini sur mesure...">
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION : PHOTOS -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-camera"></i> Photos du bateau</div>
+        <div class="section-body">
+            <div class="photos-box">
+                <p>
+                    <strong>Envoyez vos photos directement par WhatsApp ou par email.</strong><br>
+                    Idéalement : extérieur tribord/bâbord, proue, poupe, cockpit, carré, cabines, moteur.
+                </p>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
+                    <a href="https://wa.me/262629926538?text=Bonjour%2C%20je%20vous%20envoie%20les%20photos%20de%20mon%20bateau%20pour%20une%20annonce%20sur%20MyBoat."
+                       class="wa-btn" target="_blank">
+                        <i class="fab fa-whatsapp" style="font-size:18px;"></i> Envoyer par WhatsApp
+                    </a>
+                    <a href="mailto:contact@myboat-oi.com?subject=Photos%20bateau%20annonce&body=Bonjour%2C%20je%20vous%20transmets%20les%20photos%20de%20mon%20bateau."
+                       class="btn btn-secondary" style="text-decoration:none;">
+                        <i class="fas fa-envelope"></i> Envoyer par Email
+                    </a>
                 </div>
+            </div>
+
+            <div class="field" style="margin-top:14px;">
+                <label>Lien vidéo YouTube (optionnel)</label>
+                <input type="text" id="video" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION : DOCUMENTS -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-file-alt"></i> Documents disponibles</div>
+        <div class="section-body">
+            <div class="check-inline">
+                @foreach([
+                    'Acte de francisation',
+                    "Certificat d'immatriculation",
+                    'Expertise / Survey récent',
+                    'Carnet entretien moteur',
+                    'Inventaire complet',
+                    'Assurance en cours',
+                    'Certificat de jauge',
+                    'Factures travaux récents',
+                    'Plans / Documentation technique',
+                ] as $doc)
+                <label>
+                    <input type="checkbox" class="doc-cb" data-label="{{ $doc }}">
+                    <i class="fas fa-check" style="font-size:10px;"></i> {{ $doc }}
+                </label>
                 @endforeach
             </div>
-        @endif
-
-        <div style="margin-top:10px;" class="field">
-            <label>Autres équipements / remarques</label>
-            <div class="box"></div>
-        </div>
-    </div>
-</div>
-
-<!-- SECTION 4 : MÉDIAS -->
-<div class="section">
-    <div class="section-title">📸 4. Photos & vidéos</div>
-    <div class="section-body">
-        <div class="grid-2" style="gap:10px;">
-            <div class="field">
-                <label>Photos disponibles ? <span class="req">*</span></label>
-                <div style="display:flex;gap:16px;margin-top:6px;">
-                    <div class="check-item"><div class="cb"></div> Oui</div>
-                    <div class="check-item"><div class="cb"></div> Non (photos à prendre)</div>
-                </div>
-            </div>
-            <div class="field">
-                <label>Format des photos</label>
-                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;">
-                    <div class="check-item"><div class="cb"></div> Email</div>
-                    <div class="check-item"><div class="cb"></div> WhatsApp</div>
-                    <div class="check-item"><div class="cb"></div> Clé USB</div>
-                    <div class="check-item"><div class="cb"></div> Google Drive / WeTransfer</div>
-                </div>
-            </div>
-            <div class="field col-span-2">
-                <label>Lien(s) vidéo YouTube / autre</label>
-                <div class="line"></div>
+            <div class="field" style="margin-top:12px;">
+                <label>Remarques / informations complémentaires</label>
+                <textarea id="remarques" placeholder="Tout ce qui vous semble utile à préciser..."></textarea>
             </div>
         </div>
     </div>
+
 </div>
 
-<!-- SECTION 5 : DOCUMENTS -->
-<div class="section">
-    <div class="section-title">📄 5. Documents disponibles</div>
-    <div class="section-body">
-        <div class="check-grid" style="grid-template-columns:repeat(3,1fr);">
-            @foreach(["Acte de francisation / titre de navigation","Certificat d'immatriculation","Expertise / Survey récent","Carnet d'entretien moteur","Inventaire complet","Assurance en cours","Certificat jauge","Plans / Documentation technique","Factures travaux récents"] as $doc)
-            <div class="check-item">
-                <div class="cb"></div>
-                <span>{{ $doc }}</span>
-            </div>
-            @endforeach
-        </div>
+<!-- STICKY BOTTOM BAR -->
+<div class="bottom-bar">
+    <button class="btn btn-danger" onclick="confirmReset()">
+        <i class="fas fa-trash"></i> <span class="hidden-mobile">Effacer tout</span>
+    </button>
+    <div class="btn-group">
+        <button class="btn btn-secondary" onclick="sendByEmail()">
+            <i class="fas fa-envelope"></i> Envoyer par email
+        </button>
+        <a id="wa-send-btn" href="#" class="btn btn-wa" onclick="sendByWhatsApp(event)">
+            <i class="fab fa-whatsapp"></i> Envoyer par WhatsApp
+        </a>
     </div>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-    <div>
-        <strong>MyBoat Océan Indien</strong> · myboat-oi.com<br>
-        +262 629 926 538 · contact@myboat-oi.com
-    </div>
-    <div style="text-align:right;">
-        Fiche complétée le : _____ / _____ / 20_____<br>
-        Signature du vendeur : _________________________
-    </div>
-</div>
+<script>
+// ═══════════════════════════════════════════════
+//  CHAMPS TEXTE / SELECT / NUMBER
+// ═══════════════════════════════════════════════
+const TEXT_FIELDS = [
+    'vendeur_nom','vendeur_prenom','vendeur_tel','vendeur_wa','vendeur_email','vendeur_dispo',
+    'modele','type','zone','prix','description',
+    'chantier','architecte','annee','pavillon','materiaux',
+    'longueurht','largeur','tirantdeau','poids','surface','antiderive','cabines','passagers',
+    'moteur','nb_moteurs','puissance','heures','obs_moteur',
+    'autres_equip','video','remarques',
+];
+
+// ── Charger depuis localStorage ──
+function loadForm() {
+    const saved = JSON.parse(localStorage.getItem('myboat_fiche') || '{}');
+
+    TEXT_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && saved[id] !== undefined) el.value = saved[id];
+    });
+
+    // Radios
+    ['negociable','occasion','afficher_prix'].forEach(name => {
+        if (saved[name]) {
+            const radio = document.querySelector(`input[name="${name}"][value="${saved[name]}"]`);
+            if (radio) radio.checked = true;
+        }
+    });
+
+    // Équipements
+    if (saved.equip_ids) {
+        saved.equip_ids.forEach(id => {
+            const cb = document.querySelector(`.equip-cb[data-id="${id}"]`);
+            if (cb) cb.checked = true;
+        });
+    }
+
+    // Documents
+    if (saved.docs) {
+        saved.docs.forEach(label => {
+            const cb = document.querySelector(`.doc-cb[data-label="${label}"]`);
+            if (cb) cb.checked = true;
+        });
+    }
+}
+
+// ── Sauvegarder dans localStorage ──
+function saveForm() {
+    const data = {};
+
+    TEXT_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) data[id] = el.value;
+    });
+
+    ['negociable','occasion','afficher_prix'].forEach(name => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        data[name] = checked ? checked.value : '';
+    });
+
+    data.equip_ids = [...document.querySelectorAll('.equip-cb:checked')].map(cb => cb.dataset.id);
+    data.docs      = [...document.querySelectorAll('.doc-cb:checked')].map(cb => cb.dataset.label);
+
+    localStorage.setItem('myboat_fiche', JSON.stringify(data));
+    showToast('Progression sauvegardée !');
+}
+
+// ── Écouter tous les changements ──
+document.addEventListener('DOMContentLoaded', function() {
+    loadForm();
+
+    TEXT_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', debounce(saveForm, 600));
+    });
+
+    document.querySelectorAll('input[type="radio"], .equip-cb, .doc-cb').forEach(el => {
+        el.addEventListener('change', saveForm);
+    });
+});
+
+// ═══════════════════════════════════════════════
+//  COLLECTE DES DONNÉES
+// ═══════════════════════════════════════════════
+function collectData() {
+    const g = id => (document.getElementById(id)?.value || '').trim();
+    const r = name => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
+
+    const equips = [...document.querySelectorAll('.equip-cb:checked')].map(cb => cb.dataset.label);
+    const docs   = [...document.querySelectorAll('.doc-cb:checked')].map(cb => cb.dataset.label);
+
+    return { g, r, equips, docs };
+}
+
+// ── Valider les champs obligatoires ──
+function validate() {
+    const { g } = collectData();
+    const missing = [];
+    if (!g('vendeur_nom'))   missing.push('Nom');
+    if (!g('vendeur_prenom')) missing.push('Prénom');
+    if (!g('vendeur_tel'))   missing.push('Téléphone');
+    if (!g('vendeur_email')) missing.push('Email');
+    if (!g('modele'))        missing.push('Modèle du bateau');
+    if (!g('prix'))          missing.push('Prix');
+    if (!g('description'))   missing.push('Description');
+    return missing;
+}
+
+// ── Formater le message complet ──
+function buildMessage() {
+    const { g, r, equips, docs } = collectData();
+
+    let msg = `🚢 DEMANDE DE MISE EN ANNONCE – MyBoat Océan Indien\n`;
+    msg += `${'─'.repeat(45)}\n\n`;
+
+    msg += `👤 VENDEUR\n`;
+    msg += `Nom & Prénom : ${g('vendeur_prenom')} ${g('vendeur_nom')}\n`;
+    msg += `Téléphone    : ${g('vendeur_tel')}\n`;
+    if (g('vendeur_wa'))    msg += `WhatsApp     : ${g('vendeur_wa')}\n`;
+    msg += `Email        : ${g('vendeur_email')}\n`;
+    if (g('vendeur_dispo')) msg += `Disponibilité: ${g('vendeur_dispo')}\n`;
+
+    msg += `\n🚢 BATEAU\n`;
+    msg += `Modèle       : ${g('modele')}\n`;
+    if (g('type'))  msg += `Type         : ${g('type')}\n`;
+    if (g('zone'))  msg += `Localisation : ${g('zone')}\n`;
+    msg += `Prix         : ${g('prix') ? Number(g('prix')).toLocaleString('fr') + ' €' : '—'}\n`;
+    if (r('negociable'))    msg += `Négociable   : ${r('negociable')}\n`;
+    if (r('occasion'))      msg += `État         : ${r('occasion')}\n`;
+    if (r('afficher_prix')) msg += `Afficher prix: ${r('afficher_prix')}\n`;
+    msg += `\nDescription :\n${g('description')}\n`;
+
+    const specs = [
+        ['Chantier', g('chantier')], ['Architecte', g('architecte')], ['Année', g('annee')],
+        ['Pavillon', g('pavillon')], ['Matériaux', g('materiaux')],
+        ['Longueur HT', g('longueurht') ? g('longueurht') + ' m' : ''],
+        ['Largeur', g('largeur') ? g('largeur') + ' m' : ''],
+        ['Tirant d\'eau', g('tirantdeau') ? g('tirantdeau') + ' m' : ''],
+        ['Poids', g('poids') ? g('poids') + ' kg' : ''],
+        ['Surface voilure', g('surface') ? g('surface') + ' m²' : ''],
+        ['Anti-dérive', g('antiderive')], ['Cabines', g('cabines')], ['Passagers', g('passagers')],
+    ].filter(([, v]) => v);
+
+    if (specs.length) {
+        msg += `\n⚙️ CARACTÉRISTIQUES\n`;
+        specs.forEach(([k, v]) => msg += `${k.padEnd(15)}: ${v}\n`);
+    }
+
+    const motor = [
+        ['Moteur', g('moteur')], ['Nb moteurs', g('nb_moteurs')],
+        ['Puissance', g('puissance') ? g('puissance') + ' CV' : ''],
+        ['Heures moteur', g('heures') ? g('heures') + ' h' : ''],
+        ['Observations', g('obs_moteur')],
+    ].filter(([, v]) => v);
+
+    if (motor.length) {
+        msg += `\n🔧 MOTORISATION\n`;
+        motor.forEach(([k, v]) => msg += `${k.padEnd(15)}: ${v}\n`);
+    }
+
+    if (equips.length) {
+        msg += `\n✅ ÉQUIPEMENTS\n${equips.join(' · ')}\n`;
+    }
+    if (g('autres_equip')) msg += `Autres : ${g('autres_equip')}\n`;
+
+    if (docs.length) {
+        msg += `\n📄 DOCUMENTS DISPONIBLES\n${docs.join(' · ')}\n`;
+    }
+
+    if (g('video')) msg += `\n🎥 Vidéo : ${g('video')}\n`;
+    if (g('remarques')) msg += `\n💬 Remarques :\n${g('remarques')}\n`;
+
+    msg += `\n${'─'.repeat(45)}\nFormulaire envoyé depuis myboat-oi.com`;
+    return msg;
+}
+
+// ═══════════════════════════════════════════════
+//  ENVOI
+// ═══════════════════════════════════════════════
+function sendByEmail() {
+    const missing = validate();
+    if (missing.length) {
+        alert('Champs obligatoires manquants :\n• ' + missing.join('\n• '));
+        return;
+    }
+    const { g } = collectData();
+    const subject = `Demande de mise en annonce – ${g('modele') || 'Bateau'}`;
+    const body = buildMessage();
+    window.location.href = `mailto:contact@myboat-oi.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function sendByWhatsApp(e) {
+    e.preventDefault();
+    const missing = validate();
+    if (missing.length) {
+        alert('Champs obligatoires manquants :\n• ' + missing.join('\n• '));
+        return;
+    }
+    const msg = buildMessage();
+    window.open(`https://wa.me/262629926538?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ═══════════════════════════════════════════════
+//  RESET
+// ═══════════════════════════════════════════════
+function confirmReset() {
+    if (confirm('Effacer tous les champs et repartir de zéro ?')) {
+        localStorage.removeItem('myboat_fiche');
+        location.reload();
+    }
+}
+
+// ═══════════════════════════════════════════════
+//  UTILITAIRES
+// ═══════════════════════════════════════════════
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    toast.style.display = 'flex';
+    setTimeout(() => toast.style.display = 'none', 2500);
+}
+
+function debounce(fn, delay) {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
+}
+</script>
 
 </body>
 </html>
