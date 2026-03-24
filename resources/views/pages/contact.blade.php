@@ -165,7 +165,7 @@
                         </div>
                         <div class="ml-4">
                             <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ __('Téléphone') }}</h4>
-                            <a href="tel:+262629926538" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium">+262 629 926 538</a>
+                            <a href="tel:+33629926538" class="text-ocean-600 dark:text-ocean-400 hover:underline font-medium">+33 629 926 538</a>
                         </div>
                     </div>
 

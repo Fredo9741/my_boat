@@ -292,7 +292,7 @@
                             <i class="fas fa-envelope mr-2"></i>
                             Contacter le vendeur
                         </a>
-                        <a href="tel:+262629926538" class="block w-full bg-ocean-500/20 hover:bg-ocean-500/30 backdrop-blur-sm border-2 border-white/50 text-white px-6 py-4 rounded-2xl font-bold text-center transition-all">
+                        <a href="tel:+33629926538" class="block w-full bg-ocean-500/20 hover:bg-ocean-500/30 backdrop-blur-sm border-2 border-white/50 text-white px-6 py-4 rounded-2xl font-bold text-center transition-all">
                             <i class="fas fa-phone mr-2"></i>
                             Appeler
                         </a>

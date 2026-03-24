@@ -51,7 +51,7 @@
         "areaServed": ["Réunion", "Maurice", "Madagascar", "Mayotte", "Seychelles"],
         "contactPoint": {
             "@@type": "ContactPoint",
-            "telephone": "+262-629-926-538",
+            "telephone": "+33-629-926-538",
             "contactType": "sales"
         }
     }
