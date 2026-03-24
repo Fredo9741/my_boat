@@ -33,7 +33,6 @@
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/og-myboat.jpg'))">
-    <meta property="og:image:secure_url" content="@yield('og_image', asset('images/og-myboat.jpg'))">
     <meta property="og:image:type" content="image/jpeg">
 
     <!-- Additional meta tags from child views -->
