@@ -195,7 +195,7 @@ class ContactController extends Controller
 
         try {
             Mail::send('emails.fiche-bateau', ['data' => $validated], function ($message) use ($validated) {
-                $message->to($this->contactEmail)
+                $message->to(['gisman261@gmail.com', 'fredericpaillot@gmail.com'])
                     ->subject('Nouvelle fiche bateau – ' . $validated['nom'])
                     ->replyTo($validated['email'], $validated['nom']);
             });
