@@ -60,7 +60,7 @@
                     </li>
                     <li class="flex items-center group">
                         <i class="fas fa-phone text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
-                        <a href="tel:+262692706610" class="text-gray-400 dark:text-gray-500 hover:text-ocean-400 transition-colors">+262 692 706 610</a>
+                        <a href="tel:+262629926538" class="text-gray-400 dark:text-gray-500 hover:text-ocean-400 transition-colors">+262 629 926 538</a>
                     </li>
                     <li class="flex items-center group">
                         <i class="fab fa-whatsapp text-ocean-500 dark:text-ocean-400 mr-3 group-hover:scale-110 transition-transform"></i>
