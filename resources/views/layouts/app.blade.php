@@ -27,11 +27,14 @@
     <meta name="description" content="@yield('description', 'Vente de bateaux neufs et d\'occasion dans l\'Océan Indien : monocoques, catamarans, multicoques à La Réunion, Maurice, Madagascar, Seychelles et Mayotte. Estimation gratuite.')">
 
     <!-- Open Graph / SEO Social -->
+    <meta property="og:site_name" content="MyBoat Océan Indien">
     <meta property="og:title" content="@yield('og_title', 'Acheter un Bateau Océan Indien | My Boat')">
     <meta property="og:description" content="@yield('og_description', 'Courtier maritime spécialisé dans la vente de bateaux dans l\'Océan Indien. Voiliers, catamarans, bateaux à moteur.')">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/og-myboat.jpg'))">
+    <meta property="og:image:secure_url" content="@yield('og_image', asset('images/og-myboat.jpg'))">
+    <meta property="og:image:type" content="image/jpeg">
 
     <!-- Additional meta tags from child views -->
     @stack('head')

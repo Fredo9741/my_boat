@@ -7,9 +7,10 @@
 
 @section('title', $nomBateau . ' - ' . $typeBateau)
 @section('description', 'Découvrez ' . $nomBateau . ' - ' . Str::limit($bateau->description, 150))
-@section('og_title', $nomBateau . ' - ' . $typeBateau)
+@section('og_type', 'product')
+@section('og_title', $nomBateau . ' à vendre – MyBoat Océan Indien')
 @section('og_description', Str::limit(strip_tags($bateau->description), 200))
-@section('og_image', $bateau->photo_principale ? Storage::disk('r2')->url($bateau->photo_principale) : asset('images/default-boat.jpg'))
+@section('og_image', $bateau->photo_principale ? Storage::disk('r2')->url($bateau->photo_principale) : asset('images/og-myboat.jpg'))
 
 @push('structured-data')
 <script type="application/ld+json">
