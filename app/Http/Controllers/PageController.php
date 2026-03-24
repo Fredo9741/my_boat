@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Equipement;
 use App\Models\Setting;
 
 class PageController extends Controller
@@ -53,5 +54,14 @@ class PageController extends Controller
     public function confidentialite()
     {
         return view('pages.confidentialite');
+    }
+
+    /**
+     * Fiche de renseignement bateau (imprimable / PDF)
+     */
+    public function ficheBateau()
+    {
+        $equipements = Equipement::orderBy('categorie')->orderBy('libelle')->get()->groupBy('categorie');
+        return view('pages.fiche-bateau', compact('equipements'));
     }
 }

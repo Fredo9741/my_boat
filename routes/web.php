@@ -53,6 +53,7 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.legal'), [PageController::class, 'mentionsLegales'])->name('mentions-legales');
     Route::get(LaravelLocalization::transRoute('routes.terms'), [PageController::class, 'cgv'])->name('cgv');
     Route::get(LaravelLocalization::transRoute('routes.privacy'), [PageController::class, 'confidentialite'])->name('confidentialite');
+    Route::get('/fiche-bateau', [PageController::class, 'ficheBateau'])->name('fiche-bateau');
 
     // Articles (blog)
     Route::get(LaravelLocalization::transRoute('routes.articles'), [ArticleController::class, 'index'])->name('articles.index');
