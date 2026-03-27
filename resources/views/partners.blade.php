@@ -168,28 +168,6 @@
                 </div>
             </div>
 
-            <!-- Partenaire 5: MadaNautique -->
-            <div class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-gray-200 dark:border-white/10 p-8 hover:border-ocean-500 dark:hover:border-ocean-500 transition-all hover:shadow-2xl transform hover:-translate-y-2 group">
-                <div class="flex flex-col items-center text-center h-full">
-                    <div class="h-20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <img src="{{ asset('images/partners/logo_madanautique.jpg') }}" alt="MadaNautique Logo" class="h-16 w-auto object-contain">
-                    </div>
-                    <h3 class="text-2xl font-black text-gray-800 dark:text-white mb-3">MadaNautique</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        <i class="fas fa-map-marker-alt mr-2 text-ocean-600 dark:text-ocean-400"></i>
-                        Nosy-Bé, Madagascar
-                    </p>
-                    <p class="text-ocean-700 dark:text-ocean-300 text-sm font-bold mb-3">Chantier naval</p>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
-                        Travaux, accastillage & gestion de bateaux
-                    </p>
-                    <div class="flex gap-4 mt-auto">
-                        <a href="https://www.facebook.com/profile.php?id=61572523351163" target="_blank" rel="noopener" class="text-ocean-600 dark:text-ocean-400 hover:text-ocean-700 dark:hover:text-ocean-300 transition text-2xl" title="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="text-center mt-16">
