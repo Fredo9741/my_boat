@@ -66,7 +66,7 @@
                 <!-- Centered Search Bar and Stats -->
                 <div class="max-w-4xl mx-auto animate-fadeInUp" style="animation-delay: 0.3s;">
                     <form action="{{ route('bateaux.index') }}" method="GET" class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl shadow-2xl p-3 md:p-4 border border-white/20">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                             <!-- Type -->
                             <div class="relative group">
                                 <select name="type_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
@@ -104,11 +104,11 @@
                             </div>
 
                             <!-- Search Button -->
-                            <button type="submit" class="group relative px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl transform hover:scale-105 overflow-hidden">
+                            <button type="submit" class="col-span-2 md:col-span-1 group relative px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl transform hover:scale-105 overflow-hidden">
                                 <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
                                 <span class="relative z-10 flex items-center justify-center">
                                     <i class="fas fa-search mr-2"></i>
-                                    <span class="hidden md:inline">{{ __('Rechercher') }}</span>
+                                    {{ __('Rechercher') }}
                                 </span>
                             </button>
                         </div>
@@ -437,6 +437,67 @@
         </div>
     </section>
 
+    <!-- Section Articles : Conseils & actualités nautiques -->
+    @if($latestArticles->isNotEmpty())
+    <section class="py-20 md:py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
+                        {{ __('Conseils & actualités nautiques') }}
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400">
+                        {{ __('Guides d\'achat, entretien et vie maritime dans l\'Océan Indien') }}
+                    </p>
+                </div>
+                <a href="{{ route('articles.index') }}" class="hidden md:flex items-center px-6 py-3 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
+                    {{ __('Tous les articles') }}
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($latestArticles as $article)
+                <article class="group bg-white dark:bg-slate-800 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-white/10 overflow-hidden">
+                    <a href="{{ route('articles.show', $article->slug) }}" class="block relative overflow-hidden aspect-video">
+                        @if($article->featured_image)
+                        <img src="{{ $article->featured_image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        @else
+                        <div class="w-full h-full bg-gradient-to-br from-ocean-100 to-ocean-200 dark:from-ocean-950 dark:to-ocean-900 flex items-center justify-center">
+                            <i class="fas fa-newspaper text-5xl text-ocean-400 dark:text-ocean-600"></i>
+                        </div>
+                        @endif
+                    </a>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                            <i class="fas fa-calendar-alt mr-1.5 text-ocean-500"></i>
+                            {{ $article->formatted_date }}
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-ocean-600 dark:group-hover:text-ocean-400 transition-colors line-clamp-2">
+                            <a href="{{ route('articles.show', $article->slug) }}">{{ $article->title }}</a>
+                        </h3>
+                        @if($article->excerpt)
+                        <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">{{ $article->excerpt }}</p>
+                        @endif
+                        <a href="{{ route('articles.show', $article->slug) }}" class="inline-flex items-center text-ocean-600 dark:text-ocean-400 font-semibold text-sm hover:underline">
+                            {{ __('Lire l\'article') }}
+                            <i class="fas fa-arrow-right ml-1.5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+                @endforeach
+            </div>
+
+            <div class="mt-8 text-center md:hidden">
+                <a href="{{ route('articles.index') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl font-bold text-lg transition-all shadow-lg">
+                    {{ __('Tous les articles') }}
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!-- CTA Section -->
     <section class="relative py-24 md:py-32 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-ocean-50 via-cyan-50 to-ocean-100 dark:from-slate-950 dark:via-ocean-950/50 dark:to-slate-900"></div>
@@ -458,7 +519,7 @@
                     <a href="{{ route('sell') }}" class="group relative px-10 py-5 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-2xl font-black text-lg overflow-hidden transition-all hover:shadow-2xl transform hover:scale-105">
                         <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
                         <span class="relative z-10 flex items-center">
-                            <i class="fas fa-rocket mr-3"></i>
+                            <i class="fas fa-anchor mr-3"></i>
                             {{ __('Estimer mon bateau') }}
                         </span>
                     </a>
@@ -475,12 +536,12 @@
                         <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Gratuit') }}</div>
                     </div>
                     <div class="group">
-                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>
-                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Réponse') }}</div>
+                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">5</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Îles couvertes') }}</div>
                     </div>
                     <div class="group">
-                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">0€</div>
-                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Frais cachés') }}</div>
+                        <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">48h</div>
+                        <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Estimation') }}</div>
                     </div>
                 </div>
             </div>
@@ -491,7 +552,7 @@
     <section class="py-12 md:py-16 bg-gray-50 dark:bg-slate-950 border-t border-gray-100 dark:border-white/5">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">
+                <h2 class="text-2xl md:text-3xl font-black text-gray-800 dark:text-gray-200 mb-6">
                     {{ __('My Boat, votre courtier maritime dans l\'Océan Indien') }}
                 </h2>
 

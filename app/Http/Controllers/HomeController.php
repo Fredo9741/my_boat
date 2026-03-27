@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Bateau;
 use App\Models\Type;
 use App\Models\Zone;
@@ -62,13 +63,20 @@ class HomeController extends Controller
         // Get all zones for search form
         $zones = Zone::all();
 
+        // Get latest published articles for homepage
+        $latestArticles = Article::published()
+            ->orderBy('published_at', 'desc')
+            ->limit(3)
+            ->get();
+
         return view('welcome', compact(
             'featuredBateaux',
             'recentBateaux',
             'premiumBateaux',
             'stats',
             'types',
-            'zones'
+            'zones',
+            'latestArticles'
         ));
     }
 }
