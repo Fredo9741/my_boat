@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @php
-    $nomBateau = $bateau->nom ?: $bateau->modele ?: 'Bateau à vendre';
+    $nomBateau  = $bateau->nom ?: $bateau->modele ?: 'Bateau à vendre';
     $typeBateau = $bateau->type->libelle ?? 'Bateau';
+    $firstMedia = $bateau->images->first();
+    $ogImage    = $firstMedia ? strtok($firstMedia->url, '?') : asset('images/og-default.jpg');
 @endphp
 
 @section('title', $nomBateau . ' - ' . $typeBateau)
@@ -10,11 +12,11 @@
 @section('og_type', 'product')
 @section('og_title', e($nomBateau . ' à vendre – MyBoat Océan Indien'))
 @section('og_description', e(Str::limit(strip_tags($bateau->description), 200)))
-@section('og_image', $bateau->photo_principale ? strtok(Storage::disk('r2')->url($bateau->photo_principale), '?') : asset('images/og-default.jpg'))
+@section('og_image', $ogImage)
 
 @push('head')
-@if($bateau->photo_principale)
-<meta property="og:image:secure_url" content="{{ strtok(Storage::disk('r2')->url($bateau->photo_principale), '?') }}">
+@if($firstMedia)
+<meta property="og:image:secure_url" content="{{ $ogImage }}">
 @endif
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
