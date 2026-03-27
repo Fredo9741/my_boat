@@ -617,6 +617,40 @@
         </div>
     </div>
 
+    <!-- SECTION : ENGAGEMENT -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-handshake"></i> Engagement MyBoat-OI</div>
+        <div class="section-body">
+            <p style="font-size:13px;color:#475569;margin-bottom:16px;">
+                En confiant votre bateau à MyBoat Océan Indien, vous bénéficiez des engagements suivants :
+            </p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+
+                <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;">
+                    <input type="checkbox" id="eng_suivi" checked style="margin-top:2px;width:17px;height:17px;accent-color:#0ea5e9;flex-shrink:0;">
+                    <span style="font-size:13px;color:#1e293b;line-height:1.5;">
+                        <strong>Suivi personnalisé</strong> — Je m'engage à faire régulièrement un point avec le propriétaire sur les demandes reçues et l'avancement de la vente.
+                    </span>
+                </label>
+
+                <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;">
+                    <input type="checkbox" id="eng_pub" checked style="margin-top:2px;width:17px;height:17px;accent-color:#0ea5e9;flex-shrink:0;">
+                    <span style="font-size:13px;color:#1e293b;line-height:1.5;">
+                        <strong>Promotion active</strong> — Je m'engage à diffuser l'annonce et à assurer la publicité du bateau auprès de mon réseau et sur la plateforme MyBoat Océan Indien.
+                    </span>
+                </label>
+
+                <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;">
+                    <input type="checkbox" id="eng_commission" checked style="margin-top:2px;width:17px;height:17px;accent-color:#0ea5e9;flex-shrink:0;">
+                    <span style="font-size:13px;color:#1e293b;line-height:1.5;">
+                        <strong>Commission transparente</strong> — La commission de MyBoat-OI est de <strong>5 % maximum</strong> sur le prix de vente, uniquement en cas de vente conclue avec un prospect apporté par MyBoat-OI. Aucun frais si le bateau ne se vend pas.
+                    </span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 </form>
 
@@ -675,6 +709,12 @@ function loadForm() {
             if (cb) cb.checked = true;
         });
     }
+
+    // Engagements
+    ['eng_suivi','eng_pub','eng_commission'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && saved[id]) el.checked = true;
+    });
 }
 
 // ── Sauvegarder dans localStorage ──
@@ -691,8 +731,11 @@ function saveForm() {
         data[name] = checked ? checked.value : '';
     });
 
-    data.equip_ids = [...document.querySelectorAll('.equip-cb:checked')].map(cb => cb.dataset.id);
-    data.docs      = [...document.querySelectorAll('.doc-cb:checked')].map(cb => cb.dataset.label);
+    data.equip_ids   = [...document.querySelectorAll('.equip-cb:checked')].map(cb => cb.dataset.id);
+    data.docs        = [...document.querySelectorAll('.doc-cb:checked')].map(cb => cb.dataset.label);
+    data.eng_suivi      = document.getElementById('eng_suivi')?.checked || false;
+    data.eng_pub        = document.getElementById('eng_pub')?.checked || false;
+    data.eng_commission = document.getElementById('eng_commission')?.checked || false;
 
     localStorage.setItem('myboat_fiche', JSON.stringify(data));
     showToast('Progression sauvegardée !');
@@ -713,7 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (el) el.addEventListener('input', debounce(saveForm, 600));
     });
 
-    document.querySelectorAll('input[type="radio"], .equip-cb, .doc-cb').forEach(el => {
+    document.querySelectorAll('input[type="radio"], .equip-cb, .doc-cb, #eng_suivi, #eng_pub, #eng_commission').forEach(el => {
         el.addEventListener('change', saveForm);
     });
 });
@@ -803,6 +846,12 @@ function buildMessage() {
 
     if (g('video')) msg += `\n🎥 Vidéo : ${g('video')}\n`;
     if (g('remarques')) msg += `\n💬 Remarques :\n${g('remarques')}\n`;
+
+    const engagements = [];
+    if (document.getElementById('eng_suivi')?.checked)      engagements.push('Suivi personnalisé');
+    if (document.getElementById('eng_pub')?.checked)        engagements.push('Promotion active');
+    if (document.getElementById('eng_commission')?.checked) engagements.push('Commission 5% max acceptée');
+    if (engagements.length) msg += `\n🤝 ENGAGEMENTS ACCEPTÉS\n${engagements.join(' · ')}\n`;
 
     msg += `\n${'─'.repeat(45)}\nFormulaire envoyé depuis myboat-oi.com`;
     return msg;
