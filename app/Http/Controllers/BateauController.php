@@ -229,7 +229,7 @@ class BateauController extends Controller
     /**
      * Display boats filtered by zone with SEO content
      */
-    public function byZone(string $zoneSlug): View|Response
+    public function byZone(string $zoneSlug, Request $request): View|Response
     {
         $seoData = config('zones_seo.' . $zoneSlug);
 
@@ -243,12 +243,27 @@ class BateauController extends Controller
             abort(404);
         }
 
-        $bateaux = Bateau::with(['type', 'zone', 'images'])
+        $query = Bateau::with(['type', 'zone', 'images'])
             ->visible()
-            ->where('zone_id', $zone->id)
-            ->orderBy('published_at', 'desc')
-            ->get();
+            ->where('zone_id', $zone->id);
 
-        return view('bateaux.zone', compact('bateaux', 'zone', 'seoData'));
+        // Filter by type
+        if ($request->filled('type')) {
+            $typeIds = Type::whereIn('slug', (array) $request->type)->pluck('id');
+            $query->whereIn('type_id', $typeIds);
+        }
+
+        // Filter by price
+        if ($request->filled('prix_min')) {
+            $query->where('prix', '>=', $request->prix_min);
+        }
+        if ($request->filled('prix_max')) {
+            $query->where('prix', '<=', $request->prix_max);
+        }
+
+        $bateaux = $query->orderBy('published_at', 'desc')->get();
+        $types   = Type::withCount(['bateaux' => fn($q) => $q->visible()->where('zone_id', $zone->id)])->get();
+
+        return view('bateaux.zone', compact('bateaux', 'zone', 'seoData', 'types'));
     }
 }

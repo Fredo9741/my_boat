@@ -37,11 +37,47 @@
         {!! $seoData['intro'] !!}
     </div>
 
+    {{-- Filtres --}}
+    <div class="mb-8">
+        <form method="GET" action="" id="zone-filter-form">
+            <div class="flex flex-wrap gap-3 items-center">
+                {{-- Filtre type --}}
+                @foreach($types as $type)
+                    @if($type->bateaux_count > 0)
+                    @php $active = in_array($type->slug, (array) request('type')); @endphp
+                    <a href="{{ request()->fullUrlWithQuery(['type' => $active ? null : $type->slug]) }}"
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all
+                              {{ $active
+                                 ? 'bg-ocean-600 text-white border-ocean-600 shadow-md'
+                                 : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-ocean-400' }}">
+                        {{ $type->libelle }}
+                        <span class="text-xs opacity-70">({{ $type->bateaux_count }})</span>
+                    </a>
+                    @endif
+                @endforeach
+
+                {{-- Reset --}}
+                @if(request()->hasAny(['type', 'prix_min', 'prix_max']))
+                <a href="{{ url()->current() }}" class="inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors border border-gray-200 dark:border-white/10">
+                    <i class="fas fa-times text-xs"></i> Effacer filtres
+                </a>
+                @endif
+
+                {{-- Lien filtres avancés --}}
+                <a href="{{ route('bateaux.index', ['zone' => $zone->slug]) }}"
+                   class="ml-auto inline-flex items-center gap-2 text-sm text-ocean-600 dark:text-ocean-400 hover:underline">
+                    <i class="fas fa-sliders-h"></i> Filtres avancés
+                </a>
+            </div>
+        </form>
+    </div>
+
     {{-- Boats grid --}}
     @if($bateaux->count() > 0)
         <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
             <i class="fas fa-ship text-ocean-500"></i>
             Nos annonces – {{ $seoData['name'] }}
+            <span class="text-base font-normal text-gray-500 dark:text-gray-400">({{ $bateaux->count() }})</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-12">
             @foreach($bateaux as $bateau)
