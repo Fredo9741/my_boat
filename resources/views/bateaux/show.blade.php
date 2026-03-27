@@ -119,11 +119,6 @@
                 <div class="text-4xl md:text-5xl font-black text-white mb-2">
                     {{ number_format($bateau->prix, 0, ',', ' ') }} €
                 </div>
-                @if($bateau->negociable)
-                <span class="inline-block bg-luxe-gold/20 text-luxe-gold px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm">
-                    Prix négociable
-                </span>
-                @endif
             </div>
         </div>
     </div>
@@ -245,7 +240,7 @@
                         ['label' => 'Système anti-dérive', 'value' => $bateau->systemeantiderive],
                         ['label' => 'Cabines',           'value' => $bateau->cabines],
                         ['label' => 'Passagers',         'value' => $bateau->passagers],
-                        ['label' => 'État',              'value' => $bateau->etat ? ucfirst($bateau->etat) : null],
+                        ['label' => 'État',              'value' => $bateau->occasion ? 'Occasion' : 'Neuf'],
                         ['label' => 'Localisation',      'value' => $bateau->location],
                     ];
                     $specs = array_filter($specs, fn($s) => !is_null($s['value']) && $s['value'] !== '');
@@ -291,11 +286,6 @@
                         <div class="text-5xl font-black mb-3">
                             {{ number_format($bateau->prix, 0, ',', ' ') }} €
                         </div>
-                        @if($bateau->negociable)
-                        <span class="inline-block bg-luxe-gold/30 backdrop-blur-sm text-luxe-gold px-4 py-1.5 rounded-full text-sm font-semibold">
-                            Négociable
-                        </span>
-                        @endif
                     </div>
 
                     <div class="space-y-3">
