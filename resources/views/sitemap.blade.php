@@ -101,7 +101,8 @@
     @foreach($zones as $zone)
         @foreach($locales as $locale)
             @php
-                $url = LaravelLocalization::getLocalizedURL($locale, route('bateaux.index', ['zone' => $zone->slug]), [], false);
+                $zoneUrl = config('zones_seo.' . $zone->slug) ? route('bateaux.byZone', $zone->slug) : route('bateaux.index', ['zone' => $zone->slug]);
+                $url = LaravelLocalization::getLocalizedURL($locale, $zoneUrl, [], false);
             @endphp
             <url>
                 <loc>{{ $url }}</loc>
