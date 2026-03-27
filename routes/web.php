@@ -59,6 +59,9 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.articles'), [ArticleController::class, 'index'])->name('articles.index');
     Route::get(LaravelLocalization::transRoute('routes.articles') . '/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 
+    // Zone landing pages (SEO)
+    Route::get('/acheter/{zoneSlug}', [BateauController::class, 'byZone'])->name('bateaux.byZone');
+
 });
 
 // Auth routes

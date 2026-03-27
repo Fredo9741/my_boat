@@ -1,0 +1,51 @@
+<?php
+return [
+    'madagascar' => [
+        'name'        => 'Madagascar',
+        'title'       => 'Acheter un bateau à Madagascar – Annonces MyBoat Océan Indien',
+        'description' => 'Découvrez nos bateaux à vendre à Madagascar : voiliers, catamarans et bateaux à moteur. Marché nautique actif à Nosy Bé, Diégo-Suarez et Majunga.',
+        'heading'     => 'Bateaux à vendre à Madagascar',
+        'intro'       => '<p>Madagascar est l\'un des marchés nautiques les plus dynamiques de l\'Océan Indien. Entre le canal du Mozambique et les côtes de l\'Océan Indien, ses eaux proposent des opportunités d\'achat uniques. Voiliers d\'occasion, catamarans de charter et bateaux à moteur y sont régulièrement disponibles à des prix compétitifs.</p><p>Les ports de Nosy Bé, Diégo-Suarez (Antsiranana) et Mahajanga concentrent l\'essentiel des transactions. MyBoat référence les meilleures annonces de bateaux à vendre à Madagascar et dans tout l\'Océan Indien.</p>',
+        'img_alt'     => 'Bateau à vendre à Madagascar – MyBoat Océan Indien',
+    ],
+    'nosy-be' => [
+        'name'        => 'Nosy Bé',
+        'title'       => 'Acheter un bateau à Nosy Bé – Annonces MyBoat Océan Indien',
+        'description' => 'Bateaux à vendre à Nosy Bé : voiliers, catamarans et vedettes. L\'île aux parfums, premier hub nautique de Madagascar avec mouillages protégés et chantiers compétents.',
+        'heading'     => 'Bateaux à vendre à Nosy Bé',
+        'intro'       => '<p>Nosy Bé, l\'île aux parfums du nord-ouest de Madagascar, est le premier hub nautique de l\'Océan Indien occidental. Ses mouillages protégés, ses chantiers compétents et son marché d\'occasion actif en font une destination incontournable pour les acheteurs de bateaux.</p><p>Voiliers monocoques, catamarans de charter et vedettes rapides : MyBoat référence toutes les annonces de bateaux disponibles à Nosy Bé et dans l\'archipel environnant.</p>',
+        'img_alt'     => 'Bateau à vendre à Nosy Bé – MyBoat Océan Indien',
+    ],
+    'la-reunion' => [
+        'name'        => 'La Réunion',
+        'title'       => 'Acheter un bateau à La Réunion – Annonces MyBoat Océan Indien',
+        'description' => 'Bateaux à vendre à La Réunion : voiliers, catamarans, bateaux à moteur au Port et Saint-Gilles. Marché nautique dynamique dans l\'Océan Indien.',
+        'heading'     => 'Bateaux à vendre à La Réunion',
+        'intro'       => '<p>La Réunion est le cœur nautique de l\'Océan Indien. Avec ses deux grandes marinas — Le Port et Saint-Gilles-les-Bains — l\'île dispose d\'une infrastructure complète pour les plaisanciers. Le marché de l\'occasion y est particulièrement actif, avec des bateaux bien entretenus et régulièrement expertisés.</p><p>Voiliers monocoques et multicoques, bateaux à moteur, semi-rigides : MyBoat centralise toutes les annonces de bateaux à vendre à La Réunion.</p>',
+        'img_alt'     => 'Bateau à vendre à La Réunion – MyBoat Océan Indien',
+    ],
+    'mayotte' => [
+        'name'        => 'Mayotte',
+        'title'       => 'Acheter un bateau à Mayotte – Annonces MyBoat Océan Indien',
+        'description' => 'Bateaux à vendre à Mayotte : voiliers et bateaux à moteur dans le lagon de Mayotte. Département français de l\'Océan Indien avec un marché nautique en pleine croissance.',
+        'heading'     => 'Bateaux à vendre à Mayotte',
+        'intro'       => '<p>Mayotte, département français de l\'Océan Indien, possède l\'un des plus grands lagons du monde. Ses eaux calmes et ses fonds protégés en font un paradis pour la navigation côtière et la plongée. Le marché nautique y est en pleine croissance, porté par une population de résidents expatriés et de plaisanciers attirés par ce lagon d\'exception.</p><p>MyBoat référence les annonces de bateaux à vendre à Mayotte : voiliers, vedettes, bateaux de pêche et annexes.</p>',
+        'img_alt'     => 'Bateau à vendre à Mayotte – MyBoat Océan Indien',
+    ],
+    'maurice' => [
+        'name'        => 'Île Maurice',
+        'title'       => 'Acheter un bateau à l\'île Maurice – Annonces MyBoat Océan Indien',
+        'description' => 'Bateaux à vendre à l\'île Maurice : voiliers, catamarans et yachts de luxe. Grand Baie, Black River et Port-Louis : les meilleurs marchés nautiques mauriciens.',
+        'heading'     => 'Bateaux à vendre à l\'île Maurice',
+        'intro'       => '<p>L\'île Maurice est la destination nautique premium de l\'Océan Indien. Ses infrastructures portuaires de haut niveau — Grand Baie Yacht Club, Black River — et son cadre fiscal attractif pour les yachts séduisent une clientèle internationale exigeante. Le marché des bateaux d\'occasion à Maurice est particulièrement dynamique dans le segment catamaran et voilier de croisière.</p><p>MyBoat référence les meilleures annonces de bateaux à vendre à l\'île Maurice : voiliers monocoques, catamarans, bateaux à moteur et yachts de luxe.</p>',
+        'img_alt'     => 'Bateau à vendre à l\'île Maurice – MyBoat Océan Indien',
+    ],
+    'seychelles' => [
+        'name'        => 'Seychelles',
+        'title'       => 'Acheter un bateau aux Seychelles – Annonces MyBoat Océan Indien',
+        'description' => 'Bateaux à vendre aux Seychelles : catamarans de charter, voiliers et yachts dans l\'archipel des Seychelles. Marché nautique actif à Victoria, Mahé.',
+        'heading'     => 'Bateaux à vendre aux Seychelles',
+        'intro'       => '<p>Les Seychelles, archipel de 115 îles au cœur de l\'Océan Indien, constituent l\'une des destinations de charter les plus prisées au monde. Le marché nautique y est orienté vers les catamarans de croisière et les voiliers de plus de 40 pieds, souvent issus d\'activités charter. C\'est une opportunité rare pour acquérir des unités bien équipées à des prix compétitifs.</p><p>MyBoat référence les annonces de bateaux à vendre aux Seychelles : catamarans, voiliers bluewater et yachts à moteur.</p>',
+        'img_alt'     => 'Bateau à vendre aux Seychelles – MyBoat Océan Indien',
+    ],
+];

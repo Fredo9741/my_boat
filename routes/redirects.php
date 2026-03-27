@@ -20,50 +20,50 @@ use Illuminate\Support\Facades\Route;
 // ==========================================
 
 // MADAGASCAR (Top 1 - Conversion élevée)
-Route::permanentRedirect('/acheter-bateau-madagascar', '/bateaux?zone=madagascar');
-Route::permanentRedirect('/acheter-bateau-madagascar.html', '/bateaux?zone=madagascar');
-Route::permanentRedirect('/acheter/acheter-bateau-madagascar.html', '/bateaux?zone=madagascar');
-Route::permanentRedirect('/acheter/acheter-bateau-madagascar', '/bateaux?zone=madagascar');
+Route::permanentRedirect('/acheter-bateau-madagascar', '/acheter/madagascar');
+Route::permanentRedirect('/acheter-bateau-madagascar.html', '/acheter/madagascar');
+Route::permanentRedirect('/acheter/acheter-bateau-madagascar.html', '/acheter/madagascar');
+Route::permanentRedirect('/acheter/acheter-bateau-madagascar', '/acheter/madagascar');
 
 // NOSY BÉ (longue traîne - intent achat spécifique)
-Route::permanentRedirect('/acheter-bateau-nosy-be', '/bateaux?zone=nosy-be');
-Route::permanentRedirect('/acheter-bateau-nosy-be.html', '/bateaux?zone=nosy-be');
-Route::permanentRedirect('/bateau-nosy-be', '/bateaux?zone=nosy-be');
-Route::permanentRedirect('/bateau-a-vendre-nosy-be', '/bateaux?zone=nosy-be');
-Route::permanentRedirect('/acheter/acheter-bateau-nosy-be', '/bateaux?zone=nosy-be');
-Route::permanentRedirect('/acheter/acheter-bateau-nosy-be.html', '/bateaux?zone=nosy-be');
+Route::permanentRedirect('/acheter-bateau-nosy-be', '/acheter/nosy-be');
+Route::permanentRedirect('/acheter-bateau-nosy-be.html', '/acheter/nosy-be');
+Route::permanentRedirect('/bateau-nosy-be', '/acheter/nosy-be');
+Route::permanentRedirect('/bateau-a-vendre-nosy-be', '/acheter/nosy-be');
+Route::permanentRedirect('/acheter/acheter-bateau-nosy-be', '/acheter/nosy-be');
+Route::permanentRedirect('/acheter/acheter-bateau-nosy-be.html', '/acheter/nosy-be');
 
 // LA RÉUNION (Top 2 - Volume élevé)
-Route::permanentRedirect('/acheter-bateau-reunion', '/bateaux?zone=la-reunion');
-Route::permanentRedirect('/acheter-bateau-reunion.html', '/bateaux?zone=la-reunion');
-Route::permanentRedirect('/acheter/acheter-bateau-reunion.html', '/bateaux?zone=la-reunion');
-Route::permanentRedirect('/acheter/acheter-bateau-reunion', '/bateaux?zone=la-reunion');
-Route::permanentRedirect('/acheter-bateau-la-reunion', '/bateaux?zone=la-reunion');
-Route::permanentRedirect('/acheter-bateau-la-reunion.html', '/bateaux?zone=la-reunion');
+Route::permanentRedirect('/acheter-bateau-reunion', '/acheter/la-reunion');
+Route::permanentRedirect('/acheter-bateau-reunion.html', '/acheter/la-reunion');
+Route::permanentRedirect('/acheter/acheter-bateau-reunion.html', '/acheter/la-reunion');
+Route::permanentRedirect('/acheter/acheter-bateau-reunion', '/acheter/la-reunion');
+Route::permanentRedirect('/acheter-bateau-la-reunion', '/acheter/la-reunion');
+Route::permanentRedirect('/acheter-bateau-la-reunion.html', '/acheter/la-reunion');
 
 // MAYOTTE (Top 3 - Niche rentable)
-Route::permanentRedirect('/acheter-bateau-mayotte', '/bateaux?zone=mayotte');
-Route::permanentRedirect('/acheter-bateau-mayotte.html', '/bateaux?zone=mayotte');
-Route::permanentRedirect('/acheter/acheter-bateau-mayotte.html', '/bateaux?zone=mayotte');
-Route::permanentRedirect('/acheter/acheter-bateau-mayotte', '/bateaux?zone=mayotte');
+Route::permanentRedirect('/acheter-bateau-mayotte', '/acheter/mayotte');
+Route::permanentRedirect('/acheter-bateau-mayotte.html', '/acheter/mayotte');
+Route::permanentRedirect('/acheter/acheter-bateau-mayotte.html', '/acheter/mayotte');
+Route::permanentRedirect('/acheter/acheter-bateau-mayotte', '/acheter/mayotte');
 
 // MAURICE (Top 4 - Marché premium)
-Route::permanentRedirect('/acheter-bateau-maurice', '/bateaux?zone=maurice');
-Route::permanentRedirect('/acheter-bateau-maurice.html', '/bateaux?zone=maurice');
-Route::permanentRedirect('/acheter/acheter-bateau-maurice.html', '/bateaux?zone=maurice');
-Route::permanentRedirect('/acheter/acheter-bateau-maurice', '/bateaux?zone=maurice');
-Route::permanentRedirect('/acheter-bateau-ile-maurice', '/bateaux?zone=maurice');
-Route::permanentRedirect('/acheter-bateau-ile-maurice.html', '/bateaux?zone=maurice');
+Route::permanentRedirect('/acheter-bateau-maurice', '/acheter/maurice');
+Route::permanentRedirect('/acheter-bateau-maurice.html', '/acheter/maurice');
+Route::permanentRedirect('/acheter/acheter-bateau-maurice.html', '/acheter/maurice');
+Route::permanentRedirect('/acheter/acheter-bateau-maurice', '/acheter/maurice');
+Route::permanentRedirect('/acheter-bateau-ile-maurice', '/acheter/maurice');
+Route::permanentRedirect('/acheter-bateau-ile-maurice.html', '/acheter/maurice');
 
 // ==========================================
 // AUTRES ZONES GÉOGRAPHIQUES
 // ==========================================
 
 // Seychelles
-Route::permanentRedirect('/acheter-bateau-seychelles', '/bateaux?zone=seychelles');
-Route::permanentRedirect('/acheter-bateau-seychelles.html', '/bateaux?zone=seychelles');
-Route::permanentRedirect('/acheter/acheter-bateau-seychelles.html', '/bateaux?zone=seychelles');
-Route::permanentRedirect('/acheter/acheter-bateau-seychelles', '/bateaux?zone=seychelles');
+Route::permanentRedirect('/acheter-bateau-seychelles', '/acheter/seychelles');
+Route::permanentRedirect('/acheter-bateau-seychelles.html', '/acheter/seychelles');
+Route::permanentRedirect('/acheter/acheter-bateau-seychelles.html', '/acheter/seychelles');
+Route::permanentRedirect('/acheter/acheter-bateau-seychelles', '/acheter/seychelles');
 
 // Hors océan indien (anciennement "Pacifique")
 Route::permanentRedirect('/acheter-bateau-pacifique', '/bateaux?zone=hors-ocean-indien');

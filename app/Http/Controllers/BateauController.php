@@ -225,4 +225,30 @@ class BateauController extends Controller
 
         return view('bateaux.show', compact('bateau', 'similaires'));
     }
+
+    /**
+     * Display boats filtered by zone with SEO content
+     */
+    public function byZone(string $zoneSlug): View|Response
+    {
+        $seoData = config('zones_seo.' . $zoneSlug);
+
+        if (!$seoData) {
+            abort(404);
+        }
+
+        $zone = Zone::where('slug', $zoneSlug)->first();
+
+        if (!$zone) {
+            abort(404);
+        }
+
+        $bateaux = Bateau::with(['type', 'zone', 'images'])
+            ->visible()
+            ->where('zone_id', $zone->id)
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        return view('bateaux.zone', compact('bateaux', 'zone', 'seoData'));
+    }
 }
