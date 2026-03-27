@@ -62,6 +62,21 @@
             </div>
         </article>
 
+        <!-- CTA Annonces -->
+        <div class="bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-3xl p-8 md:p-10 text-white text-center mb-8 shadow-2xl">
+            <div class="text-4xl mb-4">⚓</div>
+            <h2 class="text-2xl md:text-3xl font-black mb-3">Trouvez votre bateau dans l'Océan Indien</h2>
+            <p class="text-ocean-100 mb-6 max-w-xl mx-auto">Voiliers, catamarans, bateaux à moteur — découvrez toutes nos annonces à La Réunion, Madagascar, Maurice, Mayotte et Seychelles.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="{{ route('bateaux.index') }}" class="inline-flex items-center justify-center gap-2 bg-white text-ocean-700 font-bold px-6 py-3 rounded-xl hover:bg-ocean-50 transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <i class="fas fa-ship"></i> Voir toutes les annonces
+                </a>
+                <a href="{{ route('fiche-bateau') }}" class="inline-flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold px-6 py-3 rounded-xl transition-all border border-white/30">
+                    <i class="fas fa-plus"></i> Déposer mon bateau
+                </a>
+            </div>
+        </div>
+
         <!-- Share Buttons -->
         <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-white/10 mb-12">
             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">

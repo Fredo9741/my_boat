@@ -98,7 +98,9 @@ class ArticleNosyBeSeeder extends Seeder
 
 <p>MyBoat est la première plateforme spécialisée dans la vente de bateaux dans l'Océan Indien. Basés à La Réunion avec une présence active à Nosy Bé, Madagascar, Maurice et Mayotte, nous vous accompagnons dans toutes les étapes de votre projet nautique.</p>
 
-<p>Consultez dès maintenant nos annonces de bateaux à vendre à Nosy Bé et dans tout l'Océan Indien. Que vous soyez acheteur ou vendeur, notre équipe est à votre disposition pour vous guider.</p>
+<p>Consultez dès maintenant nos <a href="/bateaux?zone=nosy-be"><strong>annonces de bateaux à vendre à Nosy Bé</strong></a> ou parcourez l'ensemble des <a href="/bateaux?zone=madagascar"><strong>bateaux disponibles à Madagascar</strong></a>. Que vous soyez acheteur ou vendeur, notre équipe est à votre disposition pour vous guider.</p>
+
+<p>Vous souhaitez vendre votre bateau ? <a href="/vendre"><strong>Demandez une estimation gratuite</strong></a> ou <a href="/fiche-bateau"><strong>déposez votre annonce</strong></a> directement en ligne.</p>
 HTML,
             ]
         );
