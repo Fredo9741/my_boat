@@ -69,6 +69,13 @@
 
 <div class="container mx-auto px-4 py-10">
 
+    {{-- Lien retour toutes zones --}}
+    <div class="flex items-center justify-between mb-6">
+        <a href="{{ route('bateaux.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors">
+            <i class="fas fa-globe"></i> Voir tous les bateaux – Océan Indien
+        </a>
+    </div>
+
     {{-- Filtres par type --}}
     <div class="flex flex-wrap gap-3 items-center mb-8">
         @foreach($types as $type)
