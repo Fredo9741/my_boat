@@ -22,63 +22,78 @@
             <span class="mx-2"><i class="fas fa-chevron-right text-xs"></i></span>
             <span class="text-white font-medium">{{ $seoData['name'] }}</span>
         </nav>
-        <h1 class="text-4xl md:text-5xl font-black mb-4">{{ $seoData['heading'] }}</h1>
-        <p class="text-ocean-200 text-lg">
-            <span class="font-bold text-white">{{ $bateaux->count() }}</span>
-            {{ $bateaux->count() > 1 ? 'annonces disponibles' : 'annonce disponible' }}
-        </p>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-black mb-3">{{ $seoData['heading'] }}</h1>
+                <p class="text-ocean-200 text-lg">
+                    <i class="fas fa-ship mr-2"></i>
+                    <span class="font-bold text-white">{{ $bateaux->count() }}</span>
+                    {{ $bateaux->count() > 1 ? 'annonces disponibles' : 'annonce disponible' }}
+                </p>
+            </div>
+            <a href="{{ route('bateaux.index', ['zone' => $zone->slug]) }}"
+               class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/30 text-white px-5 py-3 rounded-xl text-sm font-semibold transition-all self-start md:self-auto">
+                <i class="fas fa-sliders-h"></i> Filtres avancés
+            </a>
+        </div>
     </div>
 </div>
 
-<div class="container mx-auto px-4 py-12">
+{{-- Intro + Highlights --}}
+<div class="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-white/10">
+    <div class="container mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-    {{-- SEO intro text --}}
-    <div class="prose prose-lg max-w-3xl mx-auto mb-12 text-gray-700 dark:text-gray-300">
-        {!! $seoData['intro'] !!}
-    </div>
-
-    {{-- Filtres --}}
-    <div class="mb-8">
-        <form method="GET" action="" id="zone-filter-form">
-            <div class="flex flex-wrap gap-3 items-center">
-                {{-- Filtre type --}}
-                @foreach($types as $type)
-                    @if($type->bateaux_count > 0)
-                    @php $active = in_array($type->slug, (array) request('type')); @endphp
-                    <a href="{{ request()->fullUrlWithQuery(['type' => $active ? null : $type->slug]) }}"
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all
-                              {{ $active
-                                 ? 'bg-ocean-600 text-white border-ocean-600 shadow-md'
-                                 : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-ocean-400' }}">
-                        {{ $type->libelle }}
-                        <span class="text-xs opacity-70">({{ $type->bateaux_count }})</span>
-                    </a>
-                    @endif
-                @endforeach
-
-                {{-- Reset --}}
-                @if(request()->hasAny(['type', 'prix_min', 'prix_max']))
-                <a href="{{ url()->current() }}" class="inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors border border-gray-200 dark:border-white/10">
-                    <i class="fas fa-times text-xs"></i> Effacer filtres
-                </a>
-                @endif
-
-                {{-- Lien filtres avancés --}}
-                <a href="{{ route('bateaux.index', ['zone' => $zone->slug]) }}"
-                   class="ml-auto inline-flex items-center gap-2 text-sm text-ocean-600 dark:text-ocean-400 hover:underline">
-                    <i class="fas fa-sliders-h"></i> Filtres avancés
-                </a>
+            {{-- Texte intro --}}
+            <div>
+                <p class="text-gray-600 dark:text-gray-300 text-base leading-relaxed border-l-4 border-ocean-500 pl-5">
+                    {{ $seoData['intro'] }}
+                </p>
             </div>
-        </form>
+
+            {{-- Points clés --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                @foreach($seoData['highlights'] as $h)
+                <div class="flex items-start gap-3 bg-ocean-50 dark:bg-ocean-950/40 rounded-xl p-4 border border-ocean-100 dark:border-ocean-800/40">
+                    <div class="w-8 h-8 rounded-lg bg-ocean-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fas {{ $h['icon'] }} text-white text-sm"></i>
+                    </div>
+                    <p class="text-sm text-gray-700 dark:text-gray-300 font-medium leading-snug">{{ $h['text'] }}</p>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 py-10">
+
+    {{-- Filtres par type --}}
+    <div class="flex flex-wrap gap-3 items-center mb-8">
+        @foreach($types as $type)
+            @if($type->bateaux_count > 0)
+            @php $active = in_array($type->slug, (array) request('type')); @endphp
+            <a href="{{ request()->fullUrlWithQuery(['type' => $active ? null : $type->slug]) }}"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all
+                      {{ $active
+                         ? 'bg-ocean-600 text-white border-ocean-600 shadow-md'
+                         : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-ocean-400' }}">
+                {{ $type->libelle }}
+                <span class="text-xs opacity-60">({{ $type->bateaux_count }})</span>
+            </a>
+            @endif
+        @endforeach
+
+        @if(request()->hasAny(['type', 'prix_min', 'prix_max']))
+        <a href="{{ url()->current() }}" class="inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors border border-gray-200 dark:border-white/10">
+            <i class="fas fa-times text-xs"></i> Effacer
+        </a>
+        @endif
     </div>
 
-    {{-- Boats grid --}}
+    {{-- Grille bateaux --}}
     @if($bateaux->count() > 0)
-        <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
-            <i class="fas fa-ship text-ocean-500"></i>
-            Nos annonces – {{ $seoData['name'] }}
-            <span class="text-base font-normal text-gray-500 dark:text-gray-400">({{ $bateaux->count() }})</span>
-        </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-12">
             @foreach($bateaux as $bateau)
                 <x-boat-card
@@ -98,7 +113,7 @@
         </div>
     @else
         <div class="text-center py-20">
-            <i class="fas fa-ship text-5xl text-gray-300 dark:text-gray-600 mb-4"></i>
+            <i class="fas fa-ship text-5xl text-gray-300 dark:text-gray-600 mb-4 block"></i>
             <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">Aucune annonce disponible en ce moment pour {{ $seoData['name'] }}.</p>
             <a href="{{ route('bateaux.index') }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white font-bold px-6 py-3 rounded-xl hover:shadow-xl transition-all">
                 <i class="fas fa-search"></i> Voir toutes les annonces
@@ -109,7 +124,7 @@
     {{-- CTA Vendre --}}
     <div class="bg-gradient-to-r from-ocean-600 to-luxe-cyan rounded-3xl p-8 text-white text-center shadow-2xl">
         <h2 class="text-2xl font-black mb-3">Vous avez un bateau à vendre à {{ $seoData['name'] }} ?</h2>
-        <p class="text-ocean-100 mb-6">Déposez votre annonce gratuitement et touchez des acheteurs dans tout l'Océan Indien.</p>
+        <p class="text-ocean-100 mb-6">Déposez votre annonce et touchez des acheteurs dans tout l'Océan Indien.</p>
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="{{ route('fiche-bateau') }}" class="inline-flex items-center justify-center gap-2 bg-white text-ocean-700 font-bold px-6 py-3 rounded-xl hover:bg-ocean-50 transition-all shadow-lg">
                 <i class="fas fa-plus"></i> Déposer mon bateau
