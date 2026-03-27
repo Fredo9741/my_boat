@@ -75,11 +75,11 @@
     background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
 }
 
-/* Smooth transitions for color changes */
-* {
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Smooth transitions for dark mode color changes only (body-level, not all elements) */
+body, body * {
+    transition-property: background-color, border-color, color;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
 }
 
 /* Line clamp utilities */

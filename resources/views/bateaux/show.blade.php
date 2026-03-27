@@ -146,6 +146,8 @@
                          src="{{ $photos[0] }}"
                          alt="{{ $bateau->alt_text }}"
                          class="w-full h-full object-cover"
+                         loading="eager"
+                         fetchpriority="high"
                          onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200', 'dark:bg-slate-700');">
 
                     <!-- Image Counter Badge -->

@@ -9,6 +9,7 @@
     'badge' => null,
     'badgeColor' => 'green',
     'alt' => null,
+    'priority' => false,
 ])
 
 <div class="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-2xl dark:shadow-slate-950/50 transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-100 dark:border-white/10">
@@ -17,7 +18,8 @@
             <img src="{{ $image }}"
                  class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                  alt="{{ $alt ?? $title . ' à vendre - MyBoat Océan Indien' }}"
-                 loading="lazy"
+                 loading="{{ $priority ? 'eager' : 'lazy' }}"
+                 @if($priority) fetchpriority="high" @endif
                  onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200', 'dark:bg-slate-700');">
 
             <!-- Gradient overlay on hover -->
