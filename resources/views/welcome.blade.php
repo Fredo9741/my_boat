@@ -313,7 +313,7 @@
             <!-- Locations Grid - 5 cartes en dur -->
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                 <!-- La Réunion -->
-                <a href="{{ route('bateaux.index', ['zone' => 'reunion']) }}"
+                <a href="{{ route('bateaux.byZone', 'la-reunion') }}"
                    title="{{ __('Voir tous les bateaux à vendre à La Réunion') }}"
                    class="group relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-white/10">
                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-ocean-500 to-ocean-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
@@ -328,7 +328,7 @@
                 </a>
 
                 <!-- Maurice -->
-                <a href="{{ route('bateaux.index', ['zone' => 'maurice']) }}"
+                <a href="{{ route('bateaux.byZone', 'maurice') }}"
    title="{{ __('Voir tous les bateaux à vendre à Maurice') }}"
    class="group relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-white/10">
     
@@ -345,7 +345,7 @@
 </a>
 
                 <!-- Madagascar -->
-                <a href="{{ route('bateaux.index', ['zone' => 'madagascar']) }}"
+                <a href="{{ route('bateaux.byZone', 'madagascar') }}"
    title="{{ __('Voir tous les bateaux à vendre à Madagascar') }}"
    class="group relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-white/10">
     
@@ -362,7 +362,7 @@
 </a>
 
                 <!-- Seychelles -->
-                <a href="{{ route('bateaux.index', ['zone' => 'seychelles']) }}"
+                <a href="{{ route('bateaux.byZone', 'seychelles') }}"
    title="{{ __('Voir tous les bateaux à vendre aux Seychelles') }}"
    class="group relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-white/10">
     
@@ -381,7 +381,7 @@
 </a>
 
                 <!-- Mayotte -->
-                <a href="{{ route('bateaux.index', ['zone' => 'mayotte']) }}"
+                <a href="{{ route('bateaux.byZone', 'mayotte') }}"
    title="{{ __('Voir tous les bateaux à vendre à Mayotte') }}"
    class="group relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-white/10 col-span-2 sm:col-span-1 lg:col-span-1">
     
