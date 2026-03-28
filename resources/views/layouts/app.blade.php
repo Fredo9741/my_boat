@@ -63,13 +63,13 @@
 
     <!-- Favicon -->
     <!-- PNG primary (required by Google for search result icon) -->
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('images/logo-myboat.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/logo-myboat.png') }}">
-    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('images/logo-myboat.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ asset('images/favicon.png') }}">
     <!-- SVG fallback for modern browsers -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon-boat.svg') }}">
     <!-- Apple touch icon (PNG required, not SVG) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/logo-myboat.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon.png') }}">
 
     <!-- Hreflang Tags for SEO - Indicates alternate language versions -->
     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
