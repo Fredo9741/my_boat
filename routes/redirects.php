@@ -1076,6 +1076,9 @@ Route::permanentRedirect('/contatto', '/it/contatto');
 // Ces 301 redirigent vers la bonne URL avec préfixe de langue.
 // ==========================================
 
+// Anglais
+Route::get('/boats/{slug}', fn($slug) => redirect('/en/boats/' . $slug, 301));
+
 // Allemand
 Route::get('/boote/{slug}', fn($slug) => redirect('/de/boote/' . $slug, 301));
 Route::get('/artikel/{slug}', fn($slug) => redirect('/de/artikel/' . $slug, 301));

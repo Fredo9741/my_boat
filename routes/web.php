@@ -19,6 +19,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Sitemap XML (no locale prefix)
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::permanentRedirect('/sitemap-index.xml', '/sitemap.xml');
+
+// Redirections prioritaires - chargées AVANT le groupe multilingue pour éviter
+// que /acheter/{zoneSlug} intercepte les anciennes URLs /acheter/*.html
+require __DIR__ . '/redirects.php';
 
 // Routes multilingues (public)
 Route::group([
@@ -118,8 +123,4 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/visits', [\App\Http\Controllers\Admin\VisitController::class, 'destroy'])->name('visits.destroy');
 });
 
-// ==========================================
-// REDIRECTIONS 301 - Migration Symfony -> Laravel
-// IMPORTANT: Charger APRÈS les routes multilingues pour éviter les conflits
-// ==========================================
-require __DIR__ . '/redirects.php';
+// (redirects.php chargé en début de fichier)
