@@ -34,7 +34,7 @@
     >
 </picture>
 
-    <div class="absolute inset-0 bg-gradient-to-r from-black/10 via-black/2 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent"></div>
 </div>
 
 
@@ -66,7 +66,7 @@
                 <!-- Centered Search Bar and Stats -->
                 <div class="max-w-4xl mx-auto animate-fadeInUp" style="animation-delay: 0.3s;">
                     <form action="{{ route('bateaux.index') }}" method="GET" class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl shadow-2xl p-3 md:p-4 border border-white/20">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                             <!-- Type -->
                             <div class="relative group">
                                 <select name="type_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
@@ -104,7 +104,7 @@
                             </div>
 
                             <!-- Search Button -->
-                            <button type="submit" class="col-span-2 md:col-span-1 group relative px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl transform hover:scale-105 overflow-hidden">
+                            <button type="submit" class="col-span-1 sm:col-span-2 md:col-span-1 group relative px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold text-lg transition-all shadow-lg hover:shadow-2xl transform hover:scale-105 overflow-hidden">
                                 <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
                                 <span class="relative z-10 flex items-center justify-center">
                                     <i class="fas fa-search mr-2"></i>
@@ -117,7 +117,7 @@
                     <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 p-4 max-w-2xl mx-auto">
                         <div class="text-center group">
-                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-[#fdbb27] group-hover:scale-110 transition-transform" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">54+</div>
+                            <div class="text-2xl sm:text-3xl lg:text-4xl font-black mb-1 text-[#fdbb27] group-hover:scale-110 transition-transform" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">{{ $stats['total_bateaux'] }}+</div>
                             <div class="text-white text-sm sm:text-base font-semibold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.5), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">{{ __('Bateaux disponibles') }}</div>
                         </div>
                         <div class="text-center group">
@@ -148,14 +148,14 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
                 <div class="mb-6 md:mb-0">
                     <h2 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
-                        {{ __('Nos dernières opportunités') }}
+                        {{ __('Bateaux d\'occasion — Sélection du moment') }}
                     </h2>
                     <p class="text-xl text-gray-600 dark:text-gray-400">
                         {{ __('Découvrez notre sélection exclusive du moment') }}
                     </p>
                 </div>
-                <a href="{{ route('bateaux.index') }}" class="hidden md:flex items-center px-6 py-3 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
-                    {{ __('Voir tout') }}
+                <a href="{{ route('bateaux.index') }}" class="hidden md:flex items-center px-8 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
+                    {{ __('Voir tous les bateaux') }}
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -458,7 +458,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($latestArticles as $article)
-                <article class="group bg-white dark:bg-slate-800 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-white/10 overflow-hidden">
+                <article class="group bg-white dark:bg-slate-800 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-white/10 overflow-hidden {{ $loop->index > 0 ? 'hidden sm:block' : '' }}">
                     <a href="{{ route('articles.show', $article->slug) }}" class="block relative overflow-hidden aspect-video">
                         @if($article->featured_image)
                         <img src="{{ $article->featured_image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
@@ -519,7 +519,7 @@
                     <a href="{{ route('sell') }}" class="group relative px-10 py-5 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-2xl font-black text-lg overflow-hidden transition-all hover:shadow-2xl transform hover:scale-105">
                         <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
                         <span class="relative z-10 flex items-center">
-                            <i class="fas fa-anchor mr-3"></i>
+                            <i class="fas fa-calculator mr-3"></i>
                             {{ __('Estimer mon bateau') }}
                         </span>
                     </a>
@@ -530,7 +530,7 @@
                 </div>
 
                 <!-- Trust Indicators -->
-                <div class="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+                <div class="grid grid-cols-3 gap-4 sm:gap-8 max-w-3xl mx-auto">
                     <div class="group">
                         <div class="text-4xl md:text-5xl font-black mb-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan bg-clip-text text-transparent group-hover:scale-110 transition-transform">100%</div>
                         <div class="text-gray-600 dark:text-gray-400 text-sm md:text-base">{{ __('Gratuit') }}</div>
