@@ -17,6 +17,9 @@ use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+// Diagnostic TTFB — retourne "OK" sans SQL ni cache
+Route::get('/ping-vitesse', fn() => response('OK', 200)->header('Content-Type', 'text/plain'));
+
 // Sitemap XML (no locale prefix)
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::permanentRedirect('/sitemap-index.xml', '/sitemap.xml');
