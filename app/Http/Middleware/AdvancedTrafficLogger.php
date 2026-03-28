@@ -148,7 +148,7 @@ class AdvancedTrafficLogger
             $parts[] = "[{$seoIssue}]";
         }
 
-        $parts[] = '/' . $path;
+        $parts[] = '/' . ltrim($path, '/');
 
         if ($referer) {
             $parts[] = "[REF: {$referer}]";
