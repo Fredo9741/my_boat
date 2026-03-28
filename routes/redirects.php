@@ -1071,6 +1071,28 @@ Route::permanentRedirect('/partner', '/it/partner');
 Route::permanentRedirect('/contatto', '/it/contatto');
 
 // ==========================================
+// REDIRECTS WILDCARD AVEC SLUG
+// Google a indexé des URLs sans préfixe de langue avec un slug complet.
+// Ces 301 redirigent vers la bonne URL avec préfixe de langue.
+// ==========================================
+
+// Allemand
+Route::get('/boote/{slug}', fn($slug) => redirect('/de/boote/' . $slug, 301));
+Route::get('/artikel/{slug}', fn($slug) => redirect('/de/artikel/' . $slug, 301));
+
+// Espagnol
+Route::get('/barcos/{slug}', fn($slug) => redirect('/es/barcos/' . $slug, 301));
+Route::get('/articulos/{slug}', fn($slug) => redirect('/es/articulos/' . $slug, 301));
+
+// Néerlandais
+Route::get('/boten/{slug}', fn($slug) => redirect('/nl/boten/' . $slug, 301));
+Route::get('/artikelen/{slug}', fn($slug) => redirect('/nl/artikelen/' . $slug, 301));
+
+// Italien
+Route::get('/barche/{slug}', fn($slug) => redirect('/it/barche/' . $slug, 301));
+Route::get('/articoli/{slug}', fn($slug) => redirect('/it/articoli/' . $slug, 301));
+
+// ==========================================
 // NETTOYAGE DES ASSETS - ANCIENS DOSSIERS IMAGES
 // Ces URLs pointaient vers des images de l'ancien site Symfony.
 // Les images sont maintenant sur Cloudflare R2 — 410 Gone (pas de 301 inutile).
