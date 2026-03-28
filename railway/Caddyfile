@@ -6,11 +6,23 @@
 :{$PORT} {
     root * /app/public
 
-    encode gzip zstd
+    encode zstd gzip
 
     php_fastcgi 127.0.0.1:9000
 
     file_server
+
+    # Cache long terme pour assets versionnés (Vite hash dans le nom de fichier)
+    @static_assets {
+        path *.css *.js *.woff *.woff2 *.ttf *.otf
+    }
+    header @static_assets Cache-Control "public, max-age=31536000, immutable"
+
+    # Cache images 1 semaine
+    @static_images {
+        path *.png *.jpg *.jpeg *.gif *.ico *.svg *.webp *.avif
+    }
+    header @static_images Cache-Control "public, max-age=604800"
 
     header {
         -Server

@@ -52,10 +52,19 @@ class Article extends Model
             }
         });
 
-        // Invalidate sitemap cache on any changes (lazy rebuild on next request)
-        static::created(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
-        static::updated(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
-        static::deleted(fn () => \App\Http\Controllers\SitemapController::invalidateCache());
+        // Invalidate sitemap + homepage cache on any changes
+        static::created(function () {
+            \App\Http\Controllers\SitemapController::invalidateCache();
+            \Illuminate\Support\Facades\Cache::forget('homepage_boats');
+        });
+        static::updated(function () {
+            \App\Http\Controllers\SitemapController::invalidateCache();
+            \Illuminate\Support\Facades\Cache::forget('homepage_boats');
+        });
+        static::deleted(function () {
+            \App\Http\Controllers\SitemapController::invalidateCache();
+            \Illuminate\Support\Facades\Cache::forget('homepage_boats');
+        });
     }
 
     /**

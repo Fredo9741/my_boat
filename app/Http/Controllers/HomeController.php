@@ -7,6 +7,7 @@ use App\Models\Bateau;
 use App\Models\Type;
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -16,67 +17,60 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        // Get featured boats (4 boats marked as featured by admin)
-        $featuredBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
-            ->visible()
-            ->where('featured', true)
-            ->orderBy('published_at', 'desc')
-            ->limit(4)
-            ->get();
+        // Données stables cachées 10 minutes (types, zones, stats)
+        $staticData = Cache::remember('homepage_static', 600, function () {
+            return [
+                'stats' => [
+                    'total_bateaux' => Bateau::visible()->count(),
+                    'total_types'   => Type::has('bateaux')->count(),
+                    'total_zones'   => Zone::has('bateaux')->count(),
+                ],
+                'types' => Type::all(),
+                'zones' => Zone::all(),
+            ];
+        });
 
-        // If less than 4 featured boats, fill with newest boats
-        if ($featuredBateaux->count() < 4) {
-            $additionalBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
+        // Annonces cachées 5 minutes
+        $boatsData = Cache::remember('homepage_boats', 300, function () {
+            $featuredBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
                 ->visible()
-                ->where('featured', false)
+                ->where('featured', true)
                 ->orderBy('published_at', 'desc')
-                ->limit(4 - $featuredBateaux->count())
+                ->limit(4)
                 ->get();
-            $featuredBateaux = $featuredBateaux->merge($additionalBateaux);
-        }
 
-        // Get recent boats
-        $recentBateaux = Bateau::with(['type', 'zone', 'images'])
-            ->visible()
-            ->orderBy('published_at', 'desc')
-            ->limit(8)
-            ->get();
+            if ($featuredBateaux->count() < 4) {
+                $additional = Bateau::with(['type', 'zone', 'slogan', 'images'])
+                    ->visible()
+                    ->where('featured', false)
+                    ->orderBy('published_at', 'desc')
+                    ->limit(4 - $featuredBateaux->count())
+                    ->get();
+                $featuredBateaux = $featuredBateaux->merge($additional);
+            }
 
-        // Get premium boats (with slogans)
-        $premiumBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
-            ->visible()
-            ->whereNotNull('slogan_id')
-            ->inRandomOrder()
-            ->limit(6)
-            ->get();
+            $recentBateaux = Bateau::with(['type', 'zone', 'images'])
+                ->visible()
+                ->orderBy('published_at', 'desc')
+                ->limit(8)
+                ->get();
 
-        // Get statistics
-        $stats = [
-            'total_bateaux' => Bateau::visible()->count(),
-            'total_types' => Type::has('bateaux')->count(),
-            'total_zones' => Zone::has('bateaux')->count(),
-        ];
+            // inRandomOrder() = ORDER BY RAND() = full table scan, remplacé par latest
+            $premiumBateaux = Bateau::with(['type', 'zone', 'slogan', 'images'])
+                ->visible()
+                ->whereNotNull('slogan_id')
+                ->orderBy('published_at', 'desc')
+                ->limit(6)
+                ->get();
 
-        // Get all types for search form
-        $types = Type::all();
+            $latestArticles = Article::published()
+                ->orderBy('published_at', 'desc')
+                ->limit(3)
+                ->get();
 
-        // Get all zones for search form
-        $zones = Zone::all();
+            return compact('featuredBateaux', 'recentBateaux', 'premiumBateaux', 'latestArticles');
+        });
 
-        // Get latest published articles for homepage
-        $latestArticles = Article::published()
-            ->orderBy('published_at', 'desc')
-            ->limit(3)
-            ->get();
-
-        return view('welcome', compact(
-            'featuredBateaux',
-            'recentBateaux',
-            'premiumBateaux',
-            'stats',
-            'types',
-            'zones',
-            'latestArticles'
-        ));
+        return view('welcome', array_merge($staticData, $boatsData));
     }
 }
