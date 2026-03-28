@@ -16,11 +16,11 @@
 <picture>
     <source
         media="(max-width: 768px)"
-        srcset="https://files.fredlabs.org/hero/herosmart.webp"
+        srcset="{{ r2_url('hero/herosmart.webp') }}"
     >
 
     <img
-        src="https://files.fredlabs.org/hero/herodesk.webp"
+        src="{{ r2_url('hero/herodesk.webp') }}"
         alt="{{ __('Marketplace de vente de bateaux dans l\'océan Indien') }}"
         loading="eager"
         fetchpriority="high"
