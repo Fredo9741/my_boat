@@ -14,32 +14,20 @@
 <!-- Background Image -->
 <div class="absolute inset-0">
 <picture>
-    {{-- Mobile AVIF (browsers modernes) : ~30% plus léger que WebP --}}
+    {{-- Mobile WebP 828px (414px × 2x retina) --}}
     <source
         media="(max-width: 768px)"
-        srcset="{{ cf_img(r2_url('hero/herosmart.webp'), ['width' => 828, 'quality' => 65, 'format' => 'avif']) }}"
-        type="image/avif"
-    >
-    {{-- Mobile WebP (fallback) --}}
-    <source
-        media="(max-width: 768px)"
-        srcset="{{ cf_img(r2_url('hero/herosmart.webp'), ['width' => 828, 'quality' => 65]) }}"
+        srcset="{{ cf_img(r2_url('hero/herosmart.webp'), ['width' => 828, 'quality' => 70]) }}"
         type="image/webp"
     >
-    {{-- Desktop AVIF --}}
+    {{-- Desktop WebP 1600px --}}
     <source
         media="(min-width: 769px)"
-        srcset="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 70, 'format' => 'avif']) }}"
-        type="image/avif"
-    >
-    {{-- Desktop WebP (fallback) --}}
-    <source
-        media="(min-width: 769px)"
-        srcset="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 70]) }}"
+        srcset="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 75]) }}"
         type="image/webp"
     >
     <img
-        src="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 70]) }}"
+        src="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 75]) }}"
         alt="{{ __('Marketplace de vente de bateaux dans l\'océan Indien') }}"
         loading="eager"
         fetchpriority="high"
