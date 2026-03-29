@@ -65,13 +65,13 @@
             <div class="container mx-auto px-4">
                 <div class="lg:max-w-2xl xl:max-w-3xl">
                     <!-- Badge -->
-                    <a href="{{ route('bateaux.index') }}" class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white mb-6 animate-fadeInUp border border-white/20 hover:bg-white/20 transition-all cursor-pointer">
+                    <a href="{{ route('bateaux.index') }}" class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white mb-6 border border-white/20 hover:bg-white/20 transition-all cursor-pointer">
                         <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></span>
                         <span class="text-sm font-medium">{{ $stats['total_bateaux'] }} {{ __('bateaux disponibles') }}</span>
                     </a>
 
                     <!-- Main Title - SEO optimized with geographic keywords -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 animate-fadeInUp leading-tight" style="animation-delay: 0.1s; text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3), -1px -1px 0 rgba(0,0,0,0.2), 1px -1px 0 rgba(0,0,0,0.2), -1px 1px 0 rgba(0,0,0,0.2), 1px 1px 0 rgba(0,0,0,0.2);">
                         <span class="text-white">{{ __('Acheter ou vendre un bateau') }}</span><br class="hidden sm:block">
                         <span class="text-white">{{ __('dans l\'') }}</span><span class="relative inline-block">
                             <span class="relative z-10 text-[#fdbb27] italic">{{ __('Océan Indien') }}</span>
@@ -79,14 +79,14 @@
                         </span>
                     </h1>
 
-                    <p class="text-lg sm:text-xl lg:text-2xl font-semibold mb-8 animate-fadeInUp" style="animation-delay: 0.2s; text-shadow: 0 1px 3px rgba(0,0,0,0.4), -1px -1px 0 rgba(0,0,0,0.15), 1px -1px 0 rgba(0,0,0,0.15), -1px 1px 0 rgba(0,0,0,0.15), 1px 1px 0 rgba(0,0,0,0.15);">
+                    <p class="text-lg sm:text-xl lg:text-2xl font-semibold mb-8" style="text-shadow: 0 1px 3px rgba(0,0,0,0.4), -1px -1px 0 rgba(0,0,0,0.15), 1px -1px 0 rgba(0,0,0,0.15), -1px 1px 0 rgba(0,0,0,0.15), 1px 1px 0 rgba(0,0,0,0.15);">
                         <span class="text-white">{{ __('Votre courtier maritime à') }}</span>
                         <span class="text-[#fdbb27] italic">{{ __('La Réunion, Maurice, Madagascar, Seychelles et Mayotte') }}</span>
                     </p>
                 </div>
 
                 <!-- Centered Search Bar and Stats -->
-                <div class="max-w-4xl mx-auto animate-fadeInUp" style="animation-delay: 0.3s;">
+                <div class="max-w-4xl mx-auto">
                     <form action="{{ route('bateaux.index') }}" method="GET" class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl shadow-2xl p-3 md:p-4 border border-white/20">
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                             <!-- Type -->
