@@ -5,21 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="khnsY4EOXA9a9-F07reTdBySXwmf-m8xFoCYo8sDscY" />
 
-    <!-- Scripts tiers : GA + Clarity au load, ContentSquare différé au premier scroll -->
+    <!-- Microsoft Clarity - chargé après le load pour ne pas bloquer le rendu -->
     <script>
-        function loadAnalytics() {
-            // Google Analytics 4
-            var ga = document.createElement('script');
-            ga.async = true;
-            ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-L6J2VH924Y';
-            document.head.appendChild(ga);
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
-            gtag('js', new Date());
-            gtag('config', 'G-L6J2VH924Y');
-
-            // Microsoft Clarity
+        function loadClarity() {
             (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -27,30 +15,11 @@
             })(window, document, "clarity", "script", "vsiyestkj1");
         }
 
-        function loadContentsquare() {
-            if (window._csLoaded) return;
-            window._csLoaded = true;
-            var cs = document.createElement('script');
-            cs.async = true;
-            cs.src = 'https://t.contentsquare.net/uxa/209b0e57d927d.js';
-            document.head.appendChild(cs);
-        }
-
-        // GA + Clarity : au load
         if (document.readyState === 'complete') {
-            loadAnalytics();
+            loadClarity();
         } else {
-            window.addEventListener('load', loadAnalytics);
+            window.addEventListener('load', loadClarity);
         }
-
-        // ContentSquare : au premier scroll ou interaction (hors-écran au chargement)
-        ['scroll', 'touchstart', 'mousemove'].forEach(function(evt) {
-            window.addEventListener(evt, loadContentsquare, { once: true, passive: true });
-        });
-        // Fallback : 5s après le load si aucune interaction
-        window.addEventListener('load', function() {
-            setTimeout(loadContentsquare, 5000);
-        });
     </script>
 
     <title>@yield('title', 'Acheter un Bateau Océan Indien | Réunion, Maurice, Madagascar - My Boat')</title>
