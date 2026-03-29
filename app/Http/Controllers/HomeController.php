@@ -71,6 +71,9 @@ class HomeController extends Controller
             return compact('featuredBateaux', 'recentBateaux', 'premiumBateaux', 'latestArticles');
         });
 
-        return view('welcome', array_merge($staticData, $boatsData));
+        return response()
+            ->view('welcome', array_merge($staticData, $boatsData))
+            ->header('Cache-Control', 'public, s-maxage=120, stale-while-revalidate=60')
+            ->header('Vary', 'Accept-Language');
     }
 }
