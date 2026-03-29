@@ -52,10 +52,11 @@
 
 ## P2 — Ressources tierces et cache (gain estimé : +5 pts)
 
-- [ ] **Fix 6 — Désactiver Email Obfuscation Cloudflare**
-  - `email-decode.min.js` est dans la chaîne critique (408 ms, TTL 47 min)
-  - Dashboard CF → Speed → Optimization → Email Obfuscation → **Off**
-  - **Gain estimé : sortie du chemin critique**
+- [x] **Fix 6 — Désactiver Email Obfuscation Cloudflare**
+  - `email-decode.min.js` sorti de la chaîne critique (408 ms économisés)
+  - Cloudflare Fonts activé (remplace Google Fonts externe)
+  - Early Hints activé (~200 ms gagnés sur preconnect)
+  - **Gain estimé : −600+ ms sur le chemin critique**
 
 - [ ] **Fix 7 — Font Awesome : charger uniquement les icônes utilisées**
   - Actuellement : `all.min.css` = 18 KB CSS + 299 KB WOFF2 (fa-solid, fa-brands, fa-regular)
