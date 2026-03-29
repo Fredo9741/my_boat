@@ -36,16 +36,16 @@
 
 ## P1 — Optimisations images (gain estimé : +15 pts)
 
-- [ ] **Fix 4 — Hero image trop lourde** (`herosmart.webp`)
-  - Taille actuelle : **382 KB** → cible : **< 150 KB**
-  - Action : Recompresser en WebP qualité 75-80 via Squoosh / imagemin
-  - Le "Délai d'affichage de l'élément" est 2 020 ms — killer #1 du LCP
-  - Uploader sur le R2 bucket en remplacement
+- [x] **Fix 4 — Hero image via Cloudflare Transformations** (`welcome.blade.php`)
+  - Taille avant : **382 KB** bruts → cible : **~80 KB** (width=828, quality=75)
+  - `<picture>` avec source mobile (828px) + desktop (1600px) via `cf_img()`
+  - Ajout `width="1600" height="900"` sur le `<img>` fallback (CLS)
+  - **Gain estimé : −300 KB+ sur le LCP mobile**
 
-- [ ] **Fix 5 — Images bateaux JPEG sans srcset** (`boat-card.blade.php`)
-  - 4 images × ~200 KB chacune affichées en 378px mais servies en 1280-1600px
-  - Option A : Générer un thumb 450px WebP à l'upload (côté Laravel/Spatie Media Library)
-  - Option B : Utiliser Cloudflare Image Resizing si activé (`/cdn-cgi/image/width=450,format=webp/...`)
+- [x] **Fix 5 — Images bateaux JPEG via Cloudflare Transformations** (`boat-card.blade.php`)
+  - JPEG 1280-1600px → WebP 450px via `cf_img($image, ['width' => 450, 'quality' => 82])`
+  - `srcset` 1x/2x ajouté + `sizes` responsive + `width/height` explicites
+  - Helper `cf_img()` créé dans `app/helpers.php` (réutilisable partout)
   - **Gain estimé : −730 KB** sur la page d'accueil
 
 ---

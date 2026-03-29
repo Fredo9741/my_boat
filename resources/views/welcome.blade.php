@@ -14,16 +14,25 @@
 <!-- Background Image -->
 <div class="absolute inset-0">
 <picture>
+    {{-- Mobile : 828px = 414px × 2x retina (réduit herosmart de 382KB → ~80KB) --}}
     <source
         media="(max-width: 768px)"
-        srcset="{{ r2_url('hero/herosmart.webp') }}"
+        srcset="{{ cf_img(r2_url('hero/herosmart.webp'), ['width' => 828, 'quality' => 75]) }} 1x,
+                {{ cf_img(r2_url('hero/herosmart.webp'), ['width' => 828, 'quality' => 75]) }} 2x"
+        type="image/webp"
     >
-
+    {{-- Desktop : 1600px suffisant pour la plupart des écrans (herodesk restant inchangé) --}}
+    <source
+        media="(min-width: 769px)"
+        srcset="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 80]) }}"
+        type="image/webp"
+    >
     <img
-        src="{{ r2_url('hero/herodesk.webp') }}"
+        src="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 80]) }}"
         alt="{{ __('Marketplace de vente de bateaux dans l\'océan Indien') }}"
         loading="eager"
         fetchpriority="high"
+        width="1600" height="900"
         class="
             w-full h-full object-cover
             object-[35%_50%]
