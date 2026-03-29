@@ -1,5 +1,5 @@
 # Roadmap Performance — myboat-oi.com
-> Audit initial : **63/100** (mobile) — Dernière mise à jour : 29/03/2026
+> Audit initial : **63/100** (mobile) — Dernière mise à jour : 29/03/2026 16:15
 
 ---
 
@@ -27,10 +27,23 @@
 | CLS | 0 | 0 | 0 |
 | Speed Index | 5,1 s | **3,8 s** | < 3,0 s |
 
+### Page listing (`/bateaux`)
+| Métrique | Avant a11y fix (16:09) | Après a11y fix (16:15) | Objectif |
+|---|---|---|---|
+| Score Perf | 69 | **74** | 80+ |
+| Accessibilité | 79 | **100** ✅ | 100 |
+| Bonnes pratiques | 100 | **100** ✅ | 100 |
+| SEO | 92 | **92** | 96 |
+| FCP | 3,9 s | 3,9 s | < 2,0 s |
+| LCP | 5,9 s | — | < 3,0 s |
+| TBT | 0 ms | 0 ms | 0 |
+
 ### Accessibilité
 | Page | Score initial | Score actuel | Objectif |
 |---|---|---|---|
-| Accueil | 69 | 94 → **97-98** (après push a11y) | 98+ |
+| Accueil `/` | 69 | **97-98** | 100 |
+| Détail `/bateaux/[slug]` | — | **92** | 98+ |
+| Listing `/bateaux` | 79 | **100** ✅ | 100 |
 
 ---
 
@@ -50,7 +63,8 @@
 - [x] **CF Cache Rule homepage** — `s-maxage=120, stale-while-revalidate=60` + Cache-Control header Laravel
 - [x] **GA et ContentSquare supprimés** — TBT 100ms → 0ms
 - [x] **Clarity chargé après `load` event** — ne bloque pas le thread principal
-- [x] **Accessibilité** — aria-label, aria-hidden, h4→h3, h5→h3 footers, contrastes -600→-700, gray-500→gray-400
+- [x] **Accessibilité homepage** — aria-label, aria-hidden, h4→h3, h5→h3 footers, contrastes -600→-700, gray-500→gray-400
+- [x] **Accessibilité listing `/bateaux`** — aria-label buttons/select/link, sr-only label search, h3→h2 Filtres, badges ocean-600→700 — **79 → 100** ✅
 
 ---
 
