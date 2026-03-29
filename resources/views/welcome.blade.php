@@ -7,15 +7,17 @@
 @section('og_description', __('Votre courtier maritime de confiance. Voiliers, catamarans et bateaux à moteur à La Réunion, Maurice, Madagascar.'))
 
 @push('head')
-{{-- Preload hero : le navigateur commence à télécharger l'image dès la réception du HTML --}}
+{{-- Preload hero haute priorité : navigateur fetch dès réception HTML --}}
 <link rel="preload" as="image"
     href="{{ cf_img(r2_url('hero/herosmart.webp'), ['width' => 828, 'quality' => 70]) }}"
     media="(max-width: 768px)"
-    type="image/webp">
+    type="image/webp"
+    fetchpriority="high">
 <link rel="preload" as="image"
     href="{{ cf_img(r2_url('hero/herodesk.webp'), ['width' => 1600, 'quality' => 75]) }}"
     media="(min-width: 769px)"
-    type="image/webp">
+    type="image/webp"
+    fetchpriority="high">
 @endpush
 
 @section('content')
