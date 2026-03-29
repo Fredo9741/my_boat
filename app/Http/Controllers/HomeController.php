@@ -15,7 +15,7 @@ class HomeController extends Controller
     /**
      * Display the home page with featured boats
      */
-    public function index(): View
+    public function index(): \Illuminate\Http\Response
     {
         // Données stables cachées 10 minutes (types, zones, stats)
         $staticData = Cache::remember('homepage_static', 600, function () {
