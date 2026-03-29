@@ -249,7 +249,7 @@
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
                             {{ __('Stabilité et espace pour vos croisières en famille ou charters.') }}
                         </p>
-                        <div class="mt-4 flex items-center text-ocean-600 dark:text-ocean-400 font-semibold text-sm">
+                        <div class="mt-4 flex items-center text-ocean-700 dark:text-ocean-400 font-semibold text-sm">
                             {{ __('Voir les annonces') }}
                             <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </div>
@@ -270,7 +270,7 @@
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
                             {{ __('Naviguez à la force du vent avec nos voiliers de croisière et de course.') }}
                         </p>
-                        <div class="mt-4 flex items-center text-purple-600 dark:text-purple-400 font-semibold text-sm">
+                        <div class="mt-4 flex items-center text-purple-700 dark:text-purple-400 font-semibold text-sm">
                             {{ __('Voir les annonces') }}
                             <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </div>
@@ -291,7 +291,7 @@
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
                             {{ __('Rapidité et confort pour vos sorties en mer et pêche sportive.') }}
                         </p>
-                        <div class="mt-4 flex items-center text-amber-600 dark:text-amber-400 font-semibold text-sm">
+                        <div class="mt-4 flex items-center text-amber-700 dark:text-amber-400 font-semibold text-sm">
                             {{ __('Voir les annonces') }}
                             <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </div>
@@ -312,7 +312,7 @@
                         <p class="text-gray-600 dark:text-gray-400 text-sm">
                             {{ __('Performance et légèreté pour les passionnés de vitesse.') }}
                         </p>
-                        <div class="mt-4 flex items-center text-emerald-600 dark:text-emerald-400 font-semibold text-sm">
+                        <div class="mt-4 flex items-center text-emerald-700 dark:text-emerald-400 font-semibold text-sm">
                             {{ __('Voir les annonces') }}
                             <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </div>
@@ -504,7 +504,7 @@
                         @if($article->excerpt)
                         <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">{{ $article->excerpt }}</p>
                         @endif
-                        <a href="{{ route('articles.show', $article->slug) }}" class="inline-flex items-center text-ocean-600 dark:text-ocean-400 font-semibold text-sm hover:underline">
+                        <a href="{{ route('articles.show', $article->slug) }}" class="inline-flex items-center text-ocean-700 dark:text-ocean-400 font-semibold text-sm hover:underline">
                             {{ __('Lire l\'article') }}
                             <i class="fas fa-arrow-right ml-1.5 group-hover:translate-x-1 transition-transform"></i>
                         </a>
@@ -548,7 +548,7 @@
                             {{ __('Estimer mon bateau') }}
                         </span>
                     </a>
-                    <a href="{{ route('contact') }}" class="group px-10 py-5 border-2 border-ocean-600 dark:border-ocean-400 text-ocean-600 dark:text-ocean-400 rounded-2xl font-black text-lg hover:bg-ocean-600 hover:dark:bg-ocean-500 hover:text-white transition-all transform hover:scale-105">
+                    <a href="{{ route('contact') }}" class="group px-10 py-5 border-2 border-ocean-700 dark:border-ocean-400 text-ocean-700 dark:text-ocean-400 rounded-2xl font-black text-lg hover:bg-ocean-700 hover:dark:bg-ocean-500 hover:text-white transition-all transform hover:scale-105">
                         <i class="fas fa-phone mr-3"></i>
                         {{ __('Nous contacter') }}
                     </a>
