@@ -14,7 +14,7 @@ class BateauController extends Controller
     /**
      * Display a listing of all boats with filters
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|\Illuminate\Http\Response
     {
         // Start query with relations
         $query = Bateau::with(['type', 'zone', 'slogan', 'images'])
@@ -173,14 +173,17 @@ class BateauController extends Controller
             }
         }
 
-        return view('bateaux.index', compact(
-            'bateaux',
-            'types',
-            'zones',
-            'totalCount',
-            'activeTypeFilter',
-            'activeZoneFilter'
-        ));
+        return response()
+            ->view('bateaux.index', compact(
+                'bateaux',
+                'types',
+                'zones',
+                'totalCount',
+                'activeTypeFilter',
+                'activeZoneFilter'
+            ))
+            ->header('Cache-Control', 'public, s-maxage=180, stale-while-revalidate=60')
+            ->header('Vary', 'Accept-Language');
     }
 
     /**
@@ -223,13 +226,16 @@ class BateauController extends Controller
             ->limit(4)
             ->get();
 
-        return view('bateaux.show', compact('bateau', 'similaires'));
+        return response()
+            ->view('bateaux.show', compact('bateau', 'similaires'))
+            ->header('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+            ->header('Vary', 'Accept-Language');
     }
 
     /**
      * Display boats filtered by zone with SEO content
      */
-    public function byZone(string $zoneSlug, Request $request): View|Response
+    public function byZone(string $zoneSlug, Request $request): \Illuminate\Http\Response
     {
         $seoData = config('zones_seo.' . $zoneSlug);
 
@@ -264,6 +270,9 @@ class BateauController extends Controller
         $bateaux = $query->orderBy('published_at', 'desc')->get();
         $types   = Type::withCount(['bateaux' => fn($q) => $q->visible()->where('zone_id', $zone->id)])->get();
 
-        return view('bateaux.zone', compact('bateaux', 'zone', 'seoData', 'types'));
+        return response()
+            ->view('bateaux.zone', compact('bateaux', 'zone', 'seoData', 'types'))
+            ->header('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+            ->header('Vary', 'Accept-Language');
     }
 }
