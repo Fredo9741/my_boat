@@ -4,15 +4,15 @@
 
 ---
 
-## Scores initiaux (mobile, Moto G Power, 4G lente)
-| Métrique | Avant | Objectif |
-|---|---|---|
-| Score Perf | 63 | 80+ |
-| FCP | 3,9 s | < 2,0 s |
-| LCP | 8,5 s | < 3,5 s |
-| TBT | 100 ms | < 100 ms |
-| CLS | 0 | 0 |
-| Speed Index | 5,3 s | < 3,5 s |
+## Historique des scores (mobile, Moto G Power, 4G lente)
+| Métrique | Audit 1 (14:08) | Audit 2 (14:55) | Objectif |
+|---|---|---|---|
+| Score Perf | 63 | 74 | 80+ |
+| FCP | 3,9 s | 3,9 s | < 2,0 s |
+| LCP | 8,5 s | 4,7 s | < 3,0 s |
+| TBT | 100 ms | 20 ms | < 20 ms |
+| CLS | 0 | 0,018 | 0 |
+| Speed Index | 5,3 s | 3,9 s | < 3,0 s |
 
 ---
 
@@ -63,10 +63,18 @@
   - Option : Passer sur un kit FA avec subset, ou inliner les SVG des icônes critiques
   - **Gain estimé : −18 KB CSS bloquant**
 
-- [ ] **Fix 8 — ContentSquare : évaluer la nécessité**
-  - 137 KB JS sans TTL cache → rechargé à chaque visite
-  - 141 ms sur le thread principal + 2 long tasks (90 ms + 59 ms)
-  - Si trial non utilisé activement : supprimer le script jusqu'à besoin réel
+- [x] **Fix 7b — Google Fonts `display=optional`** (`app.blade.php`)
+  - `display=swap` → `display=optional` : navigateur n'attend plus la police pour FCP
+  - Élimine le layout shift causé par Inter woff2 (CLS 0,018 → 0 attendu)
+
+- [x] **Fix 7c — Hero AVIF + quality=65** (`welcome.blade.php`)
+  - `<picture>` avec 4 sources : AVIF mobile, WebP mobile, AVIF desktop, WebP desktop
+  - quality 75 → 65 : gain supplémentaire ~30% sur les browsers AVIF-compatibles
+
+- [x] **Fix 8 — ContentSquare différé au premier scroll** (`app.blade.php`)
+  - Chargé au `scroll`/`touchstart`/`mousemove` au lieu du `load`
+  - Fallback : 5s après load si aucune interaction
+  - **Gain estimé : −87 ms thread principal sur le chargement initial**
 
 ---
 

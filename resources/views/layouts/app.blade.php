@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="khnsY4EOXA9a9-F07reTdBySXwmf-m8xFoCYo8sDscY" />
 
-    <!-- Scripts tiers chargés après le load event pour ne pas bloquer le rendu -->
+    <!-- Scripts tiers : GA + Clarity au load, ContentSquare différé au premier scroll -->
     <script>
-        function loadThirdPartyScripts() {
+        function loadAnalytics() {
             // Google Analytics 4
             var ga = document.createElement('script');
             ga.async = true;
@@ -25,19 +25,32 @@
                 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "vsiyestkj1");
+        }
 
-            // Contentsquare
+        function loadContentsquare() {
+            if (window._csLoaded) return;
+            window._csLoaded = true;
             var cs = document.createElement('script');
             cs.async = true;
             cs.src = 'https://t.contentsquare.net/uxa/209b0e57d927d.js';
             document.head.appendChild(cs);
         }
 
+        // GA + Clarity : au load
         if (document.readyState === 'complete') {
-            loadThirdPartyScripts();
+            loadAnalytics();
         } else {
-            window.addEventListener('load', loadThirdPartyScripts);
+            window.addEventListener('load', loadAnalytics);
         }
+
+        // ContentSquare : au premier scroll ou interaction (hors-écran au chargement)
+        ['scroll', 'touchstart', 'mousemove'].forEach(function(evt) {
+            window.addEventListener(evt, loadContentsquare, { once: true, passive: true });
+        });
+        // Fallback : 5s après le load si aucune interaction
+        window.addEventListener('load', function() {
+            setTimeout(loadContentsquare, 5000);
+        });
     </script>
 
     <title>@yield('title', 'Acheter un Bateau Océan Indien | Réunion, Maurice, Madagascar - My Boat')</title>
@@ -98,8 +111,8 @@
     <!-- Google Fonts - Inter (3 weights only) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=optional"></noscript>
 
     <!-- Font Awesome (non-blocking) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
