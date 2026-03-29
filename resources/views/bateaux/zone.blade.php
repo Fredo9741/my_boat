@@ -15,11 +15,11 @@
         <div class="absolute bottom-10 right-20 w-80 h-80 bg-ocean-400 rounded-full blur-3xl"></div>
     </div>
     <div class="container mx-auto px-4 py-16 relative z-10">
-        <nav class="mb-6 text-sm text-ocean-200">
+        <nav class="mb-6 text-sm text-white/75" aria-label="{{ __('Fil d\'Ariane') }}">
             <a href="{{ route('home') }}" class="hover:text-white transition-colors">Accueil</a>
-            <span class="mx-2"><i class="fas fa-chevron-right text-xs"></i></span>
+            <span class="mx-2" aria-hidden="true"><i class="fas fa-chevron-right text-xs"></i></span>
             <a href="{{ route('bateaux.index') }}" class="hover:text-white transition-colors">Annonces</a>
-            <span class="mx-2"><i class="fas fa-chevron-right text-xs"></i></span>
+            <span class="mx-2" aria-hidden="true"><i class="fas fa-chevron-right text-xs"></i></span>
             <span class="text-white font-medium">{{ $seoData['name'] }}</span>
         </nav>
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -87,7 +87,7 @@
                          ? 'bg-ocean-600 text-white border-ocean-600 shadow-md'
                          : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-white/10 hover:border-ocean-400' }}">
                 {{ $type->libelle }}
-                <span class="text-xs opacity-60">({{ $type->bateaux_count }})</span>
+                <span class="text-xs {{ $active ? 'text-white/80' : 'text-gray-500' }}">({{ $type->bateaux_count }})</span>
             </a>
             @endif
         @endforeach
@@ -101,6 +101,7 @@
 
     {{-- Grille bateaux --}}
     @if($bateaux->count() > 0)
+        <h2 class="sr-only">{{ __('Annonces disponibles') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-12">
             @foreach($bateaux as $bateau)
                 <x-boat-card
