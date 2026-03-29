@@ -138,12 +138,14 @@
                     if (empty($photos)) {
                         $photos[] = $bateau->main_image;
                     }
+                    $photosLarge  = array_map(fn($u) => cf_img($u, ['width' => 900, 'quality' => 75]), $photos);
+                    $photosThumbs = array_map(fn($u) => cf_img($u, ['width' => 192, 'height' => 192, 'fit' => 'cover', 'quality' => 70]), $photos);
                 @endphp
 
                 <!-- Main Image -->
                 <div class="relative bg-gray-100 dark:bg-slate-800 aspect-video overflow-hidden">
                     <img id="mainImage"
-                         src="{{ $photos[0] }}"
+                         src="{{ $photosLarge[0] }}"
                          alt="{{ $bateau->alt_text }}"
                          class="w-full h-full object-cover"
                          loading="eager"
@@ -171,10 +173,10 @@
                 @if(count($photos) > 1)
                 <div class="p-4 bg-gray-50 dark:bg-slate-800/50">
                     <div class="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
-                        @foreach($photos as $index => $photo)
+                        @foreach($photosThumbs as $index => $thumb)
                         <button onclick="changeImage({{ $index }})"
                                 class="thumbnail-btn flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden border-3 transition-all hover:scale-105 {{ $index === 0 ? 'border-ocean-600 ring-2 ring-ocean-500' : 'border-gray-300 dark:border-slate-600' }}">
-                            <img src="{{ $photo }}" alt="{{ $bateau->alt_text }} - photo {{ $index + 1 }}" class="w-full h-full object-cover">
+                            <img src="{{ $thumb }}" alt="{{ $bateau->alt_text }} - photo {{ $index + 1 }}" class="w-full h-full object-cover" loading="lazy" width="96" height="96">
                         </button>
                         @endforeach
                     </div>
@@ -412,7 +414,7 @@
 
 <!-- Gallery JavaScript -->
 <script>
-const photos = @json($photos);
+const photos = @json($photosLarge);
 let currentImageIndex = 0;
 
 function changeImage(index) {
