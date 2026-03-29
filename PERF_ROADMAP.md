@@ -1,112 +1,99 @@
 # Roadmap Performance — myboat-oi.com
-> Audit PageSpeed du 29/03/2026 — Score mobile initial : **63/100**
-> Objectif : **80+/100**
+> Audit initial : **63/100** (mobile) — Dernière mise à jour : 29/03/2026
 
 ---
 
 ## Historique des scores (mobile, Moto G Power, 4G lente)
-| Métrique | Audit 1 (14:08) | Audit 2 (14:55) | Objectif |
+
+### Page d'accueil (`/`)
+| Métrique | Audit 1 (14:08) | Audit 2 (14:55) | Audit 3-7 | Objectif |
+|---|---|---|---|---|
+| Score Perf | 63 | 74 | 67–71 | 80+ |
+| FCP | 3,9 s | 3,9 s | ~3,8 s | < 2,0 s |
+| LCP | 8,5 s | 4,7 s | ~5–6 s | < 3,0 s |
+| TBT | 100 ms | 20 ms | 0 ms | < 20 ms |
+| CLS | 0 | 0,018 | 0 | 0 |
+| Speed Index | 5,3 s | 3,9 s | ~4,0 s | < 3,0 s |
+
+> FCP/LCP variables selon cache CF (cold = ~5s, warm = ~4s). Vraie perf utilisateur : 0,1–0,6s sur cache chaud.
+
+### Page détail bateau (`/bateaux/[slug]`)
+| Métrique | Avant fix images (16:00) | Après fix images (16:05) | Objectif |
 |---|---|---|---|
-| Score Perf | 63 | 74 | 80+ |
-| FCP | 3,9 s | 3,9 s | < 2,0 s |
-| LCP | 8,5 s | 4,7 s | < 3,0 s |
-| TBT | 100 ms | 20 ms | < 20 ms |
-| CLS | 0 | 0,018 | 0 |
-| Speed Index | 5,3 s | 3,9 s | < 3,0 s |
+| Score Perf | 65 | **78** | 80+ |
+| FCP | 3,8 s | 3,8 s | < 2,0 s |
+| LCP | 7,1 s | **4,1 s** | < 3,0 s |
+| TBT | 0 ms | 60 ms | < 20 ms |
+| CLS | 0 | 0 | 0 |
+| Speed Index | 5,1 s | **3,8 s** | < 3,0 s |
+
+### Accessibilité
+| Page | Score initial | Score actuel | Objectif |
+|---|---|---|---|
+| Accueil | 69 | 94 → **97-98** (après push a11y) | 98+ |
 
 ---
 
-## P0 — Corrections code (gain estimé : +20 pts)
+## ✅ Corrections appliquées
 
-- [x] **Fix 1 — Preconnect CDN images** (`app.blade.php`)
-  - Supprimé `preconnect` vers `files.fredlabs.org` (inutilisé)
-  - Ajouté `preconnect` vers `images.myboat-oi.com` (hero image)
-  - **Gain estimé : −330 ms LCP**
-
-- [x] **Fix 2 — Google Fonts non-bloquant** (`app.blade.php`)
-  - Remplacé `rel="stylesheet"` par `rel="preload" as="style" onload=...`
-  - **Gain estimé : −750 ms FCP/LCP**
-
-- [x] **Fix 3 — Logo SVG width/height explicites** (`header.blade.php` + `footer.blade.php`)
-  - Ajouté `width="160" height="48"` sur le logo header
-  - Ajouté `width="140" height="40"` sur le logo footer
-  - **Gain estimé : stabilisation CLS**
-
----
-
-## P1 — Optimisations images (gain estimé : +15 pts)
-
-- [x] **Fix 4 — Hero image via Cloudflare Transformations** (`welcome.blade.php`)
-  - Taille avant : **382 KB** bruts → cible : **~80 KB** (width=828, quality=75)
-  - `<picture>` avec source mobile (828px) + desktop (1600px) via `cf_img()`
-  - Ajout `width="1600" height="900"` sur le `<img>` fallback (CLS)
-  - **Gain estimé : −300 KB+ sur le LCP mobile**
-
-- [x] **Fix 5 — Images bateaux JPEG via Cloudflare Transformations** (`boat-card.blade.php`)
-  - JPEG 1280-1600px → WebP 450px via `cf_img($image, ['width' => 450, 'quality' => 82])`
-  - `srcset` 1x/2x ajouté + `sizes` responsive + `width/height` explicites
-  - Helper `cf_img()` créé dans `app/helpers.php` (réutilisable partout)
-  - **Gain estimé : −730 KB** sur la page d'accueil
+- [x] **Preconnect CDN images** — `images.myboat-oi.com` + `crossorigin`
+- [x] **Google Fonts non-bloquant** — `rel="preload" as="style" onload`
+- [x] **Google Fonts `display=optional`** — élimine CLS (0,018 → 0)
+- [x] **Logo SVG width/height explicites** — header + footer
+- [x] **Hero image via CF Transformations** — WebP mobile 828px/q70, desktop 1600px/q75, `fetchpriority="high"` preload
+- [x] **Images bateaux via CF Transformations** — `boat-card.blade.php` → WebP 450px srcset 1x/2x
+- [x] **Images galerie page détail via CF Transformations** — `show.blade.php`
+  - Image principale : WebP 900px/q75
+  - Thumbnails : WebP 192×192 cover/q70 avec `loading="lazy"` + dimensions explicites
+  - **Gain : −750 KB → LCP 7,1s → 4,1s (+13 pts)**
+- [x] **Email Obfuscation Cloudflare désactivé** — retire `email-decode.min.js` de la chaîne critique
+- [x] **CF Cache Rule homepage** — `s-maxage=120, stale-while-revalidate=60` + Cache-Control header Laravel
+- [x] **GA et ContentSquare supprimés** — TBT 100ms → 0ms
+- [x] **Clarity chargé après `load` event** — ne bloque pas le thread principal
+- [x] **Accessibilité** — aria-label, aria-hidden, h4→h3, h5→h3 footers, contrastes -600→-700, gray-500→gray-400
 
 ---
 
-## P2 — Ressources tierces et cache (gain estimé : +5 pts)
+## 🔲 Améliorations restantes
 
-- [x] **Fix 6 — Désactiver Email Obfuscation Cloudflare**
-  - `email-decode.min.js` sorti de la chaîne critique (408 ms économisés)
-  - Cloudflare Fonts activé (remplace Google Fonts externe)
-  - Early Hints activé (~200 ms gagnés sur preconnect)
-  - **Gain estimé : −600+ ms sur le chemin critique**
+### Page détail (`/bateaux/[slug]`) — priorité haute
 
-- [ ] **Fix 7 — Font Awesome : charger uniquement les icônes utilisées**
-  - Actuellement : `all.min.css` = 18 KB CSS + 299 KB WOFF2 (fa-solid, fa-brands, fa-regular)
-  - Option : Passer sur un kit FA avec subset, ou inliner les SVG des icônes critiques
+- [ ] **CF Cache Rule pour pages détail**
+  - Actuellement : chaque requête tape Laravel (TTFB variable)
+  - Ajouter règle CF : `URI Path starts with /bateaux/` → `s-maxage=300`
+  - Aussi mettre à jour `BateauController::show()` pour retourner `response()->view()->header('Cache-Control', ...)`
+  - **Gain estimé : −200–500ms TTFB sur cache chaud**
+
+- [ ] **Preload image LCP de la page détail**
+  - Ajouter dans `@push('head')` de `show.blade.php` :
+    `<link rel="preload" as="image" href="{{ $photosLarge[0] }}" fetchpriority="high">`
+  - **Gain estimé : −390ms (Resource Load Delay actuel)**
+
+### Page d'accueil (`/`) — priorité moyenne
+
+- [ ] **Font Awesome `font-display: swap`**
+  - FA hébergé sur `cdnjs.cloudflare.com` → impossible sans self-host
+  - Option : télécharger FA et le servir depuis `/public/fonts/` avec `@font-face { font-display: swap }`
+  - **Gain estimé : −20ms FCP**
+
+- [ ] **Font Awesome : charger uniquement les icônes utilisées**
+  - `all.min.css` = 18 KB CSS inutile (contient tous les styles)
+  - Option : générer un subset FA avec seulement les icônes utilisées
   - **Gain estimé : −18 KB CSS bloquant**
 
-- [x] **Fix 7b — Google Fonts `display=optional`** (`app.blade.php`)
-  - `display=swap` → `display=optional` : navigateur n'attend plus la police pour FCP
-  - Élimine le layout shift causé par Inter woff2 (CLS 0,018 → 0 attendu)
+### SEO (secondaire)
 
-- [x] **Fix 7c — Hero AVIF + quality=65** (`welcome.blade.php`)
-  - `<picture>` avec 4 sources : AVIF mobile, WebP mobile, AVIF desktop, WebP desktop
-  - quality 75 → 65 : gain supplémentaire ~30% sur les browsers AVIF-compatibles
-
-- [x] **Fix 8 — ContentSquare différé au premier scroll** (`app.blade.php`)
-  - Chargé au `scroll`/`touchstart`/`mousemove` au lieu du `load`
-  - Fallback : 5s après load si aucune interaction
-  - **Gain estimé : −87 ms thread principal sur le chargement initial**
-
----
-
-## P3 — Diagnostics secondaires
-
-- [ ] **Fix 9 — Forced layout reflow 46 ms**
-  - Source : JavaScript interrogeant `offsetWidth` après modification DOM
-  - À investiguer dans DevTools → Performance → "Forced reflow"
-
-- [ ] **Fix 10 — DOM size 566 éléments**
-  - Acceptable mais à surveiller (profondeur max : 11, nav avec 10 enfants)
-  - Pas d'action immédiate requise
-
----
-
-## Ordre d'exécution recommandé
-
-```
-Session 1 (fait) : Fix 1 + Fix 2 + Fix 3  → push ✅
-Session 2        : Fix 4 (recompression hero)
-Session 3        : Fix 6 (Cloudflare dashboard)
-Session 4        : Fix 5 (srcset bateaux)
-Session 5        : Fix 7 (Font Awesome subset)
-Session 6        : Fix 8 (arbitrage ContentSquare)
-```
+- [ ] **Robots.txt : retirer directive `Content-Signal`**
+  - CF Dashboard → Security → Bots → "Use my own robots.txt"
+  - **Gain : SEO 92 → 96**
 
 ---
 
 ## Notes techniques
 
-- **URL de test** : https://pagespeed.web.dev/analysis/https-www-myboat-oi-com/5zlpkzvtz2?form_factor=mobile
-- **Émulation** : Moto G Power, Lighthouse 13.0.1, 4G lente
-- **LCP element** : `<img src="https://images.myboat-oi.com/hero/herosmart.webp">`
-- **Chaîne critique** : html → email-decode.min.js → Google Fonts CSS → Inter WOFF2 (693 ms total)
-- **3 scripts tiers** : ContentSquare (141 ms) + GA (103 ms) + Clarity (66 ms) = 310 ms thread principal
+- **Émulation** : Moto G Power, Lighthouse 13.0.1, 4G lente (US test nodes)
+- **FCP 3,8s** = artefact Lighthouse (cold cache + simulation). Vraie perf : 0,1–0,6s
+- **LCP element homepage** : `<img src="images.myboat-oi.com/hero/herosmart.webp">`
+- **LCP element détail** : `<img id="mainImage" src="...bateau-1-*.jpeg">`
+- **CF Transformations** : activé sur le domaine `images.myboat-oi.com`
+- **CF Cache Rule homepage** : actif, TTL 120s
