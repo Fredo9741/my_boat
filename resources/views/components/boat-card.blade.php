@@ -54,8 +54,8 @@
     <div class="p-4 md:p-5">
         <div class="flex justify-between items-start mb-2 md:mb-3">
             <h4 class="font-bold text-base md:text-xl text-gray-900 dark:text-white line-clamp-1 group-hover:text-ocean-600 dark:group-hover:text-ocean-400 transition-colors">{{ $title }}</h4>
-            <button onclick="toggleCardFavorite(event, '{{ $slug }}')" class="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-all hover:scale-110">
-                <i class="favorite-icon-{{ $slug }} far fa-heart text-lg md:text-xl"></i>
+            <button onclick="toggleCardFavorite(event, '{{ $slug }}')" aria-label="{{ __('Ajouter aux favoris') }} {{ $title }}" class="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-all hover:scale-110">
+                <i class="favorite-icon-{{ $slug }} far fa-heart text-lg md:text-xl" aria-hidden="true"></i>
             </button>
         </div>
 

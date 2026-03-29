@@ -15,14 +15,14 @@
                 </div>
                 <p class="text-gray-400 dark:text-gray-500 mb-6">{{ __('Votre courtier maritime de confiance dans l\'océan Indien.') }} {{ __('Excellence et passion depuis 2024.') }}</p>
                 <div class="flex space-x-3">
-                    <a href="#" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
-                        <i class="fab fa-facebook-f text-gray-400 group-hover:text-white transition-colors"></i>
+                    <a href="#" aria-label="MyBoat sur Facebook" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
+                        <i class="fab fa-facebook-f text-gray-400 group-hover:text-white transition-colors" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
-                        <i class="fab fa-instagram text-gray-400 group-hover:text-white transition-colors"></i>
+                    <a href="#" aria-label="MyBoat sur Instagram" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
+                        <i class="fab fa-instagram text-gray-400 group-hover:text-white transition-colors" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
-                        <i class="fab fa-youtube text-gray-400 group-hover:text-white transition-colors"></i>
+                    <a href="#" aria-label="MyBoat sur YouTube" class="group w-11 h-11 bg-gray-800 dark:bg-slate-900 hover:bg-gradient-to-br hover:from-ocean-600 hover:to-luxe-cyan rounded-xl flex items-center justify-center transition-all transform hover:scale-110 shadow-md hover:shadow-lg">
+                        <i class="fab fa-youtube text-gray-400 group-hover:text-white transition-colors" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>

@@ -66,8 +66,8 @@
                 </a>
 
                 <!-- Menu Hamburger Mobile -->
-                <button id="mobileMenuBtn" class="lg:hidden text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 p-2 transition-colors">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button id="mobileMenuBtn" aria-label="{{ __('Ouvrir le menu') }}" aria-expanded="false" aria-controls="mobileMenu" class="lg:hidden text-gray-700 dark:text-gray-300 hover:text-ocean-600 dark:hover:text-ocean-400 p-2 transition-colors">
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
             </div>
         </div>

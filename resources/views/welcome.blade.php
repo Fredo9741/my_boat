@@ -91,7 +91,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                             <!-- Type -->
                             <div class="relative group">
-                                <select name="type_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
+                                <label for="search_type_id" class="sr-only">{{ __('Type de bateau') }}</label>
+                                <select id="search_type_id" name="type_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
                                     <option value="">{{ __('Type de bateau') }}</option>
                                     @foreach($types as $type)
                                         <option value="{{ $type->id }}">{{ $type->libelle }}</option>
@@ -102,7 +103,8 @@
 
                             <!-- Location -->
                             <div class="relative group">
-                                <select name="zone_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
+                                <label for="search_zone_id" class="sr-only">{{ __('Localisation') }}</label>
+                                <select id="search_zone_id" name="zone_id" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
                                     <option value="">{{ __('Localisation') }}</option>
                                     @foreach($zones as $zone)
                                         <option value="{{ $zone->id }}">{{ $zone->libelle }}</option>
@@ -113,7 +115,8 @@
 
                             <!-- Price -->
                             <div class="relative group">
-                                <select name="prix_max" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
+                                <label for="search_prix_max" class="sr-only">{{ __('Budget maximum') }}</label>
+                                <select id="search_prix_max" name="prix_max" class="w-full px-5 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer transition-all duration-300 group-hover:bg-gray-100 dark:group-hover:bg-slate-700">
                                     <option value="">{{ __('Budget max') }}</option>
                                     <option value="10000">10 000 €</option>
                                     <option value="25000">25 000 €</option>
