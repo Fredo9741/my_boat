@@ -11,7 +11,7 @@
             <!-- À propos -->
             <div>
                 <div class="mb-4">
-                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="MyBoat-oi - Courtier Maritime Océan Indien" class="h-10 w-auto">
+                    <img src="{{ asset('images/logo-myboat.svg') }}" alt="MyBoat-oi - Courtier Maritime Océan Indien" width="140" height="40" class="h-10 w-auto">
                 </div>
                 <p class="text-gray-400 dark:text-gray-500 mb-6">{{ __('Votre courtier maritime de confiance dans l\'océan Indien.') }} {{ __('Excellence et passion depuis 2024.') }}</p>
                 <div class="flex space-x-3">

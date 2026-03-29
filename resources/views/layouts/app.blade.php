@@ -93,12 +93,13 @@
     <link rel="canonical" href="{{ strtok(url()->current(), '?') }}">
 
     <!-- Preconnect CDN images -->
-    <link rel="preconnect" href="https://files.fredlabs.org">
+    <link rel="preconnect" href="https://images.myboat-oi.com" crossorigin>
 
     <!-- Google Fonts - Inter (3 weights only) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
 
     <!-- Font Awesome (non-blocking) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
