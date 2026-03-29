@@ -49,8 +49,8 @@
 
     <!-- Mobile Filter Button -->
     <div class="container mx-auto px-4 py-4 lg:hidden sticky top-20 z-30 bg-gray-50 dark:bg-slate-950">
-        <button id="mobileFilterBtn" class="w-full bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-6 py-4 rounded-2xl font-bold flex items-center justify-center shadow-lg transition-all transform hover:scale-105">
-            <i class="fas fa-filter mr-2"></i>
+        <button id="mobileFilterBtn" aria-label="{{ __('Ouvrir les filtres') }}" aria-expanded="false" aria-controls="filterPanel" class="w-full bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white px-6 py-4 rounded-2xl font-bold flex items-center justify-center shadow-lg transition-all transform hover:scale-105">
+            <i class="fas fa-filter mr-2" aria-hidden="true"></i>
             Filtres
             <span class="ml-2 px-2 py-1 bg-white/20 rounded-full text-xs">{{ number_format($bateaux->count()) }}</span>
         </button>
@@ -70,14 +70,14 @@
 
                     <!-- Panel Header -->
                     <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-white/10">
-                        <h3 class="text-2xl font-black text-gray-900 dark:text-white flex items-center">
+                        <h2 class="text-2xl font-black text-gray-900 dark:text-white flex items-center">
                             <div class="w-10 h-10 bg-gradient-to-br from-ocean-600 to-luxe-cyan rounded-xl flex items-center justify-center mr-3">
-                                <i class="fas fa-filter text-white"></i>
+                                <i class="fas fa-filter text-white" aria-hidden="true"></i>
                             </div>
                             Filtres
-                        </h3>
-                        <button id="closeFilterBtn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
-                            <i class="fas fa-times text-2xl text-gray-500 dark:text-gray-400"></i>
+                        </h2>
+                        <button id="closeFilterBtn" aria-label="{{ __('Fermer les filtres') }}" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                            <i class="fas fa-times text-2xl text-gray-500 dark:text-gray-400" aria-hidden="true"></i>
                         </button>
                     </div>
 
@@ -100,7 +100,7 @@
                                                class="w-5 h-5 text-ocean-600 dark:text-ocean-400 rounded focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-checkbox"
                                                {{ in_array($type->id, $selectedTypeIds) ? 'checked' : '' }}>
                                         <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium flex-1">{{ $type->libelle }}</span>
-                                        <span class="ml-auto px-2 py-1 bg-ocean-100 dark:bg-ocean-950/50 text-ocean-600 dark:text-ocean-400 text-xs font-bold rounded-full">{{ $type->bateaux_count }}</span>
+                                        <span class="ml-auto px-2 py-1 bg-ocean-100 dark:bg-ocean-950/50 text-ocean-700 dark:text-ocean-400 text-xs font-bold rounded-full">{{ $type->bateaux_count }}</span>
                                     </label>
                                 @endforeach
                             </div>
@@ -139,7 +139,7 @@
                                                class="w-5 h-5 text-ocean-600 dark:text-ocean-400 rounded focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 border-gray-300 dark:border-gray-600 filter-checkbox"
                                                {{ in_array($zone->id, $selectedZoneIds) ? 'checked' : '' }}>
                                         <span class="ml-3 text-gray-700 dark:text-gray-300 font-medium flex-1">{{ $zone->libelle }}</span>
-                                        <span class="ml-auto px-2 py-1 bg-ocean-100 dark:bg-ocean-950/50 text-ocean-600 dark:text-ocean-400 text-xs font-bold rounded-full">{{ $zone->bateaux_count }}</span>
+                                        <span class="ml-auto px-2 py-1 bg-ocean-100 dark:bg-ocean-950/50 text-ocean-700 dark:text-ocean-400 text-xs font-bold rounded-full">{{ $zone->bateaux_count }}</span>
                                     </label>
                                 @endforeach
                             </div>
@@ -202,8 +202,8 @@
                             <button type="submit" class="flex-1 px-6 py-4 bg-gradient-to-r from-ocean-600 to-luxe-cyan hover:from-ocean-700 hover:to-ocean-600 text-white rounded-2xl font-bold transition-all shadow-lg hover:shadow-2xl transform hover:scale-105">
                                 Appliquer
                             </button>
-                            <a href="{{ route('bateaux.index') }}" class="px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-all flex items-center justify-center">
-                                <i class="fas fa-redo text-gray-600 dark:text-gray-400"></i>
+                            <a href="{{ route('bateaux.index') }}" aria-label="{{ __('Réinitialiser les filtres') }}" class="px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-all flex items-center justify-center">
+                                <i class="fas fa-redo text-gray-600 dark:text-gray-400" aria-hidden="true"></i>
                             </a>
                         </div>
                     </form>
@@ -219,17 +219,18 @@
                         <!-- Search -->
                         <div class="flex-1 w-full">
                             <div class="relative group">
+                                <label for="searchInput" class="sr-only">{{ __('Rechercher un bateau') }}</label>
                                 <input type="text" id="searchInput" value="{{ request('search') }}"
                                        placeholder="Rechercher un bateau..."
                                        class="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium placeholder-gray-400 dark:placeholder-gray-500 transition-all">
-                                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 group-focus-within:text-ocean-500 transition-colors"></i>
+                                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 group-focus-within:text-ocean-500 transition-colors" aria-hidden="true"></i>
                             </div>
                         </div>
 
                         <!-- Sort & View -->
                         <div class="flex gap-3 items-center w-full md:w-auto">
                             <label class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap font-medium hidden md:block">Trier :</label>
-                            <select id="sortSelect" class="flex-1 md:flex-none px-4 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer">
+                            <select id="sortSelect" aria-label="{{ __('Trier les annonces') }}" class="flex-1 md:flex-none px-4 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-0 focus:ring-2 focus:ring-ocean-500 dark:focus:ring-ocean-400 text-gray-700 dark:text-gray-300 font-medium appearance-none cursor-pointer">
                                 <option value="created_at" {{ request('sort_by') === 'created_at' ? 'selected' : '' }}>Plus récents</option>
                                 <option value="prix_asc" {{ request('sort_by') === 'prix_asc' ? 'selected' : '' }}>Prix ↑</option>
                                 <option value="prix_desc" {{ request('sort_by') === 'prix_desc' ? 'selected' : '' }}>Prix ↓</option>
@@ -239,11 +240,11 @@
 
                             <!-- View Toggle -->
                             <div class="hidden md:flex gap-1 border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden p-1">
-                                <button id="gridView" class="px-4 py-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl transition-all">
-                                    <i class="fas fa-th-large"></i>
+                                <button id="gridView" aria-label="{{ __('Vue grille') }}" aria-pressed="true" class="px-4 py-2 bg-gradient-to-r from-ocean-600 to-luxe-cyan text-white rounded-xl transition-all">
+                                    <i class="fas fa-th-large" aria-hidden="true"></i>
                                 </button>
-                                <button id="listView" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition-all text-gray-600 dark:text-gray-400">
-                                    <i class="fas fa-list"></i>
+                                <button id="listView" aria-label="{{ __('Vue liste') }}" aria-pressed="false" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition-all text-gray-600 dark:text-gray-400">
+                                    <i class="fas fa-list" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
