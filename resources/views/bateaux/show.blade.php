@@ -199,10 +199,16 @@
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach($bateau->videos as $video)
+                    @php
+                        $embedUrl = $video->url;
+                        if (preg_match('/(?:youtu\.be\/|(?:m\.)?youtube\.com\/(?:watch\?.*v=|shorts\/))([a-zA-Z0-9_-]{11})/', $video->url, $ym)) {
+                            $embedUrl = 'https://www.youtube.com/embed/' . $ym[1];
+                        }
+                    @endphp
                     <div class="relative rounded-2xl overflow-hidden shadow-lg aspect-video bg-gray-900">
                         <iframe
                             class="w-full h-full"
-                            src="{{ $video->url }}"
+                            src="{{ $embedUrl }}"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
@@ -443,8 +449,8 @@
     <!-- Image area -->
     <div id="lb-img-wrapper" class="flex-1 flex items-center justify-center overflow-hidden relative select-none"
          style="touch-action: none;">
-        <img id="lb-img" src="" alt="" class="max-w-none transition-transform duration-150 will-change-transform"
-             style="transform-origin: center center;">
+        <img id="lb-img" src="" alt="" class="transition-transform duration-150 will-change-transform"
+             style="transform-origin: center center; max-width: 100%; max-height: 100%; object-fit: contain;">
     </div>
 
     <!-- Prev / Next -->
@@ -457,9 +463,9 @@
     </button>
     @endif
 
-    <!-- Thumbnails strip -->
+    <!-- Thumbnails strip (hidden in portrait on small screens) -->
     @if(count($photos) > 1)
-    <div class="flex-shrink-0 px-4 pb-4 pt-2">
+    <div class="lb-thumbs-strip flex-shrink-0 px-4 pb-4 pt-2">
         <div id="lb-thumbs" class="flex gap-2 overflow-x-auto hide-scrollbar justify-center">
             @foreach($photosThumbs as $i => $thumb)
             <button onclick="lbGoTo({{ $i }})" data-lb-thumb="{{ $i }}"
@@ -798,6 +804,15 @@ function toggleFavorite(slug) {
 
 .prose-ocean a {
     @apply text-ocean-600 dark:text-ocean-400 hover:underline;
+}
+
+/* Lightbox: hide thumbnail strip in portrait orientation */
+@media (orientation: portrait) and (max-width: 768px) {
+    .lb-thumbs-strip { display: none !important; }
+}
+/* Also fix lightbox image: prevent overflow when scale=1 */
+#lb-img-wrapper {
+    min-height: 0;
 }
 </style>
 

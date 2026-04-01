@@ -155,7 +155,7 @@ class BateauController extends Controller
                     Media::create([
                         'bateau_id' => $bateau->id,
                         'type' => 'video',
-                        'url' => $link,
+                        'url' => $this->toYoutubeEmbedUrl($link),
                         'is_youtube' => true,
                         'ordre' => $ordre,
                     ]);
@@ -253,7 +253,7 @@ class BateauController extends Controller
                     Media::create([
                         'bateau_id' => $bateau->id,
                         'type' => 'video',
-                        'url' => $link,
+                        'url' => $this->toYoutubeEmbedUrl($link),
                         'is_youtube' => true,
                         'ordre' => $ordre,
                     ]);
@@ -462,5 +462,38 @@ class BateauController extends Controller
                 'message' => 'Erreur lors de la création: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Convert any YouTube URL format to embed URL.
+     * Handles: watch, short youtu.be, mobile m.youtube.com, shorts.
+     */
+    private function toYoutubeEmbedUrl(string $url): string
+    {
+        $videoId = null;
+
+        // youtu.be/ID
+        if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]{11})/', $url, $m)) {
+            $videoId = $m[1];
+        }
+        // youtube.com/watch?v=ID or m.youtube.com/watch?v=ID
+        elseif (preg_match('/(?:youtube\.com|m\.youtube\.com)\/watch\?.*v=([a-zA-Z0-9_-]{11})/', $url, $m)) {
+            $videoId = $m[1];
+        }
+        // youtube.com/shorts/ID
+        elseif (preg_match('/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/', $url, $m)) {
+            $videoId = $m[1];
+        }
+        // Already an embed URL — extract ID to normalise
+        elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/', $url, $m)) {
+            $videoId = $m[1];
+        }
+
+        if ($videoId) {
+            return 'https://www.youtube.com/embed/' . $videoId;
+        }
+
+        // Not a YouTube URL — return as-is (Vimeo etc.)
+        return $url;
     }
 }
