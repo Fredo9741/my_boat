@@ -147,15 +147,21 @@
                     <img id="mainImage"
                          src="{{ $photosLarge[0] }}"
                          alt="{{ $bateau->alt_text }}"
-                         class="w-full h-full object-cover"
+                         class="w-full h-full object-cover cursor-zoom-in"
                          loading="eager"
                          fetchpriority="high"
+                         onclick="openLightbox(currentImageIndex)"
                          onerror="this.style.objectFit='contain'; this.parentElement.classList.add('bg-gray-200', 'dark:bg-slate-700');">
 
                     <!-- Image Counter Badge -->
                     <div class="absolute top-6 right-6 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-xl font-semibold shadow-lg">
                         <i class="fas fa-images mr-2"></i>
                         <span id="imageCounter">1</span> / {{ count($photos) }}
+                    </div>
+
+                    <!-- Expand hint -->
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full pointer-events-none opacity-80">
+                        <i class="fas fa-expand-alt mr-1"></i> Cliquez pour agrandir
                     </div>
 
                     <!-- Navigation Arrows -->
@@ -412,6 +418,60 @@
     </div>
 </div>
 
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col" role="dialog" aria-modal="true" aria-label="Galerie photos">
+
+    <!-- Top bar -->
+    <div class="flex items-center justify-between px-4 py-3 flex-shrink-0">
+        <span id="lb-counter" class="text-white/70 text-sm font-medium"></span>
+        <div class="flex items-center gap-2">
+            <button onclick="lbZoomIn()" title="Zoom +" class="text-white/80 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/10 transition-all text-lg">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button onclick="lbZoomOut()" title="Zoom -" class="text-white/80 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/10 transition-all text-lg">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button onclick="lbResetZoom()" title="Réinitialiser" class="text-white/80 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/10 transition-all text-lg">
+                <i class="fas fa-compress-arrows-alt"></i>
+            </button>
+            <button onclick="closeLightbox()" title="Fermer" class="text-white/80 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/10 transition-all text-xl ml-2">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Image area -->
+    <div id="lb-img-wrapper" class="flex-1 flex items-center justify-center overflow-hidden relative select-none"
+         style="touch-action: none;">
+        <img id="lb-img" src="" alt="" class="max-w-none transition-transform duration-150 will-change-transform"
+             style="transform-origin: center center;">
+    </div>
+
+    <!-- Prev / Next -->
+    @if(count($photos) > 1)
+    <button onclick="lbPrev()" class="absolute left-2 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/25 w-12 h-12 rounded-xl flex items-center justify-center transition-all text-xl z-10">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button onclick="lbNext()" class="absolute right-2 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/25 w-12 h-12 rounded-xl flex items-center justify-center transition-all text-xl z-10">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    @endif
+
+    <!-- Thumbnails strip -->
+    @if(count($photos) > 1)
+    <div class="flex-shrink-0 px-4 pb-4 pt-2">
+        <div id="lb-thumbs" class="flex gap-2 overflow-x-auto hide-scrollbar justify-center">
+            @foreach($photosThumbs as $i => $thumb)
+            <button onclick="lbGoTo({{ $i }})" data-lb-thumb="{{ $i }}"
+                    class="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2 transition-all opacity-60 hover:opacity-100 {{ $i === 0 ? 'border-white opacity-100' : 'border-transparent' }}">
+                <img src="{{ $thumb }}" alt="Photo {{ $i+1 }}" class="w-full h-full object-cover">
+            </button>
+            @endforeach
+        </div>
+    </div>
+    @endif
+</div>
+
 <!-- Floating CTA Buttons (mobile-first) -->
 <div id="floating-cta" class="fixed bottom-6 right-4 z-50 flex flex-col items-end gap-3 transition-all duration-300">
 
@@ -470,9 +530,182 @@ function previousImage() {
 
 // Keyboard navigation
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') previousImage();
+    if (document.getElementById('lightbox').classList.contains('hidden')) {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') previousImage();
+    } else {
+        if (e.key === 'ArrowRight') lbNext();
+        if (e.key === 'ArrowLeft') lbPrev();
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === '+') lbZoomIn();
+        if (e.key === '-') lbZoomOut();
+    }
 });
+
+// ─── Lightbox ────────────────────────────────────────────────────────────────
+(function () {
+    const lb        = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+    const wrapper   = document.getElementById('lb-img-wrapper');
+    let lbIndex = 0;
+    let scale = 1, minScale = 0.5, maxScale = 5;
+    let originX = 0, originY = 0; // transform origin in % relative to image
+    let transX = 0, transY = 0;
+
+    function applyTransform() {
+        lbImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+    }
+
+    function lbSetImage(index) {
+        lbIndex = ((index % photos.length) + photos.length) % photos.length;
+        lbImg.src = photos[lbIndex];
+        lbCounter.textContent = (lbIndex + 1) + ' / ' + photos.length;
+        lbResetZoom();
+        // Update thumb highlight
+        document.querySelectorAll('[data-lb-thumb]').forEach((btn, i) => {
+            btn.classList.toggle('border-white', i === lbIndex);
+            btn.classList.toggle('border-transparent', i !== lbIndex);
+            btn.classList.toggle('opacity-100', i === lbIndex);
+            btn.classList.toggle('opacity-60', i !== lbIndex);
+        });
+        // Scroll thumb into view
+        const activeThumb = document.querySelector('[data-lb-thumb="' + lbIndex + '"]');
+        if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    window.openLightbox = function(index) {
+        lbSetImage(index);
+        lb.classList.remove('hidden');
+        lb.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLightbox = function() {
+        lb.classList.add('hidden');
+        lb.classList.remove('flex');
+        document.body.style.overflow = '';
+    };
+
+    window.lbNext    = function() { lbSetImage(lbIndex + 1); };
+    window.lbPrev    = function() { lbSetImage(lbIndex - 1); };
+    window.lbGoTo    = function(i) { lbSetImage(i); };
+
+    window.lbZoomIn  = function() { lbZoomTo(Math.min(scale * 1.4, maxScale)); };
+    window.lbZoomOut = function() { lbZoomTo(Math.max(scale / 1.4, minScale)); };
+    window.lbResetZoom = function() { scale = 1; transX = 0; transY = 0; applyTransform(); };
+
+    function lbZoomTo(newScale) {
+        scale = newScale;
+        applyTransform();
+    }
+
+    // Click on backdrop (not image) closes lightbox
+    wrapper.addEventListener('click', function(e) {
+        if (e.target === wrapper) closeLightbox();
+    });
+
+    // Double-click/tap to zoom in/out
+    let lastTap = 0;
+    lbImg.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+        if (scale > 1) {
+            lbResetZoom();
+        } else {
+            scale = 2.5;
+            applyTransform();
+        }
+    });
+    lbImg.addEventListener('touchend', function(e) {
+        const now = Date.now();
+        if (now - lastTap < 300) {
+            if (scale > 1) lbResetZoom();
+            else { scale = 2.5; applyTransform(); }
+        }
+        lastTap = now;
+    });
+
+    // Mouse wheel zoom
+    wrapper.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 1.15 : 0.87;
+        scale = Math.min(Math.max(scale * delta, minScale), maxScale);
+        applyTransform();
+    }, { passive: false });
+
+    // Mouse drag (pan when zoomed)
+    let isDragging = false, dragStartX = 0, dragStartY = 0, dragOriginX = 0, dragOriginY = 0;
+    lbImg.addEventListener('mousedown', function(e) {
+        if (scale <= 1) return;
+        isDragging = true;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        dragOriginX = transX;
+        dragOriginY = transY;
+        lbImg.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        transX = dragOriginX + (e.clientX - dragStartX);
+        transY = dragOriginY + (e.clientY - dragStartY);
+        applyTransform();
+    });
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+        lbImg.style.cursor = '';
+    });
+
+    // Touch swipe (horizontal) and pinch zoom
+    let touchStartX = 0, touchStartY = 0, touchStartDist = 0, touchStartScale = 1;
+    let isSwiping = false, isPinching = false;
+
+    wrapper.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isSwiping = true;
+            isPinching = false;
+        } else if (e.touches.length === 2) {
+            isPinching = true;
+            isSwiping = false;
+            touchStartDist = Math.hypot(
+                e.touches[1].clientX - e.touches[0].clientX,
+                e.touches[1].clientY - e.touches[0].clientY
+            );
+            touchStartScale = scale;
+        }
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', function(e) {
+        if (isPinching && e.touches.length === 2) {
+            const dist = Math.hypot(
+                e.touches[1].clientX - e.touches[0].clientX,
+                e.touches[1].clientY - e.touches[0].clientY
+            );
+            scale = Math.min(Math.max(touchStartScale * (dist / touchStartDist), minScale), maxScale);
+            applyTransform();
+            e.preventDefault();
+        } else if (isSwiping && scale <= 1 && e.touches.length === 1) {
+            // Allow scroll prevention only for horizontal swipe
+            const dx = Math.abs(e.touches[0].clientX - touchStartX);
+            const dy = Math.abs(e.touches[0].clientY - touchStartY);
+            if (dx > dy) e.preventDefault();
+        }
+    }, { passive: false });
+
+    wrapper.addEventListener('touchend', function(e) {
+        if (isSwiping && scale <= 1 && e.changedTouches.length === 1) {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+            if (Math.abs(dx) > 50 && dy < 80) {
+                dx < 0 ? lbNext() : lbPrev();
+            }
+        }
+        isSwiping = false;
+        isPinching = false;
+    }, { passive: true });
+})();
 
 // Share functions
 function shareOnFacebook() {
