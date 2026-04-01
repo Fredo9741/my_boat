@@ -412,6 +412,30 @@
     </div>
 </div>
 
+<!-- Floating CTA Buttons (mobile-first) -->
+<div id="floating-cta" class="fixed bottom-6 right-4 z-50 flex flex-col items-end gap-3 transition-all duration-300">
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/262692706610?text={{ urlencode('Bonjour, je suis intéressé par le bateau ' . $nomBateau . ' : ' . url()->current()) }}"
+       target="_blank"
+       rel="noopener"
+       aria-label="Contacter par WhatsApp"
+       class="group flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-105 active:scale-95 px-5 py-3.5 md:px-4 md:py-3.5">
+        <i class="fab fa-whatsapp text-2xl leading-none"></i>
+        <span class="text-sm font-bold whitespace-nowrap hidden sm:inline">WhatsApp</span>
+    </a>
+
+    <!-- Email / formulaire -->
+    <a href="#contact-form"
+       aria-label="Envoyer un message"
+       onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'}); return false;"
+       class="group flex items-center gap-3 bg-ocean-600 hover:bg-ocean-700 text-white rounded-full shadow-2xl transition-all duration-200 hover:scale-105 active:scale-95 px-5 py-3.5 md:px-4 md:py-3.5">
+        <i class="fas fa-envelope text-xl leading-none"></i>
+        <span class="text-sm font-bold whitespace-nowrap hidden sm:inline">Envoyer un message</span>
+    </a>
+
+</div>
+
 <!-- Gallery JavaScript -->
 <script>
 const photos = @json($photosLarge);
@@ -500,6 +524,34 @@ function toggleFavorite(slug) {
         icon.style.color = '';
     }
 }
+
+// Floating CTA: always visible on mobile, show on desktop only once price card scrolls out of view
+(function () {
+    const cta = document.getElementById('floating-cta');
+    const contactForm = document.getElementById('contact-form');
+    const isDesktop = () => window.innerWidth >= 1024;
+
+    function updateCta() {
+        if (!isDesktop()) {
+            // Mobile: always show, hide when contact form is in viewport
+            const formRect = contactForm.getBoundingClientRect();
+            const formVisible = formRect.top < window.innerHeight && formRect.bottom > 0;
+            cta.style.opacity = formVisible ? '0' : '1';
+            cta.style.pointerEvents = formVisible ? 'none' : 'auto';
+        } else {
+            // Desktop: show only after scrolling 400px (price card likely out of view for some users)
+            const show = window.scrollY > 400;
+            cta.style.opacity = show ? '1' : '0';
+            cta.style.pointerEvents = show ? 'auto' : 'none';
+        }
+    }
+
+    // Initial state
+    cta.style.transition = 'opacity 0.3s ease';
+    updateCta();
+    window.addEventListener('scroll', updateCta, { passive: true });
+    window.addEventListener('resize', updateCta, { passive: true });
+})();
 </script>
 
 <style>
