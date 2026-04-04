@@ -228,7 +228,7 @@ class BateauController extends Controller
 
         return response()
             ->view('bateaux.show', compact('bateau', 'similaires'))
-            ->header('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+            ->header('Cache-Control', 'private, no-store')
             ->header('Vary', 'Accept-Language');
     }
 
