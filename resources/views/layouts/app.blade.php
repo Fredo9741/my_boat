@@ -124,5 +124,54 @@
     <script src="{{ asset('js/favorites.js') }}" defer></script>
 
     @stack('scripts')
+
+    @if(session('success') || session('error'))
+    <div id="toast-container" class="fixed top-6 right-4 z-[200] flex flex-col gap-3 pointer-events-none" style="max-width: 360px;">
+        @if(session('success'))
+        <div class="toast-item flex items-start gap-3 bg-white dark:bg-slate-800 border border-green-200 dark:border-green-800 rounded-2xl shadow-2xl px-5 py-4 pointer-events-auto translate-x-full opacity-0 transition-all duration-500">
+            <div class="flex-shrink-0 w-9 h-9 bg-green-100 dark:bg-green-900/40 rounded-xl flex items-center justify-center">
+                <i class="fas fa-check text-green-600 dark:text-green-400"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="font-semibold text-gray-900 dark:text-white text-sm mb-0.5">Message envoyé !</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-snug">{{ session('success') }}</p>
+            </div>
+            <button onclick="dismissToast(this.closest('.toast-item'))" class="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors mt-0.5">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+        </div>
+        @endif
+        @if(session('error'))
+        <div class="toast-item flex items-start gap-3 bg-white dark:bg-slate-800 border border-red-200 dark:border-red-800 rounded-2xl shadow-2xl px-5 py-4 pointer-events-auto translate-x-full opacity-0 transition-all duration-500">
+            <div class="flex-shrink-0 w-9 h-9 bg-red-100 dark:bg-red-900/40 rounded-xl flex items-center justify-center">
+                <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="font-semibold text-gray-900 dark:text-white text-sm mb-0.5">Erreur d'envoi</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-snug">{{ session('error') }}</p>
+            </div>
+            <button onclick="dismissToast(this.closest('.toast-item'))" class="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors mt-0.5">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+        </div>
+        @endif
+    </div>
+    <script>
+    (function () {
+        function dismissToast(el) {
+            el.classList.add('translate-x-full', 'opacity-0');
+            setTimeout(() => el.remove(), 500);
+        }
+        window.dismissToast = dismissToast;
+
+        document.querySelectorAll('.toast-item').forEach(function (el, i) {
+            setTimeout(function () {
+                el.classList.remove('translate-x-full', 'opacity-0');
+            }, 100 + i * 150);
+            setTimeout(function () { dismissToast(el); }, 6000 + i * 150);
+        });
+    })();
+    </script>
+    @endif
 </body>
 </html>
