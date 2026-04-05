@@ -226,7 +226,7 @@
                     Description
                 </h2>
                 <div class="prose prose-ocean dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed" style="line-height:1.8;">
-                    {!! nl2br(e($bateau->description)) !!}
+                {!! $bateau->description !!}
                 </div>
             </div>
 
