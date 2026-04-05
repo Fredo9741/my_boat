@@ -7,10 +7,10 @@
     $ogImage    = $firstMedia ? strtok($firstMedia->url, '?') : asset('images/og-default.jpg');
 @endphp
 
-@section('title', $nomBateau . ' - ' . $typeBateau)
-@section('description', 'Découvrez ' . $nomBateau . ' - ' . Str::limit($bateau->description, 150))
+@section('title', $nomBateau . ($bateau->occasion ? ' d\'occasion' : ' neuf') . ' à vendre ' . $bateau->location . ' | MyBoat')
+@section('description', 'Découvrez ce ' . $nomBateau . ($bateau->annee ? ' de ' . $bateau->annee : '') . ' situé à ' . $bateau->location . '. ' . ($bateau->afficher_prix && $bateau->prix ? 'Prix : ' . number_format($bateau->prix, 0, ',', ' ') . ' €. ' : '') . 'Prêt à naviguer dans l\'Océan Indien.')
 @section('og_type', 'product')
-@section('og_title', e($nomBateau . ' à vendre – MyBoat Océan Indien'))
+@section('og_title', e($nomBateau . ($bateau->occasion ? ' d\'occasion' : ' neuf') . ' à vendre ' . $bateau->location . ' – MyBoat Océan Indien'))
 @section('og_description', e(Str::limit(strip_tags($bateau->description), 200)))
 @section('og_image', $ogImage)
 
@@ -108,7 +108,7 @@
         <!-- Title & Quick Info -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-                <h1 class="text-3xl md:text-4xl font-black mb-3">{{ $nomBateau }}</h1>
+                <h1 class="text-3xl md:text-4xl font-black mb-3">{{ $nomBateau }} {{ $bateau->occasion ? 'd\'occasion' : 'neuf' }} à vendre {{ $bateau->location }}</h1>
                 <div class="flex flex-wrap items-center gap-4 text-ocean-100">
                     <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> {{ $bateau->location }}</span>
                     <span class="flex items-center"><i class="fas fa-calendar-alt mr-2"></i> {{ $bateau->annee }}</span>
@@ -221,21 +221,21 @@
 
             <!-- Description -->
             <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-white/10">
-                <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center">
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center">
                     <i class="fas fa-align-left text-ocean-600 dark:text-ocean-400 mr-3"></i>
                     Description
-                </h3>
-                <div class="prose prose-ocean dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+                </h2>
+                <div class="prose prose-ocean dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed" style="line-height:1.8;">
                     {!! nl2br(e($bateau->description)) !!}
                 </div>
             </div>
 
             <!-- Technical Specifications -->
             <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-white/10">
-                <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center">
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center">
                     <i class="fas fa-cog text-ocean-600 dark:text-ocean-400 mr-3"></i>
                     Caractéristiques techniques
-                </h3>
+                </h2>
                 @php
                     $specs = [
                         ['label' => 'Type de bateau',    'value' => $bateau->type->libelle ?? null],
@@ -271,6 +271,26 @@
                 </div>
             </div>
 
+            <!-- Localisation -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-white/10">
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-5 flex items-center">
+                    <i class="fas fa-map-marker-alt text-ocean-600 dark:text-ocean-400 mr-3"></i>
+                    Localisation
+                </h2>
+                <div class="flex items-center gap-4 bg-ocean-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-ocean-100 dark:border-ocean-900/30">
+                    <i class="fas fa-anchor text-ocean-500 dark:text-ocean-400 text-3xl flex-shrink-0"></i>
+                    <div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Zone géographique</div>
+                        <div class="text-xl font-bold text-gray-900 dark:text-white">{{ $bateau->location }}</div>
+                        @if($bateau->zone && $bateau->zone->libelle)
+                        <div class="text-sm text-ocean-600 dark:text-ocean-400 mt-1">
+                            <i class="fas fa-compass mr-1 text-xs"></i>{{ $bateau->zone->libelle }}
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             <!-- Equipment & Options -->
             @if($bateau->equipements->count() > 0)
             <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-white/10">
@@ -301,6 +321,10 @@
                         <div class="text-sm text-ocean-100 mb-2">Prix</div>
                         <div class="text-5xl font-black mb-3">
                             {{ number_format($bateau->prix, 0, ',', ' ') }} €
+                        </div>
+                        <div class="inline-flex items-center gap-1.5 bg-white/15 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
+                            <i class="fas fa-map-marker-alt text-xs"></i>
+                            {{ $bateau->location }}
                         </div>
                     </div>
 
@@ -423,6 +447,62 @@
         </div>
     </div>
 </div>
+
+@if($similaires->count() > 0)
+<!-- Similar Boats -->
+<div class="container mx-auto px-4 pb-16">
+    <h2 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+        <i class="fas fa-ship text-ocean-600 dark:text-ocean-400"></i>
+        Bateaux similaires dans la région
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        @foreach($similaires->take(3) as $similaire)
+        @php
+            $simFirstMedia = $similaire->images->first();
+            $simImgUrl = $simFirstMedia
+                ? cf_img($simFirstMedia->url, ['width' => 480, 'height' => 320, 'fit' => 'cover', 'quality' => 70])
+                : asset('images/og-default.jpg');
+            $simNom = $similaire->nom ?: $similaire->modele ?: 'Bateau à vendre';
+        @endphp
+        <a href="{{ route('bateaux.show', $similaire->slug) }}"
+           class="group bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-white/10 hover:shadow-xl transition-all hover:-translate-y-1">
+            <div class="aspect-video overflow-hidden bg-gray-100 dark:bg-slate-800">
+                <img src="{{ $simImgUrl }}"
+                     alt="{{ $simNom }} {{ $similaire->occasion ? 'd\'occasion' : 'neuf' }} à vendre {{ $similaire->location }}"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                     loading="lazy"
+                     width="480" height="320">
+            </div>
+            <div class="p-5">
+                <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 line-clamp-1">
+                    {{ $simNom }}
+                </h3>
+                <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                    <i class="fas fa-map-marker-alt text-ocean-500 text-xs"></i>
+                    {{ $similaire->location }}
+                    @if($similaire->annee)
+                    <span class="text-gray-300 dark:text-gray-600">·</span>
+                    {{ $similaire->annee }}
+                    @endif
+                </div>
+                <div class="flex items-center justify-between">
+                    @if($similaire->afficher_prix && $similaire->prix)
+                    <span class="text-xl font-black text-ocean-600 dark:text-ocean-400">
+                        {{ number_format($similaire->prix, 0, ',', ' ') }} €
+                    </span>
+                    @else
+                    <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">Prix sur demande</span>
+                    @endif
+                    <span class="text-xs bg-ocean-100 dark:bg-ocean-900/40 text-ocean-700 dark:text-ocean-300 px-2.5 py-1 rounded-lg font-medium">
+                        {{ $similaire->type->libelle ?? 'Bateau' }}
+                    </span>
+                </div>
+            </div>
+        </a>
+        @endforeach
+    </div>
+</div>
+@endif
 
 <!-- Lightbox -->
 <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col" role="dialog" aria-modal="true" aria-label="Galerie photos">
