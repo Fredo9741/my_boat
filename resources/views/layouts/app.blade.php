@@ -67,11 +67,15 @@
     <!-- Apple touch icon (PNG required, not SVG) -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon.png') }}">
 
+    @php $currentLocale = app()->getLocale(); @endphp
+    @if(in_array($currentLocale, ['de', 'es', 'nl', 'it']))
+        <meta name="robots" content="noindex, follow">
+    @endif
+
     <!-- Hreflang Tags for SEO - Indicates alternate language versions -->
-    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], false) }}">
-    @endforeach
-    <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], false) }}">
+    <link rel="alternate" hreflang="fr" href="{{ LaravelLocalization::getLocalizedURL('fr', null, [], false) }}">
+    <link rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], false) }}">
+    <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], false) }}">
     <link rel="canonical" href="{{ strtok(url()->current(), '?') }}">
 
     <!-- Preconnect CDN images -->

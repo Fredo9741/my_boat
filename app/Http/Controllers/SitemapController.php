@@ -59,9 +59,9 @@ class SitemapController extends Controller
         $types = Type::all();
         $zones = Zone::all();
 
-        // Get supported locales
-        $locales = array_keys(LaravelLocalization::getSupportedLocales());
-        $defaultLocale = config('app.locale', 'fr');
+        // Indexed locales only (de/es/nl/it volontairement exclus — noindex en place)
+        $locales = ['fr', 'en'];
+        $defaultLocale = 'en';
 
         // Static pages with their routes
         $staticPages = [
