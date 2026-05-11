@@ -544,6 +544,61 @@
                 ];
             @endphp
 
+            @php
+                $equipTranslations = [
+                    'Chauffage'                  => 'Heating',
+                    'Climatisation'              => 'Air conditioning',
+                    'Congélateur'                => 'Freezer',
+                    'Dessalinisateur'            => 'Watermaker',
+                    'Douche de pont'             => 'Deck shower',
+                    'Eau chaude'                 => 'Hot water',
+                    'Réfrigérateur'              => 'Refrigerator',
+                    'Toilettes marines'          => 'Marine heads',
+                    'TV/Système audio'           => 'TV/Audio system',
+                    'AIS (émetteur/récepteur)'   => 'AIS (transceiver)',
+                    'Chargeur de batterie'       => 'Battery charger',
+                    'Convertisseur 12V/220V'     => '12V/220V inverter',
+                    'Éolienne'                   => 'Wind generator',
+                    'Groupe électrogène'         => 'Generator',
+                    'Panneau solaire'            => 'Solar panel',
+                    'Radar'                      => 'Radar',
+                    'Traceur GPS'                => 'GPS chartplotter',
+                    'VHF'                        => 'VHF radio',
+                    'Annexe'                     => 'Dinghy',
+                    'Barbecue'                   => 'BBQ',
+                    'Bimini/Taud de soleil'      => 'Bimini/Sun awning',
+                    'Équipement de snorkeling'   => 'Snorkelling gear',
+                    'Kayak'                      => 'Kayak',
+                    'Matériel de pêche'          => 'Fishing equipment',
+                    'Matériel de plongée'        => 'Diving equipment',
+                    'Moteur hors-bord'           => 'Outboard engine',
+                    'Paddle/SUP'                 => 'Paddle/SUP',
+                    'Taud de mouillage'          => 'Anchor awning',
+                    'Bôme'                       => 'Boom',
+                    'Enrouleur de génois'        => 'Furling genoa',
+                    'Guindeau électrique'        => 'Electric windlass',
+                    'Lazy bag'                   => 'Lazy bag',
+                    "Propulseur d'étrave"        => 'Bow thruster',
+                    'Propulseur de poupe'        => 'Stern thruster',
+                    'Tangon de spi'              => 'Spinnaker pole',
+                    'Winch électrique'           => 'Electric winch',
+                    'Anémomètre'                 => 'Anemometer',
+                    'Compas'                     => 'Compass',
+                    'GPS'                        => 'GPS',
+                    'Loch/Speedomètre'           => 'Log/Speedometer',
+                    'Pilote automatique'         => 'Autopilot',
+                    'Sondeur'                    => 'Depth sounder',
+                    'EPIRB (balise de détresse)' => 'EPIRB (distress beacon)',
+                    'Extincteurs'                => 'Fire extinguishers',
+                    'Fusées de détresse'         => 'Flares',
+                    'Gilets de sauvetage'        => 'Life jackets',
+                    'Harnais et longes'          => 'Harnesses & tethers',
+                    'Pompe de cale électrique'   => 'Electric bilge pump',
+                    'Pompe de cale manuelle'     => 'Manual bilge pump',
+                    'Radeau de survie'           => 'Life raft',
+                ];
+            @endphp
+
             @foreach($equipements as $categorie => $items)
             @php $cat = $catLabels[$categorie] ?? ['icon' => 'fas fa-check', 'label' => ucfirst($categorie)]; @endphp
             <div class="equip-category">
@@ -555,7 +610,7 @@
                     <label>
                         <input type="checkbox" class="equip-cb" data-id="{{ $eq->id }}" data-label="{{ $eq->libelle }}">
                         <span class="cb-icon"><i class="fas fa-check" style="font-size:9px;"></i></span>
-                        {{ $eq->libelle }}
+                        {{ $equipTranslations[$eq->libelle] ?? $eq->libelle }}
                     </label>
                     @endforeach
                 </div>
@@ -637,13 +692,6 @@
                     <input type="checkbox" id="eng_pub" checked style="margin-top:2px;width:17px;height:17px;accent-color:#0ea5e9;flex-shrink:0;">
                     <span style="font-size:13px;color:#1e293b;line-height:1.5;">
                         <strong>Active promotion</strong> — I commit to distributing the listing and promoting the boat through my network and on the MyBoat Indian Ocean platform.
-                    </span>
-                </label>
-
-                <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;">
-                    <input type="checkbox" id="eng_commission" checked style="margin-top:2px;width:17px;height:17px;accent-color:#0ea5e9;flex-shrink:0;">
-                    <span style="font-size:13px;color:#1e293b;line-height:1.5;">
-                        <strong>Transparent commission</strong> — MyBoat-OI's commission is a <strong>maximum of 5%</strong> of the sale price, only payable upon a successful sale to a buyer introduced by MyBoat-OI. No charge if the boat does not sell.
                     </span>
                 </label>
 

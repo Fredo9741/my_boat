@@ -640,13 +640,6 @@
                     </span>
                 </label>
 
-                <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;">
-                    <input type="checkbox" id="eng_commission" checked style="margin-top:2px;width:17px;height:17px;accent-color:#0ea5e9;flex-shrink:0;">
-                    <span style="font-size:13px;color:#1e293b;line-height:1.5;">
-                        <strong>Commission transparente</strong> — La commission de MyBoat-OI est de <strong>5 % maximum</strong> sur le prix de vente, uniquement en cas de vente conclue avec un prospect apporté par MyBoat-OI. Aucun frais si le bateau ne se vend pas.
-                    </span>
-                </label>
-
             </div>
         </div>
     </div>
