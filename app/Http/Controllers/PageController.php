@@ -62,6 +62,10 @@ class PageController extends Controller
     public function ficheBateau()
     {
         $equipements = Equipement::orderBy('categorie')->orderBy('libelle')->get()->groupBy('categorie');
-        return view('pages.fiche-bateau', compact('equipements'));
+        $locale = app()->getLocale();
+        $view = ($locale !== 'fr' && view()->exists("{$locale}.pages.fiche-bateau"))
+            ? "{$locale}.pages.fiche-bateau"
+            : 'pages.fiche-bateau';
+        return view($view, compact('equipements'));
     }
 }
