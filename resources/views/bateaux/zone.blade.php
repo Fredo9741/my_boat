@@ -9,7 +9,17 @@
 @push('structured-data')
 @if($bateaux->count() > 0)
 @php
-    $schemaItems = $bateaux->take(10)->values()->map(function ($b, $i) use ($seoData) {
+    $zoneCountry = [
+        'la-reunion' => 'RE',
+        'mayotte'    => 'YT',
+        'maurice'    => 'MU',
+        'seychelles' => 'SC',
+        'madagascar' => 'MG',
+        'nosy-be'    => 'MG',
+    ];
+    $countryCode = $zoneCountry[$zone->slug] ?? 'RE';
+
+    $schemaItems = $bateaux->take(10)->values()->map(function ($b, $i) use ($seoData, $countryCode) {
         $itemData = [
             '@type'       => 'Product',
             'name'        => $b->modele,
@@ -18,10 +28,21 @@
         ];
         if ($b->prix) {
             $itemData['offers'] = [
-                '@type'        => 'Offer',
-                'price'        => (string) $b->prix,
-                'priceCurrency'=> 'EUR',
-                'availability' => 'https://schema.org/InStock',
+                '@type'           => 'Offer',
+                'price'           => (string) $b->prix,
+                'priceCurrency'   => 'EUR',
+                'availability'    => 'https://schema.org/InStock',
+                'priceValidUntil' => '2026-12-31',
+                'shippingDetails' => [
+                    '@type'               => 'OfferShippingDetails',
+                    'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '0.00', 'currency' => 'EUR'],
+                    'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => $countryCode],
+                ],
+                'hasMerchantReturnPolicy' => [
+                    '@type'               => 'MerchantReturnPolicy',
+                    'applicableCountry'   => $countryCode,
+                    'returnPolicyCategory'=> 'https://schema.org/MerchantReturnNotPermitted',
+                ],
             ];
         }
         return ['@type' => 'ListItem', 'position' => $i + 1, 'item' => $itemData];
