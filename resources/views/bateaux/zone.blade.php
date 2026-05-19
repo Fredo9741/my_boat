@@ -6,6 +6,43 @@
 @section('og_description', $seoData['description'])
 @section('og_type', 'website')
 
+@push('structured-data')
+@if($bateaux->count() > 0)
+@php
+    $schemaItems = $bateaux->take(10)->values()->map(function ($b, $i) use ($seoData) {
+        $itemData = [
+            '@type'       => 'Product',
+            'name'        => $b->modele,
+            'url'         => route('bateaux.show', $b->slug),
+            'description' => ($b->annee ? $b->modele . ' (' . $b->annee . ')' : $b->modele) . ' à vendre à ' . $seoData['name'],
+        ];
+        if ($b->prix) {
+            $itemData['offers'] = [
+                '@type'        => 'Offer',
+                'price'        => (string) $b->prix,
+                'priceCurrency'=> 'EUR',
+                'availability' => 'https://schema.org/InStock',
+            ];
+        }
+        return ['@type' => 'ListItem', 'position' => $i + 1, 'item' => $itemData];
+    })->toArray();
+
+    $itemListSchema = [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'ItemList',
+        'name'            => $seoData['heading'],
+        'description'     => $seoData['description'],
+        'url'             => url()->current(),
+        'numberOfItems'   => $bateaux->count(),
+        'itemListElement' => $schemaItems,
+    ];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($itemListSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+</script>
+@endif
+@endpush
+
 @section('content')
 
 {{-- Hero --}}
