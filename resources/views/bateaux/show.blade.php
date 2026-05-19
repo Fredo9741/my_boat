@@ -54,6 +54,16 @@
         @endif
         "availability": "https://schema.org/{{ $bateau->visible ? 'InStock' : 'SoldOut' }}",
         "itemCondition": "https://schema.org/{{ $bateau->occasion ? 'UsedCondition' : 'NewCondition' }}",
+        "shippingDetails": {
+            "@@type": "OfferShippingDetails",
+            "shippingRate": { "@@type": "MonetaryAmount", "value": "0.00", "currency": "EUR" },
+            "shippingDestination": { "@@type": "DefinedRegion", "addressCountry": "{{ ['la-reunion'=>'RE','mayotte'=>'YT','maurice'=>'MU','seychelles'=>'SC','madagascar'=>'MG','nosy-be'=>'MG'][$bateau->zone->slug] ?? 'RE' }}" }
+        },
+        "hasMerchantReturnPolicy": {
+            "@@type": "MerchantReturnPolicy",
+            "applicableCountry": "{{ ['la-reunion'=>'RE','mayotte'=>'YT','maurice'=>'MU','seychelles'=>'SC','madagascar'=>'MG','nosy-be'=>'MG'][$bateau->zone->slug] ?? 'RE' }}",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+        },
         "seller": {
             "@@type": "Organization",
             "name": "My Boat Océan Indien",

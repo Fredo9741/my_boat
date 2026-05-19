@@ -26,6 +26,9 @@
             'url'         => route('bateaux.show', $b->slug),
             'description' => ($b->annee ? $b->modele . ' (' . $b->annee . ')' : $b->modele) . ' à vendre à ' . $seoData['name'],
         ];
+        if ($b->images->isNotEmpty()) {
+            $itemData['image'] = $b->main_image;
+        }
         if ($b->prix) {
             $itemData['offers'] = [
                 '@type'           => 'Offer',
