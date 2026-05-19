@@ -331,7 +331,7 @@
                     <div class="space-y-3">
                         <a href="#contact-form" class="block w-full bg-white hover:bg-gray-100 text-ocean-900 px-6 py-4 rounded-2xl font-bold text-center transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <i class="fas fa-envelope mr-2"></i>
-                            Contacter le vendeur
+                            Demander le dossier complet
                         </a>
                         <a href="tel:+33629926538" class="block w-full bg-ocean-500/20 hover:bg-ocean-500/30 backdrop-blur-sm border-2 border-white/50 text-white px-6 py-4 rounded-2xl font-bold text-center transition-all">
                             <i class="fas fa-phone mr-2"></i>
@@ -366,13 +366,13 @@
                     </button>
                 </div>
 
-                <!-- Security Notice -->
-                <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 rounded-2xl p-5">
+                <!-- Broker Notice -->
+                <div class="bg-ocean-50 dark:bg-ocean-950/20 border border-ocean-200 dark:border-ocean-900/30 rounded-2xl p-5">
                     <div class="flex items-start">
-                        <i class="fas fa-shield-alt text-amber-600 dark:text-amber-500 mt-1 mr-3"></i>
+                        <i class="fas fa-shield-alt text-ocean-600 dark:text-ocean-400 mt-1 mr-3"></i>
                         <div>
-                            <h5 class="font-bold text-amber-900 dark:text-amber-200 mb-1">Conseils de sécurité</h5>
-                            <p class="text-sm text-amber-800 dark:text-amber-300">Ne versez jamais d'argent avant d'avoir vu le bateau. Méfiez-vous des prix trop attractifs.</p>
+                            <h5 class="font-bold text-ocean-900 dark:text-ocean-200 mb-1">Transaction accompagnée</h5>
+                            <p class="text-sm text-ocean-800 dark:text-ocean-300">MyBoat gère chaque transaction de A à Z. Toutes nos annonces sont vérifiées par notre équipe avant publication.</p>
                         </div>
                     </div>
                 </div>
@@ -386,10 +386,10 @@
     <div id="contact-form" class="mt-16">
         <div class="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100 dark:border-white/10">
             <h3 class="text-3xl font-black text-gray-900 dark:text-white mb-3 text-center">
-                Contactez le vendeur
+                Demander le dossier complet
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-center mb-8">
-                Posez vos questions sur ce {{ strtolower($bateau->type->libelle ?? 'bateau') }}
+                Notre équipe vous répond sous 24h avec photos, historique et conditions
             </p>
 
             <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">

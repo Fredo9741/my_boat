@@ -68,9 +68,9 @@ return [
         'intro'       => 'Vous cherchez un catamaran, un voilier ou un yacht d\'occasion à l\'île Maurice ? Retrouvez ici les annonces actives du marché mauricien : catamarans de croisière, monocoques voiliers et bateaux à moteur de plaisance. Découvrez notre sélection et demandez le dossier complet de chaque unité.',
         'highlights'  => [
             ['icon' => 'fa-ship',           'text' => 'Catamarans d\'occasion actifs à Grand Baie et Black River'],
-            ['icon' => 'fa-tag',            'text' => 'Annonces actives – prix négociables, vendeurs réactifs'],
+            ['icon' => 'fa-tag',            'text' => 'Sélection vérifiée – dossiers complets sur demande'],
             ['icon' => 'fa-anchor',         'text' => 'Voiliers blue water 38-55 pieds, souvent passés en transocéanique'],
-            ['icon' => 'fa-check-circle',   'text' => 'Visites organisées sur place, intermédiaires disponibles'],
+            ['icon' => 'fa-check-circle',   'text' => 'Visites organisées et suivies par notre équipe broker'],
         ],
         'img_alt'     => 'Bateau à vendre à l\'île Maurice – MyBoat Océan Indien',
     ],
