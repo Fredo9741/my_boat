@@ -63,9 +63,9 @@ return [
     'maurice' => [
         'name'        => 'Île Maurice',
         'title'       => 'Bateaux à vendre à l\'île Maurice – Catamarans & Voiliers d\'occasion | MyBoat-OI',
-        'description' => 'Catamarans d\'occasion, voiliers et yachts à vendre à l\'île Maurice. Annonces actives à Grand Baie et Black River. Contactez les vendeurs directement.',
+        'description' => 'Catamarans d\'occasion, voiliers et yachts à vendre à l\'île Maurice. Annonces actives à Grand Baie et Black River. Accédez aux fiches techniques et photos complètes.',
         'heading'     => 'Bateaux à vendre à l\'île Maurice',
-        'intro'       => 'Vous cherchez un catamaran, un voilier ou un yacht d\'occasion à l\'île Maurice ? Retrouvez ici les annonces actives du marché mauricien : catamarans de croisière, monocoques voiliers et bateaux à moteur de plaisance. Contactez directement les vendeurs et organisez votre visite sur place.',
+        'intro'       => 'Vous cherchez un catamaran, un voilier ou un yacht d\'occasion à l\'île Maurice ? Retrouvez ici les annonces actives du marché mauricien : catamarans de croisière, monocoques voiliers et bateaux à moteur de plaisance. Découvrez notre sélection et demandez le dossier complet de chaque unité.',
         'highlights'  => [
             ['icon' => 'fa-ship',           'text' => 'Catamarans d\'occasion actifs à Grand Baie et Black River'],
             ['icon' => 'fa-tag',            'text' => 'Annonces actives – prix négociables, vendeurs réactifs'],
