@@ -86,6 +86,22 @@
                 <p class="text-gray-600 dark:text-gray-300 text-base leading-relaxed border-l-4 border-ocean-500 pl-5">
                     {{ $seoData['intro'] }}
                 </p>
+
+                {{-- Article lié (maillage interne, optionnel par zone) --}}
+                @isset($seoData['related_article'])
+                <a href="{{ route('articles.show', $seoData['related_article']['slug']) }}"
+                   class="mt-6 flex items-start gap-3 rounded-xl border border-ocean-100 dark:border-ocean-800/40 bg-ocean-50 dark:bg-ocean-950/40 px-4 py-3 hover:border-ocean-400 dark:hover:border-ocean-500 transition-colors group">
+                    <div class="w-8 h-8 rounded-lg bg-ocean-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fas fa-book-open text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-ocean-500 dark:text-ocean-400 mb-0.5">À lire aussi</p>
+                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-ocean-600 dark:group-hover:text-ocean-400 transition-colors leading-snug">
+                            {{ $seoData['related_article']['title'] }}
+                        </p>
+                    </div>
+                </a>
+                @endisset
             </div>
 
             {{-- Points clés --}}

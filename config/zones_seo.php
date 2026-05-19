@@ -12,7 +12,11 @@ return [
             ['icon' => 'fa-anchor',         'text' => 'Chantiers navals compétents et économiques'],
             ['icon' => 'fa-compass',        'text' => 'Accès direct Comores, Seychelles, côte africaine'],
         ],
-        'img_alt'     => 'Bateau à vendre à Madagascar – MyBoat Océan Indien',
+        'img_alt'          => 'Bateau à vendre à Madagascar – MyBoat Océan Indien',
+        'related_article'  => [
+            'slug'  => 'de-l-aeroport-de-fascene-a-la-marina-guide-pratique-du-plaisancier-a-nosy-be',
+            'title' => 'De l\'aéroport de Fascène à la marina : guide pratique du plaisancier à Nosy Bé',
+        ],
     ],
     'nosy-be' => [
         'name'        => 'Nosy Bé',
